@@ -1,0 +1,21 @@
+<apex:page standardController="jj_rb_Rebate_Product__c" extensions="jj_rb_Rebate_RequestChange_CTE" action="{!ProductPageLoad}">
+    <apex:form >
+        <apex:pageBlock mode="Edit" Title="{!jj_rb_Rebate_Product__c.name}" ><br/>
+             <apex:pageblockButtons >
+                 <apex:commandButton value="Save"  action="{!submitForChange}"/>
+                 <apex:commandButton value="Cancel" action="{!Cancel}"/>
+                 
+            </apex:pageblockButtons>
+            <apex:pageBlockSection >
+                 <apex:inputField value="{!MDR.jj_rb_Product_Name__c}" required="true"/>
+                 <apex:inputField value="{!MDR.jj_rb_SAP_Description__c}" required="true"/>
+                 <apex:inputField value="{!MDR.jj_rb_SAP_Material_Code__c}" required="true"/>
+                 <apex:inputField value="{!MDR.jj_rb_SAP_EAN_Code__c}" required="true"/>
+                 <apex:inputField value="{!MDR.jj_rb_Unit_of_Measure__c }" required="true"/> 
+                 <apex:inputField value="{!MDR.jj_rb_IMS_Product_ID__c}" required="true"/>
+                 <apex:inputField value="{!MDR.jj_rb_VAT_Code__c}" required="true" />
+                 
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

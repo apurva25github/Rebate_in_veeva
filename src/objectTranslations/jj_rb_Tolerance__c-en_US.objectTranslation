@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Tolerance</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Tolerance</value>
+    </caseValues>
+    <fields>
+        <label><!-- Average Quantity --></label>
+        <name>jj_rb_Average_Quantity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer --></label>
+        <name>jj_rb_Customer__c</name>
+        <relationshipLabel><!-- Tolerance --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Price Tolerance --></label>
+        <name>jj_rb_Price_Tolerance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product --></label>
+        <name>jj_rb_Product__c</name>
+        <relationshipLabel><!-- Tolerance --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Quantity Tolerance --></label>
+        <name>jj_rb_Quantity_Tolerance__c</name>
+    </fields>
+    <layouts>
+        <layout>Tolerance Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- System Information --></label>
+            <section>System Information</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

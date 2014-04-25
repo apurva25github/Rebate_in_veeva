@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>jj_rb_Customer__c</field>
+        <field>jj_rb_Description__c</field>
+        <field>jj_rb_Contract_Start_Date__c</field>
+        <field>jj_rb_Contract_End_Date__c</field>
+        <field>jj_rb_Status__c</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>jj_rb_Rebate_contract_Approved</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <name>jj_rb_Head_of_BU</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>This step is the approval from Head of BU.</description>
+        <label>Head of BU approval</label>
+        <name>Head_of_BU_approval</name>
+        <rejectionActions>
+            <action>
+                <name>jj_rb_Rebate_Contract_Rejected</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <description>Approval workflow for rebate contracts. The Rebate contract goes to the Head of BU for the next approval.</description>
+    <enableMobileDeviceAccess>true</enableMobileDeviceAccess>
+    <entryCriteria>
+        <criteriaItems>
+            <field>jj_rb_Rebate_Contract__c.jj_rb_Status__c</field>
+            <operation>equals</operation>
+            <value>New, Modified, Rejected, Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>jj_rb_Rebate_Contract__c.jj_rb_Total_Line_Items__c</field>
+            <operation>greaterThan</operation>
+            <value>0.0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>jj_rb_Rebate_Contract__c.RecordType</field>
+            <operation>equals</operation>
+            <value>Retailer Contract</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>jj_rb_Rebate_Contract_Rejected_Notification</name>
+            <type>Alert</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>jj_rb_Email_Alert_For_Retailer_Contract_notification</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>jj_rb_Rebate_contract_submitted</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Rebate Contract Approvals</label>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

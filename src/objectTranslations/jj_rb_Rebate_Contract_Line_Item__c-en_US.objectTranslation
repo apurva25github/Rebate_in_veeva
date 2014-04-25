@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Rebate Contract Line Item</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Rebate Contract Line Items</value>
+    </caseValues>
+    <fields>
+        <label><!-- Contract Price --></label>
+        <name>jj_rb_Contract_Price__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>jj_rb_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Date --></label>
+        <name>jj_rb_End_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Modified --></label>
+        <name>jj_rb_Is_Modified__c</name>
+    </fields>
+    <fields>
+        <label><!-- List Price --></label>
+        <name>jj_rb_List_Price__c</name>
+    </fields>
+    <fields>
+        <label><!-- Maximum Volume --></label>
+        <name>jj_rb_Maximum_Volume__c</name>
+    </fields>
+    <fields>
+        <label><!-- Minimum Volume --></label>
+        <name>jj_rb_Minimum_Volume__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product --></label>
+        <name>jj_rb_Product__c</name>
+        <relationshipLabel><!-- Rebate Contract Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Rebate Contract --></label>
+        <name>jj_rb_Rebate_Contract__c</name>
+        <relationshipLabel><!-- Rebate Contract Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Rebate --></label>
+        <name>jj_rb_Rebate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Region --></label>
+        <name>jj_rb_Region__c</name>
+        <relationshipLabel><!-- Rebate Contract Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>jj_rb_Start_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>jj_rb_Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Closed</masterLabel>
+            <translation><!-- Closed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expired</masterLabel>
+            <translation><!-- Expired --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Modified</masterLabel>
+            <translation><!-- Modified --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New</masterLabel>
+            <translation><!-- New --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Submitted</masterLabel>
+            <translation><!-- Submitted --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Homecare Contract Line Item Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Product Information --></label>
+            <section>Product Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Homecare Line Item Read-only layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Product Information --></label>
+            <section>Product Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Retailer Contract Line Item Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Product Information --></label>
+            <section>Product Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Retailer Line Item Read- only layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Information --></label>
+            <section>Information</section>
+        </sections>
+        <sections>
+            <label><!-- Product Information --></label>
+            <section>Product Information</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Homecare Contract --></label>
+        <name>jj_rb_Homecare_Contract</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Homecare Closed Contract --></label>
+        <name>jj_rb_Homecare_closed_contract</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Retailer Closed Contract --></label>
+        <name>jj_rb_Retailer_Closed_Contract</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Retailer Contract --></label>
+        <name>jj_rb_Retailer_Rebate_contract</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- End date should be greater than the start date --></errorMessage>
+        <name>jj_rb_EndDt_greater_than_StartDt</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- List price should be greater than contract price. --></errorMessage>
+        <name>jj_rb_Listprice_greater_Contractprice</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Rebate value should be the difference of List price and Contract price. --></errorMessage>
+        <name>jj_rb_Rebate_Value_per_Unit</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Minimum Volume should be less than maximum  Volume --></errorMessage>
+        <name>jj_rb_minimum_less_maximum_value</name>
+    </validationRules>
+</CustomObjectTranslation>

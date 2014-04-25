@@ -1,0 +1,23 @@
+<apex:page extensions="jj_rb_HomecareClaimUpload" standardController="jj_rb_Rebate_Claim__c" recordSetVar="c" >
+<apex:form enctype="multipart/form-data">
+   <apex:pageBlock title="Homecare Invoice Upload"> 
+    <apex:messages style="color:red"  />           
+     <apex:pageBlockSection showHeader="false" columns="1" >           
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Select upload csv file" for="csvFile"/>
+                <apex:inputFile value="{!document.body}" fileName="{!document.name}" id="csvFile"></apex:inputFile>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:commandButton value="Upload" action="{!upload}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputPanel id="showErrMsg">                  
+                    <apex:outputText style="color:red" value="Error occurred while uploading rows from the CSV file. An email has been sent with the error rows to your email address." rendered="{!errorInUpload && showUploadMsg  }"/>
+                    <apex:outputText style="color:green" value="All rows in the CSV file uploaded successfully." rendered="{!!errorInUpload && showUploadMsg }"/>
+                </apex:outputPanel>                
+            </apex:pageBlockSectionItem>
+     </apex:pageBlockSection>
+   </apex:pageblock>        
+</apex:form>
+
+</apex:page>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Rebate Claim Line Item</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Rebate Claim Line Items</value>
+    </caseValues>
+    <fields>
+        <label><!-- Associated Contract Line Item --></label>
+        <name>jj_rb_Assoc_Contract_Line_Item__c</name>
+        <relationshipLabel><!-- Rebate Claim Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Associated IMS Sales Data --></label>
+        <name>jj_rb_Assoc_IMS_Sales_Data__c</name>
+        <relationshipLabel><!-- Rebate Claim Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Calculated VAT --></label>
+        <name>jj_rb_Calculated_VAT__c</name>
+    </fields>
+    <fields>
+        <label><!-- Calculated quantity --></label>
+        <name>jj_rb_Calculated_quantity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Calculated rebate price --></label>
+        <name>jj_rb_Calculated_rebate_price__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract price --></label>
+        <name>jj_rb_Contract_price__c</name>
+    </fields>
+    <fields>
+        <label><!-- Difference in Quantity --></label>
+        <name>jj_rb_Difference_in_Qty__c</name>
+    </fields>
+    <fields>
+        <label><!-- Difference in rebate price --></label>
+        <name>jj_rb_Difference_in_rebate_price1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hospital Id --></label>
+        <name>jj_rb_Hospital_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hospital --></label>
+        <name>jj_rb_Hospital__c</name>
+        <relationshipLabel><!-- Rebate Claim Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Net Contract Price --></label>
+        <name>jj_rb_Net_Contract_Price__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net List Price --></label>
+        <name>jj_rb_Net_List_Price__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Rebate --></label>
+        <name>jj_rb_Net_Rebate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Rebate including VAT --></label>
+        <name>jj_rb_Net_Rebate_including_VAT__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quantity --></label>
+        <name>jj_rb_Quantity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quantity Validation --></label>
+        <name>jj_rb_Quantity_validation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rebate Claim --></label>
+        <name>jj_rb_Rebate_Claim__c</name>
+        <relationshipLabel><!-- Rebate Claim Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Rebate per unit --></label>
+        <name>jj_rb_Rebate_Per_Unit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product --></label>
+        <name>jj_rb_Rebate_Product__c</name>
+        <relationshipLabel><!-- Rebate Claim Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Tolerance Failed Qty --></label>
+        <name>jj_rb_Tolerance_Failed_Qty__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tolerance Failed Rebate --></label>
+        <name>jj_rb_Tolerance_Failed_Rebate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unit Contract Price --></label>
+        <name>jj_rb_Unit_Contract_Price__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unit List Price --></label>
+        <name>jj_rb_Unit_List_Price__c</name>
+    </fields>
+    <fields>
+        <label><!-- VAT Code --></label>
+        <name>jj_rb_VAT_Code__c</name>
+        <relationshipLabel><!-- Rebate Claim Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Rebate Value Validation --></label>
+        <name>jj_rb_rebate_val_validation__c</name>
+    </fields>
+    <layouts>
+        <layout>Homecare Rebate Claim Line Item</layout>
+        <sections>
+            <label><!-- Claim Validation --></label>
+            <section>Claim Validation</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Retailer Rebate Claim Line Item</layout>
+        <sections>
+            <label><!-- Claim Validation --></label>
+            <section>Claim Validation</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Retailer Rebate Claim Line Item --></label>
+        <name>Retailer_Rebate_Claim_Line_Item</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Homecare Claim --></label>
+        <name>jj_rb_Homecare_Claim</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Retailer Rebate Claim --></label>
+        <name>jj_rb_Retailer_Rebate_Claim</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- VAT Code selected does not match the product VAT Code. --></errorMessage>
+        <name>jj_rb_Claim_Line_Item_VAT_code</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Unit list price should be greater than Unit contract price. --></errorMessage>
+        <name>jj_rb_UnitLP_greater_UnitCP</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Unit Rebate Price should be the difference of the Unit List Price and Unit Contract Price. --></errorMessage>
+        <name>jj_rb_Unit_Rebate_Diff_LP_CP</name>
+    </validationRules>
+</CustomObjectTranslation>

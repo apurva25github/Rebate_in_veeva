@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Rebate Accrual Report Line Item</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Rebate Accrual Report Line Items</value>
+    </caseValues>
+    <fields>
+        <label><!-- Calculated VAT --></label>
+        <name>jj_rb_Calculated_VAT__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Rebate Including VAT --></label>
+        <name>jj_rb_Net_Rebate_Including_VAT__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Rebate --></label>
+        <name>jj_rb_Net_Rebate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quantity --></label>
+        <name>jj_rb_Quantity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rebate Accrual Report --></label>
+        <name>jj_rb_Rebate_Accrual_Report__c</name>
+        <relationshipLabel><!-- Rebate Accrual Report Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Rebate Product --></label>
+        <name>jj_rb_Rebate_Product__c</name>
+        <relationshipLabel><!-- Rebate Accrual Report Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Rebate per unit --></label>
+        <name>jj_rb_Rebate_per_unit__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Material No --></label>
+        <name>jj_rb_SAP_Material_No__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

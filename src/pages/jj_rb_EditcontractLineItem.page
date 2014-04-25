@@ -1,0 +1,5 @@
+<apex:page standardController="jj_rb_Rebate_Contract_Line_Item__c" extensions="jj_rb_EditcontractLineItemOverrideclass" action="{!edit}">
+    <apex:form >
+    
+    </apex:form>
+</apex:page>

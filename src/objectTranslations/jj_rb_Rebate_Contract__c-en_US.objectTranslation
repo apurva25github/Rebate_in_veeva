@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Rebate Contract</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Rebate Contracts</value>
+    </caseValues>
+    <fields>
+        <label><!-- Closure Comment --></label>
+        <name>jj_rb_Closure_Comment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Closure Status --></label>
+        <name>jj_rb_Closure_Status__c</name>
+        <picklistValues>
+            <masterLabel>Agreement value is too low</masterLabel>
+            <translation><!-- Agreement value is too low --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not interested</masterLabel>
+            <translation><!-- Not interested --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Contract End Date --></label>
+        <name>jj_rb_Contract_End_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract Start Date --></label>
+        <name>jj_rb_Contract_Start_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer --></label>
+        <name>jj_rb_Customer__c</name>
+        <relationshipLabel><!-- Rebate Contracts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>jj_rb_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- National Channel Manager --></label>
+        <name>jj_rb_National_Channel_Manager__c</name>
+        <relationshipLabel><!-- Rebate Contracts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Product --></label>
+        <name>jj_rb_Product__c</name>
+        <relationshipLabel><!-- Rebate Contracts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>jj_rb_Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Closed</masterLabel>
+            <translation><!-- Closed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expired</masterLabel>
+            <translation><!-- Expired --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Modified</masterLabel>
+            <translation><!-- Modified --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New</masterLabel>
+            <translation><!-- New --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Submitted</masterLabel>
+            <translation><!-- Submitted --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Total Expired Line Items --></label>
+        <name>jj_rb_Total_Expired_Line_Items__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Line Items --></label>
+        <name>jj_rb_Total_Line_Items__c</name>
+    </fields>
+    <layouts>
+        <layout>Home Care Read-Only Layout</layout>
+        <sections>
+            <label><!-- Contract Closing Information --></label>
+            <section>Contract Closing Information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- System Information --></label>
+            <section>System Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Homecare Contract Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- System Information --></label>
+            <section>System Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Retailer Contract Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- System Information --></label>
+            <section>System Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Retailer Read-Only Page Layout</layout>
+        <sections>
+            <label><!-- Contract Closing Information --></label>
+            <section>Contract Closing Information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- System Information --></label>
+            <section>System Information</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Homecare Closed Contract --></label>
+        <name>jj_rb_HCP_Close_Contract</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Homecare Contract --></label>
+        <name>jj_rb_Homecare_Contract</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Retailer Closed Contract --></label>
+        <name>jj_rb_Retailer_Close_Contract</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Retailer Contract --></label>
+        <name>jj_rb_Retailer_Rebate_Contract</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- jj_rb_Close_Contract --></label>
+        <name>jj_rb_Close_Contract</name>
+    </webLinks>
+</CustomObjectTranslation>

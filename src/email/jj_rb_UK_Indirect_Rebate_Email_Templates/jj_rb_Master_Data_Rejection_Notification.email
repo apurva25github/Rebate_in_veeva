@@ -1,0 +1,6 @@
+Hello, <br/><br/>
+
+Master Data Request - <a href = "{!jj_rb_Master_Data_Request__c.Link}"> {!jj_rb_Master_Data_Request__c.Name}</a> has been rejected.<br/><br/> 
+
+Regards,<br/>
+Rebate Management Team

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Template for rebate claim rejection notification sent out.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Rebate claim rejection notification</name>
+    <style>none</style>
+    <subject>Rebate Claim Rejection notification - {!jj_rb_Rebate_Claim__c.Name}</subject>
+    <textOnly>Hello,
+
+Rebate Claim Id: {!jj_rb_Rebate_Claim__c.Name} for {!jj_rb_Rebate_Claim__c.jj_rb_Customer__c}  is rejected.
+
+Regards,
+Rebate Management Team</textOnly>
+    <type>custom</type>
+</EmailTemplate>

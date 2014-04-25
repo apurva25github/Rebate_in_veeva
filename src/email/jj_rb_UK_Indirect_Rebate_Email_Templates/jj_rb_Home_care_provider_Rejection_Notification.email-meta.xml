@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Template for Home care provider Contract rejection notification sent out.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Home care provider Rejection Notification</name>
+    <style>none</style>
+    <subject>Home care provider contract rejected -  {!jj_rb_Rebate_Contract__c.Name}</subject>
+    <textOnly>Hello,
+
+Contract Id: {!jj_rb_Rebate_Contract__c.Name} for   {!jj_rb_Rebate_Contract__c.jj_rb_Product__c}  is Rejected.
+
+Regards,
+Rebate Management Team.</textOnly>
+    <type>custom</type>
+</EmailTemplate>

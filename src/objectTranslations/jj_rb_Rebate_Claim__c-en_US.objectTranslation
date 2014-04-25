@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Rebate Claim</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Rebate Claims</value>
+    </caseValues>
+    <fields>
+        <label><!-- Claim Date --></label>
+        <name>jj_rb_Claim_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Invoice Number --></label>
+        <name>jj_rb_Customer_Invoice_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer --></label>
+        <name>jj_rb_Customer__c</name>
+        <relationshipLabel><!-- Rebate Claims --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Dataload external Id --></label>
+        <name>jj_rb_Dataload_external_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>jj_rb_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoice document date --></label>
+        <name>jj_rb_Invoice_document_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoice due date --></label>
+        <name>jj_rb_Invoice_due_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Month --></label>
+        <name>jj_rb_Month__c</name>
+        <picklistValues>
+            <masterLabel>01</masterLabel>
+            <translation>January</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>02</masterLabel>
+            <translation>February</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>03</masterLabel>
+            <translation>March</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>04</masterLabel>
+            <translation>April</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05</masterLabel>
+            <translation>May</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06</masterLabel>
+            <translation>June</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07</masterLabel>
+            <translation>July</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08</masterLabel>
+            <translation>August</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09</masterLabel>
+            <translation>September</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10</masterLabel>
+            <translation>October</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11</masterLabel>
+            <translation>November</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12</masterLabel>
+            <translation>December</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- SAP Customer No --></label>
+        <name>jj_rb_SAP_CustomerNo__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Vendor No --></label>
+        <name>jj_rb_SAP_Vendor_No__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>jj_rb_Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Modified</masterLabel>
+            <translation><!-- Modified --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New</masterLabel>
+            <translation><!-- New --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Submitted</masterLabel>
+            <translation><!-- Submitted --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Total Calculated VAT --></label>
+        <name>jj_rb_Total_Calculated_VAT__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Line Items --></label>
+        <name>jj_rb_Total_Line_Items__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Rebate Amount --></label>
+        <name>jj_rb_Total_Rebate_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Rebate Including VAT --></label>
+        <name>jj_rb_Total_Rebate_Including_VAT__c</name>
+    </fields>
+    <fields>
+        <label><!-- Year --></label>
+        <name>jj_rb_Year__c</name>
+        <picklistValues>
+            <masterLabel>2012</masterLabel>
+            <translation><!-- 2012 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2013</masterLabel>
+            <translation><!-- 2013 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2014</masterLabel>
+            <translation><!-- 2014 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2015</masterLabel>
+            <translation><!-- 2015 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2016</masterLabel>
+            <translation><!-- 2016 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2017</masterLabel>
+            <translation><!-- 2017 --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Homecare Rebate Claim</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Information --></label>
+            <section>Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Retailer Rebate Claim</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Homecare Claim --></label>
+        <name>jj_rb_Homecare_Claim</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Retailer Rebate Claim --></label>
+        <name>jj_rb_Retailer_Rebate_Claim</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- jj_rb_Homecare_Claim_Upload --></label>
+        <name>jj_rb_Homecare_Claim_Upload</name>
+    </webLinks>
+</CustomObjectTranslation>

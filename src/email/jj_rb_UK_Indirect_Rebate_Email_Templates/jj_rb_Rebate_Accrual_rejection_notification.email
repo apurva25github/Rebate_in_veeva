@@ -1,0 +1,7 @@
+Hello,<br/><br/>
+
+Rebate Accrual Id: <a href = "{!jj_rb_Rebate_Accrual__c.Link}">{!jj_rb_Rebate_Accrual__c.Name}</a>  for {!jj_rb_Rebate_Accrual__c.jj_rb_Customer__c}  is rejected.
+<br/>
+<br/>
+Regards,<br/>
+Rebate Management Team

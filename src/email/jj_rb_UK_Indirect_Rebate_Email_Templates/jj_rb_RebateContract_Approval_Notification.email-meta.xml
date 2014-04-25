@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Template for rebate contract notification sent out.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Rebate Contract Approval Notification</name>
+    <style>none</style>
+    <subject>Rebate Contract approval request -  {!jj_rb_Rebate_Contract__c.Name}</subject>
+    <textOnly>Hello,
+
+Contract Id: {!jj_rb_Rebate_Contract__c.Name} for {!jj_rb_Rebate_Contract__c.jj_rb_Customer__c}  is awaiting your approval.
+
+Regards,
+Rebate Management Team</textOnly>
+    <type>custom</type>
+</EmailTemplate>

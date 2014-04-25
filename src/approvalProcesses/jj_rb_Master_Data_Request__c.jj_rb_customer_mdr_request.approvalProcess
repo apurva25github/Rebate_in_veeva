@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>jj_rb_Business_Name__c</field>
+        <field>RecordType</field>
+        <field>jj_rb_National_Channel_Manager__c</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>jj_rb_Approve_master_data_request</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <name>jj_rb_Head_of_BU</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <label>Step 1</label>
+        <name>Step_1</name>
+        <rejectionActions>
+            <action>
+                <name>jj_rb_Reject_master_data_request</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <emailTemplate>jj_rb_UK_Indirect_Rebate_Email_Templates/jj_rb_MasterData_Approval_Request</emailTemplate>
+    <enableMobileDeviceAccess>true</enableMobileDeviceAccess>
+    <entryCriteria>
+        <booleanFilter>(1 AND 5 AND 2 )OR (1 AND 3 AND 5) OR(1 AND  4)</booleanFilter>
+        <criteriaItems>
+            <field>jj_rb_Master_Data_Request__c.jj_rb_Status__c</field>
+            <operation>equals</operation>
+            <value>New, Rejected</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>jj_rb_Master_Data_Request__c.RecordType</field>
+            <operation>equals</operation>
+            <value>Retailer Customer Data Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>jj_rb_Master_Data_Request__c.RecordType</field>
+            <operation>equals</operation>
+            <value>Homecare Customer Data Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>jj_rb_Master_Data_Request__c.RecordType</field>
+            <operation>equals</operation>
+            <value>Hospital Data Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>jj_rb_Master_Data_Request__c.jj_rb_Total_Estimat_Rebate_Accrual__c</field>
+            <operation>notEqual</operation>
+            <value>0.0</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalRecordLock>true</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>jj_rb_Email_notification_for_MDR_Rejection</name>
+            <type>Alert</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>jj_rb_Email_Alert_For_Master_Data_Request_Submission</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>jj_rb_Master_data_request_submitted</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Customer master data creation request</label>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

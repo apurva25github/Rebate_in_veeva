@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <customSettingsVisibility>Protected</customSettingsVisibility>
+    <description>This custom setting lists all the record types for master data request object</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>jj_rb_RecordTypeId__c</fullName>
+        <description>Id for the Record type</description>
+        <externalId>false</externalId>
+        <label>RecordTypeId</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Master Data Record Types</label>
+</CustomObject>

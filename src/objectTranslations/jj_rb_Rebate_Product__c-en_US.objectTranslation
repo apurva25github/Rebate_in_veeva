@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Rebate Product</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Rebate Products</value>
+    </caseValues>
+    <fields>
+        <label><!-- Description --></label>
+        <name>jj_rb_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- IMS Product ID --></label>
+        <name>jj_rb_IMS_Product_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP EAN Code --></label>
+        <name>jj_rb_SAP_EAN_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Material No --></label>
+        <name>jj_rb_SAP_Material_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unit of Measure --></label>
+        <name>jj_rb_Unit_of_Measure__c</name>
+        <picklistValues>
+            <masterLabel>Piece</masterLabel>
+            <translation><!-- Piece --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- VAT Code --></label>
+        <name>jj_rb_VAT_Code__c</name>
+        <relationshipLabel><!-- Rebate Products --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Rebate Product Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- System Information --></label>
+            <section>System Information</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- SAP EAN Code should be numeric. --></errorMessage>
+        <name>jj_rb_SAP_EANCode_is_numeric</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- SAP Material No. should be numeric. --></errorMessage>
+        <name>jj_rb_SAP_MaterialNo_is_numeric</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- jj_rb_Request_Change --></label>
+        <name>jj_rb_Request_Change</name>
+    </webLinks>
+</CustomObjectTranslation>

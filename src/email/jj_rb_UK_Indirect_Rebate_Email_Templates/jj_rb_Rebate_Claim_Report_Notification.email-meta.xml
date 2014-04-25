@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>29.0</apiVersion>
+    <available>true</available>
+    <description>Template for rebate claim Report notification sent out.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Rebate Claim Report Notification</name>
+    <style>none</style>
+    <subject>Rebate Claim Report</subject>
+    <type>visualforce</type>
+</EmailTemplate>

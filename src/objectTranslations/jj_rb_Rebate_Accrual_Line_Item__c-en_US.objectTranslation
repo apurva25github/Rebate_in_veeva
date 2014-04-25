@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Rebate Accrual Line Item</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Rebate Accrual Line Item</value>
+    </caseValues>
+    <fields>
+        <label><!-- Rebate Adjustment --></label>
+        <name>Rebate_Adjustment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Rebate Accrual After Adjustment --></label>
+        <name>jj_rb_Net_Rebate_Accrual_After_Adj__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Rebate Accrual Amount --></label>
+        <name>jj_rb_Net_Rebate_Accrual_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product --></label>
+        <name>jj_rb_Product__c</name>
+        <relationshipLabel><!-- Rebate Accrual Line Item --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Rebate Accrual --></label>
+        <name>jj_rb_Rebate_Accrual__c</name>
+        <relationshipLabel><!-- Rebate Accrual Line Item --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- SAP_Customer_No --></label>
+        <name>jj_rb_SAP_Customer_No__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Material No --></label>
+        <name>jj_rb_SAP_Material_No__c</name>
+    </fields>
+    <fields>
+        <label><!-- Volume --></label>
+        <name>jj_rb_Volume__c</name>
+    </fields>
+    <layouts>
+        <layout>Rebate Accrual Line Item Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Rebate adjustment cannot be greater than net rebate accrual amount. --></errorMessage>
+        <name>jj_rb_AdjustmentNotGreaterAccrual</name>
+    </validationRules>
+</CustomObjectTranslation>

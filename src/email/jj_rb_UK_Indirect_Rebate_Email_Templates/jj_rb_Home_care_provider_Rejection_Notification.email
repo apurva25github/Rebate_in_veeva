@@ -1,0 +1,7 @@
+Hello,<br/><br/>
+
+Contract Id: <a href = "{!jj_rb_Rebate_Contract__c.Link}">{!jj_rb_Rebate_Contract__c.Name}</a>  for   {!jj_rb_Rebate_Contract__c.jj_rb_Product__c}  is Rejected.
+<br/>
+<br/>
+Regards,<br/>
+Rebate Management Team.

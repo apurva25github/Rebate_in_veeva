@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Information of the products sold to Retailers and homecare providers are stored here. A separate custom object created for products, as this application is a potential candidate for migration to iConnect and to minimize the impact on the standard Product object in iConnect.</description>
+    <enableActivities>true</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fieldSets>
+        <fullName>jj_rb_Rebate_Product_Field_Set</fullName>
+        <description>For &apos;Rebate_Product_RequestChange&apos; VF Page.</description>
+        <displayedFields>
+            <field>Name</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>jj_rb_Description__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>jj_rb_SAP_Material_Number__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>jj_rb_SAP_EAN_Code__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>jj_rb_Unit_of_Measure__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Rebate Product Field Set</label>
+    </fieldSets>
+    <fields>
+        <fullName>jj_rb_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_IMS_Product_ID__c</fullName>
+        <externalId>true</externalId>
+        <label>IMS Product ID</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_SAP_EAN_Code__c</fullName>
+        <description>SKU Number of the product from SAP.</description>
+        <externalId>true</externalId>
+        <label>SAP EAN Code</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_SAP_Material_Number__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Material No of the product from SAP</description>
+        <externalId>true</externalId>
+        <label>SAP Material No</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Unit_of_Measure__c</fullName>
+        <description>Unit of measure of the product.</description>
+        <externalId>false</externalId>
+        <label>Unit of Measure</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Piece</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_VAT_Code__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>VAT Code</label>
+        <referenceTo>jj_rb_VAT_Code__c</referenceTo>
+        <relationshipLabel>Rebate Products</relationshipLabel>
+        <relationshipName>Rebate_Products</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Rebate Product</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>jj_rb_Description__c</columns>
+        <columns>jj_rb_SAP_Material_Number__c</columns>
+        <columns>jj_rb_SAP_EAN_Code__c</columns>
+        <columns>jj_rb_VAT_Code__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+        <language>en_US</language>
+    </listViews>
+    <nameField>
+        <label>Rebate Product Name</label>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Rebate Products</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>jj_rb_Description__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>jj_rb_SAP_Material_Number__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>jj_rb_Unit_of_Measure__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATED_DATE</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>jj_rb_Description__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>jj_rb_SAP_Material_Number__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>jj_rb_Unit_of_Measure__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CREATED_DATE</lookupDialogsAdditionalFields>
+        <searchResultsAdditionalFields>jj_rb_Description__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>jj_rb_SAP_Material_Number__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>jj_rb_Unit_of_Measure__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>jj_rb_SAP_EANCode_is_numeric</fullName>
+        <active>true</active>
+        <description>SAP EAN Code should be numeric.</description>
+        <errorConditionFormula>!isnumber( jj_rb_SAP_EAN_Code__c)</errorConditionFormula>
+        <errorDisplayField>jj_rb_SAP_EAN_Code__c</errorDisplayField>
+        <errorMessage>SAP EAN Code should be numeric.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>jj_rb_SAP_MaterialNo_is_numeric</fullName>
+        <active>true</active>
+        <description>SAP Material No. should be numeric.</description>
+        <errorConditionFormula>!isnumber(jj_rb_SAP_Material_Number__c )</errorConditionFormula>
+        <errorDisplayField>jj_rb_SAP_Material_Number__c</errorDisplayField>
+        <errorMessage>SAP Material No. should be numeric.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>jj_rb_Request_Change</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Request Change</masterLabel>
+        <openType>sidebar</openType>
+        <page>jj_rb_Rebate_Product_RequestChange</page>
+        <protected>false</protected>
+    </webLinks>
+</CustomObject>

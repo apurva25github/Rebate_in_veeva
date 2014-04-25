@@ -1,0 +1,9 @@
+<apex:page >
+    <apex:form >
+       
+        You are not allowed to Modify {!$CurrentPage.parameters.status}  {!$CurrentPage.parameters.recordtype} for Contract ID: {!$CurrentPage.parameters.contract}
+  
+        <!---customer:
+        {!$currentPage.parameters.customer}--->
+    </apex:form> 
+</apex:page>

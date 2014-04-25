@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object stores all the customer, product creation requests.</description>
+    <enableActivities>true</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>jj_rb_Business_City__c</fullName>
+        <description>This field will store the city value of the Business Address.</description>
+        <externalId>false</externalId>
+        <label>Business City</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Business_Country__c</fullName>
+        <description>This field will store the country value of business address.</description>
+        <externalId>false</externalId>
+        <label>Business Country</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Business_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Business_Phone__c</fullName>
+        <externalId>false</externalId>
+        <label>Business Phone</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Business_Postal_Code__c</fullName>
+        <description>This field will store the postal code value of the business address.</description>
+        <externalId>false</externalId>
+        <label>Business Postal Code</label>
+        <length>10</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Business_State__c</fullName>
+        <description>This field will store the state value of the business address.</description>
+        <externalId>false</externalId>
+        <label>Business State</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Business_Street__c</fullName>
+        <description>This field will store the street name of the business address.</description>
+        <externalId>false</externalId>
+        <label>Business Street</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Credit_check_Validity_End__c</fullName>
+        <externalId>false</externalId>
+        <label>Credit check Validity End</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Credit_check_Validity_From__c</fullName>
+        <externalId>false</externalId>
+        <label>Credit check Validity From</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Customer__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The customer record that will be created after approval of the customer master data request.</description>
+        <externalId>false</externalId>
+        <label>Customer</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Master Data Requests</relationshipLabel>
+        <relationshipName>Customer</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Email</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Fax__c</fullName>
+        <externalId>false</externalId>
+        <label>Fax</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_IMS_Customer_Id__c</fullName>
+        <externalId>true</externalId>
+        <label>IMS Customer Id</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_IMS_Product_ID__c</fullName>
+        <externalId>true</externalId>
+        <label>IMS Product ID</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_NHS_Trust__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>NHS Trust</label>
+        <referenceTo>jj_rb_NHS_Trust__c</referenceTo>
+        <relationshipLabel>Master Data Requests</relationshipLabel>
+        <relationshipName>Master_Data_Requests</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_National_Channel_Manager__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>National Channel Manager</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Master_Data_Requests</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Parent_Customer__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Parent Customer</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Master Data Requests</relationshipLabel>
+        <relationshipName>Master_Data_Requests</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Product_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Product Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Rebate_Product__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Rebate product that will be created from this master data request.</description>
+        <externalId>false</externalId>
+        <label>Rebate Product</label>
+        <referenceTo>jj_rb_Rebate_Product__c</referenceTo>
+        <relationshipLabel>Master Data Request</relationshipLabel>
+        <relationshipName>Master_Data_Request</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Rebate_Request_Change_For_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Rebate_Request_Change_For_ID</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_SAP_Customer_Number__c</fullName>
+        <description>Customer identifier from SAP</description>
+        <externalId>true</externalId>
+        <label>SAP Customer No</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_SAP_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Description</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_SAP_EAN_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP EAN Code</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_SAP_Material_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Material Code</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_SAP_Vendor_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Vendor Number</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>New</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Total_Estimat_Rebate_Accrual__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Total Estimated Rebate Accrual</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Unit_of_Measure__c</fullName>
+        <externalId>false</externalId>
+        <label>Unit of Measure</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Piece</fullName>
+                <default>true</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_VAT_Code__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>VAT Code</label>
+        <referenceTo>jj_rb_VAT_Code__c</referenceTo>
+        <relationshipLabel>Master Data Requests</relationshipLabel>
+        <relationshipName>Master_Data_Requests</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Website__c</fullName>
+        <externalId>false</externalId>
+        <label>Website</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_iConnect_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>iConnect ID</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Master Data Request</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>jj_rb_Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Customer_Master_Data_Request</fullName>
+        <columns>NAME</columns>
+        <columns>jj_rb_SAP_Customer_Number__c</columns>
+        <columns>jj_rb_Business_City__c</columns>
+        <columns>jj_rb_Status__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>jj_rb_Master_Data_Request__c.jj_rb_MDR_Retailer_Customer_Master_Data_Request</value>
+        </filters>
+        <label>Retailer Customer Master Data Request</label>
+        <language>en_US</language>
+    </listViews>
+    <listViews>
+        <fullName>Hom_Care_Provider_Master_Data_Request</fullName>
+        <columns>NAME</columns>
+        <columns>jj_rb_Business_Name__c</columns>
+        <columns>jj_rb_Business_City__c</columns>
+        <columns>jj_rb_Status__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>jj_rb_Master_Data_Request__c.jj_rb_Home_Care_Provider_Data_Request</value>
+        </filters>
+        <label>Homecare Provider Master Data Request</label>
+        <language>en_US</language>
+    </listViews>
+    <listViews>
+        <fullName>Hospital_Master_Data_Request</fullName>
+        <columns>NAME</columns>
+        <columns>jj_rb_Business_Name__c</columns>
+        <columns>jj_rb_NHS_Trust__c</columns>
+        <columns>jj_rb_iConnect_ID__c</columns>
+        <columns>jj_rb_Status__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>jj_rb_Master_Data_Request__c.jj_rb_Hospital_Data_Request</value>
+        </filters>
+        <label>Hospital Master Data Request</label>
+        <language>en_US</language>
+    </listViews>
+    <listViews>
+        <fullName>Product_Master_Data_Requests</fullName>
+        <columns>NAME</columns>
+        <columns>jj_rb_Product_Name__c</columns>
+        <columns>jj_rb_SAP_Material_Code__c</columns>
+        <columns>jj_rb_Status__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>jj_rb_Product_Name__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <label>Product Master Data Requests</label>
+    </listViews>
+    <nameField>
+        <displayFormat>MDR-{0}</displayFormat>
+        <label>Master Data Request Number</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Master Data Requests</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>jj_rb_Home_Care_Provider_Data_Request</fullName>
+        <active>true</active>
+        <description>Use this to create a new Home care provider request</description>
+        <label>Homecare Customer Data Request</label>
+        <picklistValues>
+            <picklist>jj_rb_Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>jj_rb_Unit_of_Measure__c</picklist>
+            <values>
+                <fullName>Piece</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>jj_rb_Hospital_Data_Request</fullName>
+        <active>true</active>
+        <description>Use this to create Hospital data request</description>
+        <label>Hospital Data Request</label>
+        <picklistValues>
+            <picklist>jj_rb_Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>jj_rb_Unit_of_Measure__c</picklist>
+            <values>
+                <fullName>Piece</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>jj_rb_MDR_Retailer_Customer_Master_Data_Request</fullName>
+        <active>true</active>
+        <description>Use this to create a retailer customer request.</description>
+        <label>Retailer Customer Data Request</label>
+        <picklistValues>
+            <picklist>jj_rb_Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>jj_rb_Unit_of_Measure__c</picklist>
+            <values>
+                <fullName>Piece</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>jj_rb_MDR_Retailer_Product_Master_Data_Request</fullName>
+        <active>true</active>
+        <description>Use this to create a new product request.</description>
+        <label>Product Data Request</label>
+        <picklistValues>
+            <picklist>jj_rb_Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>jj_rb_Unit_of_Measure__c</picklist>
+            <values>
+                <fullName>Piece</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>jj_rb_Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATED_DATE</customTabListAdditionalFields>
+        <searchResultsAdditionalFields>jj_rb_Business_Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>jj_rb_SAP_Customer_Number__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>jj_rb_Product_Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>jj_rb_National_Channel_Manager__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>jj_rb_SAP_Material_Code__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>jj_rb_Status__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>jj_rb_Credit_dates_validation</fullName>
+        <active>true</active>
+        <description>Credit check Validity End should be greater than Credit check Validity From</description>
+        <errorConditionFormula>AND( RecordType.Name = &apos;Homecare Customer Data Request&apos; ,jj_rb_Credit_check_Validity_End__c &lt;  jj_rb_Credit_check_Validity_From__c)</errorConditionFormula>
+        <errorDisplayField>jj_rb_Credit_check_Validity_From__c</errorDisplayField>
+        <errorMessage>Credit check Validity End should be greater than Credit check Validity From</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>jj_rb_IMS_cust_ID_is_number</fullName>
+        <active>true</active>
+        <description>IMS customer number should be a number</description>
+        <errorConditionFormula>AND(RecordType.Name = &apos;Retailer Customer Data Request&apos;, NOT( ISNUMBER( jj_rb_IMS_Customer_Id__c )))</errorConditionFormula>
+        <errorDisplayField>jj_rb_IMS_Customer_Id__c</errorDisplayField>
+        <errorMessage>IMS customer number should be a number</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>jj_rb_IMS_prod_ID_is_number</fullName>
+        <active>true</active>
+        <description>IMS product number should be a number.</description>
+        <errorConditionFormula>AND(RecordType.Name = &apos;Product Data Request&apos;, NOT( ISNUMBER( jj_rb_IMS_Product_ID__c ) ) )</errorConditionFormula>
+        <errorDisplayField>jj_rb_IMS_Product_ID__c</errorDisplayField>
+        <errorMessage>IMS product number should be a number.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>jj_rb_SAP_CustomerNo_is_numeric</fullName>
+        <active>true</active>
+        <description>SAP Customer no should be a number.</description>
+        <errorConditionFormula>AND(  OR(RecordType.Name  = &apos;Retailer Customer Data Request&apos;,RecordType.Name  = &apos;Homecare Customer Data Request&apos;)  ,NOT(isnumber(jj_rb_SAP_Customer_Number__c) ))</errorConditionFormula>
+        <errorDisplayField>jj_rb_SAP_Customer_Number__c</errorDisplayField>
+        <errorMessage>SAP Customer No. should be a number.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>jj_rb_SAP_EanCode_is_numeric</fullName>
+        <active>true</active>
+        <description>SAP EAN Code should be a number.</description>
+        <errorConditionFormula>AND( RecordType.Name = &apos;Product Data Request&apos;,NOT(isnumber(jj_rb_SAP_EAN_Code__c) ))</errorConditionFormula>
+        <errorDisplayField>jj_rb_SAP_EAN_Code__c</errorDisplayField>
+        <errorMessage>SAP EAN Code should be a number.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>jj_rb_SAP_MaterialNo_is_numeric</fullName>
+        <active>true</active>
+        <description>SAP Material No. should be a number.</description>
+        <errorConditionFormula>AND( RecordType.Name = &apos;Product Data Request&apos;,NOT(isnumber(jj_rb_SAP_Material_Code__c ) ))</errorConditionFormula>
+        <errorDisplayField>jj_rb_SAP_Material_Code__c</errorDisplayField>
+        <errorMessage>SAP Material No. should be a number.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>jj_rb_SAP_VendorNo_is_numeric</fullName>
+        <active>true</active>
+        <description>SAP Vendor No. should be a number.</description>
+        <errorConditionFormula>AND(  OR(RecordType.Name  = &apos;Retailer Customer Data Request&apos;,RecordType.Name  = &apos;Homecare Customer Data Request&apos;) ,NOT(isnumber(jj_rb_SAP_Vendor_Number__c) ))</errorConditionFormula>
+        <errorDisplayField>jj_rb_SAP_Vendor_Number__c</errorDisplayField>
+        <errorMessage>SAP Vendor No. should be a number.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>jj_rb_iConnect_ID_Numeric</fullName>
+        <active>true</active>
+        <description>iConnect Id should be a number</description>
+        <errorConditionFormula>AND(RecordType.Name = &apos;Hospital Data Request&apos;,NOT(ISBLANK(jj_rb_iConnect_ID__c)),NOT(isnumber(jj_rb_iConnect_ID__c)))</errorConditionFormula>
+        <errorDisplayField>jj_rb_iConnect_ID__c</errorDisplayField>
+        <errorMessage>iConnect Id should be a number</errorMessage>
+    </validationRules>
+</CustomObject>

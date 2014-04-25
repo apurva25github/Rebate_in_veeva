@@ -1,0 +1,6 @@
+<apex:page >
+    <apex:form >
+     You are not allowed to Modify {!$CurrentPage.parameters.status}  {!$CurrentPage.parameters.recordtype} for Customer- {!$CurrentPage.parameters.customer} 
+     <br/>Click <a href="/{!$CurrentPage.parameters.id}"> here </a> to return to the previous page.
+    </apex:form>
+</apex:page>

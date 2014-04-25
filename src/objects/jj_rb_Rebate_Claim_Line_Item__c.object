@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <content>jj_rb_Claim_Line_Item_NewOverridepage</content>
+        <skipRecordTypeSelect>true</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>jj_rb_Assoc_Contract_Line_Item__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Contract line item evaluated for this claim line item.</description>
+        <externalId>false</externalId>
+        <label>Associated Contract Line Item</label>
+        <referenceTo>jj_rb_Rebate_Contract_Line_Item__c</referenceTo>
+        <relationshipLabel>Rebate Claim Line Items</relationshipLabel>
+        <relationshipName>Rebate_Claim_Line_Items</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Assoc_IMS_Sales_Data__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>IMS Sales data associated with this claim line item.</description>
+        <externalId>false</externalId>
+        <label>Associated IMS Sales Data</label>
+        <referenceTo>jj_rb_IMS_Sales_Data__c</referenceTo>
+        <relationshipLabel>Rebate Claim Line Items</relationshipLabel>
+        <relationshipName>Rebate_Claim_Line_Items</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Calculated_VAT__c</fullName>
+        <externalId>false</externalId>
+        <label>Calculated VAT</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Calculated_quantity__c</fullName>
+        <externalId>false</externalId>
+        <label>Calculated quantity</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Calculated_rebate_price__c</fullName>
+        <externalId>false</externalId>
+        <label>Calculated rebate price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Contract_price__c</fullName>
+        <externalId>false</externalId>
+        <label>Contract price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Difference_in_Qty__c</fullName>
+        <externalId>false</externalId>
+        <formula>jj_rb_Quantity__c - jj_rb_Calculated_quantity__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Difference in Quantity</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Difference_in_rebate_price1__c</fullName>
+        <externalId>false</externalId>
+        <formula>jj_rb_Rebate_Per_Unit__c - jj_rb_Calculated_rebate_price__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Difference in rebate price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Hospital_Id__c</fullName>
+        <description>This field stores the hospital iConnectId</description>
+        <externalId>true</externalId>
+        <label>Hospital Id</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Hospital__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup to the associated hospital lookup field</description>
+        <externalId>false</externalId>
+        <label>Hospital</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Rebate Claim Line Items</relationshipLabel>
+        <relationshipName>Rebate_Claim_Line_Items</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Net_Contract_Price__c</fullName>
+        <description>Calculated net contract price</description>
+        <externalId>false</externalId>
+        <formula>jj_rb_Contract_price__c *  jj_rb_Quantity__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Net Contract Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Net_List_Price__c</fullName>
+        <description>Calculated Net list price</description>
+        <externalId>false</externalId>
+        <formula>jj_rb_Unit_List_Price__c *  jj_rb_Quantity__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Net List Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Net_Rebate__c</fullName>
+        <externalId>false</externalId>
+        <formula>jj_rb_Quantity__c *  jj_rb_Rebate_Per_Unit__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Net Rebate</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Net_Rebate_including_VAT__c</fullName>
+        <externalId>false</externalId>
+        <label>Net Rebate including VAT</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Quantity__c</fullName>
+        <externalId>false</externalId>
+        <label>Quantity</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Quantity_validation__c</fullName>
+        <description>This field indicates that the difference of the quantity in the claim and IMS quantity is outside the tolerance limit.</description>
+        <externalId>false</externalId>
+        <formula>IMAGE( IF(jj_rb_Tolerance_Failed_Qty__c ,&quot;/img/samples/flag_red.gif&quot;, &quot;/img/samples/flag_green.gif&quot;),&quot;/img/samples/flag_green.gif&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Quantity Validation</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Rebate_Claim__c</fullName>
+        <externalId>false</externalId>
+        <label>Rebate Claim</label>
+        <referenceTo>jj_rb_Rebate_Claim__c</referenceTo>
+        <relationshipLabel>Rebate Claim Line Items</relationshipLabel>
+        <relationshipName>Rebate_Claim_Line_Items</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Rebate_Per_Unit__c</fullName>
+        <externalId>false</externalId>
+        <label>Rebate per unit</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Rebate_Product__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>Product for which rebate is being claimed.</description>
+        <externalId>false</externalId>
+        <label>Product</label>
+        <referenceTo>jj_rb_Rebate_Product__c</referenceTo>
+        <relationshipLabel>Rebate Claim Line Items</relationshipLabel>
+        <relationshipName>Rebate_Claim_Line_Items</relationshipName>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Tolerance_Failed_Qty__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field indicates that the tolerance check for quantity has failed.</description>
+        <externalId>false</externalId>
+        <label>Tolerance Failed Qty</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Tolerance_Failed_Rebate__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF((jj_rb_Difference_in_rebate_price1__c)!=0.00 ,True ,False )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Tolerance Failed Rebate</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Unit_Contract_Price__c</fullName>
+        <description>Contract price of a single unit</description>
+        <externalId>false</externalId>
+        <label>Unit Contract Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Unit_List_Price__c</fullName>
+        <description>List price of  single unit.</description>
+        <externalId>false</externalId>
+        <label>Unit List Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_VAT_Code__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>VAT Code</label>
+        <referenceTo>jj_rb_VAT_Code__c</referenceTo>
+        <relationshipLabel>Rebate Claim Line Items</relationshipLabel>
+        <relationshipName>Rebate_Claim_Line_Items</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_rebate_val_validation__c</fullName>
+        <externalId>false</externalId>
+        <formula>IMAGE(  IF(jj_rb_Difference_in_rebate_price1__c!=0.00,&quot;/img/samples/flag_red.gif&quot;, &quot;/img/samples/flag_green.gif&quot;),&quot;/img/samples/flag_green.gif&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Rebate Value Validation</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Rebate Claim Line Item</label>
+    <nameField>
+        <displayFormat>CLI-{0}</displayFormat>
+        <label>Rebate Claim Line Item No.</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Rebate Claim Line Items</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Retailer_Rebate_Claim_Line_Item</fullName>
+        <active>true</active>
+        <label>Retailer Rebate Claim Line Item</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>jj_rb_Homecare_Claim</fullName>
+        <active>true</active>
+        <description>Use this to create a claim line item for a Homecare claim.</description>
+        <label>Homecare Claim</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>jj_rb_Retailer_Rebate_Claim</fullName>
+        <active>true</active>
+        <label>Retailer Rebate Claim</label>
+    </recordTypes>
+    <searchLayouts>
+        <searchFilterFields>NAME</searchFilterFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>jj_rb_Claim_Line_Item_VAT_code</fullName>
+        <active>true</active>
+        <description>This validation rule checks if the line item VAT code matches.</description>
+        <errorConditionFormula>jj_rb_VAT_Code__c &lt;&gt; jj_rb_Rebate_Product__r.jj_rb_VAT_Code__c</errorConditionFormula>
+        <errorMessage>VAT Code selected does not match the product VAT Code.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>jj_rb_UnitLP_greater_UnitCP</fullName>
+        <active>true</active>
+        <description>For Homecare claim line items, the Unit list price should be greater than the Unit contract price.</description>
+        <errorConditionFormula>RecordType.DeveloperName =&apos;jj_rb_Homecare_Claim&apos; &amp;&amp;  jj_rb_Unit_Contract_Price__c  &gt;  jj_rb_Unit_List_Price__c</errorConditionFormula>
+        <errorMessage>Unit list price should be greater than Unit contract price.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>jj_rb_Unit_Rebate_Diff_LP_CP</fullName>
+        <active>true</active>
+        <description>Unit Rebate price should be the difference of the List Price and the Contract price.</description>
+        <errorConditionFormula>AND( ISNEW(), RecordType.DeveloperName = &apos;jj_rb_Homecare_Claim&apos;, 
+jj_rb_Rebate_Per_Unit__c &lt;&gt; (jj_rb_Unit_List_Price__c - jj_rb_Unit_Contract_Price__c))</errorConditionFormula>
+        <errorMessage>Unit Rebate Price should be the difference of the Unit List Price and Unit Contract Price.</errorMessage>
+    </validationRules>
+</CustomObject>

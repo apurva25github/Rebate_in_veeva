@@ -5,7 +5,7 @@ public class jj_rb_Rebate_TestClass{
  Capgemini India Ltd 
 
  Purpose:
-  It is used for Testing the Rebate_Contract and Rebate_contract_line_items Validations
+  It is used for Testing the Rebate_Contract and Rebate_contract_line_items Validations.
 
  History:
  VERSION      AUTHOR            DATE              DETAIL                                 

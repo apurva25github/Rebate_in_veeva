@@ -21,10 +21,10 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
         List<jj_rb_Rebate_Claim_Line_Item__c> lstClaimsToUpdateclaims= new List<jj_rb_Rebate_Claim_Line_Item__c>();
         //record types
         
-        String homecareclaimrecType=jj_rb_Rebate_utils.getRecordTypeID('Homecare claim');
+        String homecareclaimrecType=jj_rb_Rebate_utils.getRecordTypeID('Claim_Homecare');
         String HospitalType = jj_rb_Rebate_utils.getAccountType('Hospital');
-        String homecareclaimLI_recType=jj_rb_Rebate_utils.getRecordTypeID('Homecare claim line item');
-        String homecareContractLI_recType=jj_rb_Rebate_utils.getRecordTypeID('HCP Contract line item');
+        String homecareclaimLI_recType=jj_rb_Rebate_utils.getRecordTypeID('Claim_LineItem_Homecare');
+        String homecareContractLI_recType=jj_rb_Rebate_utils.getRecordTypeID('Homecare_Contract_Line_Item');
         
         List<jj_rb_Rebate_Claim_Line_Item__c> lstClaimsToUpdate = new List<jj_rb_Rebate_Claim_Line_Item__c>();
         
@@ -252,8 +252,8 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
             Set<String> setMonthAndYear = new Set<String>();
             
             
-            String retailerContractLI_recType=jj_rb_Rebate_utils.getRecordTypeID('Retailer contract line item');
-            String retailerClaimLI_recType=jj_rb_Rebate_utils.getRecordTypeID('Retailer claim line item'); 
+            String retailerContractLI_recType=jj_rb_Rebate_utils.getRecordTypeID('Contract_LineItem_Retailer');
+            String retailerClaimLI_recType=jj_rb_Rebate_utils.getRecordTypeID('Claim_LineItem_Retailer'); 
                
             Map<String, jj_rb_Rebate_Claim_Line_Item__c> mapRebateClaimLineItems =
                 new Map<String, jj_rb_Rebate_Claim_Line_Item__c>(); 
@@ -501,10 +501,10 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
         Set<String> setClaimYear = new Set<String>();
         
         
-        String homecareclaimrecType=jj_rb_Rebate_utils.getRecordTypeID('Homecare claim');
-        String retailerclaim_recType=jj_rb_Rebate_utils.getRecordTypeID('Retailer Rebate Claim');
-        String retailerclaimLI_recType=jj_rb_Rebate_utils.getRecordTypeID('Retailer claim line item');
-        String homecareclaimLI_recType=jj_rb_Rebate_utils.getRecordTypeID('Homecare claim line item');
+        String homecareclaimrecType=jj_rb_Rebate_utils.getRecordTypeID('Claim_Homecare');
+        String retailerclaim_recType=jj_rb_Rebate_utils.getRecordTypeID('Rebate_Claim_Retailer');
+        String retailerclaimLI_recType=jj_rb_Rebate_utils.getRecordTypeID('Claim_LineItem_Retailer');
+        String homecareclaimLI_recType=jj_rb_Rebate_utils.getRecordTypeID('Claim_LineItem_Homecare');
         
         
         Map<String, jj_rb_Rebate_Claim_Line_Item__c> mapNotUniqueRetailerClaimLineItem = new map<String, jj_rb_Rebate_Claim_Line_Item__c>();

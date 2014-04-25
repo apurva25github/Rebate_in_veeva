@@ -11,12 +11,12 @@ public with sharing class jj_rb_EditcontractLineItemOverrideclass {
       
     
     // Record Types of contract an lineitems
-    String retailerclosed_recordType=jj_rb_Rebate_utils.getRecordTypeId('Close Contract');
-    String HomecareClosed_recordType=jj_rb_Rebate_utils.getRecordTypeId('HCP Close Contract');
-    String contractlineClosed_recordType=jj_rb_Rebate_utils.getRecordTypeId('Close Contract Line Item');
-    String HCPlineitemClosed_recordType=jj_rb_Rebate_utils.getRecordTypeId('HCP Close Lineitem');
-    String RetailerConLineitem_RT=jj_rb_Rebate_utils.getRecordTypeId('Retailer contract line item');
-    String HCPConLineItem_RT=jj_rb_Rebate_utils.getRecordTypeId('HCP Contract line item');
+    String retailerclosed_recordType=jj_rb_Rebate_utils.getRecordTypeId('Retailer_Closed_Contract');
+    String HomecareClosed_recordType=jj_rb_Rebate_utils.getRecordTypeId('Homecare_Closed_Contract');
+    String contractlineClosed_recordType=jj_rb_Rebate_utils.getRecordTypeId('Retailer_Closed_Contract_Line_Item');
+    String HCPlineitemClosed_recordType=jj_rb_Rebate_utils.getRecordTypeId('Homecare_Closed_Contract_Lineitem');
+    String RetailerConLineitem_RT=jj_rb_Rebate_utils.getRecordTypeId('Contract_LineItem_Retailer');
+    String HCPConLineItem_RT=jj_rb_Rebate_utils.getRecordTypeId('Homecare_Contract_Line_Item');
     String Status_closed=jj_rb_Rebate_utils.getRebateLineItemStatus('Closed');
     String Status_Expired=jj_rb_Rebate_utils.getRebateLineItemStatus('Expired');    
    

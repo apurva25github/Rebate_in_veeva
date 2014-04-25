@@ -1,8 +1,8 @@
 global class jj_rb_Contract_notifications implements Database.Batchable<sObject>,Database.Stateful
 {
     
-    id retailerRecordTypeID = jj_rb_Rebate_Utils.getRecordTypeId('Retailer contract line item');
-    id homecareProviderRecordTypeID = jj_rb_Rebate_Utils.getRecordTypeId('HCP Contract line item');
+    id retailerRecordTypeID = jj_rb_Rebate_Utils.getRecordTypeId('Contract_LineItem_Retailer');
+    id homecareProviderRecordTypeID = jj_rb_Rebate_Utils.getRecordTypeId('Homecare_Contract_Line_Item');
     Date expiredateToday = Date.today();
     Date expiredate2Weeks = Date.today()+14;
     Date expiredate2Months = Date.today()+60;

@@ -36,30 +36,30 @@ public class jj_rb_Close_contract
         for(jj_rb_Rebate_Contract_Line_Item__c RCIL : contract.Rebate_Contract_Line_Items__r)
         {   Id RecID  = RCIL.RecordTypeId;
             
-            if(RecID   == jj_rb_Rebate_utils.getRecordTypeId('Retailer contract line item'))
+            if(RecID   == jj_rb_Rebate_utils.getRecordTypeId('Contract_LineItem_Retailer'))
             { 
                 RCIL.jj_rb_status__c = Closed;
-                RCIL.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Close Contract Line Item');
+                RCIL.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Retailer_Closed_Contract_Line_Item');
             }
             //system.debug('Line Item *** '+ RecID  + ' Custom Setting *** '  + utils.getRecordTypeId('Retailer contract line item'));
-            else if(RecID == jj_rb_Rebate_utils.getRecordTypeId('HCP Contract line item'))
+            else if(RecID == jj_rb_Rebate_utils.getRecordTypeId('Homecare_Contract_Line_Item'))
             {
                 RCIL.jj_rb_status__c = Closed;
-                RCIL.RecordTypeId =  jj_rb_Rebate_utils.getRecordTypeId('HCP Close Lineitem');
+                RCIL.RecordTypeId =  jj_rb_Rebate_utils.getRecordTypeId('Homecare_Closed_Contract_Lineitem');
             }
             ListLine_Item.add(RCIL);
         }
         
         //Update Contract Status
-        if(contract.RecordTypeId  == jj_rb_Rebate_utils.getRecordTypeId('Retailer Contract'))
+        if(contract.RecordTypeId  == jj_rb_Rebate_utils.getRecordTypeId('Rebate_Contract_Retailer'))
         {
             contract.jj_rb_Status__c = Closed;
-            contract.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Close Contract');
+            contract.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Retailer_Closed_Contract');
         }
-        else if(contract.RecordTypeId == jj_rb_Rebate_utils.getRecordTypeId('Home care Provider contract'))
+        else if(contract.RecordTypeId == jj_rb_Rebate_utils.getRecordTypeId('Homecare_Contract'))
         {
             contract.jj_rb_Status__c = Closed;
-            contract.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('HCP Close Contract');
+            contract.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Homecare_Closed_Contract');
         }
         if(!ListLine_Item.isEmpty())
         {

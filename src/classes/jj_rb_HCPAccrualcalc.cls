@@ -17,10 +17,10 @@ global class jj_rb_HCPAccrualcalc extends jj_rb_rebateAccrualBaseClass implement
      Set<Id> setCustomerId = new Set<Id>(); 
      List<Account> listAccount = new List<Account>();     
     
-     String Account_HCP = jj_rb_Rebate_utils.getRecordTypeId('Account Homecare');
-     String Accrual_HCP = jj_rb_Rebate_utils.getRecordTypeId('Accrual HCP');
+     String Account_HCP = jj_rb_Rebate_utils.getRecordTypeId('Account_Homecare');
+     String Accrual_HCP = jj_rb_Rebate_utils.getRecordTypeId('Accrual_Homecare');
      String HCPType = jj_rb_Rebate_utils.getAccountType('Home Care Provider');
-     id Homecare_claim = jj_rb_Rebate_utils.getRecordTypeId('Homecare claim');
+     id Homecare_claim = jj_rb_Rebate_utils.getRecordTypeId('Claim_Homecare');
      // create a set of customer Id
      for(Account acc : (List<Account>) scope)
      {

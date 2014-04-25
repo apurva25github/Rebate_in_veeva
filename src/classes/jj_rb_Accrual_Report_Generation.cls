@@ -15,7 +15,7 @@ global class jj_rb_Accrual_Report_Generation implements Database.batchable<sObje
             Map<String, jj_rb_Rebate_Accrual_Report_Line_Item__c> mapReportLineItems;
             if(mapAccrualMain.containsKey(accrualRecordType))
             {
-                mapReportLineItems = mapAccrualMain.get(accrualRecordType);             
+                mapReportLineItems = mapAccrualMain.get(accrualRecordType);              
             } else {
                 // create the map of report line items 
                 mapReportLineItems =  new Map<String, jj_rb_Rebate_Accrual_Report_Line_Item__c>();              
@@ -48,10 +48,10 @@ global class jj_rb_Accrual_Report_Generation implements Database.batchable<sObje
     
     global void finish(Database.BatchableContext BC){  
    
-        String RetailerAccrualRecordType = jj_rb_Rebate_utils.getRecordTypeId('Accrual Retailer');
-        String HCPAccrualRecordType = jj_rb_Rebate_utils.getRecordTypeId('Accrual HCP');
-        String RetialerReportType = jj_rb_Rebate_utils.getRecordTypeId('Report Retailer');
-        String HCPReportType = jj_rb_Rebate_utils.getRecordTypeId('Report HCP');
+        String RetailerAccrualRecordType = jj_rb_Rebate_utils.getRecordTypeId('Accrual_Retailer');
+        String HCPAccrualRecordType = jj_rb_Rebate_utils.getRecordTypeId('Accrual_Homecare');
+        String RetialerReportType = jj_rb_Rebate_utils.getRecordTypeId('Accrual_Report_Retailer');
+        String HCPReportType = jj_rb_Rebate_utils.getRecordTypeId('Accrual_Report_Homecare');
         
         Map<String, jj_rb_Rebate_Accrual_Report_Line_Item__c> mapLineItems;
         

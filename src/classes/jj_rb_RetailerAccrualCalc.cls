@@ -7,7 +7,7 @@ global class jj_rb_RetailerAccrualCalc extends jj_rb_rebateAccrualBaseClass impl
  
  global Database.QueryLocator start(Database.BatchableContext BC){
  
-      String retailer_contract = jj_rb_Rebate_utils.getRecordTypeId('Retailer Contract');
+      String retailer_contract = jj_rb_Rebate_utils.getRecordTypeId('Rebate_Contract_Retailer');
       String query = 'SELECT jj_rb_Rebate_Contract__r.jj_rb_Customer__c,jj_rb_Rebate_Contract__r.recordtypeid FROM jj_rb_Rebate_Contract_Line_Item__c where jj_rb_End_Date__c >= today and jj_rb_Rebate_Contract__r.jj_rb_Customer__c != null and jj_rb_Rebate_Contract__r.recordtypeid =: retailer_contract';
       return Database.getQueryLocator(query);
  }
@@ -21,7 +21,7 @@ global class jj_rb_RetailerAccrualCalc extends jj_rb_rebateAccrualBaseClass impl
      Map<Id, List<jj_rb_Rebate_Accrual_Line_Item__c>> mapRebateAccrualLI = new Map<Id, List<jj_rb_Rebate_Accrual_Line_Item__c>>();  // key -> cust Id
      Set<Id> setCustomerId = new Set<Id>(); 
      
-    String Accrual_Retailer = jj_rb_Rebate_utils.getRecordTypeId('Accrual Retailer');      
+    String Accrual_Retailer = jj_rb_Rebate_utils.getRecordTypeId('Accrual_Retailer');      
      // create a set of customer Id
      for(jj_rb_Rebate_Contract_Line_Item__c contractLI : (List<jj_rb_Rebate_Contract_Line_Item__c>)
 
@@ -53,7 +53,7 @@ scope)
      system.debug('mapEstimatedAccruals>>>>' + mapEstimatedAccruals);  
      
      // loop over claims and create a map with last 3 claims of the customer
-     id Retailer_claim = jj_rb_Rebate_utils.getRecordTypeId('Retailer Rebate Claim');
+     id Retailer_claim = jj_rb_Rebate_utils.getRecordTypeId('Rebate_Claim_Retailer');
      for(jj_rb_Rebate_Claim__c claim : [SELECT Id, Name, jj_rb_Claim_Date__c, jj_rb_Customer__c, 
                                                 (select id, name, jj_rb_Rebate_Product__c, jj_rb_Quantity__c,
                                                         jj_rb_Net_Rebate__c from Rebate_Claim_Line_Items__r) 

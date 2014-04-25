@@ -18,17 +18,15 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
         // Status    
     String statusApproved = jj_rb_Rebate_utils.getRebateLineItemStatus('Approved');
         // Record Type IDs
-    String AccountRecordTypeID=jj_rb_Rebate_utils.getRecordTypeId('Retailer Customer Master Data Request');
-    String ProductRecordTypeID=jj_rb_Rebate_utils.getRecordTypeId('Product Master Data Request');
-    String HCPRecordTypeID = jj_rb_Rebate_utils.getRecordTypeId('Home Care Provider MDR');
-    String HospitalRecordTypeID = jj_rb_Rebate_utils.getRecordTypeId('Hospital Data Request');
-    String NHSRecordtypeID = jj_rb_Rebate_utils.getRecordTypeId('NHS Trust Data Request');
-    System.debug('* NHS trust ID '+NHSRecordtypeID );
+    String AccountRecordTypeID=jj_rb_Rebate_utils.getRecordTypeId('Retailer_MDR');
+    String ProductRecordTypeID=jj_rb_Rebate_utils.getRecordTypeId('Product_Data_Request');
+    String HCPRecordTypeID = jj_rb_Rebate_utils.getRecordTypeId('Homecare_MDR');
+    String HospitalRecordTypeID = jj_rb_Rebate_utils.getRecordTypeId('Hospital_Data_Request');    
+    
         // Account Types
     String RetailerType = jj_rb_Rebate_utils.getAccountType('Retailer Type');    
     String HCPType = jj_rb_Rebate_utils.getAccountType('Home Care Provider');
-    String HospitalType = jj_rb_Rebate_utils.getAccountType('Hospital');
-    String MHS_Type = jj_rb_Rebate_utils.getAccountType('NHS Trust');
+    String HospitalType = jj_rb_Rebate_utils.getAccountType('Hospital');    
     Account acc=new Account();
                 
     List<jj_rb_Master_Data_Request__c> listUpdatedMDR = new List<jj_rb_Master_Data_Request__c>();
@@ -45,7 +43,11 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
             System.debug('Trigger Working **********');
             // check status and Record type.
             // If the Record is of Account object then add Record in a List
-            If(MDR.jj_rb_Status__c != trigger.oldMap.get(MDR.id).jj_rb_Status__c && MDR.jj_rb_Status__c == statusApproved && (MDR.RecordTypeId == AccountRecordTypeID || MDR.RecordTypeId == HCPRecordTypeID || MDR.RecordTypeId == HospitalRecordTypeID || MDR.RecordTypeId == NHSRecordtypeID  ))
+            If(MDR.jj_rb_Status__c != trigger.oldMap.get(MDR.id).jj_rb_Status__c 
+            			&& MDR.jj_rb_Status__c == statusApproved 
+            			&& (MDR.RecordTypeId == AccountRecordTypeID 
+            			|| MDR.RecordTypeId == HCPRecordTypeID 
+            			|| MDR.RecordTypeId == HospitalRecordTypeID))
             { 
             
                 acc.id = MDR.jj_rb_Rebate_Request_Change_For_ID__c;
@@ -62,7 +64,7 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
                 acc.ParentId = MDR.jj_rb_Parent_Customer__c;
                 acc.jj_rb_SAP_Customer_Number__c = MDR.jj_rb_SAP_Customer_Number__c;
                 
-                acc.OwnerId = jj_rb_Rebate_utils.getMasterDataOwnerID('Master Data Owner ID');
+                //acc.OwnerId = jj_rb_Rebate_utils.getMasterDataOwnerID('Master Data Owner ID');
                 acc.Fax = MDR.jj_rb_fax__c;
                 acc.Website = MDR.jj_rb_Website__c;
                 acc.jj_rb_SAP_Vendor_Number__c = MDR.jj_rb_SAP_Vendor_Number__c;
@@ -72,7 +74,7 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
                 {
                     acc.jj_rb_IMS_Customer_Id__c = MDR.jj_rb_IMS_Customer_Id__c;
                     acc.type = RetailerType;
-                    acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account Retailer');
+                    acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account_Retailer');
                 }
                 else if(MDR.RecordTypeId == HCPRecordTypeID)
                 {
@@ -86,7 +88,7 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
                {
                    acc.Type = HospitalType;
                    acc.jj_rb_iConnect_ID__c = MDR.jj_rb_iConnect_ID__c ;
-                   acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account Hospital');
+                   acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account_Hospital');
                    acc.jj_rb_NHS_Trust__c = MDR.jj_rb_NHS_Trust__c;
                }
                
@@ -105,13 +107,14 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
                 product.jj_rb_SAP_EAN_Code__c = MDR.jj_rb_SAP_EAN_Code__c;
                 product.jj_rb_Unit_of_Measure__c = MDR.jj_rb_Unit_of_Measure__c;
                 product.jj_rb_IMS_Product_ID__c = MDR.jj_rb_IMS_Product_ID__c;
-                product.OwnerId = jj_rb_Rebate_utils.getMasterDataOwnerID('Master Data Owner ID');
+                //product.OwnerId = jj_rb_Rebate_utils.getMasterDataOwnerID('Master Data Owner ID');
                 product.jj_rb_VAT_Code__c = MDR.jj_rb_VAT_Code__c;
                 //RebateProductList.add(product);
                 MapProduct.put(MDR.id,product);
             }
     }
     
+    system.debug('MapAccount>>>' + MapAccount);
     if(MapAccount.size()>0)
     { 
         upsert(MapAccount.values());
@@ -139,6 +142,7 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
         
     }
     
+    system.debug('MapProduct>>>' + MapProduct);
     if(MapProduct.size()>0)
     {
         upsert(MapProduct.values());

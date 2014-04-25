@@ -10,8 +10,8 @@ public with sharing class jj_rb_EditcontractOverrideclass{
      
      //Record Types
       
-     String retailercontract_recordType=jj_rb_Rebate_utils.getRecordTypeId('Retailer Contract');
-     String HomecareContract_recordType=jj_rb_Rebate_utils.getRecordTypeId('Home care Provider contract');   
+     String retailercontract_recordType=jj_rb_Rebate_utils.getRecordTypeId('Rebate_Contract_Retailer');
+     String HomecareContract_recordType=jj_rb_Rebate_utils.getRecordTypeId('Homecare_Contract');   
      
      
      String Status_Expired=jj_rb_Rebate_utils.getRebateLineItemStatus('Expired');    

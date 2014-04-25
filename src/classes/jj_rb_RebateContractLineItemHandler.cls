@@ -5,8 +5,8 @@
 public class jj_rb_RebateContractLineItemHandler  {
     
     @TestVisible public static final String LINEITEM_STATUS_STATUS = 'New';
-    String retailerRecordTypeID = jj_rb_Rebate_utils.getRecordTypeId('Retailer contract line item');
-    String homecareProviderRecordTypeID = jj_rb_Rebate_utils.getRecordTypeId('HCP Contract line item');
+    String retailerRecordTypeID = jj_rb_Rebate_utils.getRecordTypeId('Contract_LineItem_Retailer');
+    String homecareProviderRecordTypeID = jj_rb_Rebate_utils.getRecordTypeId('Homecare_Contract_Line_Item');
     // Constructor
     public jj_rb_RebateContractLineItemHandler () {}
     

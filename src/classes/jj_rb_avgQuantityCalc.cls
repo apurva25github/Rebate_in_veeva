@@ -4,7 +4,7 @@ This class is used to calculate Average Quantity for customer
 global class jj_rb_avgQuantityCalc implements Database.Batchable<sObject>
 {
     
-    String homecareclaim_recType=jj_rb_Rebate_utils.getRecordTypeID('Homecare claim');
+    String homecareclaim_recType=jj_rb_Rebate_utils.getRecordTypeID('Claim_Homecare');
     String status_approved = jj_rb_Rebate_utils.getRebateLineItemStatus('Approved');
     global Database.QueryLocator start(Database.BatchableContext BC)
     {

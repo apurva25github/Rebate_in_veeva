@@ -23,7 +23,7 @@ public with sharing class jj_rb_Rebate_utils {
 	    }
 	    
 	    //Returns the MasterDataOwner's ID
-	    public static String getMasterDataOwnerID(String OwnerID)
+	    /*public static String getMasterDataOwnerID(String OwnerID)
 	    {
 	        list<jj_rb_Master_Data_OwnerID__c> OwnIDList = [select jj_rb_Owner_ID__c 
 	                                                        from jj_rb_Master_Data_OwnerID__c 
@@ -33,7 +33,7 @@ public with sharing class jj_rb_Rebate_utils {
 	            return OwnIDList[0].jj_rb_Owner_ID__c ;
 	        
 	        return null;
-	    }
+	    }*/
 	    
 	    //Returns the Account Type For Specified Record
 	     public static String getAccountType(String Acc_type)

@@ -13,8 +13,8 @@
 public class jj_rb_RebateContractLineItem_Handler {
 	@TestVisible public static final String LINEITEM_STATUS_STATUS = 'New';
 	
-	String retailerRecordType = jj_rb_Rebate_Utils.getRecordTypeId('Retailer contract line item');
-	String homecareRecordType = jj_rb_Rebate_Utils.getRecordTypeId('HCP Contract line item');
+	String retailerRecordType = jj_rb_Rebate_Utils.getRecordTypeId('Contract_LineItem_Retailer');
+	String homecareRecordType = jj_rb_Rebate_Utils.getRecordTypeId('Homecare_Contract_Line_Item');
 	
 	public void performDateRangeValidation(List<jj_rb_Rebate_Contract_Line_Item__c> listNewContractLineItems)
 	{

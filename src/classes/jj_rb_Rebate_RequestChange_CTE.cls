@@ -41,7 +41,7 @@ public class jj_rb_Rebate_RequestChange_CTE
             MDR.jj_rb_Unit_of_Measure__c = rebateProduct.jj_rb_Unit_of_Measure__c;
             MDR.jj_rb_IMS_Product_ID__c = rebateProduct.jj_rb_IMS_Product_ID__c;
             MDR.jj_rb_VAT_Code__c =rebateProduct.jj_rb_VAT_Code__c;
-            MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Product Master Data Request');  
+            MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Product_Data_Request');  
         } 
         
        
@@ -77,7 +77,7 @@ public class jj_rb_Rebate_RequestChange_CTE
                 showhospital_ids = false;
                 showIMS_id = true;
                 showHCP_dates = false;
-                MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Retailer Customer Master Data Request');
+                MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Retailer_MDR');
             }
             else if(customer.Type == HCPType)
             {
@@ -88,7 +88,7 @@ public class jj_rb_Rebate_RequestChange_CTE
                 MDR.jj_rb_Credit_check_Validity_From__c = customer.jj_rb_Credit_check_Validity_From__c;
                 MDR.jj_rb_Credit_check_Validity_End__c = customer.jj_rb_Credit_check_Validity_End__c;
             
-                MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Home Care Provider MDR');
+                MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Homecare_MDR');
             }
             else if(customer.Type == HospitalType)
             {
@@ -96,7 +96,7 @@ public class jj_rb_Rebate_RequestChange_CTE
                 showhospital_ids = true;
                 showIMS_id = false;
                 showHCP_dates  = false;
-                MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Hospital Data Request');
+                MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Hospital_Data_Request');
                 MDR.jj_rb_iConnect_ID__c = customer.jj_rb_iConnect_ID__c ;
                 MDR.jj_rb_NHS_Trust__c = customer.jj_rb_NHS_Trust__c;
             }

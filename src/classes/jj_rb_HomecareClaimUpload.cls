@@ -52,7 +52,7 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
      system.debug('Document Name>>>>' + document.Name);
      system.debug('Document type>>>>' + document.Type);
      errorInUpload = false;
-     showUploadMsg = false;
+     showUploadMsg = true;
      
      if(invalidFile(document)) {
      	document.body = null;     	
@@ -69,7 +69,7 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
      system.debug('invoiceWrapper>>>>' + invoiceWrapper); 
       
      // upload the mapped records, if no error records are available
-     if (invoiceWrapper.errorRecords.isEmpty())
+     if (invoiceWrapper.errorRecords.isEmpty() && invoiceWrapper.mapInvoiceData != null)
      {
         // upload the records   
         uploadRecords(invoiceWrapper);
@@ -85,16 +85,15 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
    
    
    private void uploadRecords(InvoiceWrapper invoiceWrapper)
-   {
-          showUploadMsg = true;
+   {          
           List<jj_rb_Rebate_Claim_Line_Item__c> claimLineItems = new List<jj_rb_Rebate_Claim_Line_Item__c>();         
           List<jj_rb_Rebate_Claim__c> claims = new List<jj_rb_Rebate_Claim__c>(); 
-              
+             
                   
-          String homecareClaimRecordType = jj_rb_Rebate_utils.getRecordTypeId('Homecare claim');
-          String homecareCLIRecordType = jj_rb_Rebate_utils.getRecordTypeId('Homecare claim line item');
+          String homecareClaimRecordType = jj_rb_Rebate_Utils.getRecordTypeId('Claim_Homecare');
+          String homecareCLIRecordType = jj_rb_Rebate_Utils.getRecordTypeId('Claim_LineItem_Homecare');
           
-          
+         
           Map<String, List<InvoiceData>> mapInvData; 
           try {
                 mapInvData = invoiceWrapper.mapInvoiceData;
@@ -160,7 +159,7 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
           }
           
           if(!claims.isEmpty())
-          {
+          {         	
                                 Integer rowNum=0;
                                 Savepoint sp = Database.setSavepoint();
                          
@@ -309,6 +308,8 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
                         for(List<String> row : csvRecords)
                         {
                                 InvoiceData wrapper = new InvoiceData();
+                                Boolean errorInRecord = false;
+                                Exception ex;
                                 
                                 // skip the header row
                                 if(rowNum == 0) {
@@ -318,35 +319,79 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
                                 }        
                                 
                                 System.debug('row>>>' + row);
-                                wrapper.sapCustomerNo = (String)row[0];
-                                wrapper.month = (String)row[1];
-                                wrapper.year = (String)row[2];
-                                wrapper.hospitalId = (String)row[3];
-                                wrapper.hospitalName =  (String)row[4];
-                                wrapper.productEANCode = (String)row[5];
-                                wrapper.productName = (String)row[6];
-                                wrapper.qty = Integer.valueOf(row[7]);
+                                try {
+                                	wrapper.sapCustomerNo = (String)row[0];
+                                } catch (Exception e) {errorInRecord = true; ex=e;}
                                 
-                                if(String.isNotBlank(row[8].trim()))
-                                    wrapper.unitListPrice = Decimal.valueOf(row[8].trim());
+                                try {	
+                                	wrapper.month = (String)row[1];
+                                } catch (Exception e) {errorInRecord = true; ex=e;}
                                 
-                                if(String.isNotBlank(row[9].trim()))                                
-                                    wrapper.unitContractPrice = Decimal.valueOf(row[9].trim());
-                                                                
-                                if(String.isNotBlank(row[10].trim()))
-                                    wrapper.unitRebate = Decimal.valueOf(row[10].trim());
+                                try {	
+                                	wrapper.year = (String)row[2];
+                                } catch (Exception e) {errorInRecord = true; ex=e;}
                                 
-                                if(String.isNotBlank(row[11].trim()))                                
-                                    wrapper.netRebate = Decimal.valueOf(row[11].trim());
+                                try {	
+                                	wrapper.hospitalId = (String)row[3];
+                                } catch (Exception e) {errorInRecord = true; ex=e;}
                                 
-                                if(String.isNotBlank(row[12].trim()))                                
-                                    wrapper.vatAmount = Decimal.valueOf(row[12].trim());
-                                wrapper.vatCode = String.valueOf(row[13]);
-
-                                if(String.isNotBlank(row[14].trim())) 
-                                wrapper.grossRebate = Decimal.valueOf(row[14].trim());
+                                try {	
+                                	wrapper.hospitalName =  (String)row[4];
+                                } catch (Exception e) {errorInRecord = true; ex=e;}
                                 
-                                listInvData.add(wrapper);
+                                try {	
+                                	wrapper.productEANCode = (String)row[5];
+                                } catch (Exception e) {errorInRecord = true; ex=e;}
+                                
+                                try {	
+                                	wrapper.productName = (String)row[6];
+                                } catch (Exception e) {errorInRecord = true; ex=e;}
+                                
+                                try {	
+                                	wrapper.qty = Integer.valueOf(row[7]);
+                                } catch (Exception e) {errorInRecord = true; ex=e;}
+                                	
+                                try {
+	                                if(String.isNotBlank(row[8].trim()))
+	                                    wrapper.unitListPrice = Decimal.valueOf(row[8].trim());
+                                } catch (Exception e) {errorInRecord = true; ex=e;}    
+                                
+                                try {
+	                                if(String.isNotBlank(row[9].trim()))                                
+	                                    wrapper.unitContractPrice = Decimal.valueOf(row[9].trim());
+                                } catch (Exception e) {errorInRecord = true; ex=e;}    
+                                
+                                try {                                
+	                                if(String.isNotBlank(row[10].trim()))
+	                                    wrapper.unitRebate = Decimal.valueOf(row[10].trim());
+                                } catch (Exception e) {errorInRecord = true; ex=e;}    
+                                
+                                try {
+	                                if(String.isNotBlank(row[11].trim()))                                
+	                                    wrapper.netRebate = Decimal.valueOf(row[11].trim());
+                                } catch (Exception e) {errorInRecord = true; ex=e;}    
+                                
+                                try {
+	                                if(String.isNotBlank(row[12].trim()))                                
+	                                    wrapper.vatAmount = Decimal.valueOf(row[12].trim());
+	                            } catch (Exception e) {errorInRecord = true; ex=e;}        
+                                
+                                try {
+                                	wrapper.vatCode = String.valueOf(row[13]);
+                                } catch (Exception e) {errorInRecord = true; ex=e;}	
+								
+								try {
+	                                if(String.isNotBlank(row[14].trim())) 
+	                                	wrapper.grossRebate = Decimal.valueOf(row[14].trim());
+                                } catch (Exception e) {errorInRecord = true; ex=e;}
+                                
+                                if (!errorInRecord)
+                                	listInvData.add(wrapper);
+                                else
+                                	{
+                                		wrapper.errorMsg = ex.getMessage();
+                                		invoiceWrapper.errorRecords.add(wrapper);  
+                                	}	
                                 
                                 rowNum++;       
                         }

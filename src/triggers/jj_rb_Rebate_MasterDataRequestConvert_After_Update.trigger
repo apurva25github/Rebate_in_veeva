@@ -53,15 +53,15 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
                 acc.id = MDR.jj_rb_Rebate_Request_Change_For_ID__c;
                 acc.Name = MDR.jj_rb_Business_Name__c;
                 acc.jj_rb_SAP_Customer_Number__c = MDR.jj_rb_SAP_Customer_Number__c;
-                acc.BillingCity = MDR.jj_rb_Business_City__c;
-                acc.BillingStreet = MDR.jj_rb_Business_Street__c;
-                acc.BillingState = MDR.jj_rb_Business_State__c;
-                acc.BillingCountry = MDR.jj_rb_Business_Country__c;
-                acc.BillingPostalCode = MDR.jj_rb_Business_Postal_Code__c;
+                //acc.BillingCity = MDR.jj_rb_Business_City__c;
+                //acc.BillingStreet = MDR.jj_rb_Business_Street__c;
+                //acc.BillingState = MDR.jj_rb_Business_State__c;
+                //acc.BillingCountry = MDR.jj_rb_Business_Country__c;
+                //acc.BillingPostalCode = MDR.jj_rb_Business_Postal_Code__c;
                 acc.Phone = MDR.jj_rb_Business_Phone__c;
                 acc.jj_rb_Email__c = MDR.jj_rb_Email__c;
                 acc.jj_rb_National_Channel_Manager__c = MDR.jj_rb_National_Channel_Manager__c;
-                acc.ParentId = MDR.jj_rb_Parent_Customer__c;
+                //acc.ParentId = MDR.jj_rb_Parent_Customer__c;
                 acc.jj_rb_SAP_Customer_Number__c = MDR.jj_rb_SAP_Customer_Number__c;
                 
                 //acc.OwnerId = jj_rb_Rebate_utils.getMasterDataOwnerID('Master Data Owner ID');

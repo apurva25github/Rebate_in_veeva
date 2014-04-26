@@ -1,0 +1,12 @@
+<apex:page standardcontroller="Account" extensions="jj_rb_DataRequestRoute_CTE" action="{!routeUser}" >
+    <apex:form >
+         <apex:PageBlock title="Select Data Request type">
+              <apex:selectRadio value="{!routeOption }" layout="pageDirection" >
+                 <apex:selectOption itemLabel="New Data Request" itemValue="{!ITEM_VAL_ICONNECT }"/>
+                 <apex:selectOption itemLabel="Rebate Master Data Request" itemValue="{!ITEM_VAL_REBATE }"/>
+              </apex:selectRadio>
+              <apex:commandButton value="Continue" action="{!routeToSelection}"/>
+              <input type = "button" value = "Cancel" class = "btn" onClick = "window.history.go(-1); return false;" />
+         </apex:PageBlock>        
+    </apex:form>
+</apex:page>

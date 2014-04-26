@@ -3,7 +3,7 @@ trigger jj_rb_IMS_Sales_Data_Trigger on jj_rb_IMS_Sales_Data__c (before insert, 
     if(Trigger.isBefore) {
         Map<String, jj_rb_IMS_Sales_Data__c> mapIMSData = new Map<String, jj_rb_IMS_Sales_Data__c>();        
         Set<String> setIMSCustomerNo = new Set<String>();
-        Set<String> setIMSProductNo = new Set<String>();     
+        Set<String> setIMSProductNo = new Set<String>();      
         
         for(jj_rb_IMS_Sales_Data__c ims : Trigger.new)
         {

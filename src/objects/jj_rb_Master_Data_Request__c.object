@@ -52,6 +52,19 @@
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
     <fields>
+        <fullName>Primary_Parent_vod__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Primary Parent</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Master Data Requests</relationshipLabel>
+        <relationshipName>Master_Data_Requests</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
         <fullName>jj_rb_Business_City__c</fullName>
         <description>This field will store the city value of the Business Address.</description>
         <externalId>false</externalId>
@@ -223,19 +236,6 @@
         <externalId>false</externalId>
         <label>National Channel Manager</label>
         <referenceTo>User</referenceTo>
-        <relationshipName>Master_Data_Requests</relationshipName>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Lookup</type>
-    </fields>
-    <fields>
-        <fullName>jj_rb_Parent_Customer__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
-        <externalId>false</externalId>
-        <label>Parent Customer</label>
-        <referenceTo>Account</referenceTo>
-        <relationshipLabel>Master Data Requests</relationshipLabel>
         <relationshipName>Master_Data_Requests</relationshipName>
         <required>false</required>
         <trackHistory>false</trackHistory>

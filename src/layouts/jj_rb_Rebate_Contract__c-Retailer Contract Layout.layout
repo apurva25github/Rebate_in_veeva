@@ -28,7 +28,7 @@
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Readonly</behavior>
                 <field>jj_rb_Status__c</field>
             </layoutItems>
             <layoutItems>
@@ -134,4 +134,10 @@
     <showInteractionLogPanel>false</showInteractionLogPanel>
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
+    <summaryLayout>
+        <masterLabel>00h11000000NH0C</masterLabel>
+        <sizeX>4</sizeX>
+        <sizeY>0</sizeY>
+        <summaryLayoutStyle>Default</summaryLayoutStyle>
+    </summaryLayout>
 </Layout>

@@ -13,5 +13,5 @@
         <type>Text</type>
         <unique>false</unique>
     </fields>
-    <label>Rebate Contract Line Item Status</label>
+    <label>UK Rebate Contract Line Item Status</label>
 </CustomObject>

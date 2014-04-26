@@ -21,7 +21,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>jj_rb_Parent_Customer__c</field>
+                <field>Primary_Parent_vod__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

@@ -375,11 +375,6 @@
     <pluralLabel>Rebate Claim Line Items</pluralLabel>
     <recordTypeTrackHistory>false</recordTypeTrackHistory>
     <recordTypes>
-        <fullName>Retailer_Rebate_Claim_Line_Item</fullName>
-        <active>true</active>
-        <label>Retailer Rebate Claim Line Item</label>
-    </recordTypes>
-    <recordTypes>
         <fullName>jj_rb_Homecare_Claim</fullName>
         <active>true</active>
         <description>Use this to create a claim line item for a Homecare claim.</description>

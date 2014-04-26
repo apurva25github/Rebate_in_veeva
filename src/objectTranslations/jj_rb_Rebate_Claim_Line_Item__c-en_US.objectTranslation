@@ -137,10 +137,6 @@
         </sections>
     </layouts>
     <recordTypes>
-        <label><!-- Retailer Rebate Claim Line Item --></label>
-        <name>Retailer_Rebate_Claim_Line_Item</name>
-    </recordTypes>
-    <recordTypes>
         <label><!-- Homecare Claim --></label>
         <name>jj_rb_Homecare_Claim</name>
     </recordTypes>

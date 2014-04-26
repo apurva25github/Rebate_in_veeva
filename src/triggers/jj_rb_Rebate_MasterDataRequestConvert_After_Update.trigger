@@ -44,10 +44,10 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
             // check status and Record type.
             // If the Record is of Account object then add Record in a List
             If(MDR.jj_rb_Status__c != trigger.oldMap.get(MDR.id).jj_rb_Status__c 
-            			&& MDR.jj_rb_Status__c == statusApproved 
-            			&& (MDR.RecordTypeId == AccountRecordTypeID 
-            			|| MDR.RecordTypeId == HCPRecordTypeID 
-            			|| MDR.RecordTypeId == HospitalRecordTypeID))
+                        && MDR.jj_rb_Status__c == statusApproved 
+                        && (MDR.RecordTypeId == AccountRecordTypeID 
+                        || MDR.RecordTypeId == HCPRecordTypeID 
+                        || MDR.RecordTypeId == HospitalRecordTypeID))
             { 
             
                 acc.id = MDR.jj_rb_Rebate_Request_Change_For_ID__c;
@@ -61,7 +61,7 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
                 acc.Phone = MDR.jj_rb_Business_Phone__c;
                 acc.jj_rb_Email__c = MDR.jj_rb_Email__c;
                 acc.jj_rb_National_Channel_Manager__c = MDR.jj_rb_National_Channel_Manager__c;
-                //acc.ParentId = MDR.jj_rb_Parent_Customer__c;
+                acc.Primary_Parent_vod__c= MDR.Primary_Parent_vod__c;
                 acc.jj_rb_SAP_Customer_Number__c = MDR.jj_rb_SAP_Customer_Number__c;
                 
                 //acc.OwnerId = jj_rb_Rebate_utils.getMasterDataOwnerID('Master Data Owner ID');
@@ -73,14 +73,14 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
                 if(MDR.RecordTypeId == AccountRecordTypeID  )
                 {
                     acc.jj_rb_IMS_Customer_Id__c = MDR.jj_rb_IMS_Customer_Id__c;
-                    acc.type = RetailerType;
+                    //acc.type = RetailerType;
                     acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account_Retailer');
                 }
                 else if(MDR.RecordTypeId == HCPRecordTypeID)
                 {
                     acc.jj_rb_Credit_check_Validity_From__c = MDR.jj_rb_Credit_check_Validity_From__c ;
                     acc.jj_rb_Credit_check_Validity_End__c = MDR.jj_rb_Credit_check_Validity_End__c;
-                    acc.type = HCPType;
+                    //acc.type = HCPType;
                     acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account Homecare');
                 }
                 

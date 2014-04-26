@@ -18,16 +18,22 @@ public  class jj_rb_DataRequestRoute_CTE {
     public String ITEM_VAL_ICONNECT {get{return 'iCONNECT';}}
     public String ITEM_VAL_REBATE {get{return 'REBATE';}}
     
-    Set<Id> setRebatePermissionSets = new Set<Id>{'0PS1100000008QdGAI','0PS1100000008QeGAI', '0PS1100000008QfGAI','0PS1100000008QgGAI', '0PS1100000008QhGAI'};
+    Set<Id> setRebatePermissionSets = new Set<Id>();
     String accountId;
     
     public jj_rb_DataRequestRoute_CTE(ApexPages.standardController con)
     {
         accountId = Apexpages.currentPage().getParameters().get('Account_id');
         system.debug('accountId>>>' + accountId);   
+        
+        for(jj_rb_Rebate_Permission_Set__c permissionSet  : [SELECT jj_rb_Permission_Set_Id__c,Name 
+        															FROM jj_rb_Rebate_Permission_Set__c])	
+        {
+        	setRebatePermissionSets.add(permissionSet.jj_rb_Permission_Set_Id__c);
+        }															
     }
     
-    public pageReference routeUser()
+    public pageReference routeUser()    
     {       
         if(!isRebateUser())
         {

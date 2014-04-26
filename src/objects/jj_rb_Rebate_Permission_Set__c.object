@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <customSettingsVisibility>Public</customSettingsVisibility>
+    <description>List of Permission Sets for UK Rebate application.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>jj_rb_Permission_Set_Id__c</fullName>
+        <description>Id of Rebate related permission set</description>
+        <externalId>false</externalId>
+        <label>Permission Set Id</label>
+        <length>20</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>UK Rebate Permission Set</label>
+</CustomObject>

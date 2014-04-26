@@ -61,8 +61,7 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
                 acc.Phone = MDR.jj_rb_Business_Phone__c;
                 acc.jj_rb_Email__c = MDR.jj_rb_Email__c;
                 acc.jj_rb_National_Channel_Manager__c = MDR.jj_rb_National_Channel_Manager__c;
-                acc.Primary_Parent_vod__c= MDR.Primary_Parent_vod__c;
-                //acc.Primary_Parent_vod__c
+                acc.Primary_Parent_vod__c= MDR.jj_rb_Primary_Parent_vod__c;
                 acc.jj_rb_SAP_Customer_Number__c = MDR.jj_rb_SAP_Customer_Number__c;
                 
                 //acc.OwnerId = jj_rb_Rebate_utils.getMasterDataOwnerID('Master Data Owner ID');

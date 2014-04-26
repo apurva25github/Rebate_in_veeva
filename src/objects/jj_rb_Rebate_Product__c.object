@@ -187,7 +187,7 @@
         <searchResultsAdditionalFields>jj_rb_Unit_of_Measure__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>Private</sharingModel>
     <validationRules>
         <fullName>jj_rb_SAP_EANCode_is_numeric</fullName>
         <active>true</active>

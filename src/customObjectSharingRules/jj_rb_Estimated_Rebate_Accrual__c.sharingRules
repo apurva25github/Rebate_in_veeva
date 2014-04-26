@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectSharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <ownerRules>
+        <fullName>jj_rb_UK_Rebate_Sharing_Estimated_Rebate_Accrual</fullName>
+        <sharedTo>
+            <group>jj_rb_UK_Rebate_Data_Sharing</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>jj_rb_UK_Rebate_Data_Sharing</group>
+        </sharedFrom>
+        <accessLevel>Edit</accessLevel>
+        <description>Rule for sharing Estimated Rebate accrual records with UK Rebate users.</description>
+        <name>UK Rebate Sharing Estimated Rebate Accrual</name>
+    </ownerRules>
+</CustomObjectSharingRules>

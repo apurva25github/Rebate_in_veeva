@@ -138,5 +138,5 @@
         <customTabListAdditionalFields>jj_rb_Quantity_Tolerance__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>jj_rb_Average_Quantity__c</customTabListAdditionalFields>
     </searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>Private</sharingModel>
 </CustomObject>

@@ -83,5 +83,5 @@
         <customTabListAdditionalFields>jj_rb_Customer__c</customTabListAdditionalFields>
         <searchResultsAdditionalFields>jj_rb_Customer__c</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>Private</sharingModel>
 </CustomObject>

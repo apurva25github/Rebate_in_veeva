@@ -80,5 +80,5 @@
         <lookupDialogsAdditionalFields>jj_rb_Description__c</lookupDialogsAdditionalFields>
         <searchResultsAdditionalFields>jj_rb_Description__c</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>Private</sharingModel>
 </CustomObject>

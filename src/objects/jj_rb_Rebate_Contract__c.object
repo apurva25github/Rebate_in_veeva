@@ -500,7 +500,7 @@
         <searchResultsAdditionalFields>jj_rb_Contract_End_Date__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>jj_rb_Status__c</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>Private</sharingModel>
     <webLinks>
         <fullName>jj_rb_Close_Contract</fullName>
         <availability>online</availability>

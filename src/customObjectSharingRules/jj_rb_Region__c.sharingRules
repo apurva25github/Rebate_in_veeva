@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectSharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <ownerRules>
+        <fullName>jj_rb_UK_Rebate_Sharing_Region</fullName>
+        <sharedTo>
+            <group>jj_rb_UK_Rebate_Data_Sharing</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>jj_rb_UK_Rebate_Data_Sharing</group>
+        </sharedFrom>
+        <accessLevel>Read</accessLevel>
+        <description>Rule to share Region records with UK Rebate users.</description>
+        <name>UK Rebate Sharing Region</name>
+    </ownerRules>
+</CustomObjectSharingRules>

@@ -170,5 +170,5 @@
         <customTabListAdditionalFields>jj_rb_NHS_Trust_ID__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>jj_rb_Region__c</customTabListAdditionalFields>
     </searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>Private</sharingModel>
 </CustomObject>

@@ -358,7 +358,7 @@
         <searchResultsAdditionalFields>jj_rb_IMS_Data_Year__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>Private</sharingModel>
     <validationRules>
         <fullName>jj_rb_IMS_Data_Month_Required</fullName>
         <active>true</active>

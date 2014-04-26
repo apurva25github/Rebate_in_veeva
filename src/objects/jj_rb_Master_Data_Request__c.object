@@ -643,7 +643,7 @@
         <searchResultsAdditionalFields>jj_rb_SAP_Material_Code__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>jj_rb_Status__c</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>Private</sharingModel>
     <validationRules>
         <fullName>jj_rb_Credit_dates_validation</fullName>
         <active>true</active>

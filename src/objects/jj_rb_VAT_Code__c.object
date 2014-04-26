@@ -91,5 +91,5 @@
     <searchLayouts>
         <customTabListAdditionalFields>jj_rb_VAT__c</customTabListAdditionalFields>
     </searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>Private</sharingModel>
 </CustomObject>

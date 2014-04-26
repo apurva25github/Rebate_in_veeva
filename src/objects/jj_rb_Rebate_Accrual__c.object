@@ -513,7 +513,7 @@
         <listViewButtons>jj_rb_Calculate_Rebate_Accrual</listViewButtons>
         <listViewButtons>jj_rb_Accrual_Report_Generation</listViewButtons>
     </searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>Private</sharingModel>
     <webLinks>
         <fullName>jj_rb_Accrual_Report_Generation</fullName>
         <availability>online</availability>

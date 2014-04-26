@@ -119,5 +119,5 @@
     </nameField>
     <pluralLabel>Estimated Rebate Accruals</pluralLabel>
     <searchLayouts/>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>Private</sharingModel>
 </CustomObject>

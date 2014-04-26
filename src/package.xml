@@ -262,14 +262,30 @@
         <members>jj_rb_Rebate_Contract_Line_Item_Status__c</members>
         <members>jj_rb_Rebate_Contract_Line_Item__c</members>
         <members>jj_rb_Rebate_Contract__c</members>
+        <members>jj_rb_Rebate_Permission_Set__c</members>
         <members>jj_rb_Rebate_Product__c</members>
         <members>jj_rb_Region__c</members>
         <members>jj_rb_Retailer_Buying_Group_Member__c</members>
         <members>jj_rb_Retailer_Buying_Group__c</members>
         <members>jj_rb_Tolerance__c</members>
         <members>jj_rb_VAT_Code__c</members>
-        <members>jj_rb_Rebate_Permission_Set__c</members>
         <name>CustomObject</name>
+    </types>
+    <types>
+        <members>jj_rb_Estimated_Rebate_Accrual__c.jj_rb_UK_Rebate_Sharing_Estimated_Rebate_Accrual</members>
+        <members>jj_rb_IMS_Sales_Data__c.jj_rb_UK_Rebate_Sharing_IMS_Sales_Data</members>
+        <members>jj_rb_Master_Data_Request__c.jj_rb_UK_Rebate_Sharing_Master_Data_Request</members>
+        <members>jj_rb_NHS_Trust__c.jj_rb_UK_Rebate_Sharing_NHS_Trust</members>
+        <members>jj_rb_Rebate_Accrual_Report__c.jj_rb_UK_Rebate_Sharing_Accrual_Report</members>
+        <members>jj_rb_Rebate_Accrual__c.jj_rb_UK_Rebate_Sharing_Rebate_Accrual</members>
+        <members>jj_rb_Rebate_Claim__c.jj_rb_UK_Rebate_Sharing_Rebate_Claim</members>
+        <members>jj_rb_Rebate_Contract__c.jj_rb_UK_Rebate_Sharing_Rebate_Contract</members>
+        <members>jj_rb_Rebate_Product__c.jj_rb_UK_Rebate_Sharing_Rebate_Product</members>
+        <members>jj_rb_Region__c.jj_rb_UK_Rebate_Sharing_Region</members>
+        <members>jj_rb_Retailer_Buying_Group__c.jj_rb_UK_Rebate_Sharing_Buying_Group</members>
+        <members>jj_rb_Tolerance__c.UK_Rebate_Sharing_Tolerance</members>
+        <members>jj_rb_VAT_Code__c.jj_rb_UK_Rebate_Sharing_VAT_Code</members>
+        <name>CustomObjectOwnerSharingRule</name>
     </types>
     <types>
         <members>jj_rb_Account_Type__c-en_US</members>
@@ -331,6 +347,7 @@
         <members>jj_rb_UK_Head_of_BU</members>
         <members>jj_rb_UK_National_Channel_Manager</members>
         <members>jj_rb_UK_Rebate_Accrual_Rpt_Receipt</members>
+        <members>jj_rb_UK_Rebate_Data_Sharing</members>
         <name>Group</name>
     </types>
     <types>
@@ -474,13 +491,13 @@
         <members>jj_rb_Rebate_Product__c.jj_rb_SAP_MaterialNo_is_numeric</members>
         <name>ValidationRule</name>
     </types>
-    <types>        
+    <types>
+        <members>Account.jj_Data_Request</members>
         <members>jj_rb_Rebate_Accrual__c.jj_rb_Accrual_Report_Generation</members>
         <members>jj_rb_Rebate_Accrual__c.jj_rb_Calculate_Rebate_Accrual</members>
         <members>jj_rb_Rebate_Claim__c.jj_rb_Homecare_Claim_Upload</members>
         <members>jj_rb_Rebate_Contract__c.jj_rb_Close_Contract</members>
         <members>jj_rb_Rebate_Product__c.jj_rb_Request_Change</members>
-        <members>Account.jj_Data_Request</members>
         <name>WebLink</name>
     </types>
     <types>

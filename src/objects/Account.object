@@ -262,14 +262,16 @@
         <errorMessage>SAP Vendor No. should be numeric.</errorMessage>
     </validationRules>
     <webLinks>
-        <fullName>jj_rb_Request_Change</fullName>
+        <fullName>jj_Data_Request</fullName>
         <availability>online</availability>
+        <description>New Data Request</description>
         <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
         <height>600</height>
-        <linkType>page</linkType>
-        <masterLabel>Request Change</masterLabel>
+        <linkType>url</linkType>
+        <masterLabel>New Data Request</masterLabel>
         <openType>sidebar</openType>
-        <page>jj_rb_Rebate_Account_RequestChange</page>
         <protected>false</protected>
+        <url>/apex/jj_rb_DataRequestRoute?Account_id={!Account.Id}</url>
     </webLinks>
 </CustomObject>

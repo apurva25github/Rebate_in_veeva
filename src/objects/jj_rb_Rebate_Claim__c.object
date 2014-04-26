@@ -635,7 +635,7 @@
         <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
         <listViewButtons>jj_rb_Homecare_Claim_Upload</listViewButtons>
     </searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>Private</sharingModel>
     <webLinks>
         <fullName>jj_rb_Homecare_Claim_Upload</fullName>
         <availability>online</availability>

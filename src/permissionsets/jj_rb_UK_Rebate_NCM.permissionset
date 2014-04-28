@@ -226,11 +226,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>jj_rb_Master_Data_Request__c.Primary_Parent_vod__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>jj_rb_Master_Data_Request__c.jj_rb_Business_City__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -307,6 +302,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>jj_rb_Master_Data_Request__c.jj_rb_National_Channel_Manager__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>jj_rb_Master_Data_Request__c.jj_rb_Primary_Parent_vod__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

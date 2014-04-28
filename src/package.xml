@@ -272,6 +272,7 @@
         <name>CustomObject</name>
     </types>
     <types>
+        <members>Account.jj_rb_UK_Rebate_Sharing_Account</members>
         <members>jj_rb_Estimated_Rebate_Accrual__c.jj_rb_UK_Rebate_Sharing_Estimated_Rebate_Accrual</members>
         <members>jj_rb_IMS_Sales_Data__c.jj_rb_UK_Rebate_Sharing_IMS_Sales_Data</members>
         <members>jj_rb_Master_Data_Request__c.jj_rb_UK_Rebate_Sharing_Master_Data_Request</members>
@@ -285,7 +286,6 @@
         <members>jj_rb_Retailer_Buying_Group__c.jj_rb_UK_Rebate_Sharing_Buying_Group</members>
         <members>jj_rb_Tolerance__c.UK_Rebate_Sharing_Tolerance</members>
         <members>jj_rb_VAT_Code__c.jj_rb_UK_Rebate_Sharing_VAT_Code</members>
-        <members>Account.jj_rb_UK_Rebate_Sharing_Account</members>
         <name>CustomObjectOwnerSharingRule</name>
     </types>
     <types>

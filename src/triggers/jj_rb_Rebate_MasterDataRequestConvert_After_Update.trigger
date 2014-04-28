@@ -81,7 +81,7 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
                     acc.jj_rb_Credit_check_Validity_From__c = MDR.jj_rb_Credit_check_Validity_From__c ;
                     acc.jj_rb_Credit_check_Validity_End__c = MDR.jj_rb_Credit_check_Validity_End__c;
                     //acc.type = HCPType;
-                    acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account Homecare');
+                    acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account_Homecare');
                 }
                 
                else if(MDR.RecordTypeId == HospitalRecordTypeID )

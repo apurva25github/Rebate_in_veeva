@@ -22,7 +22,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>jj_rb_DataRequestRoute_CTE</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>jj_rb_EditcontractLineItemOverrideclass</apexClass>
@@ -1156,7 +1156,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>jj_rb_DataRequestRoute</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>jj_rb_EditContractOverride</apexPage>

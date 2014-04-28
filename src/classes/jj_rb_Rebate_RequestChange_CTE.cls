@@ -53,7 +53,7 @@ public class jj_rb_Rebate_RequestChange_CTE
                         Phone,jj_rb_Email__c,jj_rb_National_Channel_Manager__c,
                         ParentId,jj_rb_Credit_check_Validity_End__c,jj_rb_Credit_check_Validity_From__c,
                         jj_rb_SAP_Vendor_Number__c,Website,Fax,jj_rb_IMS_Customer_Id__c,
-                        jj_rb_iConnect_ID__c,jj_rb_NHS_Trust__c, Primary_Parent_vod__c
+                        jj_rb_iConnect_ID__c,jj_rb_NHS_Trust__c, Primary_Parent_vod__c,Account_Type__c
                        FROM Account
                        Where id =: customer.id limit 1];
              MDR = new jj_rb_Master_Data_Request__c();
@@ -69,7 +69,7 @@ public class jj_rb_Rebate_RequestChange_CTE
             MDR.jj_rb_Website__c = customer.Website;
             MDR.jj_rb_fax__c = customer.Fax;
             MDR.jj_rb_IMS_Customer_Id__c = customer.jj_rb_IMS_Customer_Id__c;
-            if(customer.Type == RetailerType)
+            if(customer.Account_Type__c == RetailerType)
             {
                 showSAP_Ids = true;
                 showhospital_ids = false;
@@ -77,7 +77,7 @@ public class jj_rb_Rebate_RequestChange_CTE
                 showHCP_dates = false;
                 MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Retailer_MDR');
             }
-            else if(customer.Type == HCPType)
+            else if(customer.Account_Type__c == HCPType)
             {
                 showIMS_id = false;
                 showSAP_Ids = true;
@@ -88,9 +88,9 @@ public class jj_rb_Rebate_RequestChange_CTE
             
                 MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Homecare_MDR');
             }
-            else if(customer.Type == HospitalType)
+            else if(customer.Account_Type__c == HospitalType)
             {
-                showSAP_Ids = false;
+                showSAP_Ids = false; 
                 showhospital_ids = true;
                 showIMS_id = false;
                 showHCP_dates  = false;

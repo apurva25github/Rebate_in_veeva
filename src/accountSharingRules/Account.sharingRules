@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AccountSharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <criteriaBasedRules>
+        <fullName>jj_rb_UK_Rebate_Sharing_Account</fullName>
+        <sharedTo>
+            <group>jj_rb_UK_Rebate_Data_Sharing</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Account_Type__c</field>
+            <operation>equals</operation>
+            <value>Homecare,Retailer</value>
+        </criteriaItems>
+        <accountAccessLevel>Read</accountAccessLevel>
+        <caseAccessLevel>None</caseAccessLevel>
+        <contactAccessLevel>Read</contactAccessLevel>
+        <description>Rule to share Retailer and homecare records with UK Rebate  users.</description>
+        <name>UK Rebate Sharing Account</name>
+        <opportunityAccessLevel>None</opportunityAccessLevel>
+    </criteriaBasedRules>
+</AccountSharingRules>

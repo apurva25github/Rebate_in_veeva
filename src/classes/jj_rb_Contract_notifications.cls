@@ -15,11 +15,13 @@ global class jj_rb_Contract_notifications implements Database.Batchable<sObject>
     
     private String getUniqueKey(jj_rb_Rebate_Contract_Line_Item__c lineItem)
     {
+    	System.debug('&^&^&^&^&^b  Uniques ID '+lineItem.jj_rb_Rebate_Contract__r.jj_rb_National_Channel_Manager__c + '_' + lineItem.recordtypeId);
         return lineItem.jj_rb_Rebate_Contract__r.jj_rb_National_Channel_Manager__c + '_' + lineItem.recordtypeId;
     }
     
     global void execute(Database.BatchableContext BC, List<jj_rb_Rebate_Contract_Line_Item__c> listContractLineItem)
     {   
+    	System.debug('************** full list '+listContractLineItem);
         List<Messaging.SingleEmailMessage> mailList = new List<Messaging.SingleEmailMessage>();
         Set<Id> setRecordTypeId = new Set<id>(); // set of recordtype id
         Map<String, List<jj_rb_Rebate_Contract_Line_Item__c>> mapExpiring2Months = new Map<String, List<jj_rb_Rebate_Contract_Line_Item__c>>(); // key -> NCM user Id
@@ -27,8 +29,7 @@ global class jj_rb_Contract_notifications implements Database.Batchable<sObject>
         Map<String, List<jj_rb_Rebate_Contract_Line_Item__c>> mapExpiringToday = new Map<String, List<jj_rb_Rebate_Contract_Line_Item__c>>();
         
         Map<String, User> mapNCM = new Map<String, User>();                        
-        List<jj_rb_Rebate_Contract_Line_Item__c> listLineItems;        
-                
+        List<jj_rb_Rebate_Contract_Line_Item__c> listLineItems;
         for(jj_rb_Rebate_Contract_Line_Item__c lineItem  : listContractLineItem)
         {
             if(lineItem.jj_rb_Rebate_Contract__r.jj_rb_National_Channel_Manager__c != null)
@@ -39,30 +40,32 @@ global class jj_rb_Contract_notifications implements Database.Batchable<sObject>
               
                 mapNCM.put(lineItem.jj_rb_Rebate_Contract__r.jj_rb_National_Channel_Manager__c, lineItem.jj_rb_Rebate_Contract__r.jj_rb_National_Channel_Manager__r);               
                 if(lineItem.jj_rb_End_Date__c == expiredate2Months)
-                {                   
-                        
-                        listLineItems = getMapList(mapExpiring2Months, ncmUser); 
+                { 
+                        listLineItems = getMapList(mapExpiring2Months, getUniqueKey(lineItem)); 
                         listLineItems.add(lineItem);
                         mapExpiring2Months.put(getUniqueKey(lineItem), listLineItems);
                 }
                     
                 if(lineItem.jj_rb_End_Date__c == expiredate2Weeks)
-                {                       
-                        listLineItems = getMapList(mapExpiring2Weeks, ncmUser); 
+                {   
+                		System.debug('IF condition chk ******* '+lineItem.name+' '+lineItem.jj_rb_End_Date__c+ '==' +expiredate2Weeks) ;                   
+                        listLineItems = getMapList(mapExpiring2Weeks, getUniqueKey(lineItem)); 
                         listLineItems.add(lineItem);
+                        System.debug('*** 2wks '+ listLineItems);
                         mapExpiring2Weeks.put(getUniqueKey(lineItem), listLineItems);
                 }
                 
                 if(lineItem.jj_rb_End_Date__c == expiredateToday)
                 {                        
-                        listLineItems = getMapList(mapExpiringToday, ncmUser); 
+                        listLineItems = getMapList(mapExpiringToday, getUniqueKey(lineItem)); 
                         listLineItems.add(lineItem);
                         mapExpiringToday.put(getUniqueKey(lineItem), listLineItems);
                 }
-                
               }             
           }          
-         
+          System.debug('$$$$$$$$ MAP 2wks '+mapExpiring2Weeks);
+          System.debug('$$$$$$$$ MAP 2months '+mapExpiring2Months);
+          System.debug('$$$$$$$$ MAP 2day '+mapExpiringToday);
          system.debug('mapncm>>>>' + mapncm);
          system.debug('RecordTypeIDS ***** '+ setRecordTypeId);
         for(Id recordTypeId : setRecordTypeId)
@@ -85,21 +88,26 @@ global class jj_rb_Contract_notifications implements Database.Batchable<sObject>
                 // get the line items expiring today
                List<jj_rb_Rebate_Contract_Line_Item__c> listExpiringToday = mapExpiringToday.get(uniqueKey);
                if(listExpiringToday != null && !listExpiringToday.isEmpty()) {                
-                    lineItemTable =  getLineItemTable(listExpiringToday, recordTypeId);           
+                    lineItemTable =  getLineItemTable(listExpiringToday, recordTypeId);     
+                    System.debug('****** today +++ ' + lineItemTable)  ;    
                     messageBody += '<br><br>The following line items are going to expire today - <br/>' + lineItemTable;
                }
                
                // get the line items expiring in 2 weeks
-               List<jj_rb_Rebate_Contract_Line_Item__c> listExpiring2Weeks = mapExpiring2Weeks.get(ncmId);
+               List<jj_rb_Rebate_Contract_Line_Item__c> listExpiring2Weeks = mapExpiring2Weeks.get(uniqueKey);
+               System.debug('######## list b4 IF 2wks  '+listExpiring2Weeks);
                if(listExpiring2Weeks != null && !listExpiring2Weeks.isEmpty()) {                     
-                    lineItemTable =  getLineItemTable(listExpiring2Weeks, recordTypeId);          
+                    lineItemTable =  getLineItemTable(listExpiring2Weeks, recordTypeId);  
+                    System.debug('****** 2wks +++ ' + lineItemTable)  ;          
                     messageBody += '<br><br>The following line items are going to expire in 2 weeks - <br/>' + lineItemTable;
                }
                
                // get the line items expiring in 2 months
-               List<jj_rb_Rebate_Contract_Line_Item__c> listExpiring2Months = mapExpiring2Months.get(ncmId);
+               List<jj_rb_Rebate_Contract_Line_Item__c> listExpiring2Months = mapExpiring2Months.get(uniqueKey);
+               System.debug('######## list b4 IF 2months  '+listExpiring2Months);
                if(listExpiring2Months != null && !listExpiring2Months.isEmpty()) {                  
-                    lineItemTable =  getLineItemTable(listExpiring2Months, recordTypeId);           
+                    lineItemTable =  getLineItemTable(listExpiring2Months, recordTypeId);     
+                    System.debug('****** 2months +++ ' + lineItemTable)  ;        
                     messageBody += '<br><br>The following line items are going to expire in 2 months - <br/>' + lineItemTable;
                }                 
                
@@ -120,10 +128,9 @@ global class jj_rb_Contract_notifications implements Database.Batchable<sObject>
    
    public String getLineItemTable(List<jj_rb_Rebate_Contract_Line_Item__c> lineItems, String recordTypeId)
    {
-   		System.debug('OUT*******'+recordTypeId +' == '+retailerRecordTypeID);
+   	
       if(recordTypeId == retailerRecordTypeID)
       {
-      	System.debug('IN*******'+recordTypeId +' == '+retailerRecordTypeID);
          return createTable(lineItems);
       }
       else if(recordTypeId == homecareProviderRecordTypeID){

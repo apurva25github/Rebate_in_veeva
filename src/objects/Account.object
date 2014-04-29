@@ -19,16 +19,6 @@
         <type>Date</type>
     </fields>
     <fields>
-        <fullName>jj_rb_Email__c</fullName>
-        <externalId>false</externalId>
-        <label>Email</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>true</trackHistory>
-        <type>Email</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>jj_rb_IMS_Customer_Id__c</fullName>
         <externalId>true</externalId>
         <label>IMS Customer Id</label>
@@ -86,27 +76,16 @@
         <type>Text</type>
         <unique>false</unique>
     </fields>
-    <fields>
-        <fullName>jj_rb_iConnect_ID__c</fullName>
-        <externalId>false</externalId>
-        <label>iConnect ID</label>
-        <length>100</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>true</trackHistory>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
     <listViews>
         <fullName>AllAccounts</fullName>
         <columns>ACCOUNT.NAME</columns>
-        <columns>ACCOUNT.SITE</columns>
         <columns>ACCOUNT.ADDRESS1_STATE</columns>
         <columns>ACCOUNT.PHONE1</columns>
-        <columns>ACCOUNT.TYPE</columns>
         <columns>CORE.USERS.ALIAS</columns>
+        <columns>Account_Type__c</columns>
         <filterScope>Everything</filterScope>
         <label>All Accounts</label>
+        <language>en_US</language>
     </listViews>
     <listViews>
         <fullName>Home_Care_Providers</fullName>
@@ -128,7 +107,6 @@
         <fullName>Hospitals</fullName>
         <columns>ACCOUNT.NAME</columns>
         <columns>jj_rb_NHS_Trust__c</columns>
-        <columns>jj_rb_iConnect_ID__c</columns>
         <columns>ACCOUNT.PHONE1</columns>
         <columns>ACCOUNT.TYPE</columns>
         <columns>ACCOUNT.ADDRESS1_STATE</columns>
@@ -147,12 +125,11 @@
         <columns>jj_rb_National_Channel_Manager__c</columns>
         <columns>ACCOUNT.PHONE1</columns>
         <columns>ACCOUNT.ADDRESS1_STATE</columns>
-        <columns>ACCOUNT.TYPE</columns>
         <filterScope>Everything</filterScope>
         <filters>
-            <field>ACCOUNT.TYPE</field>
+            <field>ACCOUNT.RECORDTYPE</field>
             <operation>equals</operation>
-            <value>Retailer</value>
+            <value>Account.jj_rb_Retailer</value>
         </filters>
         <label>Retailer Customers</label>
         <language>en_US</language>

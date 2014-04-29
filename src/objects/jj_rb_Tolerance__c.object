@@ -81,7 +81,7 @@
         <externalId>false</externalId>
         <label>Price Tolerance</label>
         <precision>18</precision>
-        <required>true</required>
+        <required>false</required>
         <scale>2</scale>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
@@ -134,7 +134,6 @@
     <searchLayouts>
         <customTabListAdditionalFields>jj_rb_Customer__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>jj_rb_Product__c</customTabListAdditionalFields>
-        <customTabListAdditionalFields>jj_rb_Price_Tolerance__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>jj_rb_Quantity_Tolerance__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>jj_rb_Average_Quantity__c</customTabListAdditionalFields>
     </searchLayouts>

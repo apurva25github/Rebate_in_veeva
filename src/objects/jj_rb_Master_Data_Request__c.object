@@ -52,78 +52,9 @@
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
     <fields>
-        <fullName>jj_rb_Business_City__c</fullName>
-        <description>This field will store the city value of the Business Address.</description>
-        <externalId>false</externalId>
-        <label>Business City</label>
-        <length>100</length>
-        <required>false</required>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>jj_rb_Business_Country__c</fullName>
-        <description>This field will store the country value of business address.</description>
-        <externalId>false</externalId>
-        <label>Business Country</label>
-        <length>100</length>
-        <required>false</required>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>jj_rb_Business_Name__c</fullName>
         <externalId>false</externalId>
         <label>Name</label>
-        <length>255</length>
-        <required>false</required>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>jj_rb_Business_Phone__c</fullName>
-        <externalId>false</externalId>
-        <label>Business Phone</label>
-        <required>false</required>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Phone</type>
-    </fields>
-    <fields>
-        <fullName>jj_rb_Business_Postal_Code__c</fullName>
-        <description>This field will store the postal code value of the business address.</description>
-        <externalId>false</externalId>
-        <label>Business Postal Code</label>
-        <length>10</length>
-        <required>false</required>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>jj_rb_Business_State__c</fullName>
-        <description>This field will store the state value of the business address.</description>
-        <externalId>false</externalId>
-        <label>Business State</label>
-        <length>100</length>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>jj_rb_Business_Street__c</fullName>
-        <description>This field will store the street name of the business address.</description>
-        <externalId>false</externalId>
-        <label>Business Street</label>
         <length>255</length>
         <required>false</required>
         <trackHistory>true</trackHistory>
@@ -162,25 +93,6 @@
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
-    </fields>
-    <fields>
-        <fullName>jj_rb_Email__c</fullName>
-        <externalId>false</externalId>
-        <label>Email</label>
-        <required>false</required>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Email</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>jj_rb_Fax__c</fullName>
-        <externalId>false</externalId>
-        <label>Fax</label>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Phone</type>
     </fields>
     <fields>
         <fullName>jj_rb_IMS_Customer_Id__c</fullName>
@@ -400,26 +312,6 @@
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
-    <fields>
-        <fullName>jj_rb_Website__c</fullName>
-        <externalId>false</externalId>
-        <label>Website</label>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Url</type>
-    </fields>
-    <fields>
-        <fullName>jj_rb_iConnect_ID__c</fullName>
-        <externalId>false</externalId>
-        <label>iConnect ID</label>
-        <length>100</length>
-        <required>false</required>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
     <label>Master Data Request</label>
     <listViews>
         <fullName>All</fullName>
@@ -433,7 +325,6 @@
         <fullName>Customer_Master_Data_Request</fullName>
         <columns>NAME</columns>
         <columns>jj_rb_SAP_Customer_Number__c</columns>
-        <columns>jj_rb_Business_City__c</columns>
         <columns>jj_rb_Status__c</columns>
         <columns>RECORDTYPE</columns>
         <columns>CREATED_DATE</columns>
@@ -450,7 +341,6 @@
         <fullName>Hom_Care_Provider_Master_Data_Request</fullName>
         <columns>NAME</columns>
         <columns>jj_rb_Business_Name__c</columns>
-        <columns>jj_rb_Business_City__c</columns>
         <columns>jj_rb_Status__c</columns>
         <columns>RECORDTYPE</columns>
         <columns>CREATED_DATE</columns>
@@ -468,7 +358,6 @@
         <columns>NAME</columns>
         <columns>jj_rb_Business_Name__c</columns>
         <columns>jj_rb_NHS_Trust__c</columns>
-        <columns>jj_rb_iConnect_ID__c</columns>
         <columns>jj_rb_Status__c</columns>
         <columns>RECORDTYPE</columns>
         <columns>CREATED_DATE</columns>
@@ -699,13 +588,5 @@
         <errorConditionFormula>AND(  OR(RecordType.Name  = &apos;Retailer Customer Data Request&apos;,RecordType.Name  = &apos;Homecare Customer Data Request&apos;) ,NOT(isnumber(jj_rb_SAP_Vendor_Number__c) ))</errorConditionFormula>
         <errorDisplayField>jj_rb_SAP_Vendor_Number__c</errorDisplayField>
         <errorMessage>SAP Vendor No. should be a number.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>jj_rb_iConnect_ID_Numeric</fullName>
-        <active>true</active>
-        <description>iConnect Id should be a number</description>
-        <errorConditionFormula>AND(RecordType.Name = &apos;Hospital Data Request&apos;,NOT(ISBLANK(jj_rb_iConnect_ID__c)),NOT(isnumber(jj_rb_iConnect_ID__c)))</errorConditionFormula>
-        <errorDisplayField>jj_rb_iConnect_ID__c</errorDisplayField>
-        <errorMessage>iConnect Id should be a number</errorMessage>
     </validationRules>
 </CustomObject>

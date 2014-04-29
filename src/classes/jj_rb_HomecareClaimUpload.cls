@@ -133,7 +133,8 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
                                                   claimLineItem.jj_rb_Rebate_Claim__r = new jj_rb_Rebate_Claim__c();
                                                   claimLineItem.jj_rb_Rebate_Claim__r.jj_rb_Dataload_external_Id__c = uniqueKey;
                                                   claimLineItem.jj_rb_Hospital__r = new Account();
-                                                  claimLineItem.jj_rb_Hospital__r.jj_rb_iConnect_ID__c = invData.hospitalId;
+                                                  //claimLineItem.jj_rb_Hospital__r.jj_rb_iConnect_ID__c = invData.hospitalId;
+                                                  claimLineItem.jj_rb_Hospital__r.CODS_External_Id__c = invData.hospitalId;
                                                   claimLineItem.jj_rb_Rebate_Product__r = new jj_rb_Rebate_Product__c();
                                                   claimLineItem.jj_rb_Rebate_Product__r.jj_rb_SAP_EAN_Code__c = invData.productEANCode;
                                                   claimLineItem.jj_rb_Quantity__c = invData.qty;
@@ -243,7 +244,7 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
                                             
                                             for(InvoiceData invData : listErrorInvData)
                                             {
-                                                if(invData.hospitalId == errorClaimLineItem.jj_rb_Hospital__r.jj_rb_iConnect_ID__c
+                                                if(invData.hospitalId == errorClaimLineItem.jj_rb_Hospital__r.CODS_External_Id__c
                                                                 && invData.productEANCode == errorClaimLineItem.jj_rb_Rebate_Product__r.jj_rb_SAP_EAN_Code__c) {
                                                         invData.errorMsg = errMsg;
                                                         InvoiceWrapper.errorRecords.add(invData);

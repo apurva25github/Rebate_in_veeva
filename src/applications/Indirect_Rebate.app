@@ -4,6 +4,7 @@
     <description>This application is for business users in UK. It is used to create rebate contracts, calculate rebate accruals and process rebate claim invoices.</description>
     <label>Indirect Rebate</label>
     <logo>jj_rb_UK_Rebate_Images/jj_rb_iRebate_logo.jpg</logo>
+    <tab>MyAccounts</tab>
     <tab>standard-Account</tab>
     <tab>jj_rb_Rebate_Product__c</tab>
     <tab>jj_rb_Master_Data_Request__c</tab>

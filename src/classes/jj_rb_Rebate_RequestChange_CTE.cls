@@ -50,24 +50,21 @@ public class jj_rb_Rebate_RequestChange_CTE
             // get the record being changed
             customer = (Account)controller.getRecord();
             customer = [select id ,name, jj_rb_SAP_Customer_Number__c,
-                        Phone,jj_rb_Email__c,jj_rb_National_Channel_Manager__c,
-                        ParentId,jj_rb_Credit_check_Validity_End__c,jj_rb_Credit_check_Validity_From__c,
-                        jj_rb_SAP_Vendor_Number__c,Website,Fax,jj_rb_IMS_Customer_Id__c,
-                        jj_rb_iConnect_ID__c,jj_rb_NHS_Trust__c, Primary_Parent_vod__c,Account_Type__c
+                       jj_rb_National_Channel_Manager__c,
+                        jj_rb_Credit_check_Validity_End__c,jj_rb_Credit_check_Validity_From__c,
+                        jj_rb_SAP_Vendor_Number__c,jj_rb_IMS_Customer_Id__c,jj_rb_NHS_Trust__c,
+                        Primary_Parent_vod__c,Account_Type__c
                        FROM Account
                        Where id =: customer.id limit 1];
              MDR = new jj_rb_Master_Data_Request__c();
             MDR.jj_rb_Rebate_Request_Change_For_ID__c = customer.Id;
             MDR.jj_rb_Business_Name__c=customer.Name;
             MDR.jj_rb_SAP_Customer_Number__c=customer.jj_rb_SAP_Customer_Number__c;
-            MDR.jj_rb_Business_Phone__c=customer.Phone;
-            MDR.jj_rb_Email__c=customer.jj_rb_Email__c;
             MDR.jj_rb_National_Channel_Manager__c=customer.jj_rb_National_Channel_Manager__c;
             MDR.jj_rb_Primary_Parent_vod__c=customer.Primary_Parent_vod__c;
             MDR.jj_rb_IMS_Customer_Id__c = customer.jj_rb_IMS_Customer_Id__c;
             MDR.jj_rb_SAP_Vendor_Number__c = customer.jj_rb_SAP_Vendor_Number__c;
-            MDR.jj_rb_Website__c = customer.Website;
-            MDR.jj_rb_fax__c = customer.Fax;
+            
             MDR.jj_rb_IMS_Customer_Id__c = customer.jj_rb_IMS_Customer_Id__c;
             if(customer.Account_Type__c == RetailerType)
             {
@@ -95,7 +92,6 @@ public class jj_rb_Rebate_RequestChange_CTE
                 showIMS_id = false;
                 showHCP_dates  = false;
                 MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Hospital_Data_Request');
-                MDR.jj_rb_iConnect_ID__c = customer.jj_rb_iConnect_ID__c ;
                 MDR.jj_rb_NHS_Trust__c = customer.jj_rb_NHS_Trust__c;
             }
         }

@@ -53,41 +53,32 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
                 acc.id = MDR.jj_rb_Rebate_Request_Change_For_ID__c;
                 acc.Name = MDR.jj_rb_Business_Name__c;
                 acc.jj_rb_SAP_Customer_Number__c = MDR.jj_rb_SAP_Customer_Number__c;
-                //acc.BillingCity = MDR.jj_rb_Business_City__c;
-                //acc.BillingStreet = MDR.jj_rb_Business_Street__c;
-                //acc.BillingState = MDR.jj_rb_Business_State__c;
-                //acc.BillingCountry = MDR.jj_rb_Business_Country__c;
-                //acc.BillingPostalCode = MDR.jj_rb_Business_Postal_Code__c;
-                acc.Phone = MDR.jj_rb_Business_Phone__c;
-                acc.jj_rb_Email__c = MDR.jj_rb_Email__c;
                 acc.jj_rb_National_Channel_Manager__c = MDR.jj_rb_National_Channel_Manager__c;
                 acc.Primary_Parent_vod__c= MDR.jj_rb_Primary_Parent_vod__c;
                 acc.jj_rb_SAP_Customer_Number__c = MDR.jj_rb_SAP_Customer_Number__c;
                 
                 //acc.OwnerId = jj_rb_Rebate_utils.getMasterDataOwnerID('Master Data Owner ID');
-                acc.Fax = MDR.jj_rb_fax__c;
-                acc.Website = MDR.jj_rb_Website__c;
+                
                 acc.jj_rb_SAP_Vendor_Number__c = MDR.jj_rb_SAP_Vendor_Number__c;
                 acc.jj_rb_IMS_Customer_Id__c = MDR.jj_rb_IMS_Customer_Id__c;
                 
                 if(MDR.RecordTypeId == AccountRecordTypeID  )
                 {
                     acc.jj_rb_IMS_Customer_Id__c = MDR.jj_rb_IMS_Customer_Id__c;
-                    //acc.type = RetailerType;
+                    
                     acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account_Retailer');
                 }
                 else if(MDR.RecordTypeId == HCPRecordTypeID)
                 {
                     acc.jj_rb_Credit_check_Validity_From__c = MDR.jj_rb_Credit_check_Validity_From__c ;
                     acc.jj_rb_Credit_check_Validity_End__c = MDR.jj_rb_Credit_check_Validity_End__c;
-                    //acc.type = HCPType;
+                    
                     acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account_Homecare');
                 }
                 
                else if(MDR.RecordTypeId == HospitalRecordTypeID )
                {
                    acc.Type = HospitalType;
-                   acc.jj_rb_iConnect_ID__c = MDR.jj_rb_iConnect_ID__c ;
                    acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account_Hospital');
                    acc.jj_rb_NHS_Trust__c = MDR.jj_rb_NHS_Trust__c;
                }

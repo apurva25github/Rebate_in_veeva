@@ -154,7 +154,7 @@
         </sections>
     </layouts>
     <recordTypes>
-        <label><!-- Homacare Accrual --></label>
+        <label><!-- Homecare Accrual --></label>
         <name>jj_rb_Homacare_Accrual</name>
     </recordTypes>
     <recordTypes>

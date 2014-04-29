@@ -280,7 +280,7 @@
     <recordTypes>
         <fullName>jj_rb_Homacare_Accrual</fullName>
         <active>true</active>
-        <label>Homacare Accrual</label>
+        <label>Homecare Accrual</label>
         <picklistValues>
             <picklist>jj_rb_Month__c</picklist>
             <values>

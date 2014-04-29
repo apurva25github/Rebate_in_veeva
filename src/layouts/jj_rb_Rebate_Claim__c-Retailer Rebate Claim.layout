@@ -15,7 +15,7 @@
                 <field>jj_rb_Customer__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>jj_rb_Month__c</field>
             </layoutItems>
             <layoutItems>
@@ -45,10 +45,6 @@
                 <behavior>Readonly</behavior>
                 <field>jj_rb_Total_Rebate_Including_VAT__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>jj_rb_Total_Line_Items__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -56,7 +52,7 @@
                 <field>jj_rb_Description__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>jj_rb_Year__c</field>
             </layoutItems>
             <layoutItems>
@@ -148,4 +144,10 @@
     <showInteractionLogPanel>false</showInteractionLogPanel>
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
+    <summaryLayout>
+        <masterLabel>00h11000000NH07</masterLabel>
+        <sizeX>4</sizeX>
+        <sizeY>0</sizeY>
+        <summaryLayoutStyle>Default</summaryLayoutStyle>
+    </summaryLayout>
 </Layout>

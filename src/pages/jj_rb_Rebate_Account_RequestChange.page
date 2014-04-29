@@ -9,16 +9,11 @@
             
                 <apex:inputField value="{!MDR.jj_rb_Business_Name__c}" required="true" />
                 <apex:inputField value="{!MDR.jj_rb_SAP_Customer_Number__c}" required="true" rendered="{!showSAP_Ids}" />
-                <apex:inputField value="{!MDR.jj_rb_Email__c}" required="true"/>
                 <apex:inputField value="{!MDR.jj_rb_SAP_Vendor_Number__c}" required="true" rendered="{!showSAP_Ids}" />
                 <apex:inputField value="{!MDR.jj_rb_National_Channel_Manager__c}" required="true"/>
                 <apex:inputField value="{!MDR.jj_rb_IMS_Customer_Id__c}" rendered="{!showIMS_id}" required="true"/>
                 <apex:inputField value="{!MDR.jj_rb_Primary_Parent_vod__c}" />
-                <apex:inputField value="{!MDR.jj_rb_iConnect_ID__c}" rendered="{!showhospital_ids}" />
-                <apex:inputField value="{!MDR.jj_rb_Website__c}"/>
                 <apex:inputField value="{!MDR.jj_rb_NHS_Trust__c}" required="true" rendered="{!showhospital_ids}"/>
-                <apex:inputField value="{!MDR.jj_rb_Fax__c}" />
-                <apex:inputField value="{!MDR.jj_rb_Business_Phone__c}" required="true" />
                 <apex:inputField value="{!MDR.jj_rb_Credit_check_Validity_From__c}" required="true" rendered="{!showHCP_dates}"/> 
                 <apex:inputField value="{!MDR.jj_rb_Credit_check_Validity_End__c}" required="true" rendered="{!showHCP_dates}"/>
               

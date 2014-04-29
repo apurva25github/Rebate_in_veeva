@@ -19,16 +19,7 @@ public class jj_rb_Rebate_TestClass{
         Account customer = new Account();
         customer.jj_rb_SAP_Customer_Number__c = SAPCustNo;
         customer.Name = Name;
-        customer.Phone = phone;
-        customer.jj_rb_Email__c = email;  
         customer.jj_rb_SAP_Vendor_Number__c = SAPvendor;
-        //customer.jj_rb_Estimated_Rebate_Accrual__c = Rebate_Accrual;
-        customer.BillingState = state;
-        customer.BillingStreet = street;
-        customer.BillingCity = city;
-        customer.BillingCountry = country;
-        customer.BillingPostalCode = postal_code;
-        //customer.ParentId = 
         insert customer;
         return customer;
     }
@@ -241,17 +232,11 @@ public class jj_rb_Rebate_TestClass{
         customer.ownerid=Ownid;
         //customer.jj_rb_SAP_Customer_Number__c = SAPCustNo;
         customer.jj_rb_Business_Name__c = Name;
-        customer.jj_rb_Business_Phone__c = phone;
-        customer.jj_rb_Email__c = email;
+        
         customer.jj_rb_Status__c = status;   
         customer.jj_rb_SAP_Vendor_Number__c = SAPvendor;
         customer.jj_rb_SAP_Customer_Number__c = SAPCustNo;
-        //customer.jj_rb_Estimated_Rebate_Accrual__c = Rebate_Accrual;
-        customer.jj_rb_Business_State__c = state;
-        customer.jj_rb_Business_Street__c = street;
-        customer.jj_rb_Business_City__c = city;
-        customer.jj_rb_Business_Country__c = country;
-        customer.jj_rb_Business_Postal_Code__c = postal_code;
+        
         //MDR.jj_rb_Parent_Customer__c=accountID;
         customer.RecordTypeId = recordtype;
         insert customer;

@@ -24,7 +24,7 @@
         </approvalActions>
         <assignedApprover>
             <approver>
-                <name>jj_rb_Head_of_BU</name>
+                <name>jj_rb_UK_Rebate_Head_of_BU</name>
                 <type>queue</type>
             </approver>
             <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>

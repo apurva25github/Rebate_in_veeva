@@ -47,7 +47,7 @@
         <allowDelegate>false</allowDelegate>
         <assignedApprover>
             <approver>
-                <name>jj_rb_Head_of_BU</name>
+                <name>jj_rb_UK_Rebate_Head_of_BU</name>
                 <type>queue</type>
             </approver>
             <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
@@ -88,12 +88,12 @@
         <criteriaItems>
             <field>jj_rb_Rebate_Claim__c.jj_rb_Total_Rebate_Amount__c</field>
             <operation>lessOrEqual</operation>
-            <value>EUR 65000</value>
+            <value>GBP 65000</value>
         </criteriaItems>
         <criteriaItems>
             <field>jj_rb_Rebate_Claim__c.jj_rb_Total_Rebate_Amount__c</field>
             <operation>greaterOrEqual</operation>
-            <value>EUR 0</value>
+            <value>GBP 0</value>
         </criteriaItems>
         <criteriaItems>
             <field>jj_rb_Rebate_Claim__c.jj_rb_Total_Line_Items__c</field>

@@ -75,13 +75,13 @@
     </fields>
     <fields>
         <fullName>jj_rb_Customer__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
+        <deleteConstraint>Restrict</deleteConstraint>
         <externalId>false</externalId>
         <label>Customer</label>
         <referenceTo>Account</referenceTo>
         <relationshipLabel>Rebate Claims</relationshipLabel>
         <relationshipName>Rebate_Claims</relationshipName>
-        <required>false</required>
+        <required>true</required>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
@@ -342,9 +342,9 @@
         <columns>jj_rb_Total_Rebate_Amount__c</columns>
         <columns>jj_rb_Status__c</columns>
         <filterScope>Queue</filterScope>
-        <label>Finance Director</label>
+        <label>UK Rebate Finance Director</label>
         <language>en_US</language>
-        <queue>jj_rb_Finance_Director</queue>
+        <queue>jj_rb_UK_Rebate_Finance_Director</queue>
     </listViews>
     <listViews>
         <fullName>Head_of_BU</fullName>
@@ -354,9 +354,9 @@
         <columns>jj_rb_Year__c</columns>
         <columns>jj_rb_Total_Rebate_Amount__c</columns>
         <filterScope>Queue</filterScope>
-        <label>Head of BU</label>
+        <label>UK Rebate Head of BU</label>
         <language>en_US</language>
-        <queue>jj_rb_Head_of_BU</queue>
+        <queue>jj_rb_UK_Rebate_Head_of_BU</queue>
     </listViews>
     <listViews>
         <fullName>Homecare_Rebate_Claim</fullName>
@@ -380,9 +380,9 @@
         <fullName>NCM</fullName>
         <columns>NAME</columns>
         <filterScope>Queue</filterScope>
-        <label>NCM</label>
+        <label>UK Rebate NCM</label>
         <language>en_US</language>
-        <queue>jj_rb_NCM</queue>
+        <queue>jj_rb_UK_Rebate_NCM</queue>
         <sharedTo>
             <group>jj_rb_UK_National_Channel_Manager</group>
         </sharedTo>

@@ -69,7 +69,6 @@
     <types>
         <members>Account.jj_rb_Credit_check_Validity_End__c</members>
         <members>Account.jj_rb_Credit_check_Validity_From__c</members>
-        <members>Account.jj_rb_Email__c</members>
         <members>Account.jj_rb_IMS_Customer_Id__c</members>
         <members>Account.jj_rb_NHS_Trust__c</members>
         <members>Account.jj_rb_National_Channel_Manager__c</members>

@@ -6,9 +6,9 @@
             <group>jj_rb_UK_Rebate_Data_Sharing</group>
         </sharedTo>
         <criteriaItems>
-            <field>Account_Type__c</field>
+            <field>RecordTypeId</field>
             <operation>equals</operation>
-            <value>Homecare,Retailer</value>
+            <value>Homecare provider,Hospital/Clinic,Retailer</value>
         </criteriaItems>
         <accountAccessLevel>Read</accountAccessLevel>
         <caseAccessLevel>None</caseAccessLevel>

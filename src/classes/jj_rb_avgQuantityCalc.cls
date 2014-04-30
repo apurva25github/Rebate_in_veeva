@@ -1,6 +1,14 @@
-/*
-This class is used to calculate Average Quantity for customer 
-*/
+/**
+ *    @author  MangaDivya Kasani
+ *    @date  15/04/2014
+     @description  This class is used to calculate Average Quantity for customer  
+      
+     Modification Log:
+     ------------------------------------------------------------------------------------
+     Developer              Date            Description
+     ------------------------------------------------------------------------------------
+     MangaDivya Kasani    15/04/2014      Original Version
+ */
 global class jj_rb_avgQuantityCalc implements Database.Batchable<sObject>
 {
     

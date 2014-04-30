@@ -1,3 +1,14 @@
+/**
+ *    @author  Apurva Prasade
+ *    @date  15/04/2014
+     @description  Controller class for the close contract page. 
+     
+     Modification Log:
+     ------------------------------------------------------------------------------------
+     Developer              Date            Description
+     ------------------------------------------------------------------------------------
+     Apurva Prasade    		15/04/2014      Original Version
+ */
 public class jj_rb_Close_contract
 {
    public jj_rb_rebate_contract__c contract {get; set;} 

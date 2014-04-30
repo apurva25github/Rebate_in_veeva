@@ -1,3 +1,14 @@
+/**
+ *    @author  Sarabdeep Ahluwalia
+ *    @date  15/04/2014
+     @description  Batch job to generate Accrual Report records from 
+     approved Rebate accrual records. 
+     
+     ------------------------------------------------------------------------------------
+     Developer              Date            Description
+     ------------------------------------------------------------------------------------
+     Sarabdeep Ahluwalia    15/04/2014      Original Version
+ */
 global class jj_rb_Accrual_Report_Generation implements Database.batchable<sObject>, Database.Stateful{
     global Map<id,Map<String, jj_rb_Rebate_Accrual_Report_Line_Item__c>> mapAccrualMain = 
                                                                new Map<id, Map<String, jj_rb_Rebate_Accrual_Report_Line_Item__c>>();    // outer key -> accrual recordtype id and inner key -> product id

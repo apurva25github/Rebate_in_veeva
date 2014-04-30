@@ -142,19 +142,6 @@
         <type>Lookup</type>
     </fields>
     <fields>
-        <fullName>jj_rb_Primary_Parent_vod__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
-        <externalId>false</externalId>
-        <label>Primary Parent</label>
-        <referenceTo>Account</referenceTo>
-        <relationshipLabel>Master Data Requests</relationshipLabel>
-        <relationshipName>Master_Data_Requests</relationshipName>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Lookup</type>
-    </fields>
-    <fields>
         <fullName>jj_rb_Product_Name__c</fullName>
         <externalId>false</externalId>
         <label>Product Name</label>

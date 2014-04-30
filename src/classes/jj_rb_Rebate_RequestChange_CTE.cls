@@ -60,8 +60,7 @@ public class jj_rb_Rebate_RequestChange_CTE
             MDR.jj_rb_Rebate_Request_Change_For_ID__c = customer.Id;
             MDR.jj_rb_Business_Name__c=customer.Name;
             MDR.jj_rb_SAP_Customer_Number__c=customer.jj_rb_SAP_Customer_Number__c;
-            MDR.jj_rb_National_Channel_Manager__c=customer.jj_rb_National_Channel_Manager__c;
-            MDR.jj_rb_Primary_Parent_vod__c=customer.Primary_Parent_vod__c;
+            MDR.jj_rb_National_Channel_Manager__c=customer.jj_rb_National_Channel_Manager__c;            
             MDR.jj_rb_IMS_Customer_Id__c = customer.jj_rb_IMS_Customer_Id__c;
             MDR.jj_rb_SAP_Vendor_Number__c = customer.jj_rb_SAP_Vendor_Number__c;
             

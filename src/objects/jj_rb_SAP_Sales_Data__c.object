@@ -133,6 +133,11 @@
         <unique>false</unique>
     </fields>
     <label>SAP Sales Data</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
     <nameField>
         <label>SAP Sales Data Name</label>
         <type>Text</type>

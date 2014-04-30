@@ -125,6 +125,7 @@
         <columns>jj_rb_National_Channel_Manager__c</columns>
         <columns>ACCOUNT.PHONE1</columns>
         <columns>ACCOUNT.ADDRESS1_STATE</columns>
+        <columns>jj_rb_IMS_Customer_Id__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>ACCOUNT.RECORDTYPE</field>

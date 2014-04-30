@@ -160,6 +160,7 @@
         <fullName>All</fullName>
         <columns>NAME</columns>
         <columns>jj_rb_Description__c</columns>
+        <columns>jj_rb_IMS_Product_ID__c</columns>
         <columns>jj_rb_SAP_Material_Number__c</columns>
         <columns>jj_rb_SAP_EAN_Code__c</columns>
         <columns>jj_rb_VAT_Code__c</columns>

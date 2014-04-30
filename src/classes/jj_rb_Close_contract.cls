@@ -13,23 +13,26 @@ public class jj_rb_Close_contract
 {
    public jj_rb_rebate_contract__c contract {get; set;} 
    ApexPages.StandardController controller;
-    public boolean Block1 {get; set;}
-     public boolean Block2 {get; set;}
+    public boolean rendererrmsg {get; set;}
+     public boolean renderform {get; set;}
    public jj_rb_Close_contract(ApexPages.StandardController controller) {
       this.controller = controller;
       contract = (jj_rb_rebate_contract__c)controller.getRecord();  
       contract = [select Id, jj_rb_Closure_Status__c, jj_rb_Closure_Comment__c,jj_rb_status__c,name,(select ID,name,jj_rb_status__c from Rebate_Contract_Line_Items__r )
                         from jj_rb_rebate_contract__c
                         where id = :contract.id limit 1];
+       // //check the status of record and render pageblock accordingly
        if(contract.jj_rb_Status__c == 'Submitted')
        {
-            Block1 = true;
-            Block2 = False;
+       		// Render Error msg if record is submitted.
+            rendererrmsg = true;
+            renderform = False;
        }
        else
        {
-            Block1 = False;
-            Block2 = true;
+       		// Rebder Closing form 
+            rendererrmsg = False;
+            renderform = true;
        }
     }
 

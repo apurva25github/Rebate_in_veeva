@@ -38,6 +38,7 @@ global class jj_rb_avgQuantityCalc implements Database.Batchable<sObject>
                 accRcMap.put(accId,listclaim);
             }           
         }
+        System.debug('accRcMap'+accRcMap);
         List<jj_rb_Rebate_Claim__c> rcList = new List<jj_rb_Rebate_Claim__c>();
         Map<ID,Map<ID,avgcalculation>> m = new Map<ID,Map<ID,avgcalculation>>();
         for(ID accid : accRcMap.keySet()){
@@ -46,26 +47,32 @@ global class jj_rb_avgQuantityCalc implements Database.Batchable<sObject>
             }
             m.put(accid,calAvgQuantity(rcList));
         }
-       
+        System.debug('m@@@'+m);
         List<jj_rb_Tolerance__c> tolList = [select id,jj_rb_Customer__c, jj_rb_Product__c,jj_rb_Product__r.name,
                                                  jj_rb_Price_Tolerance__c, jj_rb_Quantity_Tolerance__c,
                                                  jj_rb_Average_Quantity__c from jj_rb_Tolerance__c 
                                                  where jj_rb_Customer__c=: accRcMap.keySet()];
+        System.debug('tolList '+tolList);                                                 
         for(jj_rb_Tolerance__c tol : tolList){
             for(id accid : m.keyset()){
                 if(tol.jj_rb_Customer__c == accid){
                     for(id productid : m.get(accid).keyset())
                     {
                         if(tol.jj_rb_Product__c == productid)
+                        {
                             tol.jj_rb_Average_Quantity__c = m.get(accid).get(productid).getAvgQty();
-                            System.debug('tol.jj_rb_Average_Quantity__c'+tol.jj_rb_Average_Quantity__c);
-                            System.debug('tol.jj_rb_Product__c'+tol.jj_rb_Product__c);
-                            System.debug('tol.jj_rb_Customer__c'+tol.jj_rb_Customer__c);
+                        }
+                        else                        
+                        {
+                            tol.jj_rb_Average_Quantity__c =null;
+                        }
+                            
                     }
                 }              
             }
         }
-        update tolList;    
+        update tolList;   
+        System.debug('@@@tolList'+tolList); 
     }
     global void finish(Database.BatchableContext BC){   
        

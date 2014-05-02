@@ -44,11 +44,6 @@
         <relationshipLabel><!-- Master Data Requests --></relationshipLabel>
     </fields>
     <fields>
-        <label><!-- Primary Parent --></label>
-        <name>jj_rb_Primary_Parent_vod__c</name>
-        <relationshipLabel><!-- Master Data Requests --></relationshipLabel>
-    </fields>
-    <fields>
         <label><!-- Product Name --></label>
         <name>jj_rb_Product_Name__c</name>
     </fields>

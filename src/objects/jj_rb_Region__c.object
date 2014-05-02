@@ -46,6 +46,7 @@
     </actionOverrides>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
+    <description>Regions denote virtual grouping of NHS Trust&apos;s and hospitals.</description>
     <enableActivities>true</enableActivities>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>

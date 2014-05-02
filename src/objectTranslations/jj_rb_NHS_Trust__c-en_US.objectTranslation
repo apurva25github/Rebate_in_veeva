@@ -9,18 +9,6 @@
         <value>NHS Trusts</value>
     </caseValues>
     <fields>
-        <label><!-- Business Phone --></label>
-        <name>Business_Phone__c</name>
-    </fields>
-    <fields>
-        <label><!-- Business Postal Code --></label>
-        <name>Business_Postal_Code__c</name>
-    </fields>
-    <fields>
-        <label><!-- Business Street --></label>
-        <name>Business_Street__c</name>
-    </fields>
-    <fields>
         <label><!-- Business City --></label>
         <name>jj_rb_Business_City__c</name>
     </fields>
@@ -29,8 +17,20 @@
         <name>jj_rb_Business_Country__c</name>
     </fields>
     <fields>
+        <label><!-- Business Phone --></label>
+        <name>jj_rb_Business_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business Postal Code --></label>
+        <name>jj_rb_Business_Postal_Code__c</name>
+    </fields>
+    <fields>
         <label><!-- Business State --></label>
         <name>jj_rb_Business_State__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business Street --></label>
+        <name>jj_rb_Business_Street__c</name>
     </fields>
     <fields>
         <label><!-- NHS Trust ID --></label>

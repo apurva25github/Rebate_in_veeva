@@ -18,15 +18,16 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
         // Status    
     String statusApproved = jj_rb_Rebate_utils.getRebateLineItemStatus('Approved');
         // Record Type IDs
-    String AccountRecordTypeID=jj_rb_Rebate_utils.getRecordTypeId('Retailer_MDR');
-    String ProductRecordTypeID=jj_rb_Rebate_utils.getRecordTypeId('Product_Data_Request');
-    String HCPRecordTypeID = jj_rb_Rebate_utils.getRecordTypeId('Homecare_MDR');
-    String HospitalRecordTypeID = jj_rb_Rebate_utils.getRecordTypeId('Hospital_Data_Request');    
+    id AccountRecordTypeID=jj_rb_Rebate_utils.getRecordTypeId('Retailer_MDR');
+    ID ProductRecordTypeID=jj_rb_Rebate_utils.getRecordTypeId('Product_Data_Request');
+    ID HCPRecordTypeID = jj_rb_Rebate_utils.getRecordTypeId('Homecare_MDR');
+    ID HospitalRecordTypeID = jj_rb_Rebate_utils.getRecordTypeId('Hospital_Data_Request');    
     
         // Account Types
     String RetailerType = jj_rb_Rebate_utils.getAccountType('Retailer Type');    
     String HCPType = jj_rb_Rebate_utils.getAccountType('Home Care Provider');
-    String HospitalType = jj_rb_Rebate_utils.getAccountType('Hospital');    
+    String HospitalType = jj_rb_Rebate_utils.getAccountType('Hospital');
+        
     Account acc=new Account();
                 
     List<jj_rb_Master_Data_Request__c> listUpdatedMDR = new List<jj_rb_Master_Data_Request__c>();
@@ -40,7 +41,7 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
     //Iterate over Newly updated Records in Master Data Request Object
     for(jj_rb_Master_Data_Request__c MDR:trigger.new)
     {
-            System.debug('Trigger Working **********');
+    	System.debug('Trigger Working *********** '+MDR.RecordTypeId+' '+MDR.jj_rb_Business_Name__c+' '+MDR.jj_rb_Product_Name__c);
             // check status and Record type.
             // If the Record is of Account object then add Record in a List
             If(MDR.jj_rb_Status__c != trigger.oldMap.get(MDR.id).jj_rb_Status__c 
@@ -55,8 +56,6 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
                 acc.jj_rb_SAP_Customer_Number__c = MDR.jj_rb_SAP_Customer_Number__c;
                 acc.jj_rb_National_Channel_Manager__c = MDR.jj_rb_National_Channel_Manager__c;                
                 acc.jj_rb_SAP_Customer_Number__c = MDR.jj_rb_SAP_Customer_Number__c;
-                
-                //acc.OwnerId = jj_rb_Rebate_utils.getMasterDataOwnerID('Master Data Owner ID');
                 
                 acc.jj_rb_SAP_Vendor_Number__c = MDR.jj_rb_SAP_Vendor_Number__c;
                 acc.jj_rb_IMS_Customer_Id__c = MDR.jj_rb_IMS_Customer_Id__c;
@@ -89,6 +88,7 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
             // If the Record is of Rebate Product object then add Record in a List
             if(MDR.jj_rb_Status__c != trigger.oldMap.get(MDR.id).jj_rb_Status__c && MDR.jj_rb_Status__c == statusApproved && MDR.RecordTypeId == ProductRecordTypeID)
             {
+            	System.debug('IN product IF ********* '+MDR);
                 jj_rb_Rebate_Product__c product=new jj_rb_Rebate_Product__c();
                 product.id = MDR.jj_rb_Rebate_Request_Change_For_ID__c;
                 product.Name = MDR.jj_rb_Product_Name__c;
@@ -101,10 +101,10 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
                 product.jj_rb_VAT_Code__c = MDR.jj_rb_VAT_Code__c;
                 //RebateProductList.add(product);
                 MapProduct.put(MDR.id,product);
+                System.debug('ProductMAP ****************** '+MapProduct);
             }
     }
     
-    system.debug('MapAccount>>>' + MapAccount);
     if(MapAccount.size()>0)
     { 
         upsert(MapAccount.values());
@@ -117,7 +117,6 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
             Account a = MapAccount.get(mdrId);
             jj_rb_Master_Data_Request__c m = new jj_rb_Master_Data_Request__c(id=mdrId);
             m.jj_rb_Customer__c = a.Id;
-            System.debug('*** Customer ID In MDR' + m.jj_rb_Customer__c);
             for(jj_rb_Estimated_Rebate_Accrual__c ERA : listId )
             {
                 if(ERA.jj_rb_Master_Data_Request__c == mdrId)
@@ -132,7 +131,6 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
         
     }
     
-    system.debug('MapProduct>>>' + MapProduct);
     if(MapProduct.size()>0)
     {
         upsert(MapProduct.values());
@@ -147,7 +145,6 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
     if(!listUpdatedMDR.isEmpty())
     {
         update listUpdatedMDR;
-        system.debug('************ List Updated MDR ******** '+listUpdatedMDR);
     } 
     if(!listUpdateERA.isEmpty())
     {

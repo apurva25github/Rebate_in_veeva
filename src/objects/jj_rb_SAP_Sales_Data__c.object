@@ -139,8 +139,9 @@
         <label>All</label>
     </listViews>
     <nameField>
+        <displayFormat>SAP-{0000}</displayFormat>
         <label>SAP Sales Data Name</label>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>SAP Sales Data</pluralLabel>
     <searchLayouts/>

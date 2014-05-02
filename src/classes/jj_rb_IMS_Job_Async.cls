@@ -93,7 +93,8 @@
                 //Validate field names
                 for(String sFieldName : lHeaderRow)
                 {
-                    if(!(sFieldName == 'Type' || sFieldName == 'IMS Customer Id' || sFieldName == 'Customer Name' || sFieldName == 'IMS Product Id' || sFieldName == 'Product Name' || sFieldName == 'Product Description' || sFieldName == 'Month' || sFieldName == 'Year' || sFieldName == 'Quantity'))
+                	if(!(sFieldName == 'Outlet Type' || sFieldName == 'Customer Name' || sFieldName == 'IMS Customer Id' || sFieldName == 'Product Name' || sFieldName == 'Product Info' || sFieldName == 'IMS Product Id' || sFieldName == 'Month' || sFieldName == 'Year' || sFieldName == 'Qty'))
+                    //if(!(sFieldName == 'Type' || sFieldName == 'IMS Customer Id' || sFieldName == 'Customer Name' || sFieldName == 'IMS Product Id' || sFieldName == 'Product Name' || sFieldName == 'Product Description' || sFieldName == 'Month' || sFieldName == 'Year' || sFieldName == 'Quantity'))
                     {
                         //ABORT, FIELD NOT SUPPORTED
                         throw new InvaliderHeaderException(sFieldName + ' is not a valid field name for loading IMS records');
@@ -121,7 +122,8 @@
                         String myField = '';
                         String myData = '';
                         System.debug (myField+': '+lLines.get(i).get(j));
-                        if (lHeaderRow.get(j) == 'Type') {
+                        
+                        if (lHeaderRow.get(j) == 'Outlet Type') {
                             myField = '';
                         } else if (lHeaderRow.get(j) == 'IMS Customer Id') {
                             myField = 'jj_rb_IMS_Customer_Number__c';
@@ -135,7 +137,7 @@
                         } else if (lHeaderRow.get(j) == 'Product Name') {
                             myField = 'jj_rb_Product_Name__c';
                             oIMS.put(myField, lLines.get(i).get(j));      
-                        } else if (lHeaderRow.get(j) == 'Product Description') {
+                        } else if (lHeaderRow.get(j) == 'Product Info') {
                             myField = '';
                         } else if (lHeaderRow.get(j) == 'Month') {
                             myField = 'jj_rb_IMS_Data_Month__c';
@@ -144,7 +146,7 @@
                         } else if (lHeaderRow.get(j) == 'Year') {
                             myField = 'jj_rb_IMS_Data_Year__c';
                             oIMS.put(myField, String.valueof(lLines.get(i).get(j)));
-                        } else if (lHeaderRow.get(j) == 'Quantity') {
+                        } else if (lHeaderRow.get(j) == 'Qty') {
                             myField = 'jj_rb_IMS_Volume__c';
                             oIMS.put(myField, Integer.valueof(lLines.get(i).get(j)));                            
                             //oIMS.put(myField,7);                            

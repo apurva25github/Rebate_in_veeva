@@ -1,0 +1,13 @@
+<apex:page standardController="jj_rb_Rebate_SAP_Job__c" extensions="jj_rb_UploadSAPDataController">
+
+<apex:form >
+  <apex:sectionHeader title="Upload SAP Sales data"/>
+  <apex:pageblock >
+      <apex:pageblocksection columns="1">
+          <apex:inputfile value="{!myfile.body}" filename="{!myfile.Name}" />
+          <apex:commandbutton value="Save" action="{!Savedoc}"/>
+      </apex:pageblocksection>
+  </apex:pageblock>   
+</apex:form> 
+
+</apex:page>

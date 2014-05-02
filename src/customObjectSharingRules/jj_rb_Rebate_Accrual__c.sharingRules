@@ -8,7 +8,7 @@
         <sharedFrom>
             <group>jj_rb_UK_Rebate_Data_Sharing</group>
         </sharedFrom>
-        <accessLevel>Read</accessLevel>
+        <accessLevel>Edit</accessLevel>
         <description>Rule to share Rebate Accrual records with all UK rebate users.</description>
         <name>UK Rebate Sharing Rebate Accrual</name>
     </ownerRules>

@@ -5,6 +5,9 @@ public class jj_rb_Rebate_RequestChange_CTE
         String RetailerType = jj_rb_Rebate_Utils.getAccountType('Retailer Type');    
         String HCPType = jj_rb_Rebate_Utils.getAccountType('Home Care Provider');
         String HospitalType = jj_rb_Rebate_Utils.getAccountType('Hospital');
+        id retailerID = jj_rb_Rebate_Utils.getRecordTypeId('Account_Retailer');
+        id hcpID = jj_rb_Rebate_Utils.getRecordTypeId('Account_Homecare');
+        id hospID = jj_rb_Rebate_Utils.getRecordTypeId('Account_Hospital');
         // Controlls visibility of fields on VF page
         public boolean showSAP_Ids {get; set;}
         public boolean showIMS_id {get; set;}
@@ -23,7 +26,7 @@ public class jj_rb_Rebate_RequestChange_CTE
         public void ProductPageLoad()
         {
             rebateProduct = (jj_rb_Rebate_Product__c)controller.getRecord();
-           
+            System.debug('Product ********** '+rebateProduct);
            // query the rebate product
            rebateProduct = [select Id, name,
                                         jj_rb_Description__c, 
@@ -42,6 +45,7 @@ public class jj_rb_Rebate_RequestChange_CTE
             MDR.jj_rb_IMS_Product_ID__c = rebateProduct.jj_rb_IMS_Product_ID__c;
             MDR.jj_rb_VAT_Code__c =rebateProduct.jj_rb_VAT_Code__c;
             MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Product_Data_Request');  
+            //System.debug('Product rec type ************** '+MDR.RecordTypeId);
         } 
         
        
@@ -50,7 +54,7 @@ public class jj_rb_Rebate_RequestChange_CTE
             // get the record being changed
             customer = (Account)controller.getRecord();
             customer = [select id ,name, jj_rb_SAP_Customer_Number__c,
-                       jj_rb_National_Channel_Manager__c,
+                       jj_rb_National_Channel_Manager__c,RecordTypeId,
                         jj_rb_Credit_check_Validity_End__c,jj_rb_Credit_check_Validity_From__c,
                         jj_rb_SAP_Vendor_Number__c,jj_rb_IMS_Customer_Id__c,jj_rb_NHS_Trust__c,
                         Primary_Parent_vod__c,Account_Type__c
@@ -65,7 +69,8 @@ public class jj_rb_Rebate_RequestChange_CTE
             MDR.jj_rb_SAP_Vendor_Number__c = customer.jj_rb_SAP_Vendor_Number__c;
             
             MDR.jj_rb_IMS_Customer_Id__c = customer.jj_rb_IMS_Customer_Id__c;
-            if(customer.Account_Type__c == RetailerType)
+            //System.debug('Customer info *************** '+customer.RecordTypeId+' '+retailerID);
+            if(customer.RecordTypeId == retailerID)
             {
                 showSAP_Ids = true;
                 showhospital_ids = false;
@@ -73,7 +78,7 @@ public class jj_rb_Rebate_RequestChange_CTE
                 showHCP_dates = false;
                 MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Retailer_MDR');
             }
-            else if(customer.Account_Type__c == HCPType)
+            else if(customer.RecordTypeId == hcpID)
             {
                 showIMS_id = false;
                 showSAP_Ids = true;
@@ -84,7 +89,7 @@ public class jj_rb_Rebate_RequestChange_CTE
             
                 MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Homecare_MDR');
             }
-            else if(customer.Account_Type__c == HospitalType)
+            else if(customer.RecordTypeId == hospID)
             {
                 showSAP_Ids = false; 
                 showhospital_ids = true;
@@ -100,6 +105,7 @@ public class jj_rb_Rebate_RequestChange_CTE
         {
             try{
                 insert(MDR);
+                System.debug('Inserted MDR ************* '+MDR);
             }
             catch(Exception e)
             {                

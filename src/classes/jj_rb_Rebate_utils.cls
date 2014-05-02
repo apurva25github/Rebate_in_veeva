@@ -36,15 +36,22 @@ public with sharing class jj_rb_Rebate_utils {
 	    }*/
 	    
 	    //Returns the Account Type For Specified Record
-	     public static String getAccountType(String Acc_type)
+	    private static Map<String, String> mapAccountType = new Map<String, String>();
+	    public static String getAccountType(String Acc_type)
 	     {
-	         list<jj_rb_account_type__c> ListAccType = [select jj_rb_Account_Type__c 
-	                                                     from jj_rb_account_type__c
-	                                                     where name =: Acc_type];
-	                                                     
-	         if(!ListAccType.isEmpty())
-	             return ListAccType[0].jj_rb_Account_Type__c;
-	            
-	         return null;
+	         if(mapAccountType.isEmpty()) {
+		         list<jj_rb_account_type__c> ListAccType = [select jj_rb_Account_Type__c,name 
+		                                                     from jj_rb_account_type__c];
+		         
+		                                                     
+		         if(!ListAccType.isEmpty()) {
+		             for(jj_rb_account_type__c accountType : ListAccType) {
+		             	mapAccountType.put(accountType.name, accountType.jj_rb_Account_Type__c);
+		             }
+		             return mapAccountType.get(Acc_type);
+		         }    
+	         }   
+	        
+	         return mapAccountType.get(Acc_type);
 	     }
 	}

@@ -23,9 +23,7 @@ global class jj_rb_RetailerAccrualCalc extends jj_rb_rebateAccrualBaseClass impl
      
     String Accrual_Retailer = jj_rb_Rebate_utils.getRecordTypeId('Accrual_Retailer');      
      // create a set of customer Id
-     for(jj_rb_Rebate_Contract_Line_Item__c contractLI : (List<jj_rb_Rebate_Contract_Line_Item__c>)
-
-scope)
+     for(jj_rb_Rebate_Contract_Line_Item__c contractLI : (List<jj_rb_Rebate_Contract_Line_Item__c>)scope)
      {
         setCustomerId.add(contractLI.jj_rb_Rebate_Contract__r.jj_rb_Customer__c);
      }

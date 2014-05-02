@@ -12,7 +12,7 @@
  */
 public abstract class jj_rb_HomecareUploadBaseClass {
 
- public String convertToString(Blob b)
+ /*public String convertToString(Blob b)
    {
         String b64;
         String strUrlUTF8;
@@ -33,7 +33,7 @@ public abstract class jj_rb_HomecareUploadBaseClass {
         {}
         return b.toString();   
    }
-  
+  */
    public static List<List<String>> parseCSV(String contents,Boolean skipHeaders) {
     List<List<String>> allFields = new List<List<String>>();
 

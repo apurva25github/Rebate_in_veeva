@@ -29,7 +29,10 @@ global class jj_rb_avgQuantityCalc implements Database.Batchable<sObject>
             String accId = rc.jj_rb_Customer__c;
             if(accRcMap.containsKey(accId)){
                 List<jj_rb_Rebate_Claim__c> claims = accRcMap.get(accId);
-                if(claims!=null && claims.size()<=2) claims.add(rc);
+                if(claims!=null && claims.size()<=2)
+                {
+                    claims.add(rc);
+                }
                 accRcMap.put(accId,claims);
             }
             else
@@ -61,14 +64,10 @@ global class jj_rb_avgQuantityCalc implements Database.Batchable<sObject>
                         if(tol.jj_rb_Product__c == productid)
                         {
                             tol.jj_rb_Average_Quantity__c = m.get(accid).get(productid).getAvgQty();
-                        }
-                        else                        
-                        {
-                            tol.jj_rb_Average_Quantity__c =null;
-                        }
-                            
+                        }   
                     }
-                }              
+                                       
+                }                         
             }
         }
         update tolList;   

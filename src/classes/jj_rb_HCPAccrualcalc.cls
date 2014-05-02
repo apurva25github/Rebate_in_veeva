@@ -1,9 +1,10 @@
 global class jj_rb_HCPAccrualcalc extends jj_rb_rebateAccrualBaseClass implements Database.batchable<sObject> 
 {
-    
+     static id hcpRecordtypeID = jj_rb_rebate_utils.getRecordTypeId('Account_Homecare');
+     
      global Database.QueryLocator start(Database.BatchableContext BC)
      {
-         String query = 'SELECT Id,jj_rb_IMS_Customer_Id__c,Type,jj_rb_National_Channel_Manager__c,jj_rb_SAP_Customer_Number__c,Name,RecordTypeId FROM Account'; 
+         String query = 'SELECT Id,jj_rb_IMS_Customer_Id__c,Account_Type__c,jj_rb_National_Channel_Manager__c,jj_rb_SAP_Customer_Number__c,Name,RecordTypeId FROM Account where RecordTypeID =: hcpRecordtypeID'; 
             return Database.getQueryLocator(query);
      }
      
@@ -11,7 +12,7 @@ global class jj_rb_HCPAccrualcalc extends jj_rb_rebateAccrualBaseClass implement
      global void execute(Database.BatchableContext BC, List<sObject> scope){    
      Map<Id, List<jj_rb_Rebate_Claim__c>> mapCustClaims = new Map<Id,List<jj_rb_Rebate_Claim__c>>();   // key -> cust id
      Map<Id, List<jj_rb_Estimated_Rebate_Accrual__c>> mapEstimatedAccruals = new Map<Id, List<jj_rb_Estimated_Rebate_Accrual__c>> ();   // key -> cust id         
-     
+     system.debug('********** '+scope);
      Map<Id, jj_rb_Rebate_Accrual__c> mapRebateAccrual = new Map<Id, jj_rb_Rebate_Accrual__c>();    // key -> cust id
      Map<Id, List<jj_rb_Rebate_Accrual_Line_Item__c>> mapRebateAccrualLI = new Map<Id, List<jj_rb_Rebate_Accrual_Line_Item__c>>();  // key -> cust Id
      Set<Id> setCustomerId = new Set<Id>(); 
@@ -24,7 +25,7 @@ global class jj_rb_HCPAccrualcalc extends jj_rb_rebateAccrualBaseClass implement
      // create a set of customer Id
      for(Account acc : (List<Account>) scope)
      {
-         if(acc.Type == HCPType )
+         if(acc.Account_Type__c == HCPType )
          {
             setCustomerId.add(acc.id);
             listAccount.add(acc);

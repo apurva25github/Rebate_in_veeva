@@ -45,7 +45,7 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Business_Street__c</field>
+                <field>jj_rb_Business_Street__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -53,7 +53,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Business_Postal_Code__c</field>
+                <field>jj_rb_Business_Postal_Code__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -67,7 +67,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Business_Phone__c</field>
+                <field>jj_rb_Business_Phone__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>

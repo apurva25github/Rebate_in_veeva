@@ -19,10 +19,6 @@
                 <behavior>Required</behavior>
                 <field>jj_rb_SAP_Customer_Number__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>jj_rb_Primary_Parent_vod__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

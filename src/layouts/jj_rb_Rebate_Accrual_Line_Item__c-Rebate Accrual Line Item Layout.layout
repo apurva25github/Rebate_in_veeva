@@ -8,16 +8,16 @@
         <label>Information</label>
         <layoutColumns>
             <layoutItems>
+                <behavior>Required</behavior>
+                <field>jj_rb_Rebate_Accrual__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>Name</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>jj_rb_Product__c</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>jj_rb_Net_Rebate_Accrual_Amount__c</field>
+                <field>jj_rb_Product__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -30,12 +30,12 @@
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>jj_rb_Rebate_Accrual__c</field>
+                <behavior>Readonly</behavior>
+                <field>jj_rb_Volume__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>jj_rb_Volume__c</field>
+                <field>jj_rb_Net_Rebate_Accrual_Amount__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -93,4 +93,10 @@
     <showInteractionLogPanel>false</showInteractionLogPanel>
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
+    <summaryLayout>
+        <masterLabel>00h11000000NGzl</masterLabel>
+        <sizeX>4</sizeX>
+        <sizeY>0</sizeY>
+        <summaryLayoutStyle>Default</summaryLayoutStyle>
+    </summaryLayout>
 </Layout>

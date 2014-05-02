@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <customButtons>jj_Data_Request</customButtons>
-    <excludeButtons>DataDotComClean</excludeButtons>
     <excludeButtons>Delete</excludeButtons>
     <excludeButtons>Edit</excludeButtons>
     <excludeButtons>IncludeOffline</excludeButtons>
@@ -57,7 +56,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Type</field>
+                <field>Account_Type__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>

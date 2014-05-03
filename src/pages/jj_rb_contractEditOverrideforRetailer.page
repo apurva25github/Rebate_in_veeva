@@ -1,6 +1,11 @@
 <apex:page >
     <apex:form >
+          <b>
+           <br/>
+       <font size="3">
      You are not allowed to Modify {!$CurrentPage.parameters.status}  {!$CurrentPage.parameters.recordtype} for Customer- {!$CurrentPage.parameters.customer} 
      <br/>Click <a href="/{!$CurrentPage.parameters.id}"> here </a> to return to the previous page.
+     </font>
+     </b>
     </apex:form>
 </apex:page>

@@ -1,8 +1,12 @@
 <apex:page >
     <apex:form >
-       
+           <b>
+           <br/>
+       <font size="3">
+
         You are not allowed to Modify {!$CurrentPage.parameters.status}  {!$CurrentPage.parameters.recordtype} for Contract ID: {!$CurrentPage.parameters.contract}
-  
+  </font>
+  </b>
         <!---customer:
         {!$currentPage.parameters.customer}--->
     </apex:form> 

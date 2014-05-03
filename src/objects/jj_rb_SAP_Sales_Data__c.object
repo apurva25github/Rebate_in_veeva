@@ -57,7 +57,7 @@
         <externalId>false</externalId>
         <label>Invoice Qty</label>
         <precision>18</precision>
-        <required>false</required>
+        <required>true</required>
         <scale>0</scale>
         <trackTrending>false</trackTrending>
         <type>Number</type>
@@ -104,7 +104,7 @@
         <externalId>false</externalId>
         <label>SAP Customer ID</label>
         <length>20</length>
-        <required>false</required>
+        <required>true</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -115,7 +115,7 @@
         <externalId>false</externalId>
         <label>SAP Material No</label>
         <length>20</length>
-        <required>false</required>
+        <required>true</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>

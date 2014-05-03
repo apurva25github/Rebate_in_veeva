@@ -54,13 +54,15 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
      system.debug('Document.body>>>' + document.body); 
      system.debug('Document Name>>>>' + document.Name);
      system.debug('Document type>>>>' + document.Type);
-     errorInUpload = false;
-     showUploadMsg = true;
+     
      
      if(invalidFile(document)) {
      	document.body = null;     	
      	return;
      }
+     
+     errorInUpload = false;
+     showUploadMsg = true;
      	
      
      // parse the records and get all the rows for all the columns

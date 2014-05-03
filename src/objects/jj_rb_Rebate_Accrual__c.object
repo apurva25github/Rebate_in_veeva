@@ -529,7 +529,11 @@
 
 if(confirm(&apos;Do you want to proceed with the accrual report generation? Generated report will be emailed as a PDF and CSV.&apos;)) 
 { 
-sforce.apex.execute(&apos;jj_rb_Accrual_Actions&apos;,&apos;createBatchReport&apos;,{}); 
+   try {
+      sforce.apex.execute(&apos;jj_rb_Accrual_Actions&apos;,&apos;createBatchReport&apos;,{});
+   } catch (e){
+      alert(&apos;You do not have the permission to perform this operation. Please contact the system administrator.&apos;);
+   } 
 }</url>
     </webLinks>
     <webLinks>
@@ -547,7 +551,11 @@ sforce.apex.execute(&apos;jj_rb_Accrual_Actions&apos;,&apos;createBatchReport&ap
 
 if(confirm(&apos;Do you want to proceed with the accrual calculation?&apos;))
 {
-  sforce.apex.execute(&apos;jj_rb_Accrual_Actions&apos;,&apos;executeCalcBatch&apos;,{});
+  try {
+      var error = sforce.apex.execute(&apos;jj_rb_Accrual_Actions&apos;,&apos;executeCalcBatch&apos;,{});
+  } catch (e){
+      alert(&apos;You do not have the permission to perform this operation. Please contact the system administrator.&apos;);
+  }
 }</url>
     </webLinks>
 </CustomObject>

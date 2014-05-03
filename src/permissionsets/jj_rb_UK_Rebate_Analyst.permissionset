@@ -45,6 +45,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>jj_rb_Homecare_CreditCheck_notification</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>jj_rb_IMS_Job_Async</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -81,10 +85,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>jj_rb_Rebate_Management_Utilities</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>jj_rb_Rebate_RequestChange_CTE</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -101,7 +101,27 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>jj_rb_SAP_Job_Async</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>jj_rb_SAP_Job_Submit</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>jj_rb_TestClass</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>jj_rb_TestClass_Accrual</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>jj_rb_Test_BaseClass</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>jj_rb_Test_Contract</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -110,6 +130,18 @@
     </classAccesses>
     <classAccesses>
         <apexClass>jj_rb_Test_Homecare_ClaimUpload</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>jj_rb_Test_IMSDataUpload</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>jj_rb_Test_MDR_class</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>jj_rb_Test_SAPDataUpload</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -126,6 +158,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>jj_rb_contract_notification_schedular</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>jj_rb_hcp_creditchk_notif_schedular</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>

@@ -18,7 +18,7 @@ public class jj_rb_Close_contract
    public jj_rb_Close_contract(ApexPages.StandardController controller) {
       this.controller = controller;
       contract = (jj_rb_rebate_contract__c)controller.getRecord();  
-      contract = [select Id, jj_rb_Closure_Status__c, jj_rb_Closure_Comment__c,jj_rb_status__c,name,(select ID,name,jj_rb_status__c from Rebate_Contract_Line_Items__r )
+      contract = [select Id, jj_rb_Closure_Status__c, jj_rb_Closure_Comment__c,jj_rb_status__c,name,RecordTypeId,(select ID,name,jj_rb_status__c,RecordtypeId from Rebate_Contract_Line_Items__r )
                         from jj_rb_rebate_contract__c
                         where id = :contract.id limit 1];
        // //check the status of record and render pageblock accordingly
@@ -45,11 +45,12 @@ public class jj_rb_Close_contract
         
         list<jj_rb_Rebate_Contract_Line_Item__c> ListLine_Item = new list<jj_rb_Rebate_Contract_Line_Item__c>();
             
-        // System.debug('Contract **** '+ contract.Rebate_Contract_Line_Items__r);
+        System.debug('Contract **** '+ contract.Rebate_Contract_Line_Items__r);
+        System.debug('HCP close class suct settings ** '+jj_rb_Rebate_utils.getRecordTypeId('Homecare_Contract_Line_Item'));
         // Iterate over Line Items and update the Status.
         for(jj_rb_Rebate_Contract_Line_Item__c RCIL : contract.Rebate_Contract_Line_Items__r)
         {   Id RecID  = RCIL.RecordTypeId;
-            
+            System.debug('******* line item id '+RCIL.RecordTypeId);
             if(RecID   == jj_rb_Rebate_utils.getRecordTypeId('Contract_LineItem_Retailer'))
             { 
                 RCIL.jj_rb_status__c = Closed;
@@ -65,6 +66,8 @@ public class jj_rb_Close_contract
         }
         
         //Update Contract Status
+        System.debug('contract.RecordTypeId **** '+contract.RecordTypeId+' UTILS '+jj_rb_Rebate_utils.getRecordTypeId('Rebate_Contract_Retailer'));
+
         if(contract.RecordTypeId  == jj_rb_Rebate_utils.getRecordTypeId('Rebate_Contract_Retailer'))
         {
             contract.jj_rb_Status__c = Closed;
@@ -72,6 +75,8 @@ public class jj_rb_Close_contract
         }
         else if(contract.RecordTypeId == jj_rb_Rebate_utils.getRecordTypeId('Homecare_Contract'))
         {
+                        System.debug('contract.RecordTypeId **** '+contract.RecordTypeId+' UTILS '+jj_rb_Rebate_utils.getRecordTypeId('Rebate_Contract_Retailer'));
+
             contract.jj_rb_Status__c = Closed;
             contract.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Homecare_Closed_Contract');
         }

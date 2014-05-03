@@ -15,6 +15,21 @@ public class jj_rb_Test_BaseClass {
     	
     }
     
+    public static Account setupRetailerCustomer(User ncmUser)
+    {
+    	Id retailerRecordType = getRecordTypeId('Retailer','Account');
+    	Account a = new Account();
+    	a.jj_rb_National_Channel_Manager__c = ncmUser.Id;
+    	a.jj_rb_SAP_Customer_Number__c = '221';
+    	a.jj_rb_SAP_Vendor_Number__c = '221';
+    	a.jj_rb_IMS_Customer_Id__c = '221';
+    	a.RecordTypeId = retailerRecordType; 
+		a.Name = 'test Account';
+		
+    	insert a;
+    	return a;
+    }
+    
     public static jj_rb_Rebate_Product__c setupRebateProduct()
     {
     	jj_rb_VAT_Code__c vatCode = setupVATCode();
@@ -25,6 +40,7 @@ public class jj_rb_Test_BaseClass {
     	product.Name = 'Test Product';
     	product.jj_rb_Description__c = 'Product description';
     	product.jj_rb_VAT_Code__c = vatCode.id;
+    	product.jj_rb_IMS_Product_ID__c = '12345';
     	
     	insert product;
     	return product;

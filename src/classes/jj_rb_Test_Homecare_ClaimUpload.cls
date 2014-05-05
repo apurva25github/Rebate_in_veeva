@@ -69,10 +69,8 @@ private class jj_rb_Test_Homecare_ClaimUpload {
     
     private static void setupData(User user)
     {
-    	       
-    	
-    	jj_rb_Test_BaseClass.setupHomecareCustomer(user);
-    	jj_rb_Test_BaseClass.setupRebateProduct();
+    	insert jj_rb_Test_BaseClass.setupHomecareCustomer(user);
+    	insert jj_rb_Test_BaseClass.setupRebateProduct();
     	
     	jj_rb_Region__c region = jj_rb_Test_BaseClass.setupRegion();
     	jj_rb_NHS_Trust__c nhsTrust = jj_rb_Test_BaseClass.setupTrust(region);

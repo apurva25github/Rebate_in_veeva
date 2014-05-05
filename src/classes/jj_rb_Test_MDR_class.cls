@@ -61,7 +61,7 @@
             customer.jj_rb_SAP_Vendor_Number__c = '5645';  
             customer.Account_Type__c = jj_rb_Test_MDR_class.accountTypeCreator('Retailer Type','Retailer');
             customer.jj_rb_IMS_Customer_Id__c='52578';
-            customer.RecordTypeId = jj_rb_Test_MDR_class.ReocrdTypeCreator('Account Retailer',rectypid);
+            customer.RecordTypeId = jj_rb_Test_MDR_class.ReocrdTypeCreator('Account_Retailer',rectypid);
             insert customer; 
             return customer;
         }
@@ -71,9 +71,8 @@
         public static Account homecareaccountCreator()
         {
             String rectypid = jj_rb_Test_MDR_class.getRecordtype('Homecare provider','Account');
-            System.debug('ID HCP ********** '+rectypid);
+            //System.debug('ID HCP ********** '+rectypid);
             Account homecare = new Account();
-           
             homecare.jj_rb_SAP_Customer_Number__c = '9855';
             homecare.jj_rb_National_Channel_Manager__c= jj_rb_Test_MDR_class.getRebateUser().id;
             homecare.Name = 'Homecare pharma';
@@ -82,7 +81,8 @@
             homecare.jj_rb_Credit_check_Validity_From__c = Date.today();
             homecare.jj_rb_Credit_check_Validity_End__c = Date.today()+60;
             homecare.RecordTypeId = jj_rb_Test_MDR_class.ReocrdTypeCreator('Account_Homecare',rectypid);
-            System.debug('in HCP creator method***** '+homecare.RecordTypeId);
+            //homecare.RecordTypeId  = '012110000004SmZ';
+            //System.debug('in HCP creator method***** '+homecare.RecordTypeId);
             insert homecare; 
             return homecare;
         }
@@ -91,14 +91,12 @@
         public static Account HospitalCreator()
         {
             String rectypid = jj_rb_Test_MDR_class.getRecordtype('Hospital_vod','Account');
-            System.debug('ID hospitals ****** '+ rectypid);
             Account customer = new Account();
             customer.jj_rb_National_Channel_Manager__c=jj_rb_Test_MDR_class.getRebateUser().Id;
             customer.Name = 'Hospital'; 
             customer.Account_Type__c = jj_rb_Test_MDR_class.accountTypeCreator('Hospital','Hospital');
             customer.jj_rb_NHS_Trust__c = jj_rb_Test_MDR_class.NhstrustCreator().id;
-            customer.RecordTypeId = jj_rb_Test_MDR_class.ReocrdTypeCreator('Account Hospital',rectypid);
-            System.debug('in hosp creator method **** '+customer.RecordTypeId);
+            customer.RecordTypeId = jj_rb_Test_MDR_class.ReocrdTypeCreator('Account_Hospital',rectypid);
             insert customer; 
             return customer;
         }
@@ -181,106 +179,41 @@
             insert RecordType;
             return RecordType.jj_rb_RecordTypeId__c;       
         }
-        
-        public static testmethod void Test_RequestChange_CTE()
+        // Test User
+        public static user testUser()
         {
-            jj_rb_Test_MDR_class.ReocrdTypeCreator('Account_Retailer', jj_rb_Test_MDR_class.getRecordtype('Retailer','Account'));
-            jj_rb_Test_MDR_class.ReocrdTypeCreator('Account_Homecare',jj_rb_Test_MDR_class.getRecordtype('Homecare provider','Account'));
-            System.debug('HCP Account ID* ' +jj_rb_Test_MDR_class.ReocrdTypeCreator('Account_Homecare',jj_rb_Test_MDR_class.getRecordtype('Homecare provider','Account')));
-            jj_rb_Test_MDR_class.ReocrdTypeCreator('Account_Hospital',jj_rb_Test_MDR_class.getRecordtype('Hospital_vod','Account'));
-            // Retailer customer
-            Account retaileracc = jj_rb_Test_MDR_class.accountCreator();
-            //System.debug('Inserted Acc Retaielr *** '+retaileracc);
-            // HCP customer
-            Account hcpacc = jj_rb_Test_MDR_class.homecareaccountCreator();
-            System.debug('inserted Account HCP **** '+ hcpacc);
-            // Hospital customer
-            Account hospacc = jj_rb_Test_MDR_class.HospitalCreator();
-            System.debug('inserted Account HCP **** '+ hospacc);
-            
+            User testUser = jj_rb_Test_MDR_class.getRebateUser();
+            	jj_rb_Test_BaseClass.setupRebateAnalystUser(testUser);
+            	return testUser;
+        }
+        public static testmethod void mainTestMethod()
+        {
+            user u = testUser();
+            if(u!= null)
+            {
+                System.runAs(u){
+                Test_RequestChange_CTE();}
+            } 
+        }
+        public static void Test_RequestChange_CTE()
+        {
             // MDR recordtypes
-            
-            jj_rb_Test_MDR_class.ReocrdTypeCreator('Retailer_MDR',jj_rb_Test_MDR_class.getRecordtype('Retailer Customer Data Request','jj_rb_Master _data_request__c'));
-            jj_rb_Test_MDR_class.ReocrdTypeCreator('Homecare_MDR',jj_rb_Test_MDR_class.getRecordtype('Homecare Customer Data Request','jj_rb_Master _data_request__c'));
-            jj_rb_Test_MDR_class.ReocrdTypeCreator('Hospital_Data_Request',jj_rb_Test_MDR_class.getRecordtype('Hospital Data Request','jj_rb_Master _data_request__c'));
-            jj_rb_Test_MDR_class.ReocrdTypeCreator('Product_Data_Request', jj_rb_Test_MDR_class.getRecordtype('Product Data Request','jj_rb_Master _data_request__c'));
-            //System.debug('Retailer ********** '+jj_rb_MDR_proc_test_class.ReocrdTypeCreator('Retailer_MDR',jj_rb_MDR_proc_test_class.getRecordtype('Retailer Customer Data Request')));
-            //System.debug('HCP ******** '+jj_rb_Test_MDR_class.ReocrdTypeCreator('Homecare_MDR',jj_rb_Test_MDR_class.getRecordtype('Homecare Customer Data Request')));
-            //System.debug('Hospital ****** '+jj_rb_MDR_proc_test_class.ReocrdTypeCreator('Hospital_Data_Request',jj_rb_MDR_proc_test_class.getRecordtype('Hospital Data Request')));
+            jj_rb_Test_MDR_class.ReocrdTypeCreator('Retailer_MDR',jj_rb_Test_MDR_class.getRecordtype('Retailer Customer Data Request','jj_rb_Master_data_request__c'));
+            jj_rb_Test_MDR_class.ReocrdTypeCreator('Homecare_MDR',jj_rb_Test_MDR_class.getRecordtype('Homecare Customer Data Request','jj_rb_Master_data_request__c'));
+            jj_rb_Test_MDR_class.ReocrdTypeCreator('Hospital_Data_Request',jj_rb_Test_MDR_class.getRecordtype('Hospital Data Request','jj_rb_Master_data_request__c'));
+            jj_rb_Test_MDR_class.ReocrdTypeCreator('Product_Data_Request', jj_rb_Test_MDR_class.getRecordtype('Product Data Request','jj_rb_Master_data_request__c'));
             
             // Product creation
             jj_rb_Rebate_Product__c product = jj_rb_Test_MDR_class.rebateProductCreator();
-            
-            // ************** Retailer **************************************
-            // Call standard controller.
-            ApexPages.StandardController sc_customer =  new ApexPages.StandardController(retaileracc);
-            ApexPages.StandardController sc_product =  new ApexPages.StandardController(product);
-            // Call VF extension
-            jj_rb_Rebate_RequestChange_CTE Request_change_customer = new jj_rb_Rebate_RequestChange_CTE(sc_customer);
-            jj_rb_Rebate_RequestChange_CTE Request_change_product = new jj_rb_Rebate_RequestChange_CTE(sc_product);
-            
-            //Call VF pages with Newly inserted Record ID
-            PageReference pgref = new PageReference('jj_rb_Rebate_Account_RequestChange');
-            pgref.getParameters().put('id',string.valueOf(retaileracc.id));
-            test.setCurrentPage(pgref);
-            PageReference pageref = new PageReference('jj_rb_Rebate_Product_RequestChange');
-            pageref.getParameters().put('id',string.valueOf(product.id));
-            Test.setCurrentPage(pageref);
-            
-            // Call Extension methods
-            Request_change_customer.AccountPageLoad();
-            Request_change_product.ProductPageLoad();
-            Request_change_customer.submitForChange();
-            Request_change_product.submitForChange();
-            Request_change_product.Cancel();
-            
-            
-            //************** HCP **************************************************
-            
-             // Call standard controller.
-            ApexPages.StandardController hcpsc_customer =  new ApexPages.StandardController(hcpacc);
-            //ApexPages.StandardController hcpsc_product =  new ApexPages.StandardController(product);
-            // Call VF extension
-            jj_rb_Rebate_RequestChange_CTE hcpRequest_change_customer = new jj_rb_Rebate_RequestChange_CTE(hcpsc_customer);
-            //jj_rb_Rebate_RequestChange_CTE hcpRequest_change_product = new jj_rb_Rebate_RequestChange_CTE(hcpsc_product);
-            
-            //Call VF pages with Newly inserted Record ID
-            PageReference hcppgref = new PageReference('jj_rb_Rebate_Account_RequestChange');
-            hcppgref.getParameters().put('id',string.valueOf(hcpacc.id));
-            test.setCurrentPage(hcppgref);
-            /*PageReference hcppageref = new PageReference('jj_rb_Rebate_Product_RequestChange');
-            hcppageref.getParameters().put('id',string.valueOf(product.id));
-            Test.setCurrentPage(hcppageref);*/
-            
-            // Call Extension methods
-            hcpRequest_change_customer.AccountPageLoad();
-            //hcpRequest_change_product.ProductPageLoad();
-            hcpRequest_change_customer.submitForChange();
-            //hcpRequest_change_product.Cancel();
-            
-            //************* Hospital ************************************************
-            
-             // Call standard controller.
-            ApexPages.StandardController hospsc_customer =  new ApexPages.StandardController(hospacc);
-            //ApexPages.StandardController hospsc_product =  new ApexPages.StandardController(product);
-            // Call VF extension
-            jj_rb_Rebate_RequestChange_CTE hospRequest_change_customer = new jj_rb_Rebate_RequestChange_CTE(hospsc_customer);
-            //jj_rb_Rebate_RequestChange_CTE hospRequest_change_product = new jj_rb_Rebate_RequestChange_CTE(hospsc_product);
-            
-            //Call VF pages with Newly inserted Record ID
-            PageReference hosppgref = new PageReference('jj_rb_Rebate_Account_RequestChange');
-            hosppgref.getParameters().put('id',string.valueOf(hospacc.id));
-            test.setCurrentPage(hosppgref);
-            /*PageReference hosppageref = new PageReference('jj_rb_Rebate_Product_RequestChange');
-            hosppageref.getParameters().put('id',string.valueOf(product.id));
-            Test.setCurrentPage(hosppageref);*/
-            
-            // Call Extension methods
-            hospRequest_change_customer.AccountPageLoad();
-            //hospRequest_change_product.ProductPageLoad();
-            hospRequest_change_customer.submitForChange();
-           // hospRequest_change_product.Cancel();
-            
+            // Retailer customer
+            Account retaileracc = jj_rb_Test_MDR_class.accountCreator();
+            jj_rb_Test_MDR_class.Retialeracc(retaileracc,product);
+            // HCP customer
+            Account hcpacc = jj_rb_Test_MDR_class.homecareaccountCreator();
+            jj_rb_Test_MDR_class.Homecareacc(hcpacc);
+			// Hospital customer
+            Account hospacc = jj_rb_Test_MDR_class.HospitalCreator();
+            jj_rb_Test_MDR_class.hospitalacc(hospacc);
             // Assert New values using assert function
             try{
                 RetailerMDR = [select jj_rb_status__c,jj_rb_Business_Name__c,jj_rb_Rebate_Request_Change_For_ID__c,
@@ -316,8 +249,7 @@
             }
             catch(exception e)
             {
-                    System.debug('The following exception has occurred: ' + e.getMessage());
-                
+                    System.debug('The following exception has occurred: ' + e.getMessage());   
             }
             // MDR Convert Trigger testing 
            //jj_rb_MDR_proc_test_class.customsStatusCreator('New','New');
@@ -341,18 +273,90 @@
             //jj_rb_Master_Data_Request__c
             
         }
-        /*
-        public static testmethod void Test_trigger_MDR_convert()
+      	public static void Retialeracc(Account retaileracc,jj_rb_Rebate_Product__c product)
         {
+			// ************** Retailer **************************************
+            // Call standard controller.
+            ApexPages.StandardController sc_customer =  new ApexPages.StandardController(retaileracc);
+            ApexPages.StandardController sc_product =  new ApexPages.StandardController(product);
+            // Call VF extension
+            jj_rb_Rebate_RequestChange_CTE Request_change_customer = new jj_rb_Rebate_RequestChange_CTE(sc_customer);
+            jj_rb_Rebate_RequestChange_CTE Request_change_product = new jj_rb_Rebate_RequestChange_CTE(sc_product);
             
-            // Update status of Newly created MDR to  'Approved'.
-            //System.debug('Trigger method ************ ');
+            //Call VF pages with Newly inserted Record ID
+            PageReference pgref = new PageReference('jj_rb_Rebate_Account_RequestChange');
+            pgref.getParameters().put('id',string.valueOf(retaileracc.id));
+            test.setCurrentPage(pgref);
+            PageReference pageref = new PageReference('jj_rb_Rebate_Product_RequestChange');
+            pageref.getParameters().put('id',string.valueOf(product.id));
+            Test.setCurrentPage(pageref);
             
-            
-            // Assert the upserted Account
-            
-            
-        }*/
+            // Call Extension methods
+            Request_change_customer.AccountPageLoad();
+            Request_change_product.ProductPageLoad();
+            Request_change_customer.submitForChange();
+            Request_change_product.submitForChange();
+            Request_change_product.Cancel();  
+        }
         
+        public static void Homecareacc(Account hcpacc)
+        {
+            System.debug('********');
+
+            //************** HCP **************************************************
+            System.debug('HCP ACC  method ********* '+ hcpacc);
+             // Call standard controller.
+            ApexPages.StandardController hcpsc_customer =  new ApexPages.StandardController(hcpacc);
+            System.debug('STD controller HCP ** '+hcpsc_customer);
+            //ApexPages.StandardController hcpsc_product =  new ApexPages.StandardController(product);
+            // Call VF extension
+            jj_rb_Rebate_RequestChange_CTE hcpRequest_change_customer = new jj_rb_Rebate_RequestChange_CTE(hcpsc_customer);
+            //jj_rb_Rebate_RequestChange_CTE hcpRequest_change_product = new jj_rb_Rebate_RequestChange_CTE(hcpsc_product);
+            
+            //Call VF pages with Newly inserted Record ID
+            PageReference hcppgref = new PageReference('jj_rb_Rebate_Account_RequestChange');
+            hcppgref.getParameters().put('id',string.valueOf(hcpacc.id));
+            test.setCurrentPage(hcppgref);
+            /*PageReference hcppageref = new PageReference('jj_rb_Rebate_Product_RequestChange');
+            hcppageref.getParameters().put('id',string.valueOf(product.id));
+            Test.setCurrentPage(hcppageref);*/
+            
+            // Call Extension methods
+            hcpRequest_change_customer.AccountPageLoad();
+            //hcpRequest_change_product.ProductPageLoad();
+            hcpRequest_change_customer.submitForChange();
+            //hcpRequest_change_product.Cancel();
+            
+        }
+         public static void hospitalacc(Account hospacc)
+         {
+             System.debug('********');
+             
+
+             
+             //************* Hospital ************************************************
+            System.debug('hosp in method *** '+hospacc);
+             // Call standard controller.
+            ApexPages.StandardController hospsc_customer =  new ApexPages.StandardController(hospacc);
+             System.debug('STD controller  ** '+hospsc_customer);
+            //ApexPages.StandardController hospsc_product =  new ApexPages.StandardController(product);
+            // Call VF extension
+            jj_rb_Rebate_RequestChange_CTE hospRequest_change_customer = new jj_rb_Rebate_RequestChange_CTE(hospsc_customer);
+            //jj_rb_Rebate_RequestChange_CTE hospRequest_change_product = new jj_rb_Rebate_RequestChange_CTE(hospsc_product);
+            
+            //Call VF pages with Newly inserted Record ID
+            PageReference hosppgref = new PageReference('jj_rb_Rebate_Account_RequestChange');
+            hosppgref.getParameters().put('id',string.valueOf(hospacc.id));
+            test.setCurrentPage(hosppgref);
+            /*PageReference hosppageref = new PageReference('jj_rb_Rebate_Product_RequestChange');
+            hosppageref.getParameters().put('id',string.valueOf(product.id));
+            Test.setCurrentPage(hosppageref);*/
+            
+            // Call Extension methods
+            hospRequest_change_customer.AccountPageLoad();
+            //hospRequest_change_product.ProductPageLoad();
+            hospRequest_change_customer.submitForChange();
+           // hospRequest_change_product.Cancel();
+         }
        
     }

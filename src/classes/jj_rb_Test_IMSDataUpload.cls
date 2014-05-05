@@ -61,7 +61,7 @@ private class jj_rb_Test_IMSDataUpload {
 	private static void setupData(User u)
 	{		
 		jj_rb_Test_BaseClass.setupRebateNCMUser(u);
-		jj_rb_Test_BaseClass.setupRebateProduct();
-		jj_rb_Test_BaseClass.setupRetailerCustomer(u);
+		insert jj_rb_Test_BaseClass.setupRebateProduct();
+		insert jj_rb_Test_BaseClass.setupRetailerCustomer(u);		
 	}
 }

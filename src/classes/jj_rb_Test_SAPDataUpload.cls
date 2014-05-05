@@ -62,7 +62,7 @@ private class jj_rb_Test_SAPDataUpload {
 	private static void setupData(User u)
 	{		
 		jj_rb_Test_BaseClass.setupRebateNCMUser(u);
-		jj_rb_Test_BaseClass.setupRebateProduct();
-		jj_rb_Test_BaseClass.setupHomecareCustomer(u);
+		insert jj_rb_Test_BaseClass.setupRebateProduct();
+		insert jj_rb_Test_BaseClass.setupHomecareCustomer(u);
 	}
 }

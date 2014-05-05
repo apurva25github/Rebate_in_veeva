@@ -12,11 +12,17 @@
 global class jj_rb_avgQuantityCalc implements Database.Batchable<sObject>
 {
     
-    String homecareclaim_recType=jj_rb_Rebate_utils.getRecordTypeID('Claim_Homecare');
-    String status_approved = jj_rb_Rebate_utils.getRebateLineItemStatus('Approved');
+    global String homecareclaim_recType;
+    global String status_approved; 
     global Database.QueryLocator start(Database.BatchableContext BC)
     {
-        String query='SELECT Id,Name,jj_rb_Claim_Date__c,jj_rb_Customer__c,(select id, name,jj_rb_Rebate_Product__r.name,jj_rb_Rebate_Product__c,jj_rb_Quantity__c from Rebate_Claim_Line_Items__r) FROM jj_rb_Rebate_Claim__c where jj_rb_Claim_Date__c = LAST_N_DAYS:1460 AND jj_rb_Status__c =:status_approved AND jj_rb_Claim_Date__c < today AND jj_rb_Customer__c!=null AND RecordTypeId=:homecareclaim_recType order by jj_rb_Claim_Date__c desc';
+        if(String.isBlank(homecareclaim_recType))
+        	homecareclaim_recType = jj_rb_Rebate_utils.getRecordTypeID('Claim_Homecare');
+        if(String.isBlank(status_approved))
+        	jj_rb_Rebate_utils.getRebateLineItemStatus('Approved');
+        
+        String query='SELECT Id,Name,jj_rb_Claim_Date__c,jj_rb_Customer__c,(select id, name,jj_rb_Rebate_Product__r.name,jj_rb_Rebate_Product__c,jj_rb_Quantity__c from Rebate_Claim_Line_Items__r) FROM jj_rb_Rebate_Claim__c where jj_rb_Claim_Date__c = LAST_N_DAYS:1460 AND jj_rb_Status__c= \'' + status_approved  + '\' AND jj_rb_Claim_Date__c < today AND jj_rb_Customer__c!=null AND RecordTypeId=\'' + homecareclaim_recType + '\' order by jj_rb_Claim_Date__c desc';
+        system.debug('query>>>>' + query);
         return Database.getQueryLocator(query);
     }
     global void execute(Database.BatchableContext BC, List<sObject> scope)

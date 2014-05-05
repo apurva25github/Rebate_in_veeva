@@ -3,12 +3,14 @@
 */
 global class jj_rb_RetailerAccrualCalc extends jj_rb_rebateAccrualBaseClass implements Database.batchable<sObject>{ 
  
- 
+ global String retailer_contract;
  
  global Database.QueryLocator start(Database.BatchableContext BC){
- 
-      String retailer_contract = jj_rb_Rebate_utils.getRecordTypeId('Rebate_Contract_Retailer');
-      String query = 'SELECT jj_rb_Rebate_Contract__r.jj_rb_Customer__c,jj_rb_Rebate_Contract__r.recordtypeid FROM jj_rb_Rebate_Contract_Line_Item__c where jj_rb_End_Date__c >= today and jj_rb_Rebate_Contract__r.jj_rb_Customer__c != null and jj_rb_Rebate_Contract__r.recordtypeid =: retailer_contract';
+ 	  if(String.isBlank(retailer_contract))
+      	retailer_contract = jj_rb_Rebate_utils.getRecordTypeId('Rebate_Contract_Retailer');
+      	
+      String query = 'SELECT jj_rb_Rebate_Contract__r.jj_rb_Customer__c,jj_rb_Rebate_Contract__r.recordtypeid FROM jj_rb_Rebate_Contract_Line_Item__c where jj_rb_End_Date__c >= today and jj_rb_Rebate_Contract__r.jj_rb_status__c not in  (\'Closed\',\'Rejected\') and jj_rb_Rebate_Contract__r.jj_rb_Customer__c != null and jj_rb_Rebate_Contract__r.recordtypeid=\'' + retailer_contract + '\'';
+      system.debug('query>>>>' + query);
       return Database.getQueryLocator(query);
  }
  
@@ -26,7 +28,9 @@ global class jj_rb_RetailerAccrualCalc extends jj_rb_rebateAccrualBaseClass impl
      for(jj_rb_Rebate_Contract_Line_Item__c contractLI : (List<jj_rb_Rebate_Contract_Line_Item__c>)scope)
      {
         setCustomerId.add(contractLI.jj_rb_Rebate_Contract__r.jj_rb_Customer__c);
+       
      }
+     
      
      List<Account> listAccount = [select Id,Name, jj_rb_National_Channel_Manager__c,
                                          jj_rb_SAP_Customer_Number__c, jj_rb_SAP_Vendor_Number__c 

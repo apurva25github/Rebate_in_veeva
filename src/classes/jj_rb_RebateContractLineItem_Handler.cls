@@ -98,7 +98,7 @@ public class jj_rb_RebateContractLineItem_Handler {
 			}															 	
 		} // for-ends'
 		
-		system.debug('mapContractLineItems existing>>>>>>'  +mapContractLineItems);
+		//system.debug('mapContractLineItems existing>>>>>>'  +mapContractLineItems);
 		
 		// validate the DML contract line items with existing line items
 		for(jj_rb_Rebate_Contract_Line_Item__c newLineItem : listNewContractLineItems)
@@ -130,19 +130,19 @@ public class jj_rb_RebateContractLineItem_Handler {
 		} else {
 			 uniqueKey = lineItem.jj_rb_Rebate_Contract__r.jj_rb_Product__c + '_' + lineItem.jj_rb_Region__c  +'_'+ lineItem.RecordTypeId;
 		} 	
-		system.debug('uniqueKey>>>>' + uniqueKey); 
+		//system.debug('uniqueKey>>>>' + uniqueKey); 
 		return uniqueKey;
 	}
 	
 	 // This method checks for the validation of the overlapping dates
     private Boolean isDateOverLapping(Date startDate1, Date endDate1, Date startDate2, Date endDate2) {
         
-        system.debug(startDate1 + ' - ' + endDate1);
-        system.debug(startDate2 + ' - ' + endDate2);
+        //system.debug(startDate1 + ' - ' + endDate1);
+        //system.debug(startDate2 + ' - ' + endDate2);
         
-        system.debug('@@@@case 1 - ' + (startDate1 >= startDate2 && startDate1 <= endDate2));
-        system.debug('@@@@case 2 - ' + (endDate1  >= startDate2 && endDate1  <= endDate2));
-        system.debug('@@@@case 3 - ' + (startDate1 <= startDate2 && endDate1  >= endDate2));
+        //system.debug('@@@@case 1 - ' + (startDate1 >= startDate2 && startDate1 <= endDate2));
+        //system.debug('@@@@case 2 - ' + (endDate1  >= startDate2 && endDate1  <= endDate2));
+        //system.debug('@@@@case 3 - ' + (startDate1 <= startDate2 && endDate1  >= endDate2));
         
         return (
             startDate1 >= startDate2 && startDate1 <= endDate2 ||

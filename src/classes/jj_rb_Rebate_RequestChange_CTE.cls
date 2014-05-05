@@ -8,6 +8,7 @@ public class jj_rb_Rebate_RequestChange_CTE
         id retailerID = jj_rb_Rebate_Utils.getRecordTypeId('Account_Retailer');
         id hcpID = jj_rb_Rebate_Utils.getRecordTypeId('Account_Homecare');
         id hospID = jj_rb_Rebate_Utils.getRecordTypeId('Account_Hospital');
+        
         // Controlls visibility of fields on VF page
         public boolean showSAP_Ids {get; set;}
         public boolean showIMS_id {get; set;}
@@ -45,7 +46,8 @@ public class jj_rb_Rebate_RequestChange_CTE
             MDR.jj_rb_IMS_Product_ID__c = rebateProduct.jj_rb_IMS_Product_ID__c;
             MDR.jj_rb_VAT_Code__c =rebateProduct.jj_rb_VAT_Code__c;
             MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Product_Data_Request');  
-            //System.debug('Product rec type ************** '+MDR.RecordTypeId);
+            System.debug('Product rec type ************** '+MDR.RecordTypeId);
+            System.debug('Product MDR ******* '+MDR);
         } 
         
        
@@ -53,6 +55,7 @@ public class jj_rb_Rebate_RequestChange_CTE
         {
             // get the record being changed
             customer = (Account)controller.getRecord();
+            //System.debug('***** customer start '+customer);
             customer = [select id ,name, jj_rb_SAP_Customer_Number__c,
                        jj_rb_National_Channel_Manager__c,RecordTypeId,
                         jj_rb_Credit_check_Validity_End__c,jj_rb_Credit_check_Validity_From__c,
@@ -69,7 +72,7 @@ public class jj_rb_Rebate_RequestChange_CTE
             MDR.jj_rb_SAP_Vendor_Number__c = customer.jj_rb_SAP_Vendor_Number__c;
             
             MDR.jj_rb_IMS_Customer_Id__c = customer.jj_rb_IMS_Customer_Id__c;
-            //System.debug('Customer info *************** '+customer.RecordTypeId+' '+retailerID);
+            //System.debug('Customer info *************** '+customer.RecordTypeId+' '+hcpID);
             if(customer.RecordTypeId == retailerID)
             {
                 showSAP_Ids = true;
@@ -98,12 +101,13 @@ public class jj_rb_Rebate_RequestChange_CTE
                 MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Hospital_Data_Request');
                 MDR.jj_rb_NHS_Trust__c = customer.jj_rb_NHS_Trust__c;
             }
+            System.debug('END MDR ******* '+MDR);
         }
         // Click event handler for the submit for approval button
         // on the product change
         public pageReference submitForChange()
         {
-            try{
+           try{
                 insert(MDR);
                 System.debug('Inserted MDR ************* '+MDR);
             }

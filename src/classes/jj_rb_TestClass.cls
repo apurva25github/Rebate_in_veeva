@@ -1,6 +1,97 @@
+/**
+ *    @author  Sarabdeep Ahluwalia
+ *    @date  5/05/2014
+      @description  Test class for the Indirect Rebate application
+     
+     Modification Log:
+     ------------------------------------------------------------------------------------
+     Developer              Date            Description
+     ------------------------------------------------------------------------------------     
+     Sarabdeep Ahluwalia    5/05/2014      	Original
+ */
 @isTest
-public class jj_rb_TestClass
+private class jj_rb_TestClass
 {
+	
+	static testmethod void testBuyingGroups()
+	{
+		User rebateUser = jj_rb_Test_BaseClass.setupUser();       
+        
+        Test.startTest();
+        
+        system.runAs(rebateUser) { 
+        	jj_rb_Test_BaseClass.setupRebateAnalystUser(rebateUser);
+        	
+        	// setup a retailer account
+        	Account retailer = jj_rb_Test_BaseClass.setupRetailerCustomer(rebateUser); 
+        	insert retailer;       	
+        	
+        	// setup buying group
+        	jj_rb_Retailer_Buying_Group__c buyingGroup = jj_rb_Test_BaseClass.setupBuyingGroup(retailer);
+        	insert buyingGroup;
+        	
+        	// setup buying group member
+        	retailer = jj_rb_Test_BaseClass.setupRetailerCustomer(rebateUser);
+        	retailer.Name = 'test 2 account';
+        	retailer.jj_rb_SAP_Customer_Number__c = '2211';
+    		retailer.jj_rb_SAP_Vendor_Number__c = '2211';
+    		retailer.jj_rb_IMS_Customer_Id__c = '2211';
+    		insert retailer;    		
+        	jj_rb_Retailer_Buying_Group_Member__c buyingGroupMember = jj_rb_Test_BaseClass.setupBuyingGroupMembers(buyingGroup, retailer);
+        	insert buyingGroupMember;
+        	
+        	// insert 2nd buying group member
+        	retailer = jj_rb_Test_BaseClass.setupRetailerCustomer(rebateUser);
+        	retailer.Name = 'test 2 account';
+        	retailer.jj_rb_SAP_Customer_Number__c = '22111';
+    		retailer.jj_rb_SAP_Vendor_Number__c = '22111';
+    		retailer.jj_rb_IMS_Customer_Id__c = '22111';
+    		insert retailer;    		
+        	buyingGroupMember = jj_rb_Test_BaseClass.setupBuyingGroupMembers(buyingGroup, retailer);
+        	insert buyingGroupMember;
+        	
+        }
+        test.stopTest();	
+	}	
+	
+	// test homecare credit check notifications
+	static testmethod void testHomecareCreditCheckNotifications()
+	{
+		User rebateUser = jj_rb_Test_BaseClass.setupUser();       
+        
+        Test.startTest();
+        
+        system.runAs(rebateUser) { 
+        	jj_rb_Test_BaseClass.setupRebateNCMUser(rebateUser);
+        	
+        	
+        	// create homecare customer with credit check expiring todat
+        	Account hcp1 = jj_rb_Test_BaseClass.setupHomecareCustomer(rebateUser);
+        	hcp1.jj_rb_Credit_check_Validity_From__c = Date.today()-1 ;
+        	hcp1.jj_rb_Credit_check_Validity_End__c = Date.today()+1;
+        	
+        	// create homecare customer with credit check expiring in 2 weeks
+        	Account hcp2 = jj_rb_Test_BaseClass.setupHomecareCustomer(rebateUser);
+        	hcp2.jj_rb_Credit_check_Validity_From__c = Date.today()+2;
+        	hcp2.jj_rb_Credit_check_Validity_End__c = Date.today()+14;
+        	
+        	// create homecare customer with credit check expiring in 2 months
+        	Account hcp3 = jj_rb_Test_BaseClass.setupHomecareCustomer(rebateUser);
+        	hcp3.jj_rb_Credit_check_Validity_From__c = Date.today()+2;
+        	hcp3.jj_rb_Credit_check_Validity_End__c = Date.today()+60;
+        	
+        	insert new List<Account> {hcp1, hcp2, hcp3};
+        	
+        	jj_rb_hcp_creditchk_notif_schedular sched = new jj_rb_hcp_creditchk_notif_schedular();
+        	sched.execute(null);
+        	//Database.executeBatch(new jj_rb_Homecare_CreditCheck_notification());       	
+        }
+        test.stopTest();	
+	}
+	
+	
+	
+	/*
     //Account type
      public static  String accountTypeCreator(String name,String Acc_type)
         {
@@ -458,76 +549,20 @@ public class jj_rb_TestClass
         jj_rb_Accrual_Actions.createBatchReport();
         
     }
-    // Customer Master Data Request creator
-    /*public static jj_rb_Master_Data_Request__c MDR_CustomerCreator()
-    {   
-        list<User> testuser = [select id,name from user where userrole.name = 'R8-UK-LCM National Channel Mgr 01' limit 1];     
-        jj_rb_Master_Data_Request__c customer = new jj_rb_Master_Data_Request__c();
-        String rectypid = jj_rb_TestClass.getRecordtype('Homecare Customer Data Request','jj_rb_Master_Data_Request__c');  
-        customer.ownerid=testuser[0].id;       
-        customer.jj_rb_Total_Estimat_Rebate_Accrual__c=500.00;
-        customer.jj_rb_Business_Name__c = 'Boots Ltd';  
-        customer.jj_rb_Status__c = jj_rb_TestClass_Accrual.customsettingCreator('new','new'); 
-        customer.jj_rb_SAP_Vendor_Number__c ='65892';
-        customer.jj_rb_SAP_Customer_Number__c = '9006'; 
-        customer.RecordTypeId =jj_rb_TestClass_Accrual.RecordTypeCreator('Homecare_MDR',rectypid); 
-        insert customer;
-        return customer;
-    }
-    //HCP Estimated accrual creator
-    public static jj_rb_Estimated_Rebate_Accrual__c estimatedAccrualCreator()
-    {        
-        jj_rb_Estimated_Rebate_Accrual__c EstimatedAccruals= new jj_rb_Estimated_Rebate_Accrual__c();
-        EstimatedAccruals.jj_rb_Account__c=jj_rb_TestClass_Accrual.homecareaccountCreators().id;
-        EstimatedAccruals.jj_rb_Rebate_Product__c=jj_rb_TestClass_Accrual.rebateProductCreators().id; 
-        EstimatedAccruals.jj_rb_Master_Data_Request__c=jj_rb_TestClass_Accrual.MDR_CustomerCreator().id;
-        EstimatedAccruals.jj_rb_Estimated_Accrual__c=5000;
-        insert EstimatedAccruals;
-        return EstimatedAccruals;
-    }
+       
+    //test method for Rebate claim line item 
     
-     // Retailer Customer Master Data Request creator
-    public static jj_rb_Master_Data_Request__c RetailerMDR_CustomerCreator()
-    {   
-        list<User> testuser = [select id,name from user where userrole.name = 'R8-UK-LCM National Channel Mgr 01' limit 1];     
-        jj_rb_Master_Data_Request__c customer = new jj_rb_Master_Data_Request__c();
-        String rectypid = jj_rb_TestClass.getRecordtype('Retailer Customer Data Request','jj_rb_Master_Data_Request__c');  
-        customer.ownerid=testuser[0].id;       
-        customer.jj_rb_Total_Estimat_Rebate_Accrual__c=1500.00;
-        customer.jj_rb_Business_Name__c = 'Boots PVT Ltd';  
-        customer.jj_rb_Status__c = jj_rb_TestClass.customsettingCreator('new','new'); 
-        customer.jj_rb_SAP_Vendor_Number__c ='85236';
-        customer.jj_rb_SAP_Customer_Number__c = '4568'; 
-        customer.RecordTypeId =jj_rb_TestClass.RecordTypeCreator('Retailer_MDR',rectypid); 
-        insert customer;
-        return customer;
-    }
-    //Retailer Estimated accrual creator
-    public static jj_rb_Estimated_Rebate_Accrual__c RetailerestimatedAccrualCreator()
-    {        
-        jj_rb_Estimated_Rebate_Accrual__c EstimatedAccruals= new jj_rb_Estimated_Rebate_Accrual__c();
-        EstimatedAccruals.jj_rb_Account__c=TestClass.accountCreator().id;
-        EstimatedAccruals.jj_rb_Rebate_Product__c=product.id;//TestClass.rebateProductCreator().id; 
-        EstimatedAccruals.jj_rb_Master_Data_Request__c=TestClass.RetailerMDR_CustomerCreator().id;
-        EstimatedAccruals.jj_rb_Estimated_Accrual__c=5000;
-        insert EstimatedAccruals;
-        return EstimatedAccruals;
-    }*/
-    
-    //test method for Rebate claim line item validations
     static testMethod void jj_rb_Rebate_claim_validation()
     {
        
         jj_rb_Rebate_Claim__c claim=jj_rb_TestClass.rebateClaimCreator();
-        jj_rb_Rebate_Claim__c claim1=jj_rb_TestClass.rebateClaimCreator1();
-        test.startTest();
-        upsert claim;
-        upsert claim1;        
-        test.stopTest();            
+        jj_rb_Rebate_Claim__c claim1=jj_rb_TestClass.rebateClaimCreator1();              
+                    
     }
     // Test method for Rebateclaimlineitem validation
     static testMethod void jj_rb_Rebate_claimLineitem_validation()
     {
+        Test.StartTest();
         //Retailer process
         jj_rb_Rebate_Contract__c contracts =jj_rb_TestClass.rebateContractCreator();
         jj_rb_Rebate_Contract_Line_Item__c RcontractLineItem =jj_rb_TestClass.rebateContractLineItemCreator();
@@ -535,28 +570,20 @@ public class jj_rb_TestClass
         jj_rb_Rebate_Claim__c claim1=jj_rb_TestClass.rebateClaimCreator1();
         jj_rb_Rebate_Claim_Line_Item__c RClaimline=jj_rb_TestClass.rebateClaimlineitemCreator();
         jj_rb_Rebate_Claim_Line_Item__c RClaimline1=jj_rb_TestClass.rebateClaimlineitemCreator1();
-        
+    
         //Home care process
-        jj_rb_Rebate_Contract__c HCPcontracts = jj_rb_TestClass.HCPContractCreator();
-        jj_rb_Rebate_Contract_Line_Item__c HCPcontractLineItem =jj_rb_TestClass.HCPContractLineItemCreator();
-        jj_rb_Rebate_Claim__c hcpclaim= jj_rb_TestClass.HCPClaimCreator();
-        jj_rb_Rebate_Claim_Line_Item__c claimlineitem= jj_rb_TestClass.HCPClaimlineitemCreator();
-        jj_rb_IMS_Sales_Data__c imsdata=jj_rb_TestClass.imsSalesdataCreator();
+       // jj_rb_Rebate_Contract__c HCPcontracts = jj_rb_TestClass.HCPContractCreator();
+       // jj_rb_Rebate_Contract_Line_Item__c HCPcontractLineItem =jj_rb_TestClass.HCPContractLineItemCreator();
+        jj_rb_Rebate_Claim__c hcpclaim= jj_rb_TestClass.HCPClaimCreator(); //No Issue
+        jj_rb_Rebate_Claim_Line_Item__c claimlineitem= jj_rb_TestClass.HCPClaimlineitemCreator(); //No issue
+        jj_rb_IMS_Sales_Data__c imsdata=jj_rb_TestClass.imsSalesdataCreator();   //No issue
         jj_rb_Retailer_Buying_Group__c Retailerbg=jj_rb_TestClass.retailerBGCreator();
         jj_rb_Retailer_Buying_Group_Member__c retailerbgMemberold=jj_rb_TestClass.retailerBGMemberCreator();
-        
+       
         jj_rb_NewClaimLineItemOverride newclaim= new  jj_rb_NewClaimLineItemOverride(new ApexPages.StandardController(RClaimline));
-        //newclaim.pageLoadExecution();
         
-        Test.StartTest();
-        upsert contracts;
-        upsert RcontractLineItem;      
-        upsert claim;
-        upsert claim1;
-        upsert hcpclaim;
-        upsert claimlineitem;
-        upsert RClaimline;
-        upsert RClaimline1;
+        //newclaim.pageLoadExecution();
+      
         RClaimline.jj_rb_Calculated_rebate_price__c=RcontractLineItem.jj_rb_Rebate__c;
         RClaimline.jj_rb_Assoc_Contract_Line_Item__c=RcontractLineItem.id;
         RClaimline.jj_rb_Calculated_quantity__c=imsdata.jj_rb_IMS_Volume__c;
@@ -567,7 +594,7 @@ public class jj_rb_TestClass
     }
     // testmethod for jj_rb_RebateAccrualCalcScheduler class
     
-   /* static testMethod void RebateAccrualCalcScheduler()
+    static testMethod void RebateAccrualCalcScheduler()
     {
         Test.startTest();
         String CRON_EXP = '0 0 0 1 1 ? 2025';  
@@ -578,11 +605,11 @@ public class jj_rb_TestClass
         System.assertEquals(0, ct.TimesTriggered);
         System.assertEquals('2025-01-01 00:00:00', String.valueOf(ct.NextFireTime));
         Test.stopTest();
-    }*/
+    }
     
     // testmethod for jj_rb_avgQuantityCalcSchedulerclass
     
-    /*static testMethod void avgQuantityCalcScheduler()
+    static testMethod void avgQuantityCalcScheduler()
     {
         Test.startTest();
         String CRON_EXP = '0 0 0 1 1 ? 2025';  
@@ -593,27 +620,6 @@ public class jj_rb_TestClass
         System.assertEquals(0, ct.TimesTriggered);
         System.assertEquals('2025-01-01 00:00:00', String.valueOf(ct.NextFireTime));
         Test.stopTest();
-    }*/
-        
-    
-     
-   
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-              
-
-
+    }
+    */   
 }

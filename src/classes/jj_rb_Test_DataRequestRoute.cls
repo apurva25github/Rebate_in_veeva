@@ -24,6 +24,7 @@ private class jj_rb_Test_DataRequestRoute {
 		system.runas(testUser) {
 			// setup test account
 			Account a = jj_rb_Test_BaseClass.setupHomecareCustomer(testUser);
+			insert a;
 			
 			// setup VF page
 			Pagereference pageRef = Page.jj_rb_DataRequestRoute;
@@ -48,6 +49,7 @@ private class jj_rb_Test_DataRequestRoute {
 			
 			// setup test account
 			Account a = jj_rb_Test_BaseClass.setupHomecareCustomer(testUser);
+			insert a;
 			
 			// setup VF page
 			Pagereference pageRef = Page.jj_rb_DataRequestRoute;

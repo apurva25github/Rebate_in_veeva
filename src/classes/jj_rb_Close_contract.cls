@@ -18,7 +18,8 @@ public class jj_rb_Close_contract
    public jj_rb_Close_contract(ApexPages.StandardController controller) {
       this.controller = controller;
       contract = (jj_rb_rebate_contract__c)controller.getRecord();  
-      contract = [select Id, jj_rb_Closure_Status__c, jj_rb_Closure_Comment__c,jj_rb_status__c,name,RecordTypeId,(select ID,name,jj_rb_status__c,RecordtypeId from Rebate_Contract_Line_Items__r )
+      contract = [select Id, jj_rb_Closure_Status__c, jj_rb_Closure_Comment__c,jj_rb_status__c, jj_rb_Customer__c,
+      					name,RecordTypeId,(select ID,name,jj_rb_status__c,RecordtypeId from Rebate_Contract_Line_Items__r )
                         from jj_rb_rebate_contract__c
                         where id = :contract.id limit 1];
        // //check the status of record and render pageblock accordingly
@@ -84,6 +85,8 @@ public class jj_rb_Close_contract
         {
            update(ListLine_Item);
         }
+        
+        system.debug('contract>>>>' + contract);
         update(contract);
         pageReference pgref = New ApexPages.StandardController(contract).view();
         pgref.setRedirect(true);

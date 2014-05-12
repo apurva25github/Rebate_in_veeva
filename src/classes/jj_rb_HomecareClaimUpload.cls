@@ -354,7 +354,7 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
                                 } catch (Exception e) {errorInRecord = true; ex=e;}
                                 
                                 try {	
-                                	wrapper.qty = Integer.valueOf(row[7]);
+                                	wrapper.qty = Decimal.valueOf(row[7]); 
                                 } catch (Exception e) {errorInRecord = true; ex=e;}
                                 	
                                 try {

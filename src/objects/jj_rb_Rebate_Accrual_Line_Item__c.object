@@ -140,6 +140,7 @@
     </fields>
     <fields>
         <fullName>jj_rb_Volume__c</fullName>
+        <description>Volume of the product.</description>
         <externalId>false</externalId>
         <label>Volume</label>
         <precision>18</precision>

@@ -3,7 +3,7 @@
     <apex:form >
     <apex:pageBlock >
     <apex:pageBlockSection rendered="{!rendererrmsg}" >
-        The Rebate Contract is submetted for Approval,you cannot close the contract 
+        The Rebate Contract is submitted for Approval,you cannot close the contract 
         <br/><a href="/{!contract.id}">Back </a>
     </apex:pageBlockSection>
     </apex:pageBlock>

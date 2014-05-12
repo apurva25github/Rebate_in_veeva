@@ -5,7 +5,7 @@
        <font size="3">
 
 
-         You are not allowed to Modify {!$CurrentPage.parameters.status}  {!$CurrentPage.parameters.recordtype} for Product- {!$CurrentPage.parameters.product} 
+         You are not allowed to modify {!$CurrentPage.parameters.status}  {!$CurrentPage.parameters.recordtype} for Product- {!$CurrentPage.parameters.product} 
          <br/>Click <a href="/{!$CurrentPage.parameters.id}"> here </a> to return to the previous page.
          </font>
          </b>

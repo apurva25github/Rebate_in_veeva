@@ -53,6 +53,7 @@
     <enableReports>true</enableReports>
     <fields>
         <fullName>jj_rb_Average_Quantity__c</fullName>
+        <description>This field stores the field average quantity.</description>
         <externalId>false</externalId>
         <label>Average Quantity</label>
         <precision>18</precision>

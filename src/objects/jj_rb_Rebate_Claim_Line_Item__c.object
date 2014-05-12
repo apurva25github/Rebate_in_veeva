@@ -93,11 +93,12 @@
     </fields>
     <fields>
         <fullName>jj_rb_Calculated_quantity__c</fullName>
+        <description>This field stores the quantity value present in the contract line item</description>
         <externalId>false</externalId>
         <label>Calculated quantity</label>
         <precision>18</precision>
         <required>false</required>
-        <scale>0</scale>
+        <scale>2</scale>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Number</type>
@@ -134,7 +135,7 @@
         <label>Difference in Quantity</label>
         <precision>18</precision>
         <required>false</required>
-        <scale>0</scale>
+        <scale>2</scale>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Number</type>
@@ -234,6 +235,7 @@
     </fields>
     <fields>
         <fullName>jj_rb_Quantity__c</fullName>
+        <description>Quantity of the product</description>
         <externalId>false</externalId>
         <label>Quantity</label>
         <precision>18</precision>

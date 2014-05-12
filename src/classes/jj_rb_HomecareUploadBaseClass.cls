@@ -106,7 +106,7 @@ public class InvoiceData {
     public String hospitalName;
     public String productEANCode;
     public String productName;
-    public Integer qty;
+    public Decimal qty;
     public Decimal unitListPrice;
     public Decimal unitContractPrice;
     public Decimal unitRebate;

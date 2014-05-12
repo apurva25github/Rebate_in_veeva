@@ -77,10 +77,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>jj_rb_RebateContractLineItemHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>jj_rb_RebateContractLineItem_Handler</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -102,18 +98,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>jj_rb_SAP_Job_Async</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>jj_rb_SAP_Job_Submit</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>jj_rb_TestClass</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>jj_rb_TestClass_Accrual</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -122,6 +114,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>jj_rb_Test_Contract</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>jj_rb_Test_ContractLineItem</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -141,19 +137,31 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>jj_rb_Test_RebateClaims</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>jj_rb_Test_Rebate_Accruals</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>jj_rb_Test_SAPDataUpload</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>jj_rb_UploadIMSDataController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>jj_rb_UploadSAPDataController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>jj_rb_avgQuantityCalc</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>jj_rb_avgQuantityCalcScheduler</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -423,6 +431,11 @@
         <editable>true</editable>
         <field>jj_rb_NHS_Trust__c.jj_rb_Website__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>jj_rb_NHS_Trust__c.jj_rb_trust_cods_id__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -946,6 +959,26 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>jj_rb_Rebate_SAP_Job__c.jj_rb_Notification_Email__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>jj_rb_Rebate_SAP_Job__c.jj_rb_Remaining_Files__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>jj_rb_Rebate_SAP_Job__c.jj_rb_Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>jj_rb_Rebate_SAP_Job__c.jj_rb_System_Message__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>jj_rb_Region__c.jj_rb_Description__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1146,7 +1179,7 @@
     <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>false</allowDelete>
-        <allowEdit>true</allowEdit>
+        <allowEdit>false</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>false</modifyAllRecords>
         <object>jj_rb_Rebate_IMS_Job__c</object>
@@ -1164,6 +1197,15 @@
     <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>false</allowDelete>
+        <allowEdit>false</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>jj_rb_Rebate_SAP_Job__c</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>false</modifyAllRecords>
@@ -1172,7 +1214,7 @@
     </objectPermissions>
     <objectPermissions>
         <allowCreate>true</allowCreate>
-        <allowDelete>false</allowDelete>
+        <allowDelete>true</allowDelete>
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>false</modifyAllRecords>
@@ -1245,7 +1287,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>jj_rb_IMS_Data_Upload</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>jj_rb_Rebate_Account_RequestChange</apexPage>
@@ -1257,7 +1299,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>jj_rb_SAP_Data_Upload</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>jj_rb_contractEditOverrideforHomecare</apexPage>
@@ -1384,7 +1426,15 @@
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
+        <tab>jj_rb_Rebate_IMS_Job__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
         <tab>jj_rb_Rebate_Product__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>jj_rb_Rebate_SAP_Job__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
@@ -1393,6 +1443,10 @@
     </tabSettings>
     <tabSettings>
         <tab>jj_rb_Retailer_Buying_Group__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>jj_rb_SAP_Sales_Data__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>

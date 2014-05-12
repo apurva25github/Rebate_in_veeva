@@ -5,7 +5,6 @@
     <label>Indirect Rebate</label>
     <logo>jj_rb_UK_Rebate_Images/jj_rb_iRebate_logo.jpg</logo>
     <tab>MyAccounts</tab>
-    <tab>standard-Account</tab>
     <tab>jj_rb_Rebate_Product__c</tab>
     <tab>jj_rb_Master_Data_Request__c</tab>
     <tab>jj_rb_Rebate_Contract__c</tab>
@@ -21,4 +20,5 @@
     <tab>jj_rb_Rebate_IMS_Job__c</tab>
     <tab>jj_rb_Rebate_SAP_Job__c</tab>
     <tab>jj_rb_SAP_Sales_Data__c</tab>
+    <tab>standard-Account</tab>
 </CustomApplication>

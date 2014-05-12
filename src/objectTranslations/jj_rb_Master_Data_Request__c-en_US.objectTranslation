@@ -194,6 +194,14 @@
         <name>jj_rb_IMS_prod_ID_is_number</name>
     </validationRules>
     <validationRules>
+        <errorMessage><!-- Rebate product already present with specified SAP EAN code. --></errorMessage>
+        <name>jj_rb_Product_EAN_code_Duplicate_chk</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Rebate product already present with specified SAP Material code --></errorMessage>
+        <name>jj_rb_Product_Materia_code_Duplicate_chk</name>
+    </validationRules>
+    <validationRules>
         <errorMessage><!-- SAP Customer No. should be a number. --></errorMessage>
         <name>jj_rb_SAP_CustomerNo_is_numeric</name>
     </validationRules>

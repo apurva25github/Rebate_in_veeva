@@ -45,6 +45,10 @@
         <label><!-- Website --></label>
         <name>jj_rb_Website__c</name>
     </fields>
+    <fields>
+        <label><!-- Trust CODS Id --></label>
+        <name>jj_rb_trust_cods_id__c</name>
+    </fields>
     <layouts>
         <layout>NHS Trust Layout</layout>
         <sections>

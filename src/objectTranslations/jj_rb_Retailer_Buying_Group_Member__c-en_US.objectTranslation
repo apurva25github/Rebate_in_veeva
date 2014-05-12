@@ -30,4 +30,8 @@
         </sections>
     </layouts>
     <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Lead Retailer customer cannot be added as group member. --></errorMessage>
+        <name>jj_rb_Group_Member_validation</name>
+    </validationRules>
 </CustomObjectTranslation>

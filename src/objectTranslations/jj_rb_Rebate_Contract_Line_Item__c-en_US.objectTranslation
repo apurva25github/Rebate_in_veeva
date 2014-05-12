@@ -25,7 +25,7 @@
         <name>jj_rb_Is_Modified__c</name>
     </fields>
     <fields>
-        <label><!-- List Price --></label>
+        <label><!-- List/Wholesale Price --></label>
         <name>jj_rb_List_Price__c</name>
     </fields>
     <fields>

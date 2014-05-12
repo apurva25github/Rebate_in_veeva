@@ -137,7 +137,7 @@
         <relationshipLabel>NHS Trusts</relationshipLabel>
         <relationshipName>NHS_Trusts</relationshipName>
         <required>true</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
@@ -149,6 +149,18 @@
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_trust_cods_id__c</fullName>
+        <description>CODS External id for the trust</description>
+        <externalId>true</externalId>
+        <label>Trust CODS Id</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <label>NHS Trust</label>
     <listViews>
@@ -163,7 +175,7 @@
     </listViews>
     <nameField>
         <label>NHS Trust Name</label>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>Text</type>
     </nameField>
     <pluralLabel>NHS Trusts</pluralLabel>

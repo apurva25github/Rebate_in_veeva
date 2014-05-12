@@ -412,7 +412,7 @@
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Rebate Claims</pluralLabel>
-    <recordTypeTrackHistory>true</recordTypeTrackHistory>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
     <recordTypes>
         <fullName>jj_rb_Homecare_Claim</fullName>
         <active>true</active>

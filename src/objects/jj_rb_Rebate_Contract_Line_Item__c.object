@@ -88,14 +88,14 @@
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>Is Modified</label>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>jj_rb_List_Price__c</fullName>
         <externalId>false</externalId>
-        <label>List Price</label>
+        <label>List/Wholesale Price</label>
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
@@ -234,7 +234,7 @@
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Rebate Contract Line Items</pluralLabel>
-    <recordTypeTrackHistory>true</recordTypeTrackHistory>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
     <recordTypes>
         <fullName>jj_rb_Homecare_Contract</fullName>
         <active>true</active>

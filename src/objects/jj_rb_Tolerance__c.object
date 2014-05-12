@@ -57,8 +57,8 @@
         <label>Average Quantity</label>
         <precision>18</precision>
         <required>false</required>
-        <scale>0</scale>
-        <trackHistory>false</trackHistory>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
@@ -83,7 +83,7 @@
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
-        <trackHistory>true</trackHistory>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Percent</type>
     </fields>

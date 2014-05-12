@@ -138,6 +138,7 @@
     <recordTypes>
         <fullName>jj_rb_Homecare_provider</fullName>
         <active>true</active>
+        <description>Homecare Providers</description>
         <label>Homecare provider</label>
         <picklistValues>
             <picklist>AccountSource</picklist>
@@ -170,7 +171,7 @@
         <picklistValues>
             <picklist>Type</picklist>
             <values>
-                <fullName>Homecare provider</fullName>
+                <fullName>Other</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -178,6 +179,7 @@
     <recordTypes>
         <fullName>jj_rb_Retailer</fullName>
         <active>true</active>
+        <description>Retailer Customers</description>
         <label>Retailer</label>
         <picklistValues>
             <picklist>AccountSource</picklist>
@@ -218,7 +220,7 @@
         <picklistValues>
             <picklist>Type</picklist>
             <values>
-                <fullName>Retailer</fullName>
+                <fullName>Other</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

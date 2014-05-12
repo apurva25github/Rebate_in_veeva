@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <content>jj_rb_SAP_Data_Upload</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>jj_rb_Notification_Email__c</fullName>
+        <defaultValue>$User.Email</defaultValue>
+        <description>Email address to which a notification email will be sent upon SAP job completion</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Email address to which a notification email will be sent upon SAP job completion</inlineHelpText>
+        <label>Notification Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Remaining_Files__c</fullName>
+        <description>Number of files that still have to be processed, populated by the APEX logic loading the files</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of files that still have to be processed, populated by the APEX logic loading the files</inlineHelpText>
+        <label>Remaining Files</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Status__c</fullName>
+        <description>Status of the job</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Status of the job - jobs in &quot;Ready&quot; state can be processed</inlineHelpText>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>New</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ready</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Processed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Failed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_System_Message__c</fullName>
+        <description>System field, used to provide feedback to the user on the result of the job</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System field, feedback on the result of the job</inlineHelpText>
+        <label>System Message</label>
+        <length>10000</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <label>Rebate SAP Job</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>RBSAP-{0000}</displayFormat>
+        <label>Rebate SAP Job Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Rebate SAP Jobs</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <webLinks>
+        <fullName>Process_Job</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Process Job</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{! REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;) }
+{! REQUIRESCRIPT(&quot;/soap/ajax/10.0/apex.js&quot;) }
+try {
+sforce.apex.execute(&quot;jj_rb_SAP_Job_Submit&quot;,&quot;ProcessJob&quot;, { JobId:&quot;{! jj_rb_Rebate_SAP_Job__c.Id}&quot;});
+window.location.reload();
+} catch(e) { alert(&apos;Error: Job is not &quot;Ready&quot;&apos;);}</url>
+    </webLinks>
+</CustomObject>

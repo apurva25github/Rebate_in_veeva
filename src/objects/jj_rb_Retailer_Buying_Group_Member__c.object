@@ -72,7 +72,7 @@
         <relationshipName>Retailer_Buying_Group_Members</relationshipName>
         <relationshipOrder>0</relationshipOrder>
         <reparentableMasterDetail>false</reparentableMasterDetail>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>MasterDetail</type>
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
@@ -87,4 +87,11 @@
     <pluralLabel>Retailer Buying Group Members</pluralLabel>
     <searchLayouts/>
     <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>jj_rb_Group_Member_validation</fullName>
+        <active>true</active>
+        <description>Validation to prevent adding the Lead Retailer customer as a group member.</description>
+        <errorConditionFormula>jj_rb_Customer__r.Id  =  jj_rb_Lead_Retailers__r.jj_rb_Customer__r.Id</errorConditionFormula>
+        <errorMessage>Lead Retailer customer cannot be added as group member.</errorMessage>
+    </validationRules>
 </CustomObject>

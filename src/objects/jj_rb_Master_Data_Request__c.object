@@ -57,7 +57,7 @@
         <label>Name</label>
         <length>255</length>
         <required>false</required>
-        <trackHistory>true</trackHistory>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -67,7 +67,7 @@
         <externalId>false</externalId>
         <label>Credit check Validity End</label>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
@@ -76,7 +76,7 @@
         <externalId>false</externalId>
         <label>Credit check Validity From</label>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
@@ -137,7 +137,7 @@
         <referenceTo>User</referenceTo>
         <relationshipName>Master_Data_Requests</relationshipName>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
@@ -204,7 +204,7 @@
         <label>SAP EAN Code</label>
         <length>100</length>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -545,6 +545,22 @@
         <errorMessage>IMS product number should be a number.</errorMessage>
     </validationRules>
     <validationRules>
+        <fullName>jj_rb_Product_EAN_code_Duplicate_chk</fullName>
+        <active>false</active>
+        <description>Rebate product already present with specified SAP EAN code.</description>
+        <errorConditionFormula>NOT(ISNULL(VLOOKUP($ObjectType.jj_rb_Rebate_Product__c.Fields.jj_rb_SAP_EAN_Code__c, $ObjectType.jj_rb_Rebate_Product__c.Fields.Name, jj_rb_SAP_EAN_Code__c)))</errorConditionFormula>
+        <errorDisplayField>jj_rb_SAP_EAN_Code__c</errorDisplayField>
+        <errorMessage>Rebate product already present with specified SAP EAN code.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>jj_rb_Product_Materia_code_Duplicate_chk</fullName>
+        <active>false</active>
+        <description>Rebate product already present with specified SAP Material code</description>
+        <errorConditionFormula>NOT(ISNULL(VLOOKUP($ObjectType.jj_rb_Rebate_Product__c.Fields.jj_rb_SAP_Material_Number__c, $ObjectType.jj_rb_Rebate_Product__c.Fields.Name,  jj_rb_SAP_Material_Code__c )))</errorConditionFormula>
+        <errorDisplayField>jj_rb_SAP_Material_Code__c</errorDisplayField>
+        <errorMessage>Rebate product already present with specified SAP Material code</errorMessage>
+    </validationRules>
+    <validationRules>
         <fullName>jj_rb_SAP_CustomerNo_is_numeric</fullName>
         <active>true</active>
         <description>SAP Customer no should be a number.</description>
@@ -572,7 +588,7 @@
         <fullName>jj_rb_SAP_VendorNo_is_numeric</fullName>
         <active>true</active>
         <description>SAP Vendor No. should be a number.</description>
-        <errorConditionFormula>AND(  OR(RecordType.Name  = &apos;Retailer Customer Data Request&apos;,RecordType.Name  = &apos;Homecare Customer Data Request&apos;) ,NOT(isnumber(jj_rb_SAP_Vendor_Number__c) ))</errorConditionFormula>
+        <errorConditionFormula>AND(RecordType.Name  = &apos;Retailer Customer Data Request&apos; ,NOT(isnumber(jj_rb_SAP_Vendor_Number__c) ))</errorConditionFormula>
         <errorDisplayField>jj_rb_SAP_Vendor_Number__c</errorDisplayField>
         <errorMessage>SAP Vendor No. should be a number.</errorMessage>
     </validationRules>

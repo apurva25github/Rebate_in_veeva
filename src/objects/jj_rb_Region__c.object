@@ -56,7 +56,7 @@
         <externalId>false</externalId>
         <label>Description</label>
         <length>32768</length>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
@@ -72,7 +72,7 @@
     </listViews>
     <nameField>
         <label>Region Code</label>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>Text</type>
     </nameField>
     <pluralLabel>Regions</pluralLabel>

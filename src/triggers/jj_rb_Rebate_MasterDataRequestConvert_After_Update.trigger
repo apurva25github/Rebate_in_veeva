@@ -41,7 +41,7 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
     //Iterate over Newly updated Records in Master Data Request Object
     for(jj_rb_Master_Data_Request__c MDR:trigger.new)
     {
-    	System.debug('Trigger Working *********** '+MDR.RecordTypeId+' '+MDR.jj_rb_Business_Name__c+' '+MDR.jj_rb_Product_Name__c);
+        System.debug('Trigger Working *********** '+MDR.RecordTypeId+' '+MDR.jj_rb_Business_Name__c+' '+MDR.jj_rb_Product_Name__c);
             // check status and Record type.
             // If the Record is of Account object then add Record in a List
             If(MDR.jj_rb_Status__c != trigger.oldMap.get(MDR.id).jj_rb_Status__c 
@@ -53,12 +53,11 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
             
                 acc.id = MDR.jj_rb_Rebate_Request_Change_For_ID__c;
                 acc.Name = MDR.jj_rb_Business_Name__c;
-                acc.jj_rb_SAP_Customer_Number__c = MDR.jj_rb_SAP_Customer_Number__c;
+                //acc.jj_rb_SAP_Customer_Number__c = MDR.jj_rb_SAP_Customer_Number__c;
                 acc.jj_rb_National_Channel_Manager__c = MDR.jj_rb_National_Channel_Manager__c;                
                 acc.jj_rb_SAP_Customer_Number__c = MDR.jj_rb_SAP_Customer_Number__c;
-                
                 acc.jj_rb_SAP_Vendor_Number__c = MDR.jj_rb_SAP_Vendor_Number__c;
-                acc.jj_rb_IMS_Customer_Id__c = MDR.jj_rb_IMS_Customer_Id__c;
+                //acc.jj_rb_IMS_Customer_Id__c = MDR.jj_rb_IMS_Customer_Id__c;
                 
                 if(MDR.RecordTypeId == AccountRecordTypeID  )
                 {
@@ -70,7 +69,6 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
                 {
                     acc.jj_rb_Credit_check_Validity_From__c = MDR.jj_rb_Credit_check_Validity_From__c ;
                     acc.jj_rb_Credit_check_Validity_End__c = MDR.jj_rb_Credit_check_Validity_End__c;
-                    
                     acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account_Homecare');
                 }
                 
@@ -88,20 +86,17 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
             // If the Record is of Rebate Product object then add Record in a List
             if(MDR.jj_rb_Status__c != trigger.oldMap.get(MDR.id).jj_rb_Status__c && MDR.jj_rb_Status__c == statusApproved && MDR.RecordTypeId == ProductRecordTypeID)
             {
-            	System.debug('IN product IF ********* '+MDR);
                 jj_rb_Rebate_Product__c product=new jj_rb_Rebate_Product__c();
                 product.id = MDR.jj_rb_Rebate_Request_Change_For_ID__c;
-                product.Name = MDR.jj_rb_Product_Name__c;
-                product.jj_rb_SAP_Material_Number__c = MDR.jj_rb_SAP_Material_Code__c;
                 product.jj_rb_Description__c = MDR.jj_rb_SAP_Description__c;
                 product.jj_rb_SAP_EAN_Code__c = MDR.jj_rb_SAP_EAN_Code__c;
+                product.jj_rb_SAP_Material_Number__c = MDR.jj_rb_SAP_Material_Code__c;
                 product.jj_rb_Unit_of_Measure__c = MDR.jj_rb_Unit_of_Measure__c;
                 product.jj_rb_IMS_Product_ID__c = MDR.jj_rb_IMS_Product_ID__c;
                 //product.OwnerId = jj_rb_Rebate_utils.getMasterDataOwnerID('Master Data Owner ID');
                 product.jj_rb_VAT_Code__c = MDR.jj_rb_VAT_Code__c;
                 //RebateProductList.add(product);
                 MapProduct.put(MDR.id,product);
-                System.debug('ProductMAP ****************** '+MapProduct);
             }
     }
     
@@ -130,10 +125,16 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
         }
         
     }
-    
+    List<Database.UpsertResult> listProduct = new List<Database.UpsertResult>();
     if(MapProduct.size()>0)
     {
-        upsert(MapProduct.values());
+        try{
+        listProduct = Database.upsert(MapProduct.values());
+        }
+        catch(Exception e)
+        {
+                 
+        }
         for(ID mdrid : MapProduct.keySet())
         {
             jj_rb_Rebate_Product__c RProduct = MapProduct.get(mdrid);

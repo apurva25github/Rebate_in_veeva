@@ -17,7 +17,7 @@ trigger jj_rb_Rebate_Claim_validation on jj_rb_Rebate_Claim__c (before insert,be
     Set<ID> setids= new Set<ID>();
     List<jj_rb_Rebate_Claim__c> UpdatedClaim = new list<jj_rb_Rebate_Claim__c>();
     
-    List<Account> accNCM = [select Id, jj_rb_National_Channel_Manager__c,name from Account];
+   List<Account> accNCM = new List<Account>([select Id, jj_rb_National_Channel_Manager__c,name from Account]);
     for(jj_rb_Rebate_Claim__c RClaim:RClaimlist)
     {
         setids.add(RClaim.jj_rb_Customer__c);
@@ -26,10 +26,10 @@ trigger jj_rb_Rebate_Claim_validation on jj_rb_Rebate_Claim__c (before insert,be
             if(RClaim.jj_rb_Customer__c == acc.Id)
             {
                 if(acc.jj_rb_National_Channel_Manager__c != null) {
-                	RClaim.OwnerId = acc.jj_rb_National_Channel_Manager__c;
+                    RClaim.OwnerId = acc.jj_rb_National_Channel_Manager__c;
                 } else {
-                	RClaim.addError('No National Channel Manager selected for claim customer ' + acc.Name + '.');
-                }	 
+                    RClaim.addError('No National Channel Manager selected for claim customer ' + acc.Name + '.');
+                }    
             }
         }
     }

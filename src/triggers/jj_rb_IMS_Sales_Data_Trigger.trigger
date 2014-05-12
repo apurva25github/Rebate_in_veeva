@@ -38,6 +38,11 @@ trigger jj_rb_IMS_Sales_Data_Trigger on jj_rb_IMS_Sales_Data__c (before insert, 
             Account a = mapAccounts.get(ims.jj_rb_IMS_Customer_Number__c);
             jj_rb_Rebate_Product__c product = mapProducts.get(ims.jj_rb_IMS_Product_Number__c);
             
+            // fix the formatting for the month            
+            if(String.isNotBlank(ims.jj_rb_IMS_Data_Month__c) 
+               					&& ims.jj_rb_IMS_Data_Month__c.length()  == 1) 
+                ims.jj_rb_IMS_Data_Month__c = '0' + ims.jj_rb_IMS_Data_Month__c;
+                        
             if(a != null) {
                 ims.jj_rb_Customer__c = a.Id;
                 

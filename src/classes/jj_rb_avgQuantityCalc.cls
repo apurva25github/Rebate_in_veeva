@@ -17,10 +17,9 @@ global class jj_rb_avgQuantityCalc implements Database.Batchable<sObject>
     global Database.QueryLocator start(Database.BatchableContext BC)
     {
         if(String.isBlank(homecareclaim_recType))
-        	homecareclaim_recType = jj_rb_Rebate_utils.getRecordTypeID('Claim_Homecare');
+            homecareclaim_recType = jj_rb_Rebate_utils.getRecordTypeID('Claim_Homecare');
         if(String.isBlank(status_approved))
-        	jj_rb_Rebate_utils.getRebateLineItemStatus('Approved');
-        
+            status_approved = jj_rb_Rebate_utils.getRebateLineItemStatus('Approved');        
         String query='SELECT Id,Name,jj_rb_Claim_Date__c,jj_rb_Customer__c,(select id, name,jj_rb_Rebate_Product__r.name,jj_rb_Rebate_Product__c,jj_rb_Quantity__c from Rebate_Claim_Line_Items__r) FROM jj_rb_Rebate_Claim__c where jj_rb_Claim_Date__c = LAST_N_DAYS:1460 AND jj_rb_Status__c= \'' + status_approved  + '\' AND jj_rb_Claim_Date__c < today AND jj_rb_Customer__c!=null AND RecordTypeId=\'' + homecareclaim_recType + '\' order by jj_rb_Claim_Date__c desc';
         system.debug('query>>>>' + query);
         return Database.getQueryLocator(query);
@@ -30,7 +29,8 @@ global class jj_rb_avgQuantityCalc implements Database.Batchable<sObject>
         List<jj_rb_Rebate_Claim__c> rbcList = (List<jj_rb_Rebate_Claim__c>)scope;  
         System.debug('rebate claims list'+rbcList);
         Set<ID> accIdSet = new Set<ID>();
-        Map<ID,List<jj_rb_Rebate_Claim__c>> accRcMap = new Map<ID,List<jj_rb_Rebate_Claim__c>>();
+        Map<ID,List<jj_rb_Rebate_Claim__c>> accRcMap = new Map<ID,List<jj_rb_Rebate_Claim__c>>();// ID:customer id
+        Map<ID,jj_rb_Rebate_Claim_Line_Item__c> accClaimLinesMap = new Map<ID,jj_rb_Rebate_Claim_Line_Item__c>();//ID:Product
         for(jj_rb_Rebate_Claim__c rc : rbcList){
             String accId = rc.jj_rb_Customer__c;
             if(accRcMap.containsKey(accId)){
@@ -48,6 +48,34 @@ global class jj_rb_avgQuantityCalc implements Database.Batchable<sObject>
             }           
         }
         System.debug('accRcMap'+accRcMap);
+        
+        for(ID accid:accRcMap.keySet())
+        {
+            for(jj_rb_Rebate_Claim__c rc : accRcMap.get(accid))
+            {
+                List<jj_rb_Rebate_Claim_Line_Item__c> claimLineItems = rc.Rebate_Claim_Line_Items__r;
+                
+                for(jj_rb_Rebate_Claim_Line_Item__c claimLI : claimLineItems)
+                {
+                    String productid=claimLI.jj_rb_Rebate_Product__c;                    
+                    if(accClaimLinesMap.containsKey(productid))
+                    {
+                        jj_rb_Rebate_Claim_Line_Item__c lineitems= accClaimLinesMap.get(productid);                            
+                        if(lineitems!=null) 
+                        {                                     
+                            accClaimLinesMap.put(productid,lineitems);
+                        } 
+                    }
+                    else
+                    {
+                        jj_rb_Rebate_Claim_Line_Item__c lineitem= new jj_rb_Rebate_Claim_Line_Item__c();
+                        accClaimLinesMap.put(productid,lineitem);
+                    }               
+                }  
+            }         
+        }       
+        System.debug('accClaimLinesMap>>'+accClaimLinesMap.size());
+        
         List<jj_rb_Rebate_Claim__c> rcList = new List<jj_rb_Rebate_Claim__c>();
         Map<ID,Map<ID,avgcalculation>> m = new Map<ID,Map<ID,avgcalculation>>();
         for(ID accid : accRcMap.keySet()){
@@ -60,8 +88,7 @@ global class jj_rb_avgQuantityCalc implements Database.Batchable<sObject>
         List<jj_rb_Tolerance__c> tolList = [select id,jj_rb_Customer__c, jj_rb_Product__c,jj_rb_Product__r.name,
                                                  jj_rb_Price_Tolerance__c, jj_rb_Quantity_Tolerance__c,
                                                  jj_rb_Average_Quantity__c from jj_rb_Tolerance__c 
-                                                 where jj_rb_Customer__c=: accRcMap.keySet()];
-        System.debug('tolList '+tolList);                                                 
+                                                 where jj_rb_Customer__c=: accRcMap.keySet()];                                                         
         for(jj_rb_Tolerance__c tol : tolList){
             for(id accid : m.keyset()){
                 if(tol.jj_rb_Customer__c == accid){
@@ -76,8 +103,17 @@ global class jj_rb_avgQuantityCalc implements Database.Batchable<sObject>
                 }                         
             }
         }
-        update tolList;   
-        System.debug('@@@tolList'+tolList); 
+        update tolList;  
+        
+        List<jj_rb_Tolerance__c> tolList1 = [select id,jj_rb_Customer__c, jj_rb_Product__c,jj_rb_Product__r.name,
+                                                 jj_rb_Quantity_Tolerance__c,
+                                                 jj_rb_Average_Quantity__c from jj_rb_Tolerance__c 
+                                                 where jj_rb_Customer__c NOT IN :accRcMap.keySet() OR jj_rb_Product__c NOT IN:accClaimLinesMap.keySet() ];
+        for(jj_rb_Tolerance__c tol : tolList1)
+        {
+            tol.jj_rb_Average_Quantity__c = null;    
+        }
+        update tolList1;  
     }
     global void finish(Database.BatchableContext BC){   
        

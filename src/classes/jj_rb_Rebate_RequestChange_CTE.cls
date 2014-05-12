@@ -10,7 +10,8 @@ public class jj_rb_Rebate_RequestChange_CTE
         id hospID = jj_rb_Rebate_Utils.getRecordTypeId('Account_Hospital');
         
         // Controlls visibility of fields on VF page
-        public boolean showSAP_Ids {get; set;}
+        public boolean showSAP_customer {get; set;}
+        public boolean showSAP_vendor{get; set;}
         public boolean showIMS_id {get; set;}
         public boolean showhospital_ids {get; set;}
         public boolean showHCP_dates {get; set;}
@@ -27,7 +28,6 @@ public class jj_rb_Rebate_RequestChange_CTE
         public void ProductPageLoad()
         {
             rebateProduct = (jj_rb_Rebate_Product__c)controller.getRecord();
-            System.debug('Product ********** '+rebateProduct);
            // query the rebate product
            rebateProduct = [select Id, name,
                                         jj_rb_Description__c, 
@@ -46,8 +46,6 @@ public class jj_rb_Rebate_RequestChange_CTE
             MDR.jj_rb_IMS_Product_ID__c = rebateProduct.jj_rb_IMS_Product_ID__c;
             MDR.jj_rb_VAT_Code__c =rebateProduct.jj_rb_VAT_Code__c;
             MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Product_Data_Request');  
-            System.debug('Product rec type ************** '+MDR.RecordTypeId);
-            System.debug('Product MDR ******* '+MDR);
         } 
         
        
@@ -55,7 +53,6 @@ public class jj_rb_Rebate_RequestChange_CTE
         {
             // get the record being changed
             customer = (Account)controller.getRecord();
-            //System.debug('***** customer start '+customer);
             customer = [select id ,name, jj_rb_SAP_Customer_Number__c,
                        jj_rb_National_Channel_Manager__c,RecordTypeId,
                         jj_rb_Credit_check_Validity_End__c,jj_rb_Credit_check_Validity_From__c,
@@ -66,27 +63,32 @@ public class jj_rb_Rebate_RequestChange_CTE
              MDR = new jj_rb_Master_Data_Request__c();
             MDR.jj_rb_Rebate_Request_Change_For_ID__c = customer.Id;
             MDR.jj_rb_Business_Name__c=customer.Name;
-            MDR.jj_rb_SAP_Customer_Number__c=customer.jj_rb_SAP_Customer_Number__c;
+           
             MDR.jj_rb_National_Channel_Manager__c=customer.jj_rb_National_Channel_Manager__c;            
             MDR.jj_rb_IMS_Customer_Id__c = customer.jj_rb_IMS_Customer_Id__c;
-            MDR.jj_rb_SAP_Vendor_Number__c = customer.jj_rb_SAP_Vendor_Number__c;
             
-            MDR.jj_rb_IMS_Customer_Id__c = customer.jj_rb_IMS_Customer_Id__c;
-            //System.debug('Customer info *************** '+customer.RecordTypeId+' '+hcpID);
+            
+            //MDR.jj_rb_IMS_Customer_Id__c = customer.jj_rb_IMS_Customer_Id__c;
             if(customer.RecordTypeId == retailerID)
             {
-                showSAP_Ids = true;
+                showSAP_customer = true;
+                showSAP_vendor = true;
                 showhospital_ids = false;
                 showIMS_id = true;
                 showHCP_dates = false;
+                 MDR.jj_rb_SAP_Customer_Number__c=customer.jj_rb_SAP_Customer_Number__c;
+                 MDR.jj_rb_SAP_Vendor_Number__c = customer.jj_rb_SAP_Vendor_Number__c;
                 MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Retailer_MDR');
             }
             else if(customer.RecordTypeId == hcpID)
             {
+            	System.debug('HCP change ***** '+customer);
                 showIMS_id = false;
-                showSAP_Ids = true;
+                showSAP_customer = true;
+                showSAP_vendor = false;
                 showhospital_ids = false;
                 showHCP_dates = true;
+                 MDR.jj_rb_SAP_Customer_Number__c=customer.jj_rb_SAP_Customer_Number__c;
                 MDR.jj_rb_Credit_check_Validity_From__c = customer.jj_rb_Credit_check_Validity_From__c;
                 MDR.jj_rb_Credit_check_Validity_End__c = customer.jj_rb_Credit_check_Validity_End__c;
             
@@ -94,14 +96,15 @@ public class jj_rb_Rebate_RequestChange_CTE
             }
             else if(customer.RecordTypeId == hospID)
             {
-                showSAP_Ids = false; 
+                showSAP_customer = false; 
+                showSAP_vendor = false;
                 showhospital_ids = true;
                 showIMS_id = false;
                 showHCP_dates  = false;
-                MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Hospital_Data_Request');
                 MDR.jj_rb_NHS_Trust__c = customer.jj_rb_NHS_Trust__c;
+                MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Hospital_Data_Request');
+                
             }
-            System.debug('END MDR ******* '+MDR);
         }
         // Click event handler for the submit for approval button
         // on the product change
@@ -109,7 +112,7 @@ public class jj_rb_Rebate_RequestChange_CTE
         {
            try{
                 insert(MDR);
-                System.debug('Inserted MDR ************* '+MDR);
+                System.debug('Inserted MDR ***** '+MDR);
             }
             catch(Exception e)
             {                

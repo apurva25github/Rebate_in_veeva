@@ -124,7 +124,7 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
                                         // if month value specified as a single charachter,
                                         // append 0 to it.
                                         if(String.isNotBlank(month) && month.length() == 1)
-                                            month = '0' + month;
+                                            month = '0' + month; 
                                             
                                         claim.jj_rb_Month__c = month;
                                         claim.jj_rb_Year__c = year;                                     

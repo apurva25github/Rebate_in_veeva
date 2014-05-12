@@ -54,7 +54,7 @@ private class jj_rb_Test_Homecare_ClaimUpload {
     private static Blob prepareCSVBody()
     {
     	String csvBody = 'SAP Customer No,Claim Month,Claim Year,Hospital Id,Hospital Name,Product EAN Code,Product Name,Quantity,Unit List Price (pack),Unit Contract Price(pack),Unit,Rebate (pack),Net Rebate,VAT Amount,VAT Code,Gross Rebate\n';
-    	csvBody = csvBody + '221,01,2013,12345,,376769,Durogesic DTrans 50 8.4mg x 5patches,20,2.3,2,0.3,6,0.3,5,6.3';
+    	csvBody = csvBody + '221,02,2014,12345,,376769,Durogesic DTrans 50 8.4mg x 5patches,20,2.3,2,0.3,6,0.3,5,6.3';
     	
     	return Blob.valueOf(csvBody);
     }
@@ -71,6 +71,9 @@ private class jj_rb_Test_Homecare_ClaimUpload {
     {
     	insert jj_rb_Test_BaseClass.setupHomecareCustomer(user);
     	insert jj_rb_Test_BaseClass.setupRebateProduct();
+    	
+    	List<jj_rb_Master_Data_RecordTypes__c> listCS = jj_rb_Test_BaseClass.createRecordTypeCustomSetting();
+    	insert listCS;
     	
     	jj_rb_Region__c region = jj_rb_Test_BaseClass.setupRegion();
     	jj_rb_NHS_Trust__c nhsTrust = jj_rb_Test_BaseClass.setupTrust(region);

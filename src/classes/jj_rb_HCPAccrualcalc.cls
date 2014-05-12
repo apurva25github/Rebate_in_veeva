@@ -3,10 +3,12 @@ global class jj_rb_HCPAccrualcalc extends jj_rb_rebateAccrualBaseClass implement
      static id hcpRecordtypeID = jj_rb_rebate_utils.getRecordTypeId('Account_Homecare');
      
      global Database.QueryLocator start(Database.BatchableContext BC)
-     {
-         String query = 'SELECT Id,jj_rb_IMS_Customer_Id__c,Account_Type__c,jj_rb_National_Channel_Manager__c,jj_rb_SAP_Customer_Number__c,Name,RecordTypeId FROM Account where RecordTypeID =: hcpRecordtypeID'; 
+     {  
+         
+         String query = 'SELECT Id,jj_rb_IMS_Customer_Id__c,Account_Type__c,jj_rb_National_Channel_Manager__c,jj_rb_SAP_Customer_Number__c,Name,RecordTypeId FROM Account where RecordTypeID =:hcpRecordtypeID';
             return Database.getQueryLocator(query);
      }
+     
      
      
      global void execute(Database.BatchableContext BC, List<sObject> scope){    

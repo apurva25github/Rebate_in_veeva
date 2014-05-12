@@ -13,8 +13,12 @@ public with sharing class jj_rb_EditcontractOverrideclass{
      String retailercontract_recordType=jj_rb_Rebate_utils.getRecordTypeId('Rebate_Contract_Retailer');
      String HomecareContract_recordType=jj_rb_Rebate_utils.getRecordTypeId('Homecare_Contract');   
      
+      String retailerclosedcontract_recordType=jj_rb_Rebate_utils.getRecordTypeId('Retailer_Closed_Contract');
+     String HomecareclosedContract_recordType=jj_rb_Rebate_utils.getRecordTypeId('Homecare_Closed_Contract');  
      
-     String Status_Expired=jj_rb_Rebate_utils.getRebateLineItemStatus('Expired');    
+     String status_Expired= jj_rb_Rebate_utils.getRebateLineItemStatus('Expired');    
+     String status_Closed = jj_rb_Rebate_utils.getRebateLineItemStatus('Closed');
+     
      //constructor
      public jj_rb_EditcontractOverrideclass(ApexPages.StandardController controller)
      {
@@ -29,17 +33,17 @@ public with sharing class jj_rb_EditcontractOverrideclass{
      }
      public Pagereference Edit()
     {
-        PageReference returnURL;
+        PageReference returnURL; 
         contracts=(jj_rb_Rebate_Contract__c)controller.getRecord();
         //get the Rebate contracts 
         contracts=[select jj_rb_Status__c,name,RecordTypeId,RecordType.name,jj_rb_Product__r.name,
                         jj_rb_customer__c,jj_rb_Customer__r.name from jj_rb_Rebate_Contract__c
                         where id=:contracts.id];
-        if(contracts.jj_rb_Status__c==Status_Expired && contracts.RecordTypeId==retailercontract_recordType)
+        if((contracts.jj_rb_Status__c==Status_Expired || contracts.jj_rb_Status__c==status_Closed) && (contracts.RecordTypeId==retailercontract_recordType)||(contracts.RecordTypeId==HomecareclosedContract_recordType))
         {
             returnURL=new PageReference('/apex/jj_rb_contractEditOverrideforRetailer?id='+contracts.id);        
         
-        } else if(contracts.jj_rb_Status__c==Status_Expired && contracts.RecordTypeId==HomecareContract_recordType)
+        } else if((contracts.jj_rb_Status__c==Status_Expired || contracts.jj_rb_Status__c==status_Closed) && (contracts.RecordTypeId==HomecareContract_recordType)||(contracts.RecordTypeId==retailerclosedcontract_recordType))
         {
             returnURL=new PageReference('/apex/jj_rb_contractEditOverrideforHomecare?id='+contracts.id);     
         }else        

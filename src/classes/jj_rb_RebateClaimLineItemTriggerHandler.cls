@@ -81,7 +81,8 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
             ids.add(account.jj_rb_NHS_Trust__r.jj_rb_Region__c);
             mapNHSTrust.put(account.id,account.jj_rb_NHS_Trust__r.jj_rb_region__c);
         }
-        System.debug('mapNHSTrust>>>'+mapNHSTrust);
+        //system.debug('mapNHSTrust>>>'+mapNHSTrust);
+        //system.debug('homecareContractLI_recType>>>' + homecareContractLI_recType);
         
         List<jj_rb_Rebate_Contract_Line_Item__c> listcontractlineitems=[SELECT jj_rb_Status__c,jj_rb_Start_Date__c, jj_rb_Rebate__c, 
                                                                         jj_rb_Rebate_Contract__r.jj_rb_Product__c, jj_rb_Region__c, 
@@ -93,7 +94,7 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
                                                                         jj_rb_Start_Date__c != null AND
                                                                         jj_rb_End_Date__c != null
                                                                         AND recordTypeID=:homecareContractLI_recType];
-       System.debug('@@@listcontractlineitems'+listcontractlineitems); 
+       ////system.debug('@@@listcontractlineitems'+listcontractlineitems); 
          List<jj_rb_Rebate_Claim_Line_Item__c> linelist= new  List<jj_rb_Rebate_Claim_Line_Item__c>();
        for(jj_rb_Rebate_Claim_Line_Item__c claimline: listClaimLineItemsdata)
        { 
@@ -105,7 +106,7 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
                         claimline.jj_rb_Hospital__c;            
            
             String uniqueKey = contractLineItem.jj_rb_Rebate_Contract__r.jj_rb_Product__c + seperator +contractLineItem.jj_rb_Region__c;                        
-            System.debug('uniqueKey'+uniqueKey );
+            //system.debug('uniqueKey'+uniqueKey );
             if(mapRebateClaimLineItems.containsKey(uniqueKey1)) 
             {
                 jj_rb_Rebate_Claim_Line_Item__c objClaimLineItem = mapRebateClaimLineItems.get(uniqueKey1);                    
@@ -136,32 +137,32 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
         
         
         }
-     System.debug('@@mapRebateContractLineItems'+mapRebateContractLineItems);
+     //system.debug('@@mapRebateContractLineItems'+mapRebateContractLineItems);
         for(jj_rb_Rebate_Claim_Line_Item__c claimline: listClaimLineItemsdata)
         {               
             if(mapClaimsToValidate.containsKey(claimline.id))
             {
                   jj_rb_Rebate_Claim_Line_Item__c objItem = mapClaimsToValidate.get(claimline.Id);
                   String productkey=objItem.jj_rb_Rebate_Product__c;
-                  System.debug('productkey@@@'+productkey);
+                  //system.debug('productkey@@@'+productkey);
                   
                   String uniqueKey = objItem.jj_rb_Rebate_Product__c + seperator +objItem.jj_rb_Hospital__c; 
-                  System.debug('uniqueKey@@@'+uniqueKey);    
+                  //system.debug('uniqueKey@@@'+uniqueKey);    
                    
                   string customer=objItem.jj_rb_Hospital__c;
-                  System.debug('customer@@@'+customer); 
+                  //system.debug('customer@@@'+customer); 
                   
                   
                   string region=mapNHSTrust.get(customer);
-                  System.debug('region@@@'+region); 
+                  //system.debug('region@@@'+region); 
                   
                   String unique1=productkey+seperator+region;
-                  System.debug('unique1@@@'+unique1); 
+                  //system.debug('unique1@@@'+unique1); 
                   
                   List<jj_rb_Rebate_Contract_Line_Item__c> lstContractLineItem = mapRebateContractLineItems.get(unique1);
                   jj_rb_Rebate_Claim_Line_Item__c objClaimLineItem = mapRebateClaimLineItems.get(uniqueKey);
                   
-                  System.debug('lstContractLineItem '+lstContractLineItem );
+                  //system.debug('lstContractLineItem '+lstContractLineItem );
                   
                   
                   if(objClaimLineItem !=null && lstContractLineItem!=null && !lstContractLineItem.isEmpty())
@@ -169,7 +170,7 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
                   lstClaimsToUpdateclaims.add(new jj_rb_Rebate_Claim_Line_Item__c(id=claimline.id,jj_rb_Calculated_rebate_price__c = lstContractLineItem[0].jj_rb_Rebate__c,
                          jj_rb_Assoc_Contract_Line_Item__c = lstContractLineItem[0].Id));                    
                   }
-                  System.debug('lstClaimsToUpdateclaims'+lstClaimsToUpdateclaims);
+                  //system.debug('lstClaimsToUpdateclaims'+lstClaimsToUpdateclaims);
             }
         }
        
@@ -184,7 +185,7 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
             mapTolerance.put(uniqueKey,tol);   
         }  
         
-        System.debug('mapTolerance'+mapTolerance);                                                    
+        //system.debug('mapTolerance'+mapTolerance);                                                    
         List<jj_rb_Rebate_Claim_Line_Item__c> claimsToUpdate= new  List<jj_rb_Rebate_Claim_Line_Item__c>();
         for(jj_rb_Rebate_Claim_Line_Item__c objclaimline: mapClaimsTocheck.values())
         {
@@ -192,7 +193,7 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
             
             jj_rb_Tolerance__c tolerancelist=mapTolerance.get(uniqueKey);  
             
-            System.debug('tolerancelist'+tolerancelist);   
+            //system.debug('tolerancelist'+tolerancelist);   
             Decimal qtyTolerance = 0;
             if(tolerancelist!= null && tolerancelist.jj_rb_Average_Quantity__c!=null)
             {
@@ -398,7 +399,7 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
                                                     where (jj_rb_Customer__c in :setProductAndCustomers or  jj_rb_Customer__c in :setBuyingGroupMembers)
                                                     and jj_rb_Product__c in :setProductAndCustomers
                                                     and jj_rb_IMS_Data_Month__c in :setMonthAndYear
-                                                    and jj_rb_IMS_Data_Year__c in :setMonthAndYear]) {
+                                                    and jj_rb_IMS_Data_Year__c in :setMonthAndYear]) { 
                     
                     String uniqueKey = ims.jj_rb_Customer__c + seperator +
                                        ims.jj_rb_Product__c + seperator + 
@@ -506,6 +507,11 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
         String retailerclaimLI_recType=jj_rb_Rebate_utils.getRecordTypeID('Claim_LineItem_Retailer');
         String homecareclaimLI_recType=jj_rb_Rebate_utils.getRecordTypeID('Claim_LineItem_Homecare');
         
+        //system.debug('homecareclaimrecType>>>' + homecareclaimrecType);
+        //system.debug('retailerclaim_recType>>>' + retailerclaim_recType);
+        //system.debug('retailerclaimLI_recType>>>' + retailerclaimLI_recType);
+        //system.debug('homecareclaimLI_recType>>>>' + homecareclaimLI_recType);
+        
         
         Map<String, jj_rb_Rebate_Claim_Line_Item__c> mapNotUniqueRetailerClaimLineItem = new map<String, jj_rb_Rebate_Claim_Line_Item__c>();
         Map<String, jj_rb_Rebate_Claim_Line_Item__c> mapNotUniqueHomecareClaimLineItem = new map<String, jj_rb_Rebate_Claim_Line_Item__c>();
@@ -569,6 +575,13 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
             }
             
         }
+        
+        //system.debug('setClaimAccounts>>>' + setClaimAccounts);
+        //system.debug('setClaimProducts>>>' + setClaimProducts);
+        //system.debug('setClaimMonth>>>>>>' + setClaimMonth);
+        //system.debug('listNewClaimLineItems>>>' + listNewClaimLineItems);
+        //system.debug('setClaimYear>>>>'  + setClaimYear);
+        //system.debug('retailerclaimLI_recType>>>>' + retailerclaimLI_recType);
         
         // get all old Retailer line items with the same customer, product, month and year.
         for (jj_rb_Rebate_Claim_Line_Item__c oldLineItem : [select Id, jj_rb_Rebate_Claim__c, jj_rb_Rebate_Claim__r.jj_rb_Customer__c,
@@ -634,12 +647,12 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
     // This method checks for the validation of the overlapping dates
     private static Boolean isDateOverLapping(Date startDate1, Date endDate1, Date startDate2, Date endDate2) {
         
-        system.debug(startDate1 + ' - ' + endDate1);
-        system.debug(startDate2 + ' - ' + endDate2);
+        //system.debug(startDate1 + ' - ' + endDate1);
+        //system.debug(startDate2 + ' - ' + endDate2);
         
-        system.debug(startDate1 + ' >= ' + startDate2 + ' && ' + startDate1 + ' <= ' + endDate2 + ' - @@@@case 1 - ' + (startDate1 >= startDate2 && startDate1 <= endDate2));
-        system.debug(endDate1 + ' >= ' + startDate2 + ' && ' + endDate1 + ' <= ' + endDate2 + ' - @@@@case 2 - ' + (endDate1  >= startDate2 && endDate1  <= endDate2));
-        system.debug(startDate1 + ' <= ' + startDate2 + ' && ' + endDate1 + ' >= ' + endDate2 + ' - @@@@case 3 - ' + (startDate1 <= startDate2 && endDate1  >= endDate2));
+        //system.debug(startDate1 + ' >= ' + startDate2 + ' && ' + startDate1 + ' <= ' + endDate2 + ' - @@@@case 1 - ' + (startDate1 >= startDate2 && startDate1 <= endDate2));
+        //system.debug(endDate1 + ' >= ' + startDate2 + ' && ' + endDate1 + ' <= ' + endDate2 + ' - @@@@case 2 - ' + (endDate1  >= startDate2 && endDate1  <= endDate2));
+        //system.debug(startDate1 + ' <= ' + startDate2 + ' && ' + endDate1 + ' >= ' + endDate2 + ' - @@@@case 3 - ' + (startDate1 <= startDate2 && endDate1  >= endDate2));
         
         return (
             startDate1 >= startDate2 && startDate1 <= endDate2 ||

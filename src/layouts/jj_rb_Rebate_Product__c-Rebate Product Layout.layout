@@ -120,7 +120,6 @@
     <relatedLists>
         <fields>NAME</fields>
         <fields>jj_rb_Customer__c</fields>
-        <fields>jj_rb_Price_Tolerance__c</fields>
         <fields>jj_rb_Quantity_Tolerance__c</fields>
         <fields>jj_rb_Average_Quantity__c</fields>
         <relatedList>jj_rb_Tolerance__c.jj_rb_Product__c</relatedList>

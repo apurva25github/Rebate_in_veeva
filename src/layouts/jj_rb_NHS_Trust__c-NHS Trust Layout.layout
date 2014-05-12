@@ -19,6 +19,10 @@
                 <behavior>Required</behavior>
                 <field>jj_rb_Region__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>jj_rb_trust_cods_id__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <excludeButtons>Clone</excludeButtons>
+    <excludeButtons>Share</excludeButtons>
     <layoutSections>
         <customLabel>true</customLabel>
         <detailHeading>true</detailHeading>
@@ -23,10 +24,6 @@
                 <behavior>Required</behavior>
                 <field>jj_rb_Credit_check_Validity_From__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Required</behavior>
-                <field>jj_rb_Credit_check_Validity_End__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -34,12 +31,12 @@
                 <field>jj_rb_National_Channel_Manager__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>jj_rb_SAP_Vendor_Number__c</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>jj_rb_Status__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Required</behavior>
+                <field>jj_rb_Credit_check_Validity_End__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>

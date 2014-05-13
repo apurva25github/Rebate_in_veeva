@@ -12,7 +12,7 @@
  */
 global abstract class jj_rb_rebateAccrualBaseClass
 {
-    // handles the accrual calculation for the new customer scenario
+    // handles the accrual calculation for the new customer scenario  
     protected void processAccrualForNewCustomer(Account customer, 
                                                     Map<Id, List<jj_rb_Estimated_Rebate_Accrual__c>> mapEstimatedAccruals,
                                                     Map<Id, jj_rb_Rebate_Accrual__c> mapRebateAccrual,
@@ -123,7 +123,7 @@ global abstract class jj_rb_rebateAccrualBaseClass
         accrualCalc calc = mapAccrualCal.get(productId);
         
         jj_rb_Rebate_Accrual_Line_Item__c rebateAccrualLI = new jj_rb_Rebate_Accrual_Line_Item__c();
-        rebateAccrualLI.jj_rb_Volume__c = Math.round(calc.getAvgQty()) * monthDiff;
+        rebateAccrualLI.jj_rb_Volume__c = calc.getAvgQty() * monthDiff;
         rebateAccrualLI.jj_rb_Net_Rebate_Accrual_Amount__c = calc.getAvgNetRebate() * monthDiff;  
         rebateAccrualLI.jj_rb_Product__c = productId;
         accrualLineItems.add(rebateAccrualLI); 

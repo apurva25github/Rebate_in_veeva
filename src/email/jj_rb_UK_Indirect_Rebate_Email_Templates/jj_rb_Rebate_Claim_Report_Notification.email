@@ -13,6 +13,5 @@ Rebate Management Team
     <apex:repeat var="claimLineItem" value="{!relatedTo.Rebate_Claim_Line_Items__r}">         
             {!relatedTo.name},{!relatedTo.jj_rb_Month__c},{!relatedTo.jj_rb_Year__c},{!relatedTo.jj_rb_Customer__r.Name},{!relatedTo.jj_rb_SAP_CustomerNo__c},{!relatedTo.jj_rb_SAP_Vendor_No__c},{!claimLineItem.jj_rb_Rebate_Product__r.jj_rb_SAP_Material_Number__c},{!claimLineItem.jj_rb_Rebate_Product__r.Name},{!claimLineItem.jj_rb_Net_Rebate_including_VAT__c},GBP,{!claimLineItem.jj_rb_Net_Rebate__c},{!claimLineItem.jj_rb_VAT_Code__r.jj_rb_VAT__c},{!claimLineItem.jj_rb_VAT_Code__r.name},{!$Setup.jj_rb_Rebate_Commodity_Constants__c.jj_rb_GL_Account_Number__c}, {!$Setup.jj_rb_Rebate_Commodity_Constants__c.jj_rb_Commodity_Code__c}
     </apex:repeat>
-    
 </messaging:attachment>
 </messaging:emailTemplate>

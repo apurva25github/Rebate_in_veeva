@@ -12,12 +12,15 @@ public abstract class jj_rb_NewOverrideBaseClass {
         PageReference p = new PageReference('/' + childSobType.getDescribe().getKeyPrefix() + '/e');
         Map<String, String> m = p.getParameters();
         m.putAll(ApexPages.currentPage().getParameters());
+        System.debug('Parameters ******* '+m.keyset());
         m.put('RecordType', getChildRecordTypeId(getParentSObjectId(m)));
+        System.debug('Only put ***********'+m);
         m.put('nooverride', '1');
         system.debug('p>>>>' + p);
         return p;
     }
     private Id getChildRecordTypeId(Id parentId) {
+        System.debug('Parent ID ******* '+parentId);
         SObject parent = Database.query('select RecordType.DeveloperName from ' + String.valueOf(parentSobType)
                 + ' where Id = :parentId');
         system.debug('parent object>>>>' + parent);        
@@ -27,10 +30,12 @@ public abstract class jj_rb_NewOverrideBaseClass {
                 and DeveloperName = :parentDeveloperName].Id;
     }
     private Id getParentSObjectId(Map<String, String> m) {
+    
         for (String key : m.keySet()) {
+            System.debug('Key ****** '+key);
             if (key.endsWith('_lkid')) {
                 return m.get(key);
-            }
+            }                
         }
         return null;
     }

@@ -198,7 +198,7 @@ private class jj_rb_Test_Rebate_Accruals {
         insert region;
                        
         // set NHS Trust
-        jj_rb_NHS_Trust__c trust = jj_rb_Test_BaseClass.setupTrust(region);
+        Account trust = jj_rb_Test_BaseClass.setupTrustCustomer(region);
         insert trust;
             
         // create hospital
@@ -271,7 +271,7 @@ private class jj_rb_Test_Rebate_Accruals {
         insert region;
                        
         // set NHS Trust
-        jj_rb_NHS_Trust__c trust = jj_rb_Test_BaseClass.setupTrust(region);
+        Account trust = jj_rb_Test_BaseClass.setupTrustCustomer(region);
         insert trust;
             
         // create hospital

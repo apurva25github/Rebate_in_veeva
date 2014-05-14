@@ -90,7 +90,6 @@
         <members>Account.jj_rb_Credit_check_Validity_End__c</members>
         <members>Account.jj_rb_Credit_check_Validity_From__c</members>
         <members>Account.jj_rb_IMS_Customer_Id__c</members>
-        <members>Account.jj_rb_NHS_Trust__c</members>
         <members>Account.jj_rb_National_Channel_Manager__c</members>
         <members>Account.jj_rb_Region__c</members>
         <members>Account.jj_rb_SAP_Customer_Number__c</members>
@@ -117,7 +116,6 @@
         <members>jj_rb_Master_Data_Request__c.jj_rb_Customer__c</members>
         <members>jj_rb_Master_Data_Request__c.jj_rb_IMS_Customer_Id__c</members>
         <members>jj_rb_Master_Data_Request__c.jj_rb_IMS_Product_ID__c</members>
-        <members>jj_rb_Master_Data_Request__c.jj_rb_NHS_Trust__c</members>
         <members>jj_rb_Master_Data_Request__c.jj_rb_National_Channel_Manager__c</members>
         <members>jj_rb_Master_Data_Request__c.jj_rb_Product_Name__c</members>
         <members>jj_rb_Master_Data_Request__c.jj_rb_Rebate_Product__c</members>
@@ -131,15 +129,7 @@
         <members>jj_rb_Master_Data_Request__c.jj_rb_Total_Estimat_Rebate_Accrual__c</members>
         <members>jj_rb_Master_Data_Request__c.jj_rb_Unit_of_Measure__c</members>
         <members>jj_rb_Master_Data_Request__c.jj_rb_VAT_Code__c</members>
-        <members>jj_rb_NHS_Trust__c.jj_rb_Business_City__c</members>
-        <members>jj_rb_NHS_Trust__c.jj_rb_Business_Country__c</members>
-        <members>jj_rb_NHS_Trust__c.jj_rb_Business_Phone__c</members>
-        <members>jj_rb_NHS_Trust__c.jj_rb_Business_Postal_Code__c</members>
-        <members>jj_rb_NHS_Trust__c.jj_rb_Business_State__c</members>
-        <members>jj_rb_NHS_Trust__c.jj_rb_Business_Street__c</members>
-        <members>jj_rb_NHS_Trust__c.jj_rb_NHS_Trust_ID__c</members>
-        <members>jj_rb_NHS_Trust__c.jj_rb_Region__c</members>
-        <members>jj_rb_NHS_Trust__c.jj_rb_Website__c</members>
+        <members>jj_rb_Master_Data_Request__c.jj_rb_Region__c</members>
         <members>jj_rb_Rebate_Accrual_Line_Item__c.Rebate_Adjustment__c</members>
         <members>jj_rb_Rebate_Accrual_Line_Item__c.jj_rb_Net_Rebate_Accrual_After_Adj__c</members>
         <members>jj_rb_Rebate_Accrual_Line_Item__c.jj_rb_Net_Rebate_Accrual_Amount__c</members>
@@ -280,7 +270,6 @@
         <members>jj_rb_IMS_Sales_Data__c</members>
         <members>jj_rb_Master_Data_RecordTypes__c</members>
         <members>jj_rb_Master_Data_Request__c</members>
-        <members>jj_rb_NHS_Trust__c</members>
         <members>jj_rb_Rebate_Accrual_Line_Item__c</members>
         <members>jj_rb_Rebate_Accrual_Report_Line_Item__c</members>
         <members>jj_rb_Rebate_Accrual_Report__c</members>
@@ -308,7 +297,6 @@
         <members>jj_rb_Estimated_Rebate_Accrual__c.jj_rb_UK_Rebate_Sharing_Estimated_Rebate_Accrual</members>
         <members>jj_rb_IMS_Sales_Data__c.jj_rb_UK_Rebate_Sharing_IMS_Sales_Data</members>
         <members>jj_rb_Master_Data_Request__c.jj_rb_UK_Rebate_Sharing_Master_Data_Request</members>
-        <members>jj_rb_NHS_Trust__c.jj_rb_UK_Rebate_Sharing_NHS_Trust</members>
         <members>jj_rb_Rebate_Accrual_Report__c.jj_rb_UK_Rebate_Sharing_Accrual_Report</members>
         <members>jj_rb_Rebate_Accrual__c.jj_rb_UK_Rebate_Sharing_Rebate_Accrual</members>
         <members>jj_rb_Rebate_Claim__c.jj_rb_UK_Rebate_Sharing_Rebate_Claim</members>
@@ -325,7 +313,6 @@
         <members>jj_rb_IMS_Sales_Data__c-en_US</members>
         <members>jj_rb_Master_Data_RecordTypes__c-en_US</members>
         <members>jj_rb_Master_Data_Request__c-en_US</members>
-        <members>jj_rb_NHS_Trust__c-en_US</members>
         <members>jj_rb_Rebate_Accrual_Line_Item__c-en_US</members>
         <members>jj_rb_Rebate_Accrual_Report_Line_Item__c-en_US</members>
         <members>jj_rb_Rebate_Accrual_Report__c-en_US</members>
@@ -347,7 +334,6 @@
     <types>
         <members>jj_rb_IMS_Sales_Data__c</members>
         <members>jj_rb_Master_Data_Request__c</members>
-        <members>jj_rb_NHS_Trust__c</members>
         <members>jj_rb_Rebate_Accrual__c</members>
         <members>jj_rb_Rebate_Claim__c</members>
         <members>jj_rb_Rebate_Contract__c</members>
@@ -387,6 +373,7 @@
         <name>Group</name>
     </types>
     <types>
+        <members>Account-JJ_Hospital_Clinic</members>
         <members>Account-UK Rebate Homecare</members>
         <members>Account-UK Rebate Retailer</members>
         <members>jj_rb_Estimated_Rebate_Accrual__c-Estimated Rebate Accrual Layout</members>
@@ -396,7 +383,6 @@
         <members>jj_rb_Master_Data_Request__c-Master Data Request Layout</members>
         <members>jj_rb_Master_Data_Request__c-Product master data request</members>
         <members>jj_rb_Master_Data_Request__c-Retailer Customer Data Request</members>
-        <members>jj_rb_NHS_Trust__c-NHS Trust Layout</members>
         <members>jj_rb_Rebate_Accrual_Line_Item__c-Rebate Accrual Line Item Layout</members>
         <members>jj_rb_Rebate_Accrual_Report_Line_Item__c-Rebate Accrual Report Line Item Layout</members>
         <members>jj_rb_Rebate_Accrual_Report__c-Rebate Accrual Report Layout</members>
@@ -435,7 +421,6 @@
         <members>jj_rb_Master_Data_Request__c.Hom_Care_Provider_Master_Data_Request</members>
         <members>jj_rb_Master_Data_Request__c.Hospital_Master_Data_Request</members>
         <members>jj_rb_Master_Data_Request__c.Product_Master_Data_Requests</members>
-        <members>jj_rb_NHS_Trust__c.All</members>
         <members>jj_rb_Rebate_Accrual__c.All</members>
         <members>jj_rb_Rebate_Claim__c.All</members>
         <members>jj_rb_Rebate_Claim__c.FD</members>

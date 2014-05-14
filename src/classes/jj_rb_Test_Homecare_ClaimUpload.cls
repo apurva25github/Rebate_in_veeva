@@ -12,7 +12,7 @@
 @isTest
 private class jj_rb_Test_Homecare_ClaimUpload { 	
     static testMethod void testUploadPage() {
-    	Document d;
+    	Document d; 
     	
     	
     	jj_rb_HomecareClaimUpload uploadController = new jj_rb_HomecareClaimUpload(); 
@@ -76,7 +76,7 @@ private class jj_rb_Test_Homecare_ClaimUpload {
     	insert listCS;
     	
     	jj_rb_Region__c region = jj_rb_Test_BaseClass.setupRegion();
-    	jj_rb_NHS_Trust__c nhsTrust = jj_rb_Test_BaseClass.setupTrust(region);
+    	Account nhsTrust = jj_rb_Test_BaseClass.setupTrustCustomer(region);
     	jj_rb_Test_BaseClass.setupHospital(nhsTrust, user);   	
     }
     

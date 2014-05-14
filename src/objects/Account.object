@@ -30,19 +30,6 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>jj_rb_NHS_Trust__c</fullName>
-        <deleteConstraint>Restrict</deleteConstraint>
-        <externalId>false</externalId>
-        <label>NHS Trust</label>
-        <referenceTo>jj_rb_NHS_Trust__c</referenceTo>
-        <relationshipLabel>Hospitals</relationshipLabel>
-        <relationshipName>Accounts</relationshipName>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Lookup</type>
-    </fields>
-    <fields>
         <fullName>jj_rb_National_Channel_Manager__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
@@ -52,6 +39,20 @@
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Region__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Region associated with the trust.</description>
+        <externalId>false</externalId>
+        <label>Region</label>
+        <referenceTo>jj_rb_Region__c</referenceTo>
+        <relationshipLabel>Accounts</relationshipLabel>
+        <relationshipName>Accounts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
         <type>Lookup</type>
     </fields>
     <fields>
@@ -106,7 +107,6 @@
     <listViews>
         <fullName>Hospitals</fullName>
         <columns>ACCOUNT.NAME</columns>
-        <columns>jj_rb_NHS_Trust__c</columns>
         <columns>ACCOUNT.PHONE1</columns>
         <columns>ACCOUNT.TYPE</columns>
         <columns>ACCOUNT.ADDRESS1_STATE</columns>

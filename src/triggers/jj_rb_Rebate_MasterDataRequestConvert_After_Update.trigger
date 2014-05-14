@@ -33,11 +33,10 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
     List<jj_rb_Master_Data_Request__c> listUpdatedMDR = new List<jj_rb_Master_Data_Request__c>();
     List<jj_rb_Estimated_Rebate_Accrual__c> listUpdateERA = new List<jj_rb_Estimated_Rebate_Accrual__c>();
     List<jj_rb_Estimated_Rebate_Accrual__c> listId  = new List<jj_rb_Estimated_Rebate_Accrual__c>();
-    List<jj_rb_NHS_Trust__c> listupdateNHSTrust = new list<jj_rb_NHS_Trust__c>();
     Map <id,Account> MapAccount = new Map<id,Account>();    
     Map <id,jj_rb_Rebate_Product__c> MapProduct = New Map<id,jj_rb_Rebate_Product__c>();
     Map <id,jj_rb_Estimated_Rebate_Accrual__c> MapERA = New Map<id,jj_rb_Estimated_Rebate_Accrual__c>();
-    MAP <id,jj_rb_NHS_Trust__c> MapHNS = new MAP <id,jj_rb_NHS_Trust__c>();
+    
     //Iterate over Newly updated Records in Master Data Request Object
     for(jj_rb_Master_Data_Request__c MDR:trigger.new)
     {
@@ -62,7 +61,6 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
                 if(MDR.RecordTypeId == AccountRecordTypeID  )
                 {
                     acc.jj_rb_IMS_Customer_Id__c = MDR.jj_rb_IMS_Customer_Id__c;
-                    
                     acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account_Retailer');
                 }
                 else if(MDR.RecordTypeId == HCPRecordTypeID)
@@ -72,11 +70,11 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
                     acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account_Homecare');
                 }
                 
-               else if(MDR.RecordTypeId == HospitalRecordTypeID )
+               	else if(MDR.RecordTypeId == HospitalRecordTypeID )
                {
                    acc.Type = HospitalType;
+                   acc.jj_rb_Region__c = MDR.jj_rb_Region__c;
                    acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account_Hospital');
-                   acc.jj_rb_NHS_Trust__c = MDR.jj_rb_NHS_Trust__c;
                }
                
                MapAccount.put(MDR.Id, acc);

@@ -34,11 +34,6 @@
         <name>jj_rb_IMS_Product_ID__c</name>
     </fields>
     <fields>
-        <label><!-- NHS Trust --></label>
-        <name>jj_rb_NHS_Trust__c</name>
-        <relationshipLabel><!-- Master Data Requests --></relationshipLabel>
-    </fields>
-    <fields>
         <label><!-- National Channel Manager --></label>
         <name>jj_rb_National_Channel_Manager__c</name>
         <relationshipLabel><!-- Master Data Requests --></relationshipLabel>
@@ -55,6 +50,11 @@
     <fields>
         <label><!-- Rebate_Request_Change_For_ID --></label>
         <name>jj_rb_Rebate_Request_Change_For_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Region --></label>
+        <name>jj_rb_Region__c</name>
+        <relationshipLabel><!-- Master Data Requests --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- SAP Customer No --></label>
@@ -179,6 +179,10 @@
     <recordTypes>
         <label><!-- Product Data Request --></label>
         <name>jj_rb_MDR_Retailer_Product_Master_Data_Request</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Trust Data Request --></label>
+        <name>jj_rb_Trust_Data_Request</name>
     </recordTypes>
     <startsWith>Consonant</startsWith>
     <validationRules>

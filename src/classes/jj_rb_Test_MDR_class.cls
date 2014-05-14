@@ -6,6 +6,7 @@
         static list<jj_rb_Master_Data_Request__c> HCPMDR = new list<jj_rb_Master_Data_Request__c>();
         static list<jj_rb_Master_Data_Request__c> HOSPMDR = new list<jj_rb_Master_Data_Request__c>();
         static list<jj_rb_Master_Data_Request__c> productMDR = new list<jj_rb_Master_Data_Request__c>();
+        
         public static user getRebateUser()
         {
             if(rebateUser == null)
@@ -95,7 +96,7 @@
             customer.jj_rb_National_Channel_Manager__c=jj_rb_Test_MDR_class.getRebateUser().Id;
             customer.Name = 'Hospital'; 
             customer.Account_Type__c = jj_rb_Test_MDR_class.accountTypeCreator('Hospital','Hospital');
-            customer.jj_rb_NHS_Trust__c = jj_rb_Test_MDR_class.NhstrustCreator().id;
+            //customer.jj_rb_NHS_Trust__c = jj_rb_Test_MDR_class.NhstrustCreator().id;
             customer.RecordTypeId = jj_rb_Test_MDR_class.ReocrdTypeCreator('Account_Hospital',rectypid);
             insert customer; 
             return customer;
@@ -109,6 +110,7 @@
         insert region;
         return region;
     }
+    /*
     public static jj_rb_NHS_Trust__c NhstrustCreator()
     {
         jj_rb_NHS_Trust__c nhstrust = new jj_rb_NHS_Trust__c();
@@ -125,6 +127,7 @@
         insert nhstrust;  
         return nhstrust;
     } 
+    */
         // ERA creator 
         public static jj_rb_Estimated_Rebate_Accrual__c ERAcreator(integer estimatedAcc,id products)
         {
@@ -253,22 +256,35 @@
             }
             // MDR Convert Trigger testing 
            //jj_rb_MDR_proc_test_class.customsStatusCreator('New','New');
-           jj_rb_Test_MDR_class.customsStatusCreator('Approved','Approved');
-            jj_rb_Master_Data_Request__c retailMDR = RetailerMDR[0];
-            retailMDR.jj_rb_Status__c = jj_rb_Test_MDR_class.customsStatusCreator('Approved','Approved');
-            update retailMDR;
-            jj_rb_Estimated_Rebate_Accrual__c newERA = jj_rb_Test_MDR_class.ERAcreator(50, product.id);
-            newERA.jj_rb_Master_Data_Request__c = retailMDR.Id;
-            update newERA;
-            jj_rb_Master_Data_Request__c HomecareMDR = HCPMDR[0];
-            HomecareMDR.jj_rb_Status__c = jj_rb_Test_MDR_class.customsStatusCreator('Approved','Approved');
-            update HomecareMDR;
-            jj_rb_Master_Data_Request__c HospitalMDR = HOSPMDR[0];
-            HospitalMDR.jj_rb_Status__c = jj_rb_Test_MDR_class.customsStatusCreator('Approved','Approved');
-            update HospitalMDR;
-            jj_rb_Master_Data_Request__c proMDR = productMDR[0];
-            proMDR.jj_rb_Status__c = jj_rb_Test_MDR_class.customsStatusCreator('Approved','Approved');
-            update proMDR;
+            jj_rb_Test_MDR_class.customsStatusCreator('Approved','Approved');
+            
+            if(!RetailerMDR.isEmpty()) {
+	            jj_rb_Master_Data_Request__c retailMDR = RetailerMDR[0];
+	            retailMDR.jj_rb_Status__c = jj_rb_Test_MDR_class.customsStatusCreator('Approved','Approved');
+	            update retailMDR;
+	            
+	            jj_rb_Estimated_Rebate_Accrual__c newERA = jj_rb_Test_MDR_class.ERAcreator(50, product.id);
+	            newERA.jj_rb_Master_Data_Request__c = retailMDR.Id;
+	            update newERA;
+            }            
+            
+            if(!HCPMDR.isEmpty()) {
+	            jj_rb_Master_Data_Request__c HomecareMDR = HCPMDR[0];
+	            HomecareMDR.jj_rb_Status__c = jj_rb_Test_MDR_class.customsStatusCreator('Approved','Approved');
+	            update HomecareMDR;
+            }
+            
+            if(!HOSPMDR.isEmpty()) {
+	            jj_rb_Master_Data_Request__c HospitalMDR = HOSPMDR[0];
+	            HospitalMDR.jj_rb_Status__c = jj_rb_Test_MDR_class.customsStatusCreator('Approved','Approved');
+	            update HospitalMDR;
+            }
+            
+            if(!productMDR.isEmpty()) {
+	            jj_rb_Master_Data_Request__c proMDR = productMDR[0];
+	            proMDR.jj_rb_Status__c = jj_rb_Test_MDR_class.customsStatusCreator('Approved','Approved');
+	            update proMDR; 
+            }
             
             //jj_rb_Master_Data_Request__c
             

@@ -19,6 +19,18 @@ public class jj_rb_Test_BaseClass {
         
     }
     
+     public static Account setupTrustCustomer(jj_rb_Region__c region)
+    {
+    	Id hcpRecordtype = jj_rb_Test_BaseClass.getRecordTypeId('Hospital_vod', 'Account');
+    	Account a = new Account();
+    	a.Name = 'Test Trust';
+    	a.Account_Type__c = 'Acute Trust';
+    	a.jj_rb_Region__c = region.Id;    	
+    	a.RecordTypeId = hcpRecordtype;
+    	return a;    
+    }
+    
+    
     
     public static jj_rb_Rebate_Contract__c setupRetailerContract(Account retailer, User ncmUser)
     {
@@ -88,7 +100,7 @@ public class jj_rb_Test_BaseClass {
     public static jj_rb_Rebate_Claim__c setupRetailerClaim(Account customer)
     {
         // get the retailer claim recordtype
-        Id retailerClaimRecordTypeId = getRecordTypeId('Retailer Rebate Claim', 'jj_rb_Rebate_Claim__c');
+        Id retailerClaimRecordTypeId = jj_rb_Test_BaseClass.getRecordTypeId('Retailer Rebate Claim', 'jj_rb_Rebate_Claim__c');
         return setupClaim(customer, retailerClaimRecordTypeId);     
     }
     
@@ -209,11 +221,11 @@ public class jj_rb_Test_BaseClass {
         return product;
     }
     
-    public static Account setupHospital(jj_rb_NHS_Trust__c trust, User ncmUser)
+    public static Account setupHospital(Account trust, User ncmUser)
     {
         Id hospitalRecordtype = getRecordTypeId('Hospital_vod', 'Account');
         Account a = new Account();
-        a.jj_rb_NHS_Trust__c = trust.id;
+        a.Primary_Parent_vod__c = trust.Id;
         a.CODS_External_Id__c = '12345';
         a.RecordTypeId = hospitalRecordtype;
         a.name = 'Test Hospital';
@@ -236,20 +248,7 @@ public class jj_rb_Test_BaseClass {
         
         insert vat;
         return vat;
-    }
-    
-    public static jj_rb_NHS_Trust__c setupTrust(jj_rb_Region__c r)
-    {
-        jj_rb_NHS_Trust__c t = new jj_rb_NHS_Trust__c();
-        t.Name = 'Test Trust';
-        t.jj_rb_NHS_Trust_ID__c = '12345';
-        t.jj_rb_Business_Phone__c = '12312344123';
-        t.jj_rb_Business_Postal_Code__c = '1234567';
-        t.jj_rb_Business_Street__c = 'trust street';
-        t.jj_rb_Business_City__c = 'trust city';
-        t.jj_rb_Region__c = r.Id;       
-        return t;
-    }
+    }  
     
     // create a test region
     public static jj_rb_Region__c setupRegion()
@@ -430,7 +429,7 @@ public class jj_rb_Test_BaseClass {
         rebateAccrual.jj_rb_Year__c = '2014';
         rebateAccrual.jj_rb_Status__c = STATUS_NEW;
         rebateAccrual.recordtypeId = recordTypeId;
-        return rebateAccrual;
+        return rebateAccrual; 
     }
     
     public static jj_rb_Rebate_Accrual_Line_Item__c setupAccrualLineItem(jj_rb_Rebate_Accrual__c rebateAccrual, jj_rb_Rebate_Product__c product)

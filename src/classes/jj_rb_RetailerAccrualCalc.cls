@@ -66,6 +66,7 @@ global class jj_rb_RetailerAccrualCalc extends jj_rb_rebateAccrualBaseClass impl
                                                     and jj_rb_Claim_Date__c < THIS_MONTH
                                                      order by jj_rb_Claim_Date__c desc])
      {
+     	system.debug('**** Retailer claim' + claim);
         String customerId = claim.jj_rb_Customer__c;
         if(mapCustClaims.containsKey(customerId))
         {

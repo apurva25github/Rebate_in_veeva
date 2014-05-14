@@ -33,15 +33,33 @@ public  class jj_rb_DataRequestRoute_CTE {
         }															
     }
     
+    // page load event
+    // Redirect to iConnect Data Request Page - 
+    // if not a rebate user
+    // if data request created for a hospital customer
     public pageReference routeUser()    
     {       
-        if(!isRebateUser())
+        if(!isRebateUser() || isHospital())
         {
            return routeToIConnect();
         }
         
         return null; 
     }
+    
+    private boolean isHospital()
+    {
+    	// check if the data request account is a hospital 
+    	if(String.isNotBlank(accountId)) {
+	    	List<Account> hospitals = [SELECT Primary_Parent_vod__c, recordtype.DeveloperName 
+	    									FROM Account where recordtype.DeveloperName = 'Hospital_vod' 
+	    									and Primary_Parent_vod__c != null
+	    									and id = :accountId];
+	    	if(!hospitals.isEmpty())
+	    		return true;    									
+    	}    									
+    	return false;
+    } 
     
     public pageReference routeToSelection()
     {

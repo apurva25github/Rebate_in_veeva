@@ -66,6 +66,7 @@ global class jj_rb_HCPAccrualcalc extends jj_rb_rebateAccrualBaseClass implement
                                                        and jj_rb_Claim_Date__c < THIS_MONTH
                                                        order by jj_rb_Claim_Date__c desc])
      {
+     	system.debug('****** Homecare claim '+ claim);
         String customerId = claim.jj_rb_Customer__c;
         if(mapCustClaims.containsKey(customerId))
         {

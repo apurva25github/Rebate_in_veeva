@@ -49,12 +49,6 @@
         <style>CustomLinks</style>
     </layoutSections>
     <relatedLists>
-        <fields>NAME</fields>
-        <fields>jj_rb_NHS_Trust_ID__c</fields>
-        <fields>jj_rb_Business_City__c</fields>
-        <relatedList>jj_rb_NHS_Trust__c.jj_rb_Region__c</relatedList>
-    </relatedLists>
-    <relatedLists>
         <fields>TASK.SUBJECT</fields>
         <fields>TASK.WHO_NAME</fields>
         <fields>ACTIVITY.TASK</fields>

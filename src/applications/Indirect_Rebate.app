@@ -14,7 +14,6 @@
     <tab>jj_rb_Tolerance__c</tab>
     <tab>jj_rb_IMS_Sales_Data__c</tab>
     <tab>jj_rb_Region__c</tab>
-    <tab>jj_rb_NHS_Trust__c</tab>
     <tab>jj_rb_Rebate_Accrual__c</tab>
     <tab>standard-report</tab>
     <tab>jj_rb_Rebate_IMS_Job__c</tab>

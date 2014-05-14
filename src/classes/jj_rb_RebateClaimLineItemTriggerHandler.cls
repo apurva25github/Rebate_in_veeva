@@ -74,12 +74,12 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
             mapClaimsTocheck.put(objItem.id,objItem);
         }
         
-        List<Account> hospitallist=[select jj_rb_NHS_Trust__r.jj_rb_Region__c from Account where type=:HospitalType AND id IN:setHospital];
+        List<Account> hospitallist=[select jj_rb_Region__c from Account where account_type__c =:HospitalType AND id IN:setHospital];
         Map<id,String>  mapNHSTrust= new Map<id,String>();//key:accountid
         for(Account account:hospitallist)
         {
-            ids.add(account.jj_rb_NHS_Trust__r.jj_rb_Region__c);
-            mapNHSTrust.put(account.id,account.jj_rb_NHS_Trust__r.jj_rb_region__c);
+            ids.add(account.jj_rb_Region__c);
+            mapNHSTrust.put(account.id,account.jj_rb_region__c); 
         }
         //system.debug('mapNHSTrust>>>'+mapNHSTrust);
         //system.debug('homecareContractLI_recType>>>' + homecareContractLI_recType);
@@ -506,15 +506,8 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
         String retailerclaim_recType=jj_rb_Rebate_utils.getRecordTypeID('Rebate_Claim_Retailer');
         String retailerclaimLI_recType=jj_rb_Rebate_utils.getRecordTypeID('Claim_LineItem_Retailer');
         String homecareclaimLI_recType=jj_rb_Rebate_utils.getRecordTypeID('Claim_LineItem_Homecare');
-        
-        //system.debug('homecareclaimrecType>>>' + homecareclaimrecType);
-        //system.debug('retailerclaim_recType>>>' + retailerclaim_recType);
-        //system.debug('retailerclaimLI_recType>>>' + retailerclaimLI_recType);
-        //system.debug('homecareclaimLI_recType>>>>' + homecareclaimLI_recType);
-        
-        
-        Map<String, jj_rb_Rebate_Claim_Line_Item__c> mapNotUniqueRetailerClaimLineItem = new map<String, jj_rb_Rebate_Claim_Line_Item__c>();
-        Map<String, jj_rb_Rebate_Claim_Line_Item__c> mapNotUniqueHomecareClaimLineItem = new map<String, jj_rb_Rebate_Claim_Line_Item__c>();
+      
+        Map<String, jj_rb_Rebate_Claim_Line_Item__c> mapNotUniqueClaimLineItem = new map<String, jj_rb_Rebate_Claim_Line_Item__c>();        
                 
         List<jj_rb_Rebate_Claim_Line_Item__c> listNewClaimLineItems = System.trigger.new;   
         
@@ -526,20 +519,17 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
         }
         
         // get the retailer claims associated with the new line items
-        Map<Id, jj_rb_Rebate_Claim__c> mapRetailerClaim = new Map<Id, jj_rb_Rebate_Claim__c> ([select Id, jj_rb_Customer__c, toLabel(jj_rb_Month__c), jj_rb_Year__c
-                                                                                                from jj_rb_Rebate_Claim__c where id in :setClaimIds AND RecordTypeID=:retailerclaim_recType]);
+        Map<Id, jj_rb_Rebate_Claim__c> mapClaim = new Map<Id, jj_rb_Rebate_Claim__c> ([select Id, jj_rb_Customer__c, toLabel(jj_rb_Month__c), 
+        																						jj_rb_Year__c, recordTypeId
+                                                                                                from jj_rb_Rebate_Claim__c where id in :setClaimIds]);
 
-        // get the Homecare claims associated with the new line items
-        Map<Id, jj_rb_Rebate_Claim__c> mapHomecareClaim = new Map<Id, jj_rb_Rebate_Claim__c> ([select Id, jj_rb_Customer__c, toLabel(jj_rb_Month__c), jj_rb_Year__c
-                                                                                                from jj_rb_Rebate_Claim__c where id in :setClaimIds AND RecordTypeID=:homecareclaimrecType]);        
         
         
         // check if there is a claim line item with the same customer, product, claim month and year
         for(jj_rb_Rebate_Claim_Line_Item__c newLineItem : listNewClaimLineItems)
         {       
-            jj_rb_Rebate_Claim__c claim = mapRetailerClaim.get(newLineItem.jj_rb_Rebate_Claim__c);
-            jj_rb_Rebate_Claim__c homecareClaim=mapHomecareClaim.get(newLineItem.jj_rb_Rebate_Claim__c);
-            
+            jj_rb_Rebate_Claim__c claim = mapClaim.get(newLineItem.jj_rb_Rebate_Claim__c);
+                        
             if(claim!=null)
             {
                 setClaimAccounts.add(claim.jj_rb_Customer__c);      
@@ -549,39 +539,14 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
                 String uniqueKey = prepareUniqueKey(claim.jj_rb_Customer__c,
                                                                 newLineItem.jj_rb_Rebate_Product__c, 
                                                                 claim.jj_rb_Month__c, 
-                                                                claim.jj_rb_Year__c);
-                if(mapNotUniqueRetailerClaimLineItem.containsKey(uniqueKey))
+                                                                claim.jj_rb_Year__c, claim.RecordTypeId);
+                if(mapNotUniqueClaimLineItem.containsKey(uniqueKey))
                 {
                     newLineItem.addError(newLineItem.jj_rb_Rebate_Product__r.Name + ' has already been claimed for the period of ' + newLineItem.jj_rb_Rebate_Claim__r.jj_rb_Month__c + ' ' + newLineItem.jj_rb_Rebate_Claim__r.jj_rb_Year__c + '.');               
                 } 
-                mapNotUniqueRetailerClaimLineItem.put(uniqueKey, newLineItem);          
-            }
-            else if(homecareClaim!=null)
-            {
-                setClaimAccounts.add(homecareClaim.jj_rb_Customer__c);      
-                setClaimMonth.add(homecareClaim.jj_rb_Month__c);
-                setClaimYear.add(homecareClaim.jj_rb_Year__c);
-                // check if a duplicate is present in the record being inserted
-                String uniqueKey1=prepareUniqueKeyFOrHomecare(homecareClaim.jj_rb_Customer__c,
-                                                                newLineItem.jj_rb_Rebate_Product__c,
-                                                                newLineItem.jj_rb_hospital__c,                                                              
-                                                                homecareClaim.jj_rb_Month__c,
-                                                                homecareClaim.jj_rb_Year__c);               
-                if(mapNotUniqueHomecareClaimLineItem.containsKey(uniqueKey1))
-                {
-                    newLineItem.addError(newLineItem.jj_rb_Rebate_Product__r.Name + ' ' + 'for'+ ' ' + newLineItem.jj_rb_hospital__r.name + ' ' + 'has already been claimed for the period of ' + newLineItem.jj_rb_Rebate_Claim__r.jj_rb_Month__c + ' ' + newLineItem.jj_rb_Rebate_Claim__r.jj_rb_Year__c + '.');                                     
-                }
-                mapNotUniqueHomecareClaimLineItem.put(uniqueKey1,newLineItem);
-            }
-            
-        }
-        
-        //system.debug('setClaimAccounts>>>' + setClaimAccounts);
-        //system.debug('setClaimProducts>>>' + setClaimProducts);
-        //system.debug('setClaimMonth>>>>>>' + setClaimMonth);
-        //system.debug('listNewClaimLineItems>>>' + listNewClaimLineItems);
-        //system.debug('setClaimYear>>>>'  + setClaimYear);
-        //system.debug('retailerclaimLI_recType>>>>' + retailerclaimLI_recType);
+                mapNotUniqueClaimLineItem.put(uniqueKey, newLineItem);          
+            }           
+        }      
         
         // get all old Retailer line items with the same customer, product, month and year.
         for (jj_rb_Rebate_Claim_Line_Item__c oldLineItem : [select Id, jj_rb_Rebate_Claim__c, jj_rb_Rebate_Claim__r.jj_rb_Customer__c,
@@ -593,55 +558,22 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
                                                                         and  jj_rb_Rebate_Product__c in :setClaimProducts
                                                                         and id NOT IN : listNewClaimLineItems
                                                                         and  toLabel(jj_rb_Rebate_Claim__r.jj_rb_Month__c) in :setClaimMonth
-                                                                        and jj_rb_Rebate_Claim__r.jj_rb_Year__c in :setClaimYear 
-                                                                        AND RecordTypeID=:retailerclaimLI_recType])
+                                                                        and jj_rb_Rebate_Claim__r.jj_rb_Year__c in :setClaimYear])
         {
             String uniqueKey = prepareUniqueKey(oldLineItem.jj_rb_Rebate_Claim__r.jj_rb_Customer__c,
                                                            oldLineItem.jj_rb_Rebate_Product__c, 
                                                            oldLineItem.jj_rb_Rebate_Claim__r.jj_rb_Month__c, 
-                                                           oldLineItem.jj_rb_Rebate_Claim__r.jj_rb_Year__c);            
-            jj_rb_Rebate_Claim_Line_Item__c newLineItem = mapNotUniqueRetailerClaimLineItem.get(uniqueKey);
+                                                           oldLineItem.jj_rb_Rebate_Claim__r.jj_rb_Year__c, 
+                                                           oldLineItem.jj_rb_Rebate_Claim__r.recordTypeId);            
+            jj_rb_Rebate_Claim_Line_Item__c newLineItem = mapNotUniqueClaimLineItem.get(uniqueKey);
             if(newLineItem != null){
                 newLineItem.addError(oldLineItem.jj_rb_Rebate_Product__r.Name + ' has already been claimed for the period of ' + oldLineItem.jj_rb_Rebate_Claim__r.jj_rb_Month__c + ' ' + oldLineItem.jj_rb_Rebate_Claim__r.jj_rb_Year__c + '.');
-            }
-            
-        }
-        
-        // get all old Homecare claim line items with same customer,product,hospital,month,year
-        for (jj_rb_Rebate_Claim_Line_Item__c oldLineItem : [select Id, jj_rb_Rebate_Claim__c, jj_rb_Rebate_Claim__r.jj_rb_Customer__c,
-                                                                              jj_rb_Rebate_Product__c, jj_rb_Rebate_Product__r.Name,
-                                                                              toLabel(jj_rb_Rebate_Claim__r.jj_rb_Month__c),
-                                                                              jj_rb_Rebate_Claim__r.jj_rb_Year__c,jj_rb_Hospital__c,jj_rb_Hospital__r.name                                                                              
-                                                                        from jj_rb_Rebate_Claim_Line_Item__c
-                                                                        where jj_rb_Rebate_Claim__r.jj_rb_Customer__c in :setClaimAccounts
-                                                                        and  jj_rb_Rebate_Product__c in :setClaimProducts
-                                                                        and id NOT IN : listNewClaimLineItems
-                                                                        and  toLabel(jj_rb_Rebate_Claim__r.jj_rb_Month__c) in :setClaimMonth
-                                                                        and jj_rb_Rebate_Claim__r.jj_rb_Year__c in :setClaimYear 
-                                                                        AND RecordTypeID=:homecareclaimLI_recType])
-        {
-            String uniqueKey1=prepareUniqueKeyFOrHomecare(oldLineItem.jj_rb_Rebate_Claim__r.jj_rb_Customer__c,
-                                                                oldLineItem.jj_rb_Rebate_Product__c,
-                                                                oldLineItem.jj_rb_Hospital__c,
-                                                                oldLineItem.jj_rb_Rebate_Claim__r.jj_rb_Month__c,
-                                                                oldLineItem.jj_rb_Rebate_Claim__r.jj_rb_Year__c);                                                                             
-            
-            jj_rb_Rebate_Claim_Line_Item__c newLineItem = mapNotUniqueHomecareClaimLineItem.get(uniqueKey1);
-            if(newLineItem != null){
-                newLineItem.addError(oldLineItem.jj_rb_Rebate_Product__r.Name +' '+ 'for'+ ' ' + oldLineItem.jj_rb_Hospital__r.name + ' ' + 'has already been claimed for the period of ' + oldLineItem.jj_rb_Rebate_Claim__r.jj_rb_Month__c + ' ' + oldLineItem.jj_rb_Rebate_Claim__r.jj_rb_Year__c + '.');                
-            }
-        }
-        
+            }            
+        }       
     }    
     
-    private static String prepareUniqueKey(String accountId, String productId, String month, String year){
-        return  accountId + '-' + productId + '-' + month + '-' + year;     
-    }
-    
-    private static String prepareUniqueKeyFOrHomecare(String accountId, String productId,String hospitalid,String month, String year)
-    {
-        return  accountId + '-' + productId + '-' + hospitalid +  '_'+ month + '-' + year;  
-    
+    private static String prepareUniqueKey(String accountId, String productId, String month, String year, String recordType){
+        return  accountId + '-' + productId + '-' + month + '-' + year + '-' + recordType;     
     }
     
     // This method checks for the validation of the overlapping dates

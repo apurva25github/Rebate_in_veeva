@@ -7,5 +7,6 @@ public class jj_rb_NewContractLineItemOverride extends jj_rb_NewOverrideBaseClas
 	public jj_rb_NewContractLineItemOverride(Apexpages.StandardController stdController)
 	{
 		super(jj_rb_Rebate_Contract__c.SObjectType, jj_rb_Rebate_Contract_Line_Item__c.SObjectType);
+		
 	}
 }

@@ -117,19 +117,6 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>jj_rb_NHS_Trust__c</fullName>
-        <deleteConstraint>Restrict</deleteConstraint>
-        <externalId>false</externalId>
-        <label>NHS Trust</label>
-        <referenceTo>jj_rb_NHS_Trust__c</referenceTo>
-        <relationshipLabel>Master Data Requests</relationshipLabel>
-        <relationshipName>Master_Data_Requests</relationshipName>
-        <required>false</required>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Lookup</type>
-    </fields>
-    <fields>
         <fullName>jj_rb_National_Channel_Manager__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
@@ -176,6 +163,20 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>jj_rb_Region__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Region associated with the NHS Trust</description>
+        <externalId>false</externalId>
+        <label>Region</label>
+        <referenceTo>jj_rb_Region__c</referenceTo>
+        <relationshipLabel>Master Data Requests</relationshipLabel>
+        <relationshipName>Master_Data_Requests</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>jj_rb_SAP_Customer_Number__c</fullName>
@@ -344,7 +345,6 @@
         <fullName>Hospital_Master_Data_Request</fullName>
         <columns>NAME</columns>
         <columns>jj_rb_Business_Name__c</columns>
-        <columns>jj_rb_NHS_Trust__c</columns>
         <columns>jj_rb_Status__c</columns>
         <columns>RECORDTYPE</columns>
         <columns>CREATED_DATE</columns>
@@ -481,6 +481,38 @@
         <active>true</active>
         <description>Use this to create a new product request.</description>
         <label>Product Data Request</label>
+        <picklistValues>
+            <picklist>jj_rb_Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>jj_rb_Unit_of_Measure__c</picklist>
+            <values>
+                <fullName>Piece</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>jj_rb_Trust_Data_Request</fullName>
+        <active>true</active>
+        <description>Use this to create a new Trust data request.</description>
+        <label>Trust Data Request</label>
         <picklistValues>
             <picklist>jj_rb_Status__c</picklist>
             <values>

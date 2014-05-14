@@ -1,5 +1,18 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+*.cls text eol=crlf
+*.trigger text eol=crlf
+*.app text eol=crlf
+*.group text eol=crlf
+*.sharingRules text eol=crlf
+*.approvalProcess text eol=crlf
+*.email text eol=crlf
+*.layout text eol=crlf
+*.object text eol=crlf
+*.page text eol=crlf
+*.permissionset text eol=crlf
+*.queue text eol=crlf
+*.workflow text eol=crlf
 
 # Custom for Visual Studio
 *.cs     diff=csharp

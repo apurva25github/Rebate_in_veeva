@@ -1,18 +1,33 @@
+/**
+ *    @author  Apurva Prasade
+ *    @date  15/04/2014
+     @description  Batch apex for homecare credit check 
+      
+     Modification Log:
+     ------------------------------------------------------------------------------------
+     Developer              Date            Description
+     ------------------------------------------------------------------------------------
+     Apurva Prasade    15/04/2014      Original Version
+ */
+
 global class jj_rb_Homecare_CreditCheck_notification implements Database.Batchable<sObject>,Database.Stateful
-    {
-        Date exriringToday = Date.Today();
-        Date expiring2Months = Date.Today()+60;
-        Date expiring2Wks = Date.Today()+14;
-        Id recid= jj_rb_rebate_utils.getRecordTypeId('Account_Homecare');
+    {       
+		Date exriringToday = Date.Today();
+	    Date expiring2Months = Date.Today()+60;
+	    Date expiring2Wks = Date.Today()+14;
+
+
         global Database.QueryLocator start(Database.BatchableContext BC)
         {
             //Fetch all HCP customers  which are expiring today/2 months/2 wks
+            Id recid =  jj_rb_Rebate_utils.getHospitalRecordTypeId();
             String query = 'select jj_rb_Credit_check_Validity_End__c,jj_rb_Credit_check_Validity_From__c,name,jj_rb_National_Channel_Manager__r.name,jj_rb_National_Channel_Manager__r.email from account where (jj_rb_Credit_check_Validity_End__c =: exriringToday OR jj_rb_Credit_check_Validity_End__c =: expiring2Months OR jj_rb_Credit_check_Validity_End__c =: expiring2Wks) And RecordTypeID =: recid';
             return Database.getQueryLocator(query);
         }
         
         global void execute(Database.BatchableContext BC,List<Account> listHCPcustomer)
-        {
+        {       
+            
             //map<String, list<Account>> mapexpToday = new map<String, list<Account>>();
             List<Messaging.SingleEmailMessage> mailList = new List<Messaging.SingleEmailMessage>();
             map<id,list<Account>> mapexpToday = new map<id,list<Account>>();//NCM ID

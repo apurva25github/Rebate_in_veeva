@@ -169,10 +169,6 @@
         <name>jj_rb_Home_Care_Provider_Data_Request</name>
     </recordTypes>
     <recordTypes>
-        <label><!-- Hospital Data Request --></label>
-        <name>jj_rb_Hospital_Data_Request</name>
-    </recordTypes>
-    <recordTypes>
         <label><!-- Retailer Customer Data Request --></label>
         <name>jj_rb_MDR_Retailer_Customer_Master_Data_Request</name>
     </recordTypes>

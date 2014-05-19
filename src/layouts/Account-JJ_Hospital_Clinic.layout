@@ -43,11 +43,20 @@
                 <emptySpace>true</emptySpace>
             </layoutItems>
             <layoutItems>
-                <emptySpace>true</emptySpace>
+                <behavior>Edit</behavior>
+                <field>jj_rb_Region__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>jj_rb_Region__c</field>
+                <field>jj_rb_SAP_Customer_Number__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>jj_rb_SAP_Vendor_Number__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>jj_rb_IMS_Customer_Id__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -70,7 +79,16 @@
                 <emptySpace>true</emptySpace>
             </layoutItems>
             <layoutItems>
-                <emptySpace>true</emptySpace>
+                <behavior>Edit</behavior>
+                <field>jj_rb_National_Channel_Manager__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>jj_rb_Credit_check_Validity_From__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>jj_rb_Credit_check_Validity_End__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -260,6 +278,21 @@
         <fields>Email_JJ__c</fields>
         <fields>ParentId</fields>
     </miniLayout>
+    <relatedLists>
+        <excludeButtons>New</excludeButtons>
+        <fields>NAME</fields>
+        <fields>RECORDTYPE</fields>
+        <fields>jj_rb_Status__c</fields>
+        <fields>CREATED_DATE</fields>
+        <relatedList>jj_rb_Master_Data_Request__c.jj_rb_Customer__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <excludeButtons>New</excludeButtons>
+        <fields>NAME</fields>
+        <fields>jj_rb_Rebate_Product__c</fields>
+        <fields>jj_rb_Estimated_Accrual__c</fields>
+        <relatedList>jj_rb_Estimated_Rebate_Accrual__c.jj_rb_Account__c</relatedList>
+    </relatedLists>
     <relatedLists>
         <excludeButtons>New</excludeButtons>
         <fields>NAME</fields>

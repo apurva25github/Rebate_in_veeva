@@ -12,9 +12,14 @@
     <currency>EUR</currency>
     <filter>
         <criteriaItems>
+            <column>Account.Account_Type__c</column>
+            <operator>equals</operator>
+            <value>Wholesaler Chemist</value>
+        </criteriaItems>
+        <criteriaItems>
             <column>RECORDTYPE</column>
             <operator>equals</operator>
-            <value>Account.jj_rb_Homecare_provider</value>
+            <value>Account.Hospital_vod</value>
         </criteriaItems>
         <language>en_US</language>
     </filter>

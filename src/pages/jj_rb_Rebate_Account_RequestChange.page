@@ -5,7 +5,7 @@
                  <apex:commandButton value="Save" action="{!submitForChange}"/>
                 <apex:commandButton value="Cancel" action="{!Cancel}"/> 
             </apex:pageblockButtons> 
-            <apex:pageblockSection title="Account Details">
+            <apex:pageblockSection title="Account Details" columns="1">
                 <apex:outputField value="{!MDR.jj_rb_Business_Name__c}"/>
                 <apex:inputField value="{!MDR.jj_rb_SAP_Customer_Number__c}" required="true" rendered="{!showSAP_customer}"/>
                 <apex:inputField value="{!MDR.jj_rb_SAP_Vendor_Number__c}" required="true" rendered="{!showSAP_vendor}" />

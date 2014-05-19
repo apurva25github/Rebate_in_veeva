@@ -13,7 +13,7 @@
                 <field>Name</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
+                <behavior>Readonly</behavior>
                 <field>jj_rb_Business_Name__c</field>
             </layoutItems>
             <layoutItems>

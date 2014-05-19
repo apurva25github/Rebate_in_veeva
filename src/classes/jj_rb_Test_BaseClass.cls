@@ -1,3 +1,14 @@
+/**
+ *    @author  Sarabdeep Ahluwalia
+ *    @date  15/04/2014
+     @description  Base class for all test classes
+      
+     Modification Log:
+     ------------------------------------------------------------------------------------
+     Developer              Date            Description
+     ------------------------------------------------------------------------------------
+     Sarabdeep Ahluwalia    15/04/2014      Original Version
+ */
 public class jj_rb_Test_BaseClass {
     public static String  STATUS_APPROVED = 'Approved';
     public static String STATUS_NEW = 'New';
@@ -6,14 +17,18 @@ public class jj_rb_Test_BaseClass {
     
     public static Account setupHomecareCustomer(User ncmUser)
     {
-        Id hcpRecordtype = getRecordTypeId('Homecare provider', 'Account');        
+        //Id hcpRecordtype = getRecordTypeId('Homecare provider', 'Account');        
+        Id hcpRecordtype = jj_rb_Rebate_utils.getHospitalRecordTypeId();
        
         Account a = new Account();
         a.jj_rb_National_Channel_Manager__c = ncmUser.Id;
         a.jj_rb_SAP_Customer_Number__c = '221';
         a.jj_rb_SAP_Vendor_Number__c = '221';
+        a.Account_Type__c = 'Wholesaler Chemist';
         a.RecordTypeId =hcpRecordtype; 
         a.Name = 'test Account';    
+        a.jj_rb_Credit_check_Validity_From__c = Date.today();
+        a.jj_rb_Credit_check_Validity_End__c = Date.today() + 30;
         
         return a;
         
@@ -26,6 +41,7 @@ public class jj_rb_Test_BaseClass {
     	a.Name = 'Test Trust';
     	a.Account_Type__c = 'Acute Trust';
     	a.jj_rb_Region__c = region.Id;    	
+    	a.Structure_Type_JJ__c = 'Primary Organisation';
     	a.RecordTypeId = hcpRecordtype;
     	return a;    
     }
@@ -184,12 +200,15 @@ public class jj_rb_Test_BaseClass {
     
     public static Account setupRetailerCustomer(User ncmUser)
     {
-        Id retailerRecordType = getRecordTypeId('Retailer','Account');
+        //Id retailerRecordType = getRecordTypeId('Retailer','Account');
+        Id retailerRecordType = jj_rb_Rebate_utils.getHospitalRecordTypeId();
+        
         Account a = new Account();
         a.jj_rb_National_Channel_Manager__c = ncmUser.Id;
         a.jj_rb_SAP_Customer_Number__c = '221';
         a.jj_rb_SAP_Vendor_Number__c = '221';
         a.jj_rb_IMS_Customer_Id__c = '221';
+        a.Account_Type__c = 'Retail Shop';
         a.RecordTypeId = retailerRecordType; 
         a.Name = 'test Account';        
         
@@ -217,7 +236,7 @@ public class jj_rb_Test_BaseClass {
         product.jj_rb_Description__c = 'Product description';
         product.jj_rb_VAT_Code__c = vatCode.id;
         product.jj_rb_IMS_Product_ID__c = '12345';      
-        
+        product.name = 'Test Product';
         return product;
     }
     
@@ -227,6 +246,8 @@ public class jj_rb_Test_BaseClass {
         Account a = new Account();
         a.Primary_Parent_vod__c = trust.Id;
         a.CODS_External_Id__c = '12345';
+        a.Account_Type__c = 'Acute Trust';
+        a.Structure_Type_JJ__c = 'Department';
         a.RecordTypeId = hospitalRecordtype;
         a.name = 'Test Hospital';
         
@@ -279,6 +300,7 @@ public class jj_rb_Test_BaseClass {
     
     public static Id getRecordTypeId(String recordTypeName, String objectName)
     {
+    	//System.debug('********** Intest base class' +recordTypeName + ' '+ objectName );
         List<RecordType> r = [select Id from RecordType 
                                     where name = :recordTypeName 
                                     and SobjectType = :objectName limit 1];
@@ -375,6 +397,26 @@ public class jj_rb_Test_BaseClass {
             insert accType;
             return accType.jj_rb_Account_Type__c;        
         }
+        
+    public static list<jj_rb_Account_Type__c> createAccountType()
+    {
+    	list<jj_rb_Account_Type__c> listAccType = new list<jj_rb_Account_Type__c>();
+    	jj_rb_Account_Type__c retailerType = new jj_rb_Account_Type__c();
+    	retailerType.Name = 'Retailer Type';
+    	retailerType.jj_rb_Account_Type__c = 'Retail Shop';
+    	jj_rb_Account_Type__c hcpType = new jj_rb_Account_Type__c();
+    	hcpType.Name = 'Home Care Provider';
+    	hcpType.jj_rb_Account_Type__c = 'Wholesaler Chemist';
+    	jj_rb_Account_Type__c trustType = new jj_rb_Account_Type__c();
+    	trustType.Name = 'Hospital';
+    	trustType.jj_rb_Account_Type__c = 'Acute Trust';
+    	
+    	listAccType.add(retailerType);
+    	listAccType.add(hcpType);
+    	listAccType.add(trustType);
+    	
+    	return listAccType;
+    }
     
     public static List<jj_rb_Master_Data_RecordTypes__c>  createRecordTypeCustomSetting() 
     {
@@ -410,8 +452,16 @@ public class jj_rb_Test_BaseClass {
             listCS2.add(jj_rb_Test_BaseClass.setupRecordTypeCustomSetting('Claim_LineItem_Homecare',
                                                                         jj_rb_Test_BaseClass.getRecordTypeId('Homecare Claim', 'jj_rb_Rebate_Claim_Line_Item__c'))); 
             listCS2.add(jj_rb_Test_BaseClass.setupRecordTypeCustomSetting('Claim_LineItem_Retailer',
-                                                                        jj_rb_Test_BaseClass.getRecordTypeId('Retailer Rebate Claim', 'jj_rb_Rebate_Claim_Line_Item__c')));                                                                                                                                                                                                 
-                                                                                                                                                
+                                                                        jj_rb_Test_BaseClass.getRecordTypeId('Retailer Rebate Claim', 'jj_rb_Rebate_Claim_Line_Item__c')));    
+            listCS2.add(jj_rb_Test_BaseClass.setupRecordTypeCustomSetting('Retailer_MDR',
+            															jj_rb_Test_BaseClass.getRecordTypeId('Retailer Customer Data Request','jj_rb_Master_data_request__c')));                                                                                                                                                                                             
+            listCS2.add(jj_rb_Test_BaseClass.setupRecordTypeCustomSetting('Homecare_MDR',
+            															jj_rb_Test_BaseClass.getRecordTypeId('Homecare Customer Data Request','jj_rb_Master_data_request__c')));  
+            listCS2.add(jj_rb_Test_BaseClass.setupRecordTypeCustomSetting('Trust_MDR',
+            															jj_rb_Test_BaseClass.getRecordTypeId('Trust Data Request','jj_rb_Master_data_request__c'))); 
+            listCS2.add(jj_rb_Test_BaseClass.setupRecordTypeCustomSetting('Product_Data_Request',
+            															jj_rb_Test_BaseClass.getRecordTypeId('Product Data Request','jj_rb_Master_data_request__c')));															 
+                                                                                                                                               
             return listCS2;  
     }
     

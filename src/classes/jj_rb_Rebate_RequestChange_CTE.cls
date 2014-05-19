@@ -2,12 +2,6 @@ public class jj_rb_Rebate_RequestChange_CTE
     {
         private jj_rb_Rebate_Product__c rebateProduct;
         public jj_rb_Master_Data_Request__c MDR {get; set;}
-        String RetailerType = jj_rb_Rebate_Utils.getAccountType('Retailer Type');    
-        String HCPType = jj_rb_Rebate_Utils.getAccountType('Home Care Provider');
-        String HospitalType = jj_rb_Rebate_Utils.getAccountType('Hospital');
-        id retailerID = jj_rb_Rebate_Utils.getRecordTypeId('Account_Retailer');
-        id hcpID = jj_rb_Rebate_Utils.getRecordTypeId('Account_Homecare');
-        id hospID = jj_rb_Rebate_Utils.getRecordTypeId('Account_Hospital');
         
         // Controlls visibility of fields on VF page
         public boolean showSAP_customer {get; set;}
@@ -53,22 +47,28 @@ public class jj_rb_Rebate_RequestChange_CTE
        
         public void AccountPageLoad()
         {
+        	System.debug('In AccPageload mrthod ***** ');
             // get the record being changed
             customer = (Account)controller.getRecord();
+            System.debug('Customer record ***** '+customer);
             customer = [select id ,name, jj_rb_SAP_Customer_Number__c,
                        jj_rb_National_Channel_Manager__c,RecordTypeId,
                         jj_rb_Credit_check_Validity_End__c,jj_rb_Credit_check_Validity_From__c,
                         jj_rb_SAP_Vendor_Number__c,jj_rb_IMS_Customer_Id__c,
-                        Primary_Parent_vod__c,Account_Type__c,jj_rb_Region__c
+                        Primary_Parent_vod__c,Account_Type__c,jj_rb_Region__c,Structure_Type_JJ__c
                        FROM Account
                        Where id =: customer.id limit 1];
+                        System.debug('*************** ');
+                       System.debug('Customer ********* '+customer);
              MDR = new jj_rb_Master_Data_Request__c();
             MDR.jj_rb_Rebate_Request_Change_For_ID__c = customer.Id;
+            System.debug(MDR.jj_rb_Rebate_Request_Change_For_ID__c);
             MDR.jj_rb_Business_Name__c = customer.Name;
             MDR.jj_rb_National_Channel_Manager__c = customer.jj_rb_National_Channel_Manager__c;            
             MDR.jj_rb_IMS_Customer_Id__c = customer.jj_rb_IMS_Customer_Id__c;
             //MDR.jj_rb_IMS_Customer_Id__c = customer.jj_rb_IMS_Customer_Id__c;
-            if(customer.RecordTypeId == retailerID)
+            //System.debug('IS TRust Method ********** '+ jj_rb_Rebate_utils.isTrust(customer));
+            if(jj_rb_Rebate_utils.isRetailer(customer))
             {
                 showSAP_customer = true;
                 showSAP_vendor = true;
@@ -81,7 +81,7 @@ public class jj_rb_Rebate_RequestChange_CTE
                 MDR.jj_rb_SAP_Vendor_Number__c = customer.jj_rb_SAP_Vendor_Number__c;
                 MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Retailer_MDR');
             }
-            else if(customer.RecordTypeId == hcpID)
+            else if(jj_rb_Rebate_utils.isHomecare(customer))
             {
                 showIMS_id = false;
                 showSAP_customer = true;
@@ -93,10 +93,9 @@ public class jj_rb_Rebate_RequestChange_CTE
                 MDR.jj_rb_SAP_Customer_Number__c=customer.jj_rb_SAP_Customer_Number__c;
                 MDR.jj_rb_Credit_check_Validity_From__c = customer.jj_rb_Credit_check_Validity_From__c;
                 MDR.jj_rb_Credit_check_Validity_End__c = customer.jj_rb_Credit_check_Validity_End__c;
-            
                 MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Homecare_MDR');
             }
-            else if(customer.RecordTypeId == hospID)
+            else if(jj_rb_Rebate_utils.isTrust(customer))
             {
                 showSAP_customer = false; 
                 showSAP_vendor = false;
@@ -106,8 +105,7 @@ public class jj_rb_Rebate_RequestChange_CTE
                 showNCM = false;
                 showRegion = true;
                 MDR.jj_rb_Region__c = customer.jj_rb_Region__c;
-                MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Hospital_Data_Request');
-                
+                MDR.RecordTypeId = jj_rb_Rebate_Utils.getRecordTypeId('Trust_MDR'); 
             }
         }
         // Click event handler for the submit for approval button

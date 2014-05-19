@@ -352,7 +352,7 @@
         <filters>
             <field>RECORDTYPE</field>
             <operation>equals</operation>
-            <value>jj_rb_Master_Data_Request__c.jj_rb_Hospital_Data_Request</value>
+            <value>jj_rb_Master_Data_Request__c.jj_rb_Trust_Data_Request</value>
         </filters>
         <label>Hospital Master Data Request</label>
         <language>en_US</language>
@@ -385,38 +385,6 @@
         <active>true</active>
         <description>Use this to create a new Home care provider request</description>
         <label>Homecare Customer Data Request</label>
-        <picklistValues>
-            <picklist>jj_rb_Status__c</picklist>
-            <values>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>New</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Submitted</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>jj_rb_Unit_of_Measure__c</picklist>
-            <values>
-                <fullName>Piece</fullName>
-                <default>true</default>
-            </values>
-        </picklistValues>
-    </recordTypes>
-    <recordTypes>
-        <fullName>jj_rb_Hospital_Data_Request</fullName>
-        <active>true</active>
-        <description>Use this to create Hospital data request</description>
-        <label>Hospital Data Request</label>
         <picklistValues>
             <picklist>jj_rb_Status__c</picklist>
             <values>
@@ -511,7 +479,7 @@
     <recordTypes>
         <fullName>jj_rb_Trust_Data_Request</fullName>
         <active>true</active>
-        <description>Use this to create a new Trust data request.</description>
+        <description>Use this to create Trust data request</description>
         <label>Trust Data Request</label>
         <picklistValues>
             <picklist>jj_rb_Status__c</picklist>

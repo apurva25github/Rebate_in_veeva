@@ -1,11 +1,13 @@
 <apex:page standardController="jj_rb_Rebate_Contract__c" extensions="jj_rb_Close_contract" >
    
     <apex:form >
-    <apex:pageBlock >
-    <apex:pageBlockSection rendered="{!rendererrmsg}" >
-        The Rebate Contract is submitted for Approval,you cannot close the contract 
-        <br/><a href="/{!contract.id}">Back </a>
-    </apex:pageBlockSection>
+    <apex:pageBlock >    
+    <apex:outputPanel rendered="{!rendererrmsg}">
+    	<font size="3">
+        	<b>The Rebate Contract is submitted for approval, you cannot close the contract.</b></font><br/> 
+        	<a href="/{!contract.id}">Back </a>        
+    </apex:outputPanel>
+   
     </apex:pageBlock>
        <apex:pageblock rendered="{!renderform}">
            <apex:pageBlockButtons >

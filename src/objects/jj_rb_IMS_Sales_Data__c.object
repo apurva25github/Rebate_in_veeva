@@ -66,6 +66,18 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>jj_rb_Dataload_External_id__c</fullName>
+        <description>External id to check if a duplicate IMS Sales Data record is being uploaded</description>
+        <externalId>true</externalId>
+        <label>Dataload External id</label>
+        <length>200</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>jj_rb_IMS_Customer_Number__c</fullName>
         <externalId>false</externalId>
         <label>IMS Customer ID</label>

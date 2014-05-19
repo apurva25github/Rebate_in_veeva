@@ -85,6 +85,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>jj_rb_Rebate_TestClass</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>jj_rb_Rebate_utils</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -102,6 +106,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>jj_rb_TestClass</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>jj_rb_TestClass_Accrual</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -237,6 +245,11 @@
         <editable>true</editable>
         <field>jj_rb_IMS_Sales_Data__c.jj_rb_Customer__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>jj_rb_IMS_Sales_Data__c.jj_rb_Dataload_External_id__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -1251,19 +1264,7 @@
         <enabled>false</enabled>
     </pageAccesses>
     <recordTypeVisibilities>
-        <recordType>Account.jj_rb_Homecare_provider</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <recordType>Account.jj_rb_Retailer</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
         <recordType>jj_rb_Master_Data_Request__c.jj_rb_Home_Care_Provider_Data_Request</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <recordType>jj_rb_Master_Data_Request__c.jj_rb_Hospital_Data_Request</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
@@ -1276,7 +1277,7 @@
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <recordType>jj_rb_Master_Data_Request__c.jj_rb_Trust_Data_Request</recordType>
-        <visible>false</visible>
+        <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <recordType>jj_rb_Rebate_Accrual_Report__c.jj_rb_Homecare_Report</recordType>

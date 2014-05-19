@@ -1,10 +1,20 @@
+/**
+ *    @author Mangadivya Kasani
+ *    @date  15/04/2014
+     @description  Batch job to calculate accrual values 
+      
+     Modification Log:
+     ------------------------------------------------------------------------------------
+     Developer              Date            Description
+     ------------------------------------------------------------------------------------
+     Mangadivya Kasani    15/04/2014      Original Version
+ */
 global class jj_rb_HCPAccrualcalc extends jj_rb_rebateAccrualBaseClass implements Database.batchable<sObject> 
 {
-     static id hcpRecordtypeID = jj_rb_rebate_utils.getRecordTypeId('Account_Homecare');
+     static id hcpRecordtypeID = jj_rb_Rebate_utils.getHospitalRecordTypeId(); 	
      
      global Database.QueryLocator start(Database.BatchableContext BC)
-     {  
-         
+     {           
          String query = 'SELECT Id,jj_rb_IMS_Customer_Id__c,Account_Type__c,jj_rb_National_Channel_Manager__c,jj_rb_SAP_Customer_Number__c,Name,RecordTypeId FROM Account where RecordTypeID =:hcpRecordtypeID';
             return Database.getQueryLocator(query);
      }
@@ -20,7 +30,9 @@ global class jj_rb_HCPAccrualcalc extends jj_rb_rebateAccrualBaseClass implement
      Set<Id> setCustomerId = new Set<Id>(); 
      List<Account> listAccount = new List<Account>();     
     
-     String Account_HCP = jj_rb_Rebate_utils.getRecordTypeId('Account_Homecare');
+   
+     Id Account_HCP = jj_rb_Rebate_utils.getHospitalRecordTypeId();
+     
      String Accrual_HCP = jj_rb_Rebate_utils.getRecordTypeId('Accrual_Homecare');
      String HCPType = jj_rb_Rebate_utils.getAccountType('Home Care Provider');
      id Homecare_claim = jj_rb_Rebate_utils.getRecordTypeId('Claim_Homecare');

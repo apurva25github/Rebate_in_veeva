@@ -114,7 +114,7 @@
             </action>
         </rejectionActions>
     </approvalStep>
-    <description>Approval workflow for rebate claim. The Rebate claim goes to the NCM,Head of BU and FD for the next approvals.</description>
+    <description>Approval workflow for rebate claim. The Rebate claim goes to the NCM,Head of BU and FD for approval when the claim amount is greater than GBP 65000</description>
     <emailTemplate>jj_rb_UK_Indirect_Rebate_Email_Templates/Rebate_claim_approval_Notification</emailTemplate>
     <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
     <entryCriteria>

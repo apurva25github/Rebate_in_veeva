@@ -18,15 +18,13 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
         // Status    
     String statusApproved = jj_rb_Rebate_utils.getRebateLineItemStatus('Approved');
         // Record Type IDs
+        
     id AccountRecordTypeID=jj_rb_Rebate_utils.getRecordTypeId('Retailer_MDR');
     ID ProductRecordTypeID=jj_rb_Rebate_utils.getRecordTypeId('Product_Data_Request');
     ID HCPRecordTypeID = jj_rb_Rebate_utils.getRecordTypeId('Homecare_MDR');
-    ID HospitalRecordTypeID = jj_rb_Rebate_utils.getRecordTypeId('Hospital_Data_Request');    
+    ID HospitalRecordTypeID = jj_rb_Rebate_utils.getRecordTypeId('Trust_MDR');    
     
-        // Account Types
-    String RetailerType = jj_rb_Rebate_utils.getAccountType('Retailer Type');    
-    String HCPType = jj_rb_Rebate_utils.getAccountType('Home Care Provider');
-    String HospitalType = jj_rb_Rebate_utils.getAccountType('Hospital');
+        
         
     Account acc=new Account();
                 
@@ -40,14 +38,13 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
     //Iterate over Newly updated Records in Master Data Request Object
     for(jj_rb_Master_Data_Request__c MDR:trigger.new)
     {
-        System.debug('Trigger Working *********** '+MDR.RecordTypeId+' '+MDR.jj_rb_Business_Name__c+' '+MDR.jj_rb_Product_Name__c);
             // check status and Record type.
             // If the Record is of Account object then add Record in a List
             If(MDR.jj_rb_Status__c != trigger.oldMap.get(MDR.id).jj_rb_Status__c 
-                        && MDR.jj_rb_Status__c == statusApproved 
-                        && (MDR.RecordTypeId == AccountRecordTypeID 
+                        && MDR.jj_rb_Status__c == statusApproved && (MDR.RecordTypeId == AccountRecordTypeID 
                         || MDR.RecordTypeId == HCPRecordTypeID 
                         || MDR.RecordTypeId == HospitalRecordTypeID))
+             
             { 
             
                 acc.id = MDR.jj_rb_Rebate_Request_Change_For_ID__c;
@@ -56,28 +53,13 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
                 acc.jj_rb_National_Channel_Manager__c = MDR.jj_rb_National_Channel_Manager__c;                
                 acc.jj_rb_SAP_Customer_Number__c = MDR.jj_rb_SAP_Customer_Number__c;
                 acc.jj_rb_SAP_Vendor_Number__c = MDR.jj_rb_SAP_Vendor_Number__c;
-                //acc.jj_rb_IMS_Customer_Id__c = MDR.jj_rb_IMS_Customer_Id__c;
+                acc.jj_rb_IMS_Customer_Id__c = MDR.jj_rb_IMS_Customer_Id__c;
+                acc.RecordTypeId = jj_rb_Rebate_utils.getHospitalRecordTypeId();
+                acc.jj_rb_Credit_check_Validity_From__c = MDR.jj_rb_Credit_check_Validity_From__c ;
+                acc.jj_rb_Credit_check_Validity_End__c = MDR.jj_rb_Credit_check_Validity_End__c;
+                acc.jj_rb_Region__c = MDR.jj_rb_Region__c;
                 
-                if(MDR.RecordTypeId == AccountRecordTypeID  )
-                {
-                    acc.jj_rb_IMS_Customer_Id__c = MDR.jj_rb_IMS_Customer_Id__c;
-                    acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account_Retailer');
-                }
-                else if(MDR.RecordTypeId == HCPRecordTypeID)
-                {
-                    acc.jj_rb_Credit_check_Validity_From__c = MDR.jj_rb_Credit_check_Validity_From__c ;
-                    acc.jj_rb_Credit_check_Validity_End__c = MDR.jj_rb_Credit_check_Validity_End__c;
-                    acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account_Homecare');
-                }
-                
-               	else if(MDR.RecordTypeId == HospitalRecordTypeID )
-               {
-                   acc.Type = HospitalType;
-                   acc.jj_rb_Region__c = MDR.jj_rb_Region__c;
-                   acc.RecordTypeId = jj_rb_Rebate_utils.getRecordTypeId('Account_Hospital');
-               }
-               
-               MapAccount.put(MDR.Id, acc);
+                MapAccount.put(MDR.Id, acc);
             }  
            
             // check status and Record type.
@@ -86,6 +68,7 @@ trigger jj_rb_Rebate_MasterDataRequestConvert_After_Update on jj_rb_Master_Data_
             {
                 jj_rb_Rebate_Product__c product=new jj_rb_Rebate_Product__c();
                 product.id = MDR.jj_rb_Rebate_Request_Change_For_ID__c;
+                product.name = MDR.jj_rb_Product_Name__c; 
                 product.jj_rb_Description__c = MDR.jj_rb_SAP_Description__c;
                 product.jj_rb_SAP_EAN_Code__c = MDR.jj_rb_SAP_EAN_Code__c;
                 product.jj_rb_SAP_Material_Number__c = MDR.jj_rb_SAP_Material_Code__c;

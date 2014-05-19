@@ -40,7 +40,7 @@ trigger jj_rb_IMS_Sales_Data_Trigger on jj_rb_IMS_Sales_Data__c (before insert, 
             
             // fix the formatting for the month            
             if(String.isNotBlank(ims.jj_rb_IMS_Data_Month__c) 
-               					&& ims.jj_rb_IMS_Data_Month__c.length()  == 1) 
+                                && ims.jj_rb_IMS_Data_Month__c.length()  == 1) 
                 ims.jj_rb_IMS_Data_Month__c = '0' + ims.jj_rb_IMS_Data_Month__c;
                         
             if(a != null) {

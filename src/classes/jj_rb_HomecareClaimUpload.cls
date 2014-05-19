@@ -98,6 +98,8 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
           String homecareClaimRecordType = jj_rb_Rebate_Utils.getRecordTypeId('Claim_Homecare');
           String homecareCLIRecordType = jj_rb_Rebate_Utils.getRecordTypeId('Claim_LineItem_Homecare');
           
+          Boolean hasRolledBack = false;
+          
          
           Map<String, List<InvoiceData>> mapInvData; 
           try {
@@ -187,7 +189,10 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
                                          // items have to be marked with the error                                       
                                          if(!sr.isSuccess())
                                          {
-                                                Database.rollback(sp);
+                                                if(!hasRolledBack) {
+                                                	Database.rollback(sp);
+                                                	hasRolledBack = true;
+                                                }	
                                                 
                                                 errorClaim = claims[rowNum];
                                                 
@@ -222,6 +227,7 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
                                  
                                  // process all claim line item error records
                                  rowNum = 0;
+                                 hasRolledBack = false;
                                  for(Database.SaveResult sr : sr2)
                                  {
                                          
@@ -229,7 +235,10 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
                                          // items have to be marked with the error                                       
                                          if(!sr.isSuccess())
                                          {
-                                                Database.rollback(sp);
+                                                if(!hasRolledBack) {
+                                                	Database.rollback(sp);
+                                                	hasRolledBack = true;	
+                                                }	
                                                 
                                                 // create the error message string
                                                 String errMsg = '';

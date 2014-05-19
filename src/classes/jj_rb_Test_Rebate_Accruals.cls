@@ -11,6 +11,7 @@
  */
 @isTest
 private class jj_rb_Test_Rebate_Accruals {
+	
     static testMethod void testAccrualActionButtons()
     {       
         User rebateUser = jj_rb_Test_BaseClass.setupUser();       
@@ -24,6 +25,9 @@ private class jj_rb_Test_Rebate_Accruals {
             // fill the customset for recordtypes
             List<jj_rb_Master_Data_RecordTypes__c> listRecType = jj_rb_Test_BaseClass.createRecordTypeCustomSetting();
             insert listRecType;
+            // fill custom settings for Account types
+            list<jj_rb_Account_Type__c> listaccType = jj_rb_Test_BaseClass.createAccountType();
+            insert listaccType;
             
             // create a product
             jj_rb_Rebate_Product__c product = jj_rb_Test_BaseClass.setupRebateProduct();
@@ -56,6 +60,10 @@ private class jj_rb_Test_Rebate_Accruals {
         Test.startTest();
         
         system.runAs(rebateUser) { 
+        	
+        	// fill custom settings for Account types
+        	list<jj_rb_Account_Type__c> listaccType = jj_rb_Test_BaseClass.createAccountType();
+            insert listaccType;
             jj_rb_Test_BaseClass.setupRebateAnalystUser(rebateUser);
             jj_rb_Test_BaseClass.setupRebateNCMUser(rebateUser);
             
@@ -127,7 +135,9 @@ private class jj_rb_Test_Rebate_Accruals {
             // fill the customset for recordtypes
             List<jj_rb_Master_Data_RecordTypes__c> listRecType = jj_rb_Test_BaseClass.createRecordTypeCustomSetting();
             insert listRecType;
-            
+            // fill custom settings for Account types
+            list<jj_rb_Account_Type__c> listaccType = jj_rb_Test_BaseClass.createAccountType();
+            insert listaccType;
             // create a product
             jj_rb_Rebate_Product__c product = jj_rb_Test_BaseClass.setupRebateProduct();
             insert product;
@@ -175,6 +185,9 @@ private class jj_rb_Test_Rebate_Accruals {
         // fill the customset for recordtypes
         List<jj_rb_Master_Data_RecordTypes__c> listCS = jj_rb_Test_BaseClass.createRecordTypeCustomSetting();                                            
         insert listCS;
+        // fill custom settings for Account types
+        list<jj_rb_Account_Type__c> listaccType = jj_rb_Test_BaseClass.createAccountType();
+            insert listaccType;
           
         // create a product
         jj_rb_Rebate_Product__c product = jj_rb_Test_BaseClass.setupRebateProduct();
@@ -185,7 +198,7 @@ private class jj_rb_Test_Rebate_Accruals {
         
         // create a homecare account
         Account homecare= jj_rb_Test_BaseClass.setupHomecareCustomer(rebateUser);
-        homecare.Account_Type__c=jj_rb_Test_BaseClass.accountTypeCreator('Home Care Provider','Homecare');
+        //homecare.Account_Type__c=jj_rb_Test_BaseClass.accountTypeCreator('Home Care Provider','Homecare');
         homecare.jj_rb_IMS_Customer_Id__c='25698';            
         insert homecare;
                        
@@ -253,12 +266,13 @@ private class jj_rb_Test_Rebate_Accruals {
         // create a product
         jj_rb_Rebate_Product__c product = jj_rb_Test_BaseClass.setupRebateProduct();
         insert product;      
-        
-         
+        // fill custom settings for Account types
+        list<jj_rb_Account_Type__c> listaccType = jj_rb_Test_BaseClass.createAccountType();
+            insert listaccType;
         
         // create a homecare account
         Account homecares= jj_rb_Test_BaseClass.setupHomecareCustomer(rebateUser);
-        homecares.Account_Type__c=jj_rb_Test_BaseClass.accountTypeCreator('Home Care Provider','Homecare');
+        //homecares.Account_Type__c=jj_rb_Test_BaseClass.accountTypeCreator('Home Care Provider','Homecare');
         homecares.jj_rb_IMS_Customer_Id__c='25698';
        
         insert homecares;        

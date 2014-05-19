@@ -67,6 +67,9 @@
             //List of batches and batch itself
             List<List<jj_rb_IMS_Sales_Data__c>> IMSUpsertList = new List<List<jj_rb_IMS_Sales_Data__c>>();
             List<jj_rb_IMS_Sales_Data__c> lBatch;   
+            //Init error list
+            Map<String, String> oErrorMap = new Map<String, String>();
+            
     
             if(lLines.size() > 0)
             {
@@ -116,7 +119,7 @@
     
                     //Create IMS object and populate it
                     jj_rb_IMS_Sales_Data__c oIMS = new jj_rb_IMS_Sales_Data__c();
-                    
+                    Boolean hasError = false; 
                     for (Integer j = 0; j < lLines.get(i).size(); j++) {
 
                         String myField = '';
@@ -148,7 +151,14 @@
                             oIMS.put(myField, String.valueof(lLines.get(i).get(j)));
                         } else if (lHeaderRow.get(j) == 'Qty') {
                             myField = 'jj_rb_IMS_Volume__c';
-                            oIMS.put(myField, Integer.valueof(lLines.get(i).get(j)));                            
+                            Integer x = 0;
+                            try {
+							  x = Integer.valueof(lLines.get(i).get(j));
+							}
+							Catch (exception e) {
+	                            hasError = true;
+							}
+                            oIMS.put(myField, x);                            
                             //oIMS.put(myField,7);                            
                         }
                         
@@ -157,8 +167,16 @@
                         }   
                     }
                     
-                    //Add to current batch
-                    lBatch.add(oIMS);
+                    if (!hasError) {
+	                    // generate external id & add to current batch
+	                    String extid = oIMS.jj_rb_IMS_Customer_Number__c+'-'+oIMS.jj_rb_IMS_Product_Number__c+'-'+oIMS.jj_rb_IMS_Data_Month__c+'-'+oIMS.jj_rb_IMS_Data_Year__c;
+	                    oIMS.jj_rb_Dataload_External_id__c = extid;
+	                    
+	                    lBatch.add(oIMS);
+                    } else {
+                    	// Add to error list
+                    	oErrorMap.put('error on line '+i, 'Invalid quantity: '+oIMS.jj_rb_IMS_Volume__c);
+                    }
     
                     //Add batch if completed or at end of lines list (check next record, so from a list index perspective that becomes i -1 +1 = i)
                     if((math.mod(i, MAX_BATCH_SIZE) == 0 && i != iFirstDataRow) || (i+1) == lLines.size() )
@@ -168,9 +186,6 @@
                     }
                 }
             }
-            
-            //Init error list
-            Map<String, String> oErrorMap = new Map<String, String>();
             
             //Upsert objects
             for(List<jj_rb_IMS_Sales_Data__c> lBatchForUpsert : IMSUpsertList)

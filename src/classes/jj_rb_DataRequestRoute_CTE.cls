@@ -51,12 +51,11 @@ public  class jj_rb_DataRequestRoute_CTE {
     {
     	// check if the data request account is a hospital 
     	if(String.isNotBlank(accountId)) {
-	    	List<Account> hospitals = [SELECT Primary_Parent_vod__c, recordtype.DeveloperName 
-	    									FROM Account where recordtype.DeveloperName = 'Hospital_vod' 
-	    									and Primary_Parent_vod__c != null
-	    									and id = :accountId];
+	    	List<Account> hospitals = [SELECT Account_Type__c, Structure_Type_JJ__c, recordtypeId, 
+	    									 Primary_Parent_vod__c, recordtype.DeveloperName 
+	    									FROM Account where id = :accountId];
 	    	if(!hospitals.isEmpty())
-	    		return true;    									
+	    		return jj_rb_Rebate_utils.isHospital(hospitals[0]);    									
     	}    									
     	return false;
     } 

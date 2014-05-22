@@ -301,6 +301,13 @@ public with sharing class jj_rb_SAP_Job_Async implements Database.Batchable<Stri
         {
             sEmailBody = 'SAP job "' + sJobName + '" (file "' + sSAPFileName + '") processed successfully';
         }
+        // Set email subject correctly, taking Database & data format errors into account
+        String sEmailSubjectStatus = '';
+		if ((iErrorCount > 0) || (oAsyncApexJob.NumberOfErrors > 0 )) {
+	            sEmailSubjectStatus = 'Failed';
+	    } else {
+	            sEmailSubjectStatus = 'Completed';
+	    }
         
         // Send an email to the Apex job's submitter notifying of job completion.
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
@@ -312,8 +319,8 @@ public with sharing class jj_rb_SAP_Job_Async implements Database.Batchable<Stri
             toAddresses = new String[] {oAsyncApexJob.CreatedBy.Email, sNotificationEmailAddress};
         }
         mail.setToAddresses(toAddresses);
-        mail.setSubject('SAP job "' + sJobName + '" finished with status ' + oAsyncApexJob.Status);
-        mail.setPlainTextBody('The SAP job "' + sJobName + '" for file "' + sSAPFileName + '" processed ' + oAsyncApexJob.TotalJobItems + ' batches with '+ oAsyncApexJob.NumberOfErrors + ' failures.');
+        mail.setSubject('SAP job "' + sJobName + '" finished with status ' + sEmailSubjectStatus);
+        mail.setPlainTextBody('The SAP job "' + sJobName + '" for file "' + sSAPFileName + '" processed ' + oAsyncApexJob.TotalJobItems + ' batches with '+ (oAsyncApexJob.NumberOfErrors + iErrorCount) + ' failures.');
         Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });       
 
         //Decrement file counter (for showing user what's pending)

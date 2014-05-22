@@ -52,6 +52,18 @@
     <enableHistory>false</enableHistory>
     <enableReports>true</enableReports>
     <fields>
+        <fullName>jj_rb_Dataload_External_id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>External id to check if a duplicate SAP Sales Data record is being uploaded</description>
+        <externalId>true</externalId>
+        <label>Dataload External id</label>
+        <length>200</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
         <fullName>jj_rb_Invoice_Qty__c</fullName>
         <description>Quantity value in SAP Sales invoice.</description>
         <externalId>false</externalId>
@@ -93,7 +105,7 @@
         <label>Net Trade Sales</label>
         <precision>18</precision>
         <required>false</required>
-        <scale>0</scale>
+        <scale>2</scale>
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
@@ -135,8 +147,16 @@
     <label>SAP Sales Data</label>
     <listViews>
         <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>jj_rb_SAP_Customer_ID__c</columns>
+        <columns>jj_rb_SAP_Material_No__c</columns>
+        <columns>jj_rb_Net_Trade_Sales__c</columns>
+        <columns>jj_rb_Invoice_Qty__c</columns>
+        <columns>jj_rb_Month__c</columns>
+        <columns>jj_rb_Year__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
+        <language>en_US</language>
     </listViews>
     <nameField>
         <displayFormat>SAP-{0000}</displayFormat>

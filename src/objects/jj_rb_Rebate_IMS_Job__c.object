@@ -124,8 +124,12 @@
     <label>Rebate IMS Job</label>
     <listViews>
         <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>jj_rb_Status__c</columns>
+        <columns>jj_rb_System_Message__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
+        <language>en_US</language>
     </listViews>
     <nameField>
         <displayFormat>RBIMS-{0000}</displayFormat>

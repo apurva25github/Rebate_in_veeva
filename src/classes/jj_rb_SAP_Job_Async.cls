@@ -67,6 +67,9 @@ public with sharing class jj_rb_SAP_Job_Async implements Database.Batchable<Stri
             List<List<jj_rb_SAP_Sales_Data__c>> SAPUpsertList = new List<List<jj_rb_SAP_Sales_Data__c>>();
             List<jj_rb_SAP_Sales_Data__c> lBatch;   
     
+            //Init error list
+            Map<String, String> oErrorMap = new Map<String, String>();
+            
             if(lLines.size() > 0)
             {
                 //Set first data row index
@@ -115,6 +118,8 @@ public with sharing class jj_rb_SAP_Job_Async implements Database.Batchable<Stri
                     //Create SAP object and populate it
                     jj_rb_SAP_Sales_Data__c oSAP = new jj_rb_SAP_Sales_Data__c();
                     
+                    Boolean hasError = false; 
+                    String errorMessages = 'Invalide number(s): ';
                     for (Integer j = 0; j < lLines.get(i).size(); j++) {
 
                         String myField = '';
@@ -130,20 +135,48 @@ public with sharing class jj_rb_SAP_Job_Async implements Database.Batchable<Stri
                             oSAP.put(myField, lLines.get(i).get(j));                            
                         } else if (lHeaderRow.get(j) == 'Net Trade Sales') {
                             myField = 'jj_rb_Net_Trade_Sales__c';
-                            oSAP.put(myField,Integer.valueof(lLines.get(i).get(j)));                                 
+                            Decimal x = 0;
+                            try {
+							  x = Decimal.valueof(lLines.get(i).get(j));
+							}
+							Catch (exception e) {
+	                            hasError = true;
+	                            errorMessages = errorMessages+' '+lLines.get(i).get(j);
+							}
+                            oSAP.put(myField, x);                               
                         } else if (lHeaderRow.get(j) == 'Invoice Qty') {
                             myField = 'jj_rb_Invoice_Qty__c';
-                            oSAP.put(myField,Integer.valueof(lLines.get(i).get(j)));                                 
+                            Integer x = 0;
+                            try {
+							  x = Integer.valueof(lLines.get(i).get(j));
+							}
+							Catch (exception e) {
+	                            hasError = true;
+	                            errorMessages = errorMessages+' '+lLines.get(i).get(j);
+							}
+                            oSAP.put(myField, x);                               
                         } else if (lHeaderRow.get(j) == 'Month') {
                             myField = 'jj_rb_month__c';
-                            oSAP.put(myField,Integer.valueof(lLines.get(i).get(j)));                                 
+                            Integer x = 0;
+                            try {
+							  x = Integer.valueof(lLines.get(i).get(j));
+							}
+							Catch (exception e) {
+	                            hasError = true;
+	                            errorMessages = errorMessages+' '+lLines.get(i).get(j);
+							}
+                            oSAP.put(myField, x);                               
                         } else if (lHeaderRow.get(j) == 'Year') {
                             myField = 'jj_rb_Year__c';
-                            oSAP.put(myField,Integer.valueof(lLines.get(i).get(j)));                                  
-                        } else if (lHeaderRow.get(j) == 'Year') {
-                            myField = 'jj_rb_SAP_Data_Year__c';
-                            //oSAP.put(myField, Integer.valueof(lLines.get(i).get(j)));                            
-                            oSAP.put(myField,'2014');                            
+                            Integer x = 0;
+                            try {
+							  x = Integer.valueof(lLines.get(i).get(j));
+							}
+							Catch (exception e) {
+	                            hasError = true;
+	                            errorMessages = errorMessages+' '+lLines.get(i).get(j);
+							}
+                            oSAP.put(myField, x);                               
                         } 
                         
                         if (myField != '') {
@@ -151,9 +184,18 @@ public with sharing class jj_rb_SAP_Job_Async implements Database.Batchable<Stri
                         }   
                     }
                     
-                    //Add to current batch
-                    lBatch.add(oSAP);
-    
+                    if (!hasError) {
+	                    String extid = oSAP.jj_rb_SAP_Customer_ID__c + '-' + oSAP.jj_rb_SAP_Material_No__c + '-' + oSAP.jj_rb_month__c + '-' + oSAP.jj_rb_Year__c;
+	                    oSAP.jj_rb_Dataload_External_id__c = extid;
+                    
+	                    //Add to current batch
+	                    lBatch.add(oSAP);
+                    } else {
+                    	// Add to error list
+                    	oErrorMap.put('error on line '+i, 'Invalid quantity: '+errorMessages);
+                    	
+                    }
+                    
                     //Add batch if completed or at end of lines list (check next record, so from a list index perspective that becomes i -1 +1 = i)
                     if((math.mod(i, MAX_BATCH_SIZE) == 0 && i != iFirstDataRow) || (i+1) == lLines.size() )
                     {
@@ -162,9 +204,6 @@ public with sharing class jj_rb_SAP_Job_Async implements Database.Batchable<Stri
                     }
                 }
             }
-            
-            //Init error list
-            Map<String, String> oErrorMap = new Map<String, String>();
             
             //Upsert objects
             for(List<jj_rb_SAP_Sales_Data__c> lBatchForUpsert : SAPUpsertList)
@@ -181,7 +220,7 @@ public with sharing class jj_rb_SAP_Job_Async implements Database.Batchable<Stri
                         
                         //Get record for which things went wrong (assuming errors are in same order as inputs)
                         jj_rb_SAP_Sales_Data__c oSAPRec = lBatchForUpsert.get(i);
-                        oErrorMap.put(oSAPRec.Id, arrErrors[0].getMessage());
+                        oErrorMap.put(oSAPRec.jj_rb_Dataload_External_id__c, arrErrors[0].getMessage());
                     }
                 }
             }
@@ -192,12 +231,12 @@ public with sharing class jj_rb_SAP_Job_Async implements Database.Batchable<Stri
                 iErrorCount += oErrorMap.size();
                 
                 Datetime myDateTime = Datetime.now();
-                String sCsvName= sSAPFileName + '-' + String.valueof(iBatchCount) + '-' + myDateTime.format('yyyymmddHHmmss') + '.bad';
-                String sHeader = '"Id","Error Message"\n';
+                String sCsvName= sSAPFileName + '-' + String.valueof(iBatchCount) + '-' + myDateTime.format('yyyymmddHHmmss') + '-errors.txt';
+                String sHeader = '"Id","Error Message"\r\n';
                 String sFinal = sHeader;
                 
                 for (String sId : oErrorMap.keySet()) {
-                    String sRecord = '"' + sId + '","' + oErrorMap.get(sId) + '"\n';
+                    String sRecord = '"' + sId + '","' + oErrorMap.get(sId) + '"\r\n';
                     sFinal = sFinal + sRecord;
                 }
                 
@@ -205,7 +244,7 @@ public with sharing class jj_rb_SAP_Job_Async implements Database.Batchable<Stri
                 
                 Attachment oAttachment = new Attachment();
                 oAttachment.Body = oCsvBlob;
-                oAttachment.ContentType = 'txt';
+                oAttachment.ContentType = 'text/plain';
                 oAttachment.Name = sCsvName;
                 oAttachment.ParentId = sJobId;
                 insert oAttachment;

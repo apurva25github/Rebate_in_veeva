@@ -120,6 +120,7 @@
                     //Create IMS object and populate it
                     jj_rb_IMS_Sales_Data__c oIMS = new jj_rb_IMS_Sales_Data__c();
                     Boolean hasError = false; 
+                    String badQuantity = '';
                     for (Integer j = 0; j < lLines.get(i).size(); j++) {
 
                         String myField = '';
@@ -145,7 +146,6 @@
                         } else if (lHeaderRow.get(j) == 'Month') {
                             myField = 'jj_rb_IMS_Data_Month__c';
                             oIMS.put(myField, String.valueof(lLines.get(i).get(j)));
-                            //oIMS.put(myField,'7');                            
                         } else if (lHeaderRow.get(j) == 'Year') {
                             myField = 'jj_rb_IMS_Data_Year__c';
                             oIMS.put(myField, String.valueof(lLines.get(i).get(j)));
@@ -157,9 +157,9 @@
 							}
 							Catch (exception e) {
 	                            hasError = true;
+	                            badQuantity = lLines.get(i).get(j);
 							}
                             oIMS.put(myField, x);                            
-                            //oIMS.put(myField,7);                            
                         }
                         
                         if (myField != '') {
@@ -175,7 +175,7 @@
 	                    lBatch.add(oIMS);
                     } else {
                     	// Add to error list
-                    	oErrorMap.put('error on line '+i, 'Invalid quantity: '+oIMS.jj_rb_IMS_Volume__c);
+                    	oErrorMap.put('error on line '+i, 'Invalid quantity: '+badQuantity);
                     }
     
                     //Add batch if completed or at end of lines list (check next record, so from a list index perspective that becomes i -1 +1 = i)
@@ -202,7 +202,7 @@
                         
                         //Get record for which things went wrong (assuming errors are in same order as inputs)
                         jj_rb_IMS_Sales_Data__c oIMSRec = lBatchForUpsert.get(i);
-                        oErrorMap.put(oIMSRec.Id, arrErrors[0].getMessage());
+                        oErrorMap.put(oIMSRec.jj_rb_Dataload_External_id__c, arrErrors[0].getMessage());
                     }
                 }
             }
@@ -213,7 +213,7 @@
                 iErrorCount += oErrorMap.size();
                 
                 Datetime myDateTime = Datetime.now();
-                String sCsvName= sIMSFileName + '-' + String.valueof(iBatchCount) + '-' + myDateTime.format('yyyymmddHHmmss') + '.bad';
+                String sCsvName= sIMSFileName + '-' + String.valueof(iBatchCount) + '-' + myDateTime.format('yyyymmddHHmmss') + '-errors.txt';
                 String sHeader = '"Id","Error Message"\n';
                 String sFinal = sHeader;
                 
@@ -273,16 +273,23 @@
             }
             else
             {
-                oIMSJob.jj_rb_System_Message__c = sIMSFileName + ': ' + String.valueof(iErrorCount) + ' data errors, please check bad file(s) attached';
+                oIMSJob.jj_rb_System_Message__c = sIMSFileName + ': ' + String.valueof(iErrorCount) + ' data errors, please check error text file(s) attached';
             }
             
             sEmailBody += 'IMS job "' + sJobName + '" (file "' + sIMSFileName + '") not processed successfully\r\n';
-            sEmailBody += '\t' + String.valueof(iErrorCount) + ' data errors, please check bad file(s) attached';
+            sEmailBody += '\t' + String.valueof(iErrorCount) + ' data errors, please check error text file(s) attached';
         }
         else
         {
             sEmailBody = 'IMS job "' + sJobName + '" (file "' + sIMSFileName + '") processed successfully';
         }
+        // Set email subject correctly, taking Database & data format errors into account
+        String sEmailSubjectStatus = '';
+		if ((iErrorCount > 0) || (oAsyncApexJob.NumberOfErrors > 0 )) {
+	            sEmailSubjectStatus = 'Failed';
+	    } else {
+	            sEmailSubjectStatus = 'Completed';
+	    }
         
         // Send an email to the Apex job's submitter notifying of job completion.
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
@@ -294,8 +301,8 @@
             toAddresses = new String[] {oAsyncApexJob.CreatedBy.Email, sNotificationEmailAddress};
         }
         mail.setToAddresses(toAddresses);
-        mail.setSubject('IMS job "' + sJobName + '" finished with status ' + oAsyncApexJob.Status);
-        mail.setPlainTextBody('The IMS job "' + sJobName + '" for file "' + sIMSFileName + '" processed ' + oAsyncApexJob.TotalJobItems + ' batches with '+ oAsyncApexJob.NumberOfErrors + ' failures.');
+        mail.setSubject('IMS job "' + sJobName + '" finished with status ' + sEmailSubjectStatus);
+        mail.setPlainTextBody('The IMS job "' + sJobName + '" for file "' + sIMSFileName + '" processed ' + oAsyncApexJob.TotalJobItems + ' batches with '+ (oAsyncApexJob.NumberOfErrors + iErrorCount) + ' failures');
         Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });       
 
         //Decrement file counter (for showing user what's pending)

@@ -67,6 +67,7 @@
     </fields>
     <fields>
         <fullName>jj_rb_Dataload_External_id__c</fullName>
+        <caseSensitive>false</caseSensitive>
         <description>External id to check if a duplicate IMS Sales Data record is being uploaded</description>
         <externalId>true</externalId>
         <label>Dataload External id</label>
@@ -75,7 +76,7 @@
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
-        <unique>false</unique>
+        <unique>true</unique>
     </fields>
     <fields>
         <fullName>jj_rb_IMS_Customer_Number__c</fullName>

@@ -214,11 +214,11 @@
                 
                 Datetime myDateTime = Datetime.now();
                 String sCsvName= sIMSFileName + '-' + String.valueof(iBatchCount) + '-' + myDateTime.format('yyyymmddHHmmss') + '-errors.txt';
-                String sHeader = '"Id","Error Message"\n';
+                String sHeader = '"Id","Error Message"\r\n';
                 String sFinal = sHeader;
                 
                 for (String sId : oErrorMap.keySet()) {
-                    String sRecord = '"' + sId + '","' + oErrorMap.get(sId) + '"\n';
+                    String sRecord = '"' + sId + '","' + oErrorMap.get(sId) + '"\r\n';
                     sFinal = sFinal + sRecord;
                 }
                 
@@ -226,7 +226,7 @@
                 
                 Attachment oAttachment = new Attachment();
                 oAttachment.Body = oCsvBlob;
-                oAttachment.ContentType = 'txt';
+                oAttachment.ContentType = 'text/plain';
                 oAttachment.Name = sCsvName;
                 oAttachment.ParentId = sJobId;
                 insert oAttachment;

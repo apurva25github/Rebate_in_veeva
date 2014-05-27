@@ -570,7 +570,7 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
         for (jj_rb_Rebate_Claim_Line_Item__c oldLineItem : [select Id, jj_rb_Rebate_Claim__c, jj_rb_Rebate_Claim__r.jj_rb_Customer__c,
                                                                               jj_rb_Rebate_Product__c, jj_rb_Rebate_Product__r.Name,
                                                                               toLabel(jj_rb_Rebate_Claim__r.jj_rb_Month__c),
-                                                                              jj_rb_Rebate_Claim__r.jj_rb_Year__c
+                                                                              jj_rb_Rebate_Claim__r.jj_rb_Year__c,jj_rb_Hospital__c,RecordTypeId
                                                                         from jj_rb_Rebate_Claim_Line_Item__c
                                                                         where jj_rb_Rebate_Claim__r.jj_rb_Customer__c in :setClaimAccounts
                                                                         and  jj_rb_Rebate_Product__c in :setClaimProducts

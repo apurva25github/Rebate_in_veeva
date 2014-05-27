@@ -417,7 +417,19 @@ public class jj_rb_Test_BaseClass {
     	
     	return listAccType;
     }
-    
+    public static list<jj_rb_Rebate_Contract_Line_Item_Status__c> createcustomstatus()
+    {
+    	list<jj_rb_Rebate_Contract_Line_Item_Status__c> listStatus = new list<jj_rb_Rebate_Contract_Line_Item_Status__c>();
+    	listStatus.add(jj_rb_Test_BaseClass.setupCustomSettingForStatus('Closed','Closed'));
+    	listStatus.add(jj_rb_Test_BaseClass.setupCustomSettingForStatus('Approved','Approved'));
+    	listStatus.add(jj_rb_Test_BaseClass.setupCustomSettingForStatus('Modified','Modified'));
+    	listStatus.add(jj_rb_Test_BaseClass.setupCustomSettingForStatus('Submitted','Submitted'));
+    	listStatus.add(jj_rb_Test_BaseClass.setupCustomSettingForStatus('New','New'));
+    	listStatus.add(jj_rb_Test_BaseClass.setupCustomSettingForStatus('Rejected','Rejected'));
+    	listStatus.add(jj_rb_Test_BaseClass.setupCustomSettingForStatus('Expired','Expired'));
+    	return listStatus;
+    	
+    }
     public static List<jj_rb_Master_Data_RecordTypes__c>  createRecordTypeCustomSetting() 
     {
             List<jj_rb_Master_Data_RecordTypes__c> listCS2 = new List<jj_rb_Master_Data_RecordTypes__c>();

@@ -87,7 +87,9 @@
         </actions>
         <active>true</active>
         <description>This workflow will set the status of the contract to expired if all the line items are expired.</description>
-        <formula>(jj_rb_Total_Expired_Line_Items__c =  jj_rb_Total_Line_Items__c) &amp;&amp; jj_rb_Total_Line_Items__c &gt; 0</formula>
+        <formula>(jj_rb_Total_Expired_Line_Items__c =  jj_rb_Total_Line_Items__c) 
+&amp;&amp; jj_rb_Total_Line_Items__c &gt; 0
+&amp;&amp;  NOT(ISPICKVAL(jj_rb_Status__c,&apos;Closed&apos;))</formula>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
 </Workflow>

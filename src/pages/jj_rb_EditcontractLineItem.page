@@ -1,5 +1,38 @@
-<apex:page standardController="jj_rb_Rebate_Contract_Line_Item__c" extensions="jj_rb_EditcontractLineItemOverrideclass" action="{!edit}">
+<apex:page standardController="jj_rb_Rebate_Contract_Line_Item__c" extensions="jj_rb_EditcontractLineItemOverrideclass" action="{!edit}" >
     <apex:form >
-    
+        <apex:pageblock title="Rebate Contract Line Item" rendered="{!show_optns}">
+            <apex:selectRadio value="{!editOption}" layout="pagedirection">
+                <apex:selectOption itemLabel="Edit Contract Line Item" itemvalue="{!editContractLineItem}"/>
+                <apex:selectOption itemLabel="Clone Contract Line Item" itemvalue="{!cloneContractLineItem}"/>
+            </apex:selectRadio>
+                <apex:commandButton value="Continue" action="{!redirect}"/>
+                <apex:commandButton value="Cancel" action="{!Cancel}"/>
+        </apex:pageblock>
+        <apex:pageblock rendered="{!show_error}">
+            <b>
+            <br/>
+            <font size="3">
+                <!-- You are not allowed to Modify {!$CurrentPage.parameters.status}  {!$CurrentPage.parameters.recordtype} for Contract ID: {!$CurrentPage.parameters.contract} -->
+                An expired contract line item cannot be modified.
+                </font>
+                </b><br/><br/>
+                But you can clone the line item by selecting the option below : 
+            
+            <apex:selectRadio value="{!editOption}" layout="pagedirection">
+                <apex:selectOption itemLabel="Clone Contract Line Item" itemvalue="{!cloneContractLineItem}"/>
+            </apex:selectRadio>
+            <apex:commandButton value="Continue" action="{!redirect}"/>
+            <apex:commandButton value="Cancel" action="{!Cancel}"/>
+        </apex:pageblock>
+        <apex:pageblock rendered="{!show_clone}">
+            <b>
+            <br/>
+            <font size="3">
+                <!-- A closed contract line item cannot be modified. -->
+                <apex:outputtext value="{!show_closeError}"> </apex:outputtext>
+            </font>
+            </b><br/>
+            <apex:commandLink action="{!cancel}" value="Back"/>
+        </apex:pageblock>
     </apex:form>
 </apex:page>

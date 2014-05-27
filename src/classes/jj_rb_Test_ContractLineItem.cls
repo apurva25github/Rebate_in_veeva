@@ -40,13 +40,15 @@ private class jj_rb_Test_ContractLineItem {
     }
     
     static testMethod void testEditContractLineItemOverride() {
-    	User rebateUser = jj_rb_Test_BaseClass.setupUser();       
-        
-        Test.startTest();
+    	User rebateUser = jj_rb_Test_BaseClass.setupUser();
         
         system.runAs(rebateUser) { 
         	jj_rb_Test_BaseClass.setupRebateNCMUser(rebateUser);
         	
+        	List<jj_rb_Master_Data_RecordTypes__c> listRecType = jj_rb_Test_BaseClass.createRecordTypeCustomSetting();
+            insert listRecType;
+            list<jj_rb_Rebate_Contract_Line_Item_Status__c> listStatus = jj_rb_Test_BaseClass.createcustomstatus();
+        	insert listStatus;
         	// setup a retailer account
         	Account retailer = jj_rb_Test_BaseClass.setupRetailerCustomer(rebateUser);
         	insert retailer;
@@ -58,13 +60,29 @@ private class jj_rb_Test_ContractLineItem {
         	insert product;
         	jj_rb_Rebate_Contract_Line_Item__c cli = jj_rb_Test_BaseClass.setupRetailerContractLineItem(contract, product);
         	insert cli;
-        	
+        	test.startTest();
+        	cli.jj_rb_status__c = 'Closed';
+        	update cli;
         	jj_rb_EditcontractLineItemOverrideclass controller = new jj_rb_EditcontractLineItemOverrideclass(new ApexPages.Standardcontroller(cli));
         	controller.edit();
         	
+        	cli.jj_rb_status__c = 'Approved';
+        	update cli;
+        	controller = new jj_rb_EditcontractLineItemOverrideclass(new ApexPages.Standardcontroller(cli));
+        	controller.edit();
+        	
+        	contract.jj_rb_status__c = 'Submitted';
+        	update contract;
+        	controller = new jj_rb_EditcontractLineItemOverrideclass(new ApexPages.Standardcontroller(cli));
+        	controller.edit();
+        	
+        	cli.jj_rb_status__c = 'Expired';
+        	update cli;
+        	controller = new jj_rb_EditcontractLineItemOverrideclass(new ApexPages.Standardcontroller(cli));
+        	controller.edit();
+        	
+        	test.stopTest();
         }
-        
-        Test.stopTest();	
     }
     	 
     

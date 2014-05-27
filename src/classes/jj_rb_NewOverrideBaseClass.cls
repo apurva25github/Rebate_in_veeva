@@ -27,7 +27,8 @@ public abstract class jj_rb_NewOverrideBaseClass {
         Id parentSObjectId = getParentSObjectId(m);        
         if(parentSObjectId != null) {                
 	        m.put('RecordType', getChildRecordTypeId(getParentSObjectId(m)));        
-	        m.put('nooverride', '1');    
+	        m.put('nooverride', '1');   
+	        m.remove('save_new');   
         } else {
         	m.put('save_new','1');
         	m.put('nooverride', '1');        	

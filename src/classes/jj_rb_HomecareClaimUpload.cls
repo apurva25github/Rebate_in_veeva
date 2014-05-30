@@ -39,12 +39,21 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
      	return;
      }
      
+    
+     List<List<String>> listParsedCSV;
+     try {
+	     // parse the records and get all the rows for all the columns
+	     listParsedCSV = parseCSV(document.body.toString(), false);
+     }
+     catch (Exception ex) {
+     	Apexpages.addMessage(new ApexPages.Message(ApexPages.Severity.FATAL, 
+     				'An error occurred while parsing the upload file. Please check the file for special charachters like single quotes, percentage, pound sign etc.'));     	
+     	return;
+     }
+     
      errorInUpload = false;
      showUploadMsg = true;
      	
-     
-     // parse the records and get all the rows for all the columns
-     List<List<String>> listParsedCSV = parseCSV(document.body.toString(), false);
      
      // map these parsed records to the wrapper object
      InvoiceWrapper invoiceWrapper = getMappedRecords(listParsedCSV); 
@@ -145,7 +154,7 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
           }
           catch(Exception ex)
           {
-                Apexpages.addMessages(ex);
+                //Apexpages.addMessages(ex);
           }
           
           if(!claims.isEmpty())
@@ -479,7 +488,7 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
                 } 
                 catch (Exception ex)
                 {
-                        Apexpages.addMessages(ex); 
+                        //Apexpages.addMessages(ex); 
                 } 
                 return invoiceWrapper;            
    }

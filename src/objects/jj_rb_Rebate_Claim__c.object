@@ -634,6 +634,7 @@
         <customTabListAdditionalFields>jj_rb_Status__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
         <listViewButtons>jj_rb_Homecare_Claim_Upload</listViewButtons>
+        <listViewButtons>jj_rb_Submit_for_Approval</listViewButtons>
     </searchLayouts>
     <sharingModel>Private</sharingModel>
     <webLinks>
@@ -647,5 +648,40 @@
         <page>jj_rb_Homecare_Claim_Upload</page>
         <protected>false</protected>
         <requireRowSelection>false</requireRowSelection>
+    </webLinks>
+    <webLinks>
+        <fullName>jj_rb_Submit_for_Approval</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Submit for Approval</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/21.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/21.0/apex.js&quot;)} 
+
+var url = parent.location.href; 
+records={!GETRECORDIDS($ObjectType.jj_rb_Rebate_Claim__c)}; 
+
+if (records.length==0) 
+{ 
+alert(&quot;Please select at least one Rebate claim&quot;); 
+} 
+else if(records.length &gt; 1000)
+{
+        alert(&quot;Please select only 1000 records&quot;);
+}
+else 
+{
+     try { 
+      var error = sforce.apex.execute(&apos;jj_rb_Claimsubmit_Approval&apos;,&apos;Submitforapproval&apos;,  {listClaim:records}); 
+         } catch (e)
+         { 
+      alert(&apos;You do not have the permission to perform this operation. Please contact          the system administrator.&apos;); 
+         } 
+
+parent.location.href=url; 
+}</url>
     </webLinks>
 </CustomObject>

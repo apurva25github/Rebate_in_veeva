@@ -40,7 +40,8 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
         List<jj_rb_Rebate_Claim_Line_Item__c> listClaimLineItemsdata=[select id,jj_rb_Rebate_Product__c,jj_rb_Quantity__c,jj_rb_Tolerance_Failed_Qty__c,
                                                      jj_rb_Hospital__c,jj_rb_Rebate_Claim__c,jj_rb_Rebate_Per_Unit__c,jj_rb_Rebate_Claim__r.jj_rb_Month__c,
                                                      jj_rb_Rebate_Claim__r.jj_rb_Customer__c,jj_rb_Difference_in_Qty__c, 
-                                                     jj_rb_Rebate_Claim__r.jj_rb_Year__c,jj_rb_Calculated_quantity__c 
+                                                     jj_rb_Rebate_Claim__r.jj_rb_Year__c,jj_rb_Calculated_quantity__c, jj_rb_Hospital__r.Name,
+                                                     jj_rb_Hospital__r.Primary_Parent_vod__c, jj_rb_Hospital__r.Primary_Parent_vod__r.jj_rb_region__c
                                                      from jj_rb_Rebate_Claim_Line_Item__c WHERE Id IN: listNewClaimLineItem AND
                                                      jj_rb_Rebate_Product__c != null AND                                                            
                                                      jj_rb_Rebate_Claim__r.jj_rb_Month__c != null AND
@@ -59,7 +60,7 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
             // add month and year in a single set 
             setMonthAndYear.add(objItem.jj_rb_Rebate_Claim__r.jj_rb_Month__c);
             setMonthAndYear.add(objItem.jj_rb_Rebate_Claim__r.jj_rb_Year__c);
-            mapClaimsToValidate.put(objItem.id,objItem);
+            mapClaimsToValidate.put(objItem.id,objItem);            
         }
 
       
@@ -84,9 +85,9 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
             ids.add(account.Primary_Parent_vod__r.jj_rb_region__c);
             mapNHSTrust.put(account.id,account.Primary_Parent_vod__r.jj_rb_region__c); 
             
-            if(account.Primary_Parent_vod__r.jj_rb_region__c == null) {
+            /*if(account.Primary_Parent_vod__r.jj_rb_region__c == null) {
             	throw new jj_rb_ApplicationException('Region not associated with NHS Trust - ' + account.Primary_Parent_vod__r.Name);
-            }         
+            } */        
         }
         
         //system.debug('mapNHSTrust>>>'+mapNHSTrust);        
@@ -614,6 +615,37 @@ public without sharing class jj_rb_RebateClaimLineItemTriggerHandler {
         );
     }
     
+   public static void validateHospitalCustomers(Set<jj_rb_Rebate_Claim_Line_Item__c> setHCPClaimLineItems)
+   {
+   	  Set<Id> setHospitals = new Set<Id>();
+   	  for(jj_rb_Rebate_Claim_Line_Item__c cli : setHCPClaimLineItems)
+   	  {
+   	  	setHospitals.add(cli.jj_rb_Hospital__c);
+   	  }
+   	  
+   	  if(!setHospitals.isEmpty()) {
+   	  	 Map<id, Account> mapHospitals = new Map<Id, Account>([select name, 
+   	  	 															Primary_Parent_vod__r.jj_rb_region__c,Primary_Parent_vod__r.Name  
+					        									from Account 
+					        									where id IN :setHospitals]);
+        	
+        	system.debug('mapHospitals>>>>' + mapHospitals);
+        	for(jj_rb_Rebate_Claim_Line_Item__c cli :  setHCPClaimLineItems)
+        	{
+        		Account hospital = mapHospitals.get(cli.jj_rb_Hospital__c);
+        		
+        		if(hospital.Primary_Parent_vod__r == null)
+        		{
+        			cli.addError('No parent trust defined for hospital - ' + hospital.name);
+        		} 
+        		
+        		if(hospital.Primary_Parent_vod__r != null && hospital.Primary_Parent_vod__r.jj_rb_region__c == null)
+        		{
+        			cli.addError('No region defined for NHS Trust - ' + hospital.Primary_Parent_vod__r.name);
+        		}
+        	}								
+   	  }
+   }
         
    public class jj_rb_ApplicationException extends Exception {} 
 }

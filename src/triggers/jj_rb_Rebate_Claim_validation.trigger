@@ -15,25 +15,31 @@ trigger jj_rb_Rebate_Claim_validation on jj_rb_Rebate_Claim__c (before insert,be
     List<jj_rb_Rebate_Claim__c> RClaimlist=System.Trigger.new;
     List<jj_rb_Rebate_Claim__c> RClistdata= new  List<jj_rb_Rebate_Claim__c>();
     Set<ID> setids= new Set<ID>();
+    Set<Id> setClaimAccounts = new Set<Id>();
     List<jj_rb_Rebate_Claim__c> UpdatedClaim = new list<jj_rb_Rebate_Claim__c>();
     
-   List<Account> accNCM = new List<Account>([select Id, jj_rb_National_Channel_Manager__c,name from Account]);
     for(jj_rb_Rebate_Claim__c RClaim:RClaimlist)
     {
-        setids.add(RClaim.jj_rb_Customer__c);
-        for(Account acc : accNCM)
-        {
-            if(RClaim.jj_rb_Customer__c == acc.Id)
-            {
-                if(acc.jj_rb_National_Channel_Manager__c != null) {
-                    RClaim.OwnerId = acc.jj_rb_National_Channel_Manager__c;
-                } else {
-                    RClaim.addError('No National Channel Manager selected for claim customer ' + acc.Name + '.');
-                }    
-            }
-        }
+    	setClaimAccounts.add(RClaim.jj_rb_Customer__c);    	
     }
     
+    Map<Id, Account> mapAccount = new Map<Id, Account>([select Id, jj_rb_National_Channel_Manager__c,name from Account where id in :setClaimAccounts]);
+    
+    // set the NCM as the owner of the claim
+    // if no NCM specified for the acccount, throw error
+    for(jj_rb_Rebate_Claim__c newClaim : trigger.new)
+    {
+    	setids.add(newClaim.jj_rb_Customer__c);
+    	
+    	Account claimAccount = mapAccount.get(newClaim.jj_rb_Customer__c);
+    	
+    	if(claimAccount.jj_rb_National_Channel_Manager__c == null)
+    		newClaim.addError('No National Channel Manager selected for claim customer ' + claimAccount.Name + '.');
+    	else	
+    	    newClaim.OwnerId = claimAccount.jj_rb_National_Channel_Manager__c;    	    	
+    }
+    
+       
     RClistdata=[SELECT jj_rb_month__c,jj_rb_Year__c FROM jj_rb_Rebate_Claim__c where jj_rb_Customer__c IN:setids];
     
     for(jj_rb_Rebate_Claim__c RClaim:RClaimlist)

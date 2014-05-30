@@ -666,11 +666,11 @@ records={!GETRECORDIDS($ObjectType.jj_rb_Rebate_Claim__c)};
 
 if (records.length==0) 
 { 
-alert(&quot;Please select at least one Rebate claim&quot;); 
+alert(&quot;Please select at least one Rebate claim.&quot;); 
 } 
 else if(records.length &gt; 1000)
 {
-        alert(&quot;Please select only 1000 records&quot;);
+        alert(&quot;Please select only 1000 records.&quot;);
 }
 else 
 {
@@ -678,7 +678,7 @@ else
       var error = sforce.apex.execute(&apos;jj_rb_Claimsubmit_Approval&apos;,&apos;Submitforapproval&apos;,  {listClaim:records}); 
          } catch (e)
          { 
-      alert(&apos;You do not have the permission to perform this operation. Please contact          the system administrator.&apos;); 
+      alert(&apos;You do not have the permission to perform this operation. Please contact the system administrator.&apos;); 
          } 
 
 parent.location.href=url; 

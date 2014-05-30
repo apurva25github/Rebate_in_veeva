@@ -13,6 +13,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>jj_rb_Claimsubmit_Approval</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>jj_rb_Close_contract</apexClass>
         <enabled>false</enabled>
     </classAccesses>

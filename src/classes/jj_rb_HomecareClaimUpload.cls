@@ -24,29 +24,7 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
         set;
      } 
      
-   //constructor
-   public jj_rb_HomecareClaimUpload()
-   {}
-   
-   public jj_rb_HomecareClaimUpload(Apexpages.StandardController con)
-   {  } 
-   
-   public jj_rb_HomecareClaimUpload(Apexpages.StandardSetController con)  
-   {   }
-   
-   // function to validate the file being uploaded.
-   public Boolean invalidFile(Document doc)
-   {
-   	if(String.isBlank(doc.Name)) {
-   		Apexpages.addMessage(new ApexPages.Message(ApexPages.Severity.WARNING, MSG_INVALID_FILE));
-   		return true;  
-   	}	 	
-   	if(!doc.Name.toUpperCase().contains('.CSV')) {
-   		Apexpages.addMessage(new ApexPages.Message(ApexPages.Severity.WARNING, MSG_INVALID_FILE));
-   		return true;
-   	}	
-   	return false;	
-   }
+  
      
    public void upload() 
    {  	 
@@ -82,7 +60,7 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
      
      if (!invoiceWrapper.errorRecords.isEmpty()) {
         // process the error records
-        processErrorRecords(invoiceWrapper.errorRecords);
+        processErrorRows(invoiceWrapper);
      }  
      
      document.body = null;     
@@ -139,11 +117,15 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
                                                   jj_rb_Rebate_Claim_Line_Item__c claimLineItem = new jj_rb_Rebate_Claim_Line_Item__c();                  
                                                   claimLineItem.jj_rb_Rebate_Claim__r = new jj_rb_Rebate_Claim__c();
                                                   claimLineItem.jj_rb_Rebate_Claim__r.jj_rb_Dataload_external_Id__c = uniqueKey;
-                                                  claimLineItem.jj_rb_Hospital__r = new Account();
-                                                  //claimLineItem.jj_rb_Hospital__r.jj_rb_iConnect_ID__c = invData.hospitalId;
+                                                  claimLineItem.jj_rb_Hospital__r = new Account();                                                  
                                                   claimLineItem.jj_rb_Hospital__r.CODS_External_Id__c = invData.hospitalId;
                                                   claimLineItem.jj_rb_Rebate_Product__r = new jj_rb_Rebate_Product__c();
-                                                  claimLineItem.jj_rb_Rebate_Product__r.jj_rb_SAP_EAN_Code__c = invData.productEANCode;
+                                                  
+                                                  if(String.isNotBlank(invData.productSAPMaterialNo))
+                                                  	claimLineItem.jj_rb_Rebate_Product__r.jj_rb_SAP_Material_Number__c = invData.productSAPMaterialNo;
+                                                  else	
+                                                  	claimLineItem.jj_rb_Rebate_Product__r.jj_rb_SAP_EAN_Code__c = invData.productEANCode;
+                                                  
                                                   claimLineItem.jj_rb_Quantity__c = invData.qty;
                                                   claimLineItem.jj_rb_Unit_List_Price__c = invData.unitListPrice;
                                                   claimLineItem.jj_rb_Unit_Contract_Price__c = invData.unitContractPrice;
@@ -259,9 +241,10 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
                                             for(InvoiceData invData : listErrorInvData)
                                             {
                                                 if(invData.hospitalId == errorClaimLineItem.jj_rb_Hospital__r.CODS_External_Id__c
-                                                                && invData.productEANCode == errorClaimLineItem.jj_rb_Rebate_Product__r.jj_rb_SAP_EAN_Code__c) {
+                                                       && (invData.productEANCode == errorClaimLineItem.jj_rb_Rebate_Product__r.jj_rb_SAP_EAN_Code__c
+                                                           || invData.productSAPMaterialNo == errorClaimLineItem.jj_rb_Rebate_Product__r.jj_rb_SAP_Material_Number__c)) {
                                                         invData.errorMsg = errMsg;
-                                                        InvoiceWrapper.errorRecords.add(invData);
+                                                        InvoiceWrapper.errorRecords.add(invData); 
                                                 }
                                             }
                                             
@@ -272,49 +255,80 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
           }              
 }
 
-// this method processes the error records
-   private void processErrorRecords(List<InvoiceData> listErrorRows)
-   {
-           errorInUpload = true;           
-           for(InvoiceData errorRow : listErrorRows)
-           {
-                        system.debug('Error row>>>>' + errorRow);
-           }
+	// process error rows
+	private void processErrorRows(InvoiceWrapper invoiceWrapper)
+	{
+		errorInUpload = true;
+		
+		// get the error file
+		String errorFile = 	prepareErrorFile(invoiceWrapper.csvHeader, invoiceWrapper.errorRecords);
+		
+		sendEmail(errorFile);		
+	}
+	
+	private void sendEmail(String errorFile)
+	{
+		// send error email to current user
+        Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
            
-           String body = '';
-           body = 'SAP Customer No,Claim Month,Claim Year,Hospital Id,Hospital Name,Product EAN Code,Product Name,Quantity,Unit List Price,Unit Contract Price,Unit Rebate Price,Net Rebate,VAT Amount,VAT Code,Gross Rebate, Error Message\n';
-           for(InvoiceData errorRow : listErrorRows)
-           {
-                  body += errorRow.sapCustomerNo + ',' + errorRow.month + ',' + errorRow.year + ',' + errorRow.hospitalId + ',' + errorRow.hospitalName + ',' + errorRow.productEANCode + ',' + errorRow.productName + ',' + errorRow.qty + ',' + errorRow.unitListPrice + ',' + errorRow.unitContractPrice + ',' + errorRow.unitRebate + ',' + errorRow.netRebate + ',' + errorRow.vatAmount + ','+ errorRow.vatCode + ',' + errorRow.grossRebate + ',' + errorRow.errorMsg + '\n';    
-           }
-           
-           // send error email to current user
-           Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
-           
-           // Create the email attachment
-       Messaging.EmailFileAttachment efa = new Messaging.EmailFileAttachment();
-       efa.setFileName('errorLog.csv');
-       efa.setBody(Blob.valueOf(body)); 
+        // Create the email attachment
+       	Messaging.EmailFileAttachment efa = new Messaging.EmailFileAttachment();
+       	efa.setFileName('errorLog.csv');
+       	efa.setBody(Blob.valueOf(errorFile)); 
        
-       List<String> toAddresses = new List<String> {UserInfo.getUserEmail()};
+       	List<String> toAddresses = new List<String> {UserInfo.getUserEmail()};
        
-       // Sets the paramaters of the email
-       email.setSubject('Homecare claim upload error report');
-       email.setToAddresses( toAddresses );
-       email.setPlainTextBody('Hello,\n\nPlease find attached the Homecare claim upload error report.\n\nRegards,\nRebate Management');
+       	// Sets the paramaters of the email
+       	email.setSubject('Homecare claim upload error report');
+       	email.setToAddresses( toAddresses );
+       	email.setPlainTextBody('Hello,\n\nPlease find attached the Homecare claim upload error report.\n\nRegards,\nRebate Management');
 
-       email.setFileAttachments(new Messaging.EmailFileAttachment[] {efa});
+       	email.setFileAttachments(new Messaging.EmailFileAttachment[] {efa});
 
-       // Sends the email
-       Messaging.SendEmailResult [] r =
-            Messaging.sendEmail(new Messaging.SingleEmailMessage[] {email});   
-   }
-   
+       	// Sends the email
+       	Messaging.SendEmailResult [] r =
+        Messaging.sendEmail(new Messaging.SingleEmailMessage[] {email}); 
+	}
+	
+	private String prepareErrorFile(List<String> csvHeader, List<InvoiceData> errorRows)
+	{
+		//prepare header of the error file
+		String header = '';
+		for(String col : csvHeader)
+		{
+			header += col + ',';
+		}
+		
+		// add header for error column
+		header = header.replaceAll('\n','').replaceAll('\r','');
+		header += 'Error Message\n';
+		
+		// prepare body of the error file
+		String body = '';
+		for(InvoiceData invData : errorRows)
+		{
+			for(String col : invData.csvRow)
+			{
+				body += col + ',';
+			}
+			
+			// add error message
+			body = body.replaceAll('\r','');
+			body += invData.errorMsg + '\n';
+		}
+		
+		system.debug('Err File Header>>>>' + header);
+		system.debug('Err File BodyBody>>>>' + body);
+		
+		return header + body;
+	}
+	   
    private InvoiceWrapper getMappedRecords(List<List<String>> csvRecords)
    {
                 Integer rowNum = 0;
                 List<InvoiceData> listInvData = new List<InvoiceData> ();
                 Map<String, List<InvoiceData>> mapInvoiceWrapper =  new Map<String, List<InvoiceData>>();
+                Map<String, Integer> mapHeader;
                 InvoiceWrapper invoiceWrapper = new InvoiceWrapper();
                                 
                 try 
@@ -322,90 +336,116 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
                         // loop through the records in csv file and create a list of invoice data   
                         for(List<String> row : csvRecords)
                         {
-                                InvoiceData wrapper = new InvoiceData();
+                                InvoiceData invoiceData = new InvoiceData();
                                 Boolean errorInRecord = false;
                                 Exception ex;
                                 
                                 // skip the header row
                                 if(rowNum == 0) {
                                         invoiceWrapper.csvHeader = row;
+                                        mapHeader = prepareHeaderMap(row);
+                                        system.debug('Header Map>>>>' + mapHeader);
                                         rownum++;
                                         continue;
                                 }        
                                 
                                 System.debug('row>>>' + row);
+                                
+                                // set the csv row 
+                                invoiceData.csvRow = row;
+                                
                                 try {
-                                	wrapper.sapCustomerNo = (String)row[0];
+                                	//invoiceData.sapCustomerNo = (String)row[0];
+                                	invoiceData.sapCustomerNo = (String) getValue(row, mapHeader.get('SAP Customer No'));
                                 } catch (Exception e) {errorInRecord = true; ex=e;}
                                 
                                 try {	
-                                	wrapper.month = (String)row[1];
+                                	//invoiceData.month = (String)row[1];
+                                	invoiceData.month = (String)  getValue(row, mapHeader.get('Claim Month'));
                                 } catch (Exception e) {errorInRecord = true; ex=e;}
                                 
                                 try {	
-                                	wrapper.year = (String)row[2];
+                                	//invoiceData.year = (String)row[2];
+                                	invoiceData.year = (String)  getValue(row, mapHeader.get('Claim Year')); 
                                 } catch (Exception e) {errorInRecord = true; ex=e;}
                                 
                                 try {	
-                                	wrapper.hospitalId = (String)row[3];
+                                	//invoiceData.hospitalId = (String) row[3];
+                                	invoiceData.hospitalId = (String) getValue(row, mapHeader.get('Hospital Id'));
                                 } catch (Exception e) {errorInRecord = true; ex=e;}
                                 
                                 try {	
-                                	wrapper.hospitalName =  (String)row[4];
+                                	//invoiceData.hospitalName =  (String)row[4];
+                                	invoiceData.hospitalName =  (String)  getValue(row, mapHeader.get('Hospital Name'));
                                 } catch (Exception e) {errorInRecord = true; ex=e;}
                                 
                                 try {	
-                                	wrapper.productEANCode = (String)row[5];
+                                	//invoiceData.productEANCode = (String)row[5];
+                                	invoiceData.productEANCode = (String)  getValue(row, mapHeader.get('Product EAN Code'));
                                 } catch (Exception e) {errorInRecord = true; ex=e;}
                                 
                                 try {	
-                                	wrapper.productName = (String)row[6];
+                                	//invoiceData.productEANCode = (String)row[5];
+                                	invoiceData.productSAPMaterialNo = (String)  getValue(row, mapHeader.get('SAP Material Number'));
                                 } catch (Exception e) {errorInRecord = true; ex=e;}
                                 
                                 try {	
-                                	wrapper.qty = Decimal.valueOf(row[7]); 
+                                	//invoiceData.productName = (String)row[6];
+                                	invoiceData.productName = (String) getValue(row, mapHeader.get('Product Name'));
+                                } catch (Exception e) {errorInRecord = true; ex=e;}
+                                
+                                try {	
+                                	//invoiceData.qty = Decimal.valueOf(row[7]);
+                                	invoiceData.qty = Decimal.valueOf(getValue(row, mapHeader.get('Quantity'))); 
                                 } catch (Exception e) {errorInRecord = true; ex=e;}
                                 	
                                 try {
-	                                if(String.isNotBlank(row[8].trim()))
-	                                    wrapper.unitListPrice = Decimal.valueOf(row[8].trim());
+	                                String unitListPrice = getValue(row, mapHeader.get('Unit List Price (pack)'));
+	                                if(String.isNotBlank(unitListPrice))
+	                                    invoiceData.unitListPrice = Decimal.valueOf(unitListPrice);
                                 } catch (Exception e) {errorInRecord = true; ex=e;}    
                                 
                                 try {
-	                                if(String.isNotBlank(row[9].trim()))                                
-	                                    wrapper.unitContractPrice = Decimal.valueOf(row[9].trim());
+	                                String unitContractPrice = getValue(row, mapHeader.get('Unit Contract Price (pack)'));
+	                                if(String.isNotBlank(unitContractPrice))                                
+	                                    invoiceData.unitContractPrice = Decimal.valueOf(unitContractPrice);
                                 } catch (Exception e) {errorInRecord = true; ex=e;}    
                                 
                                 try {                                
-	                                if(String.isNotBlank(row[10].trim()))
-	                                    wrapper.unitRebate = Decimal.valueOf(row[10].trim());
+	                                String unitRebate = getValue(row, mapHeader.get('Unit Rebate (pack)'));
+	                                if(String.isNotBlank(unitRebate))
+	                                    invoiceData.unitRebate = Decimal.valueOf(unitRebate);
                                 } catch (Exception e) {errorInRecord = true; ex=e;}    
                                 
                                 try {
-	                                if(String.isNotBlank(row[11].trim()))                                
-	                                    wrapper.netRebate = Decimal.valueOf(row[11].trim());
+	                                String netRebate = getValue(row, mapHeader.get('Net Rebate'));
+	                                if(String.isNotBlank(netRebate))                                
+	                                    invoiceData.netRebate = Decimal.valueOf(netRebate);
                                 } catch (Exception e) {errorInRecord = true; ex=e;}    
                                 
                                 try {
-	                                if(String.isNotBlank(row[12].trim()))                                
-	                                    wrapper.vatAmount = Decimal.valueOf(row[12].trim());
+	                                String vatAmount = getValue(row, mapHeader.get('VAT Amount'));
+	                                if(String.isNotBlank(vatAmount))                                
+	                                    invoiceData.vatAmount = Decimal.valueOf(vatAmount);
 	                            } catch (Exception e) {errorInRecord = true; ex=e;}        
                                 
                                 try {
-                                	wrapper.vatCode = String.valueOf(row[13]);
+                                	//invoiceData.vatCode = String.valueOf(row[13]);
+                                	invoiceData.vatCode = String.valueOf(getValue(row, mapHeader.get('VAT Code')));
                                 } catch (Exception e) {errorInRecord = true; ex=e;}	
 								
 								try {
-	                                if(String.isNotBlank(row[14].trim())) 
-	                                	wrapper.grossRebate = Decimal.valueOf(row[14].trim());
+	                                String grossRebate = getValue(row, mapHeader.get('Gross Rebate'));
+	                                if(String.isNotBlank(grossRebate)) 
+	                                	invoiceData.grossRebate = Decimal.valueOf(grossRebate);
                                 } catch (Exception e) {errorInRecord = true; ex=e;}
                                 
                                 if (!errorInRecord)
-                                	listInvData.add(wrapper);
+                                	listInvData.add(invoiceData);
                                 else
                                 	{
-                                		wrapper.errorMsg = ex.getMessage();
-                                		invoiceWrapper.errorRecords.add(wrapper);  
+                                		invoiceData.errorMsg = ex.getMessage();
+                                		invoiceWrapper.errorRecords.add(invoiceData);  
                                 	}	
                                 
                                 rowNum++;       
@@ -441,10 +481,58 @@ public class jj_rb_HomecareClaimUpload extends jj_rb_HomecareUploadBaseClass {
                 {
                         Apexpages.addMessages(ex); 
                 } 
-                return invoiceWrapper;           
+                return invoiceWrapper;            
    }
    
+   private Map<String, Integer> prepareHeaderMap(List<String> csvHeader)
+   {
+   	  Map<String, Integer> mapHeader = new Map<String, Integer>();
+   	  Integer iCount = 0;
+   	  for(String colHeader : csvHeader)
+   	  {
+   	  	 if(String.isNotBlank(colHeader))
+   	  	 {
+   	  	 	mapHeader.put(colHeader.trim(),iCount);
+   	  	 }
+   	  	 iCount++;
+   	  }  	  
+   	  return mapHeader;
+   }  
    
-  
+   private String getValue(List<String> row, Integer index)
+   {       
+       if(index != null) {
+        try {
+        	return row[index].trim();
+        } catch (Exception ex){
+        	return null;
+        }        
+       } 
+       else 
+        return null;
+   }
    
+    //constructor
+   public jj_rb_HomecareClaimUpload()
+   {}
+   
+   public jj_rb_HomecareClaimUpload(Apexpages.StandardController con)
+   {  } 
+   
+   public jj_rb_HomecareClaimUpload(Apexpages.StandardSetController con)  
+   {   }
+   
+   // function to validate the file being uploaded.
+   public Boolean invalidFile(Document doc)
+   {
+   	if(String.isBlank(doc.Name)) {
+   		Apexpages.addMessage(new ApexPages.Message(ApexPages.Severity.WARNING, MSG_INVALID_FILE));
+   		return true;  
+   	}	 	
+   	if(!doc.Name.toUpperCase().contains('.CSV')) {
+   		Apexpages.addMessage(new ApexPages.Message(ApexPages.Severity.WARNING, MSG_INVALID_FILE));
+   		return true;
+   	}	
+   	return false;	
+   }
 }

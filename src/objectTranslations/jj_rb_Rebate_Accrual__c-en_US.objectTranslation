@@ -82,8 +82,8 @@
         <label><!-- Rebate Group --></label>
         <name>jj_rb_Rebate_Group__c</name>
         <picklistValues>
-            <masterLabel>Homacare Pharma</masterLabel>
-            <translation><!-- Homacare Pharma --></translation>
+            <masterLabel>Homecare Pharma</masterLabel>
+            <translation><!-- Homecare Pharma --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Retailer Pharma</masterLabel>

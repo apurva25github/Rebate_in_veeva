@@ -115,5 +115,7 @@ public class InvoiceData {
     public String vatCode;
     public Decimal grossRebate;
     public String errorMsg;
+    public String productSAPMaterialNo;
+    public List<String> csvRow;
 }
 }

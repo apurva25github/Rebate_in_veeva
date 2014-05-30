@@ -168,7 +168,7 @@
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Homacare Pharma</fullName>
+                <fullName>Homecare Pharma</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>
@@ -335,7 +335,7 @@
         <picklistValues>
             <picklist>jj_rb_Rebate_Group__c</picklist>
             <values>
-                <fullName>Homacare Pharma</fullName>
+                <fullName>Homecare Pharma</fullName>
                 <default>true</default>
             </values>
         </picklistValues>

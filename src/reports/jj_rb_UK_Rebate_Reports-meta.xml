@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReportFolder xmlns="http://soap.sforce.com/2006/04/metadata">
+    <accessType>Shared</accessType>
+    <name>UK Rebate Reports</name>
+    <publicFolderAccess>ReadOnly</publicFolderAccess>
+    <sharedTo>
+        <group>jj_rb_UK_Finance_Director</group>
+        <group>jj_rb_UK_Head_of_BU</group>
+        <group>jj_rb_UK_National_Channel_Manager</group>
+        <group>jj_rb_UK_Rebate_Analyst</group>
+    </sharedTo>
+</ReportFolder>

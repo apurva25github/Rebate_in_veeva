@@ -112,7 +112,11 @@ private class jj_rb_Test_Rebate_Accruals {
             //batch.retailer_contract = jj_rb_Test_BaseClass.getRecordTypeId('Retailer Contract', 'jj_rb_Rebate_Contract__c');
             //database.executeBatch(batch);
             jj_rb_RebateAccrualCalcScheduler sched = new jj_rb_RebateAccrualCalcScheduler();
-            sched.execute(null);        
+            sched.execute(null); 
+            
+            // call the accrual report scheduler
+            jj_rb_AccrualReportGenerateScheduler sched1 = new jj_rb_AccrualReportGenerateScheduler();
+            sched1.execute(null);       
             
         }
         

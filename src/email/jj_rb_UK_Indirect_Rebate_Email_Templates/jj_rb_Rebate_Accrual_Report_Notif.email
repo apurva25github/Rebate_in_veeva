@@ -10,8 +10,9 @@ Rebate Management Team
 <messaging:attachment renderAs="pdf" filename="rebateAccrualReport.pdf">    
     <html>
         <body>       
-            <table border="1" width = "90%" style = "font-size: 10px" >
-            <tr>                
+            <table border="1" width = "90%" style = "font-size: 9px" >
+            <tr> 
+                <th>Record ID</th>               
                 <th>SAP Material No</th>
                 <th>Product Name</th>
                 <th>Quantity</th>
@@ -20,6 +21,7 @@ Rebate Management Team
                 <th>Rebate per unit</th>
                 <th>Currency</th>
                 <th>Net Rebate</th>
+                <th>VAT Code</th>
                 <th>Calculated VAT</th>               
                 <th>Net Rebate Including VAT</th>
                 <th>Rebate Group</th>
@@ -27,6 +29,7 @@ Rebate Management Team
             
            <apex:repeat var="reportLineItem" value="{!relatedTo.Rebate_Accrual_Report_Line_Items__r}"> 
              <tr>
+                 <td>{!relatedTo.name}</td>
                  <td>{!reportLineItem.jj_rb_SAP_Material_No__c}</td>
                  <td>{!reportLineItem.jj_rb_Rebate_Product__r.Name}</td>
                  <td>{!reportLineItem.jj_rb_Quantity__c}</td>
@@ -34,19 +37,21 @@ Rebate Management Team
                  <td>{!relatedTo.jj_rb_Year__c}</td>
                  <td>{!reportLineItem.jj_rb_Rebate_per_unit__c}</td>
                  <td>GBP</td>                 
-                 <td>{!reportLineItem.jj_rb_Net_Rebate__c}</td>                 
+                 <td>{!reportLineItem.jj_rb_Net_Rebate__c}</td>  
+                  <td><apex:outputField value=" {!reportLineItem.jj_rb_Rebate_Product__r.jj_rb_VAT_code__r.jj_rb_VAT__c}"/> </td>             
                  <td>{!reportLineItem.jj_rb_Calculated_VAT__c}</td>                 
                  <td>{!reportLineItem.jj_rb_Net_Rebate_Including_VAT__c}</td> 
-                 <td>{!reportLineItem.jj_rb_Rebate_Accrual_Report__r.jj_rb_Rebate_Group__c}</td>               
+                 <td>{!reportLineItem.jj_rb_Rebate_Accrual_Report__r.jj_rb_Rebate_Group__c}</td>  
+                             
              </tr> 
            </apex:repeat> 
             </table>
         </body>
     </html>
 </messaging:attachment>
-<messaging:attachment filename="rebateAccrualReport.csv">SAP Material No,Product Name,Quantity,Calendar month,Rebate Year,Rebate per unit,Currency,Net Rebate,Calculated VAT,Net Rebate Including VAT,Rebate Group
+<messaging:attachment filename="rebateAccrualReport.csv">Record ID,SAP Material No,Product Name,Quantity,Calendar month,Rebate Year,Rebate per unit,Currency,Net Rebate,VAT Code,Calculated VAT,Net Rebate Including VAT,Rebate Group
     <apex:repeat var="reportLineItem" value="{!relatedTo.Rebate_Accrual_Report_Line_Items__r}">         
-      {!reportLineItem.jj_rb_SAP_Material_No__c},{!reportLineItem.jj_rb_Rebate_Product__r.Name},{!reportLineItem.jj_rb_Quantity__c},{!relatedTo.jj_rb_Month__c},{!relatedTo.jj_rb_Year__c},{!reportLineItem.jj_rb_Rebate_per_unit__c},GBP,{!reportLineItem.jj_rb_Net_Rebate__c},{!reportLineItem.jj_rb_Calculated_VAT__c},{!reportLineItem.jj_rb_Net_Rebate_Including_VAT__c},{!reportLineItem.jj_rb_Rebate_Accrual_Report__r.jj_rb_Rebate_Group__c}
+      {!relatedTo.name},{!reportLineItem.jj_rb_SAP_Material_No__c},{!reportLineItem.jj_rb_Rebate_Product__r.Name},{!reportLineItem.jj_rb_Quantity__c},{!relatedTo.jj_rb_Month__c},{!relatedTo.jj_rb_Year__c},{!reportLineItem.jj_rb_Rebate_per_unit__c},GBP,{!reportLineItem.jj_rb_Net_Rebate__c},{!reportLineItem.jj_rb_Rebate_Product__r.jj_rb_VAT_code__r.jj_rb_VAT__c},{!reportLineItem.jj_rb_Calculated_VAT__c},{!reportLineItem.jj_rb_Net_Rebate_Including_VAT__c},{!reportLineItem.jj_rb_Rebate_Accrual_Report__r.jj_rb_Rebate_Group__c}
     </apex:repeat>
     
 </messaging:attachment>

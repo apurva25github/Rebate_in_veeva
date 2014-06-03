@@ -5,6 +5,10 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
+        <apexClass>jj_rb_AccrualReportGenerateScheduler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>jj_rb_Accrual_Actions</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -113,10 +117,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>jj_rb_TestClass_Accrual</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>jj_rb_Test_BaseClass</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -187,6 +187,11 @@
     <description>Permission set for giving National Channel Manager  role access to the Indirect Rebate application.</description>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Account.Account_Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Account.jj_rb_Credit_check_Validity_End__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -213,11 +218,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Account.jj_rb_SAP_Customer_Number__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Account.jj_rb_SAP_Vendor_Number__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -668,6 +668,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>jj_rb_Rebate_Claim_Line_Item__c.jj_rb_rebate_val_validation__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>jj_rb_Rebate_Claim__c.jj_rb_Attachment_Present__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1272,6 +1277,10 @@
         <apexPage>jj_rb_contractLineItemEditOverride</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
+    <recordTypeVisibilities>
+        <recordType>Account.Hospital_vod</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
     <recordTypeVisibilities>
         <recordType>jj_rb_Master_Data_Request__c.jj_rb_Home_Care_Provider_Data_Request</recordType>
         <visible>true</visible>

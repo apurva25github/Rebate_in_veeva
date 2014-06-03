@@ -545,22 +545,6 @@
         <errorMessage>IMS product number should be a number.</errorMessage>
     </validationRules>
     <validationRules>
-        <fullName>jj_rb_Product_EAN_code_Duplicate_chk</fullName>
-        <active>false</active>
-        <description>Rebate product already present with specified SAP EAN code.</description>
-        <errorConditionFormula>NOT(ISNULL(VLOOKUP($ObjectType.jj_rb_Rebate_Product__c.Fields.jj_rb_SAP_EAN_Code__c, $ObjectType.jj_rb_Rebate_Product__c.Fields.Name, jj_rb_SAP_EAN_Code__c)))</errorConditionFormula>
-        <errorDisplayField>jj_rb_SAP_EAN_Code__c</errorDisplayField>
-        <errorMessage>Rebate product already present with specified SAP EAN code.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>jj_rb_Product_Materia_code_Duplicate_chk</fullName>
-        <active>false</active>
-        <description>Rebate product already present with specified SAP Material code</description>
-        <errorConditionFormula>NOT(ISNULL(VLOOKUP($ObjectType.jj_rb_Rebate_Product__c.Fields.jj_rb_SAP_Material_Number__c, $ObjectType.jj_rb_Rebate_Product__c.Fields.Name,  jj_rb_SAP_Material_Code__c )))</errorConditionFormula>
-        <errorDisplayField>jj_rb_SAP_Material_Code__c</errorDisplayField>
-        <errorMessage>Rebate product already present with specified SAP Material code</errorMessage>
-    </validationRules>
-    <validationRules>
         <fullName>jj_rb_SAP_CustomerNo_is_numeric</fullName>
         <active>true</active>
         <description>SAP Customer no should be a number.</description>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>SAP Sales Data</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>SAP Sales Data</value>
+    </caseValues>
+    <fields>
+        <label><!-- Dataload External id --></label>
+        <name>jj_rb_Dataload_External_id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoice Qty --></label>
+        <name>jj_rb_Invoice_Qty__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoice Type --></label>
+        <name>jj_rb_Invoice_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Month --></label>
+        <name>jj_rb_Month__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Trade Sales --></label>
+        <name>jj_rb_Net_Trade_Sales__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Customer ID --></label>
+        <name>jj_rb_SAP_Customer_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Material No --></label>
+        <name>jj_rb_SAP_Material_No__c</name>
+    </fields>
+    <fields>
+        <label><!-- Year --></label>
+        <name>jj_rb_Year__c</name>
+    </fields>
+    <layouts>
+        <layout>SAP Sales Data Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>UK Rebate Permission Set</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>UK Rebate Permission Set</value>
+    </caseValues>
+    <fields>
+        <label><!-- Permission Set Id --></label>
+        <name>jj_rb_Permission_Set_Id__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

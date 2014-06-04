@@ -9,6 +9,10 @@
         <value>Rebate Claims</value>
     </caseValues>
     <fields>
+        <label><!-- Attachment Present --></label>
+        <name>jj_rb_Attachment_Present__c</name>
+    </fields>
+    <fields>
         <label><!-- Claim Date --></label>
         <name>jj_rb_Claim_Date__c</name>
     </fields>
@@ -165,6 +169,12 @@
             <translation><!-- 2017 --></translation>
         </picklistValues>
     </fields>
+    <fields>
+        <help><!-- GREEN flag indicates claim invoice file is attached to the Rebate Claim record. 
+RED flag indicates claim invoice file attachment is missing. --></help>
+        <label><!-- Claim Invoice Present --></label>
+        <name>jj_rb_claim_invoice_Present__c</name>
+    </fields>
     <layouts>
         <layout>Homecare Rebate Claim</layout>
         <sections>
@@ -175,12 +185,20 @@
             <label><!-- Information --></label>
             <section>Information</section>
         </sections>
+        <sections>
+            <label><!-- System Messages --></label>
+            <section>System Messages</section>
+        </sections>
     </layouts>
     <layouts>
         <layout>Retailer Rebate Claim</layout>
         <sections>
             <label><!-- Custom Links --></label>
             <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- System Messages --></label>
+            <section>System Messages</section>
         </sections>
     </layouts>
     <recordTypes>
@@ -195,5 +213,9 @@
     <webLinks>
         <label><!-- jj_rb_Homecare_Claim_Upload --></label>
         <name>jj_rb_Homecare_Claim_Upload</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- jj_rb_Submit_for_Approval --></label>
+        <name>jj_rb_Submit_for_Approval</name>
     </webLinks>
 </CustomObjectTranslation>

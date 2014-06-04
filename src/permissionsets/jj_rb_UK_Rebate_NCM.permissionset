@@ -97,6 +97,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>jj_rb_Rebate_claimInvoice_triggerhandler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>jj_rb_Rebate_utils</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -753,6 +757,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>jj_rb_Rebate_Claim__c.jj_rb_Year__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>jj_rb_Rebate_Claim__c.jj_rb_claim_invoice_Present__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

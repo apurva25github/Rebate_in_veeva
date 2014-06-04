@@ -303,6 +303,61 @@ private class jj_rb_Test_RebateClaims {
                 
         Test.stopTest();        
     }
-    
+    //Test Rebate claim invoice attachment
+    static testMethod void testinvoiceattachment()
+    {
+        // setup running user
+        User rebateUser = jj_rb_Test_BaseClass.setupUser();
+        Test.startTest();
+        system.runAs(rebateUser)
+        {
+            // create status custom settings
+            list<jj_rb_Rebate_Contract_Line_Item_Status__c> listStatus = jj_rb_Test_BaseClass.createcustomstatus();
+            insert listStatus;
+            
+        	// setup a retailer account
+            Account retailer = jj_rb_Test_BaseClass.setupRetailerCustomer(rebateUser);
+            insert retailer;
+            
+            // setup rebate product
+            jj_rb_Rebate_Product__c rebateProduct = jj_rb_Test_BaseClass.setupRebateProduct();
+            insert rebateProduct;
+            
+            // create a retailer claim
+            jj_rb_Rebate_Claim__c retailerClaim = jj_rb_Test_BaseClass.setupRetailerClaim(retailer);
+            insert retailerClaim;
+            
+            // create retailer line items
+            jj_rb_Rebate_Claim_Line_Item__c cli = jj_rb_Test_BaseClass.setupRetailerClaimLineItems(retailerClaim, rebateProduct);
+            insert cli;
+            
+            // create attachment
+            Attachment attach1 = jj_rb_Test_BaseClass.setupattachment(retailerClaim.id);
+            insert attach1;
+            delete attach1;
+            retailerClaim.jj_rb_Status__c = jj_rb_Test_BaseClass.STATUS_SUBMITTED;
+            update retailerClaim;    
+            Attachment testattach = jj_rb_Test_BaseClass.setupattachment(retailerClaim.id);
+            insert testattach;
+            
+               
+            // create attachment
+            retailerClaim.jj_rb_Status__c = jj_rb_Test_BaseClass.STATUS_APPROVED;
+            update retailerClaim;
+            Attachment attach = jj_rb_Test_BaseClass.setupattachment(retailerClaim.id);
+            insert attach;
+            
+            try{
+                delete testattach;
+            	delete attach;
+        	}
+            catch(DMLException e)
+            {
+            }
+            System.assertEquals(false, retailerClaim.jj_rb_Attachment_Present__c);
+           
+        }
+         test.stopTest();
+    }
 
 }

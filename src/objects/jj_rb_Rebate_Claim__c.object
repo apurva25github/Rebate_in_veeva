@@ -52,6 +52,15 @@
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
     <fields>
+        <fullName>jj_rb_Attachment_Present__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Attachment Present</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>jj_rb_Claim_Date__c</fullName>
         <externalId>false</externalId>
         <formula>DATE(value(text(jj_rb_Year__c)) ,value(text(jj_rb_Month__c)) ,1)</formula>
@@ -320,6 +329,19 @@
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
+    <fields>
+        <fullName>jj_rb_claim_invoice_Present__c</fullName>
+        <externalId>false</externalId>
+        <formula>IMAGE( IF(jj_rb_Attachment_Present__c == True ,&quot;/img/samples/flag_green.gif&quot;, &quot;/img/samples/flag_red.gif&quot;),&quot;/img/samples/flag_green.gif&quot;)</formula>
+        <inlineHelpText>GREEN flag indicates claim invoice file is attached to the Rebate Claim record. 
+RED flag indicates claim invoice file attachment is missing.</inlineHelpText>
+        <label>Claim Invoice Present</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
     <label>Rebate Claim</label>
     <listViews>
         <fullName>All</fullName>
@@ -329,6 +351,7 @@
         <columns>jj_rb_Year__c</columns>
         <columns>jj_rb_Total_Rebate_Amount__c</columns>
         <columns>jj_rb_Status__c</columns>
+        <columns>jj_rb_Attachment_Present__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
         <language>en_US</language>
@@ -367,6 +390,7 @@
         <columns>jj_rb_Status__c</columns>
         <columns>jj_rb_Total_Rebate_Amount__c</columns>
         <columns>jj_rb_Total_Rebate_Including_VAT__c</columns>
+        <columns>jj_rb_Attachment_Present__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>RECORDTYPE</field>
@@ -396,6 +420,7 @@
         <columns>jj_rb_Status__c</columns>
         <columns>jj_rb_Total_Rebate_Amount__c</columns>
         <columns>jj_rb_Total_Rebate_Including_VAT__c</columns>
+        <columns>jj_rb_Attachment_Present__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>RECORDTYPE</field>

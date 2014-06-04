@@ -79,7 +79,7 @@
     <emailTemplate>jj_rb_UK_Indirect_Rebate_Email_Templates/Rebate_claim_approval_Notification</emailTemplate>
     <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
     <entryCriteria>
-        <booleanFilter>(1 AND 2 AND 3 AND 4) AND (5 OR 6)</booleanFilter>
+        <booleanFilter>(1 AND 2 AND 3 AND 4 AND 7) AND (5 OR 6)</booleanFilter>
         <criteriaItems>
             <field>jj_rb_Rebate_Claim__c.jj_rb_Status__c</field>
             <operation>equals</operation>
@@ -109,6 +109,11 @@
             <field>jj_rb_Rebate_Claim__c.RecordType</field>
             <operation>equals</operation>
             <value>Homecare Claim</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>jj_rb_Rebate_Claim__c.jj_rb_Attachment_Present__c</field>
+            <operation>equals</operation>
+            <value>true</value>
         </criteriaItems>
     </entryCriteria>
     <finalApprovalActions>

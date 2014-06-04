@@ -477,6 +477,16 @@ public class jj_rb_Test_BaseClass {
             return listCS2;  
     }
     
+    //setup an attachment
+    public static Attachment setupattachment(id parentId)
+    {
+        Attachment attach = new Attachment();
+        attach.Body = Blob.valueOf('Claim Invoice');
+        attach.Description = 'Claim Invoice';
+        attach.Name = 'Invoice';
+        attach.ParentId = parentId;
+        return attach;
+    }
     public static jj_rb_Rebate_Accrual__c setupRetailerAccrual(Account retailer)
     {       
         String recordTypeId = getRecordTypeId('Retailer Accrual', 'jj_rb_Rebate_Accrual__c');

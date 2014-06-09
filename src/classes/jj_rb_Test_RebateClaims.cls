@@ -79,6 +79,7 @@ private class jj_rb_Test_RebateClaims {
             
             // create retailer line items
             jj_rb_Rebate_Claim_Line_Item__c cli2 = jj_rb_Test_BaseClass.setupRetailerClaimLineItems(retailerClaim2, rebateProduct);
+            //jj_rb_RebateClaimLineItemTriggerHandler.alreadyFired = false;
             try { insert cli2;  } catch(Exception e) { }       
             
             // approve the claim
@@ -166,7 +167,15 @@ private class jj_rb_Test_RebateClaims {
             
             // create claim line items
             jj_rb_Rebate_Claim_Line_Item__c claimCLI2 = jj_rb_Test_BaseClass.setupHCPClaimLineItems(hcpClaim2, rebateProduct, hospital);
-            try {insert claimCLI2; } catch(Exception ex) {}             
+            try {insert claimCLI2; } catch(Exception ex) {}   
+                      
+            // create hcp claim 3
+            jj_rb_Rebate_Claim__c hcpClaim3 = jj_rb_Test_BaseClass.setupHCPClaim(customer);
+            try{insert hcpClaim3;} catch(Exception ex){}
+            
+            //create claim lineitems
+            jj_rb_Rebate_Claim_Line_Item__c claimCLI3 = jj_rb_Test_BaseClass.setupHCPClaimLineItems(hcpClaim3, rebateProduct, hospital);
+            try{insert claimCLI3;} catch(Exception ex){}
             
             // approve the claim
             hcpClaim.jj_rb_Status__c = jj_rb_Test_BaseClass.STATUS_APPROVED;
@@ -303,6 +312,7 @@ private class jj_rb_Test_RebateClaims {
                 
         Test.stopTest();        
     }
+    
     //Test Rebate claim invoice attachment
     static testMethod void testinvoiceattachment()
     {
@@ -359,5 +369,51 @@ private class jj_rb_Test_RebateClaims {
         }
          test.stopTest();
     }
-
+	static testmethod void testSubmitforApproval()
+	{
+		// setup running user
+        User rebateUser = jj_rb_Test_BaseClass.setupUser();
+        Test.startTest();
+        system.runAs(rebateUser)
+        {
+        	// create status custom settings
+            list<jj_rb_Rebate_Contract_Line_Item_Status__c> listStatus = jj_rb_Test_BaseClass.createcustomstatus();
+            insert listStatus;
+            
+        	// setup a retailer account
+            Account retailer = jj_rb_Test_BaseClass.setupRetailerCustomer(rebateUser);
+            insert retailer;
+            
+            // setup rebate product
+            jj_rb_Rebate_Product__c rebateProduct = jj_rb_Test_BaseClass.setupRebateProduct();
+            insert rebateProduct;
+            
+            // create a retailer claim
+            jj_rb_Rebate_Claim__c retailerClaim = jj_rb_Test_BaseClass.setupRetailerClaim(retailer);
+            retailerClaim.jj_rb_status__c = jj_rb_Test_BaseClass.STATUS_NEW;
+            insert retailerClaim;
+            
+            // create retailer line items
+            jj_rb_Rebate_Claim_Line_Item__c cli = jj_rb_Test_BaseClass.setupRetailerClaimLineItems(retailerClaim, rebateProduct);
+            cli.jj_rb_Quantity__c  = 505;
+            cli.jj_rb_Rebate_Per_Unit__c = 5;
+            insert cli;
+            // create attachment
+            Attachment testattach = jj_rb_Test_BaseClass.setupattachment(retailerClaim.id);
+            insert testattach;
+            
+            list<id> listClaim = new list<id>();
+            // Call class
+            listClaim.add(retailerClaim.id);
+            jj_rb_Claimsubmit_Approval.Submitforapproval(listClaim);
+            
+            //Assert rescord
+            
+            list<jj_rb_Rebate_Claim__c> claims = [select id,jj_rb_status__c,name from jj_rb_Rebate_Claim__c where id =:retailerClaim.id ];
+            System.assertEquals(jj_rb_Test_BaseClass.STATUS_SUBMITTED , claims[0].jj_rb_status__c);
+        }
+        test.stopTest();
+    }
+        
+	
 }
